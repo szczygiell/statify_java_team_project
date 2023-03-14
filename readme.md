@@ -21,7 +21,7 @@ Niewielka funkcja aplikacji umożliwiająca użytkownikowi poszerzenie swoich mu
 ## Technologie i źródła:
 
 - Java
-- [Api Spotify]([https://developer.spotify.com/documentation/web-api/reference/#/](https://developer.spotify.com/documentation/web-api/reference/#/))
+- [Api Spotify](https://developer.spotify.com/documentation/web-api/reference/#/)
 - [Spotify api Java wrapper]( https://github.com/spotify-web-api-java/spotify-web-api-java)
 
 ### Autorzy:
