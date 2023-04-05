@@ -8,34 +8,70 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import org.knowm.xchart.SwingWrapper;
 import java.util.List;
-import java.util.stream.IntStream;
+import java.lang.Math;
 
 public class Statify {
 
-    private CategoryChart getBarChart(List<Integer> x_values, List<Float> y_values) {
+    private CategoryChart getBarChart(List<Float> x_values,
+            List<Integer> y_values,
+            String title,
+            String xAxisTitle,
+            String yAxisTitle) {
         CategoryChart chart = new CategoryChartBuilder()
                 .width(800)
                 .height(600)
-                .title("Score Histogram")
-                .xAxisTitle("Score")
-                .yAxisTitle("Number")
+                .title(title)
+                .xAxisTitle(xAxisTitle)
+                .yAxisTitle(yAxisTitle)
                 .build();
 
         // Customize Chart
         chart.getStyler().setLegendPosition(LegendPosition.InsideNW);
-        chart.getStyler().setLabelsVisible(false);
-        chart.getStyler().setPlotGridLinesVisible(false);
+        chart.getStyler().setLabelsVisible(true);
+        chart.getStyler().setPlotGridLinesVisible(true);
 
         // Series
         chart.addSeries("test 1", x_values, y_values);
         return chart;
     }
 
-    public void getDanceabilityHistogram(List<Float> values) {
-        int valuesLen = values.size();
-        List<Integer> keys_array = IntStream.range(0, valuesLen).boxed().toList();
+    public void getDanceabilityHistogram(List<Float> data) {
+        // int valuesLen = data.size();
+        // List<Integer> keysArray = IntStream.range(0, valuesLen).boxed().toList();
 
-        CategoryChart chart = getBarChart(keys_array, values);
+        int binsNum = (int) Math.cbrt(data.size());
+        int[] binCounts = new int[binsNum];
+        float min = Float.MAX_VALUE;
+        float max = Float.MIN_VALUE;
+        for (float value : data) {
+            if (value < min) {
+                min = value;
+            }
+            if (value > max) {
+                max = value;
+            }
+        }
+        float binWidth = (max - min) / binsNum;
+        for (float value : data) {
+            int binIndex = (int) ((value - min) / binWidth);
+            if (binIndex == binsNum) {
+                binIndex = binsNum - 1;
+            }
+            binCounts[binIndex]++;
+        }
+        List<Float> keys = new ArrayList<>();
+        List<Integer> values = new ArrayList<>();
+        for (int i = 0; i < binsNum; i++) {
+            float binStart = min + i * binWidth;
+            // float binEnd = binStart + binWidth;
+            keys.add(binStart);
+            values.add(binCounts[i]);
+        }
+        String title = "Danceability Histogram";
+        String xTitle = "Minimal danceability rate";
+        String yTitle = "Number of tracks";
+
+        CategoryChart chart = getBarChart(keys, values, title, xTitle, yTitle);
         new SwingWrapper<CategoryChart>(chart).displayChart();
     }
 
