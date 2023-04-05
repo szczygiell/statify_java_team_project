@@ -112,36 +112,4 @@ public class User {
         }
 
     }
-
-    public String getTracksAlbumId(String trackId) {
-        final GetTrackRequest getTrackRequest = spotifyApi.getTrack(trackId)
-                .build();
-        try {
-            final Track track = getTrackRequest.execute();
-            return track.getAlbum().getId();
-        } catch (IOException | SpotifyWebApiException | ParseException e) {
-            System.out.println("Error: " + e.getMessage());
-            return "";
-        }
-    }
-
-    public Dictionary<String, Float> getTracksAudioFeatures(String trackId) {
-        final GetAudioFeaturesForTrackRequest getAudioFeaturesForTrackRequest = spotifyApi
-                .getAudioFeaturesForTrack(trackId)
-                .build();
-
-        Dictionary<String, Float> selectedAudioFeatures = new Hashtable<>();
-
-        try {
-            final AudioFeatures audioFeatures = getAudioFeaturesForTrackRequest.execute();
-            selectedAudioFeatures.put("danceability", audioFeatures.getDanceability());
-            selectedAudioFeatures.put("loudness", audioFeatures.getLoudness());
-            selectedAudioFeatures.put("acousticness", audioFeatures.getAcousticness());
-            return selectedAudioFeatures;
-        } catch (IOException | SpotifyWebApiException | ParseException e) {
-            System.out.println("Error: " + e.getMessage());
-            return selectedAudioFeatures;
-        }
-
-    }
 }
