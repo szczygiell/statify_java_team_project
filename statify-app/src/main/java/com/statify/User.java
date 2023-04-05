@@ -94,8 +94,7 @@ public class User {
 
         try {
             final AudioFeatures audioFeatures = getAudioFeaturesForTrackRequest.execute();
-            System.out.println("ID: " + audioFeatures.getId());
-            selectedAudioFeatures.put("dancebility", audioFeatures.getDanceability());
+            selectedAudioFeatures.put("danceability", audioFeatures.getDanceability());
             selectedAudioFeatures.put("loudness", audioFeatures.getLoudness());
             selectedAudioFeatures.put("acousticness", audioFeatures.getAcousticness());
             return selectedAudioFeatures;
