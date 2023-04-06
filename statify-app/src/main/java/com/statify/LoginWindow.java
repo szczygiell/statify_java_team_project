@@ -71,6 +71,8 @@ public class LoginWindow extends JFrame implements ActionListener {
             TokenTest token_test = new TokenTest(pwdText);
             if (token_test.TokenTestFun()) {
                 JOptionPane.showMessageDialog(this, "Login Successful");
+                MainWindow main_window = new MainWindow();
+                main_window.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid Acces Token");
             }
