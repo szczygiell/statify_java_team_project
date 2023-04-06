@@ -24,6 +24,11 @@ Niewielka funkcja aplikacji umożliwiająca użytkownikowi poszerzenie swoich mu
 - [Api Spotify](https://developer.spotify.com/documentation/web-api/reference/#/)
 - [Spotify api Java wrapper]( https://github.com/spotify-web-api-java/spotify-web-api-java)
 
+
+### Źródła:
+ikony: https://icons8.com/icon/set/music/windows--static
+
+
 ### Autorzy:
 
 Miłosz Kowalewski 
