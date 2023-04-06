@@ -32,8 +32,14 @@ public class Statify {
         chart.getStyler().setPlotGridLinesVisible(true);
 
         // Series
-        chart.addSeries("test 1", x_values, y_values);
-        return chart;
+        try {
+            chart.addSeries("playlist 1", x_values, y_values);
+            return chart;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e);
+            chart.addSeries("Error", Arrays.asList(0.0f), Arrays.asList(0));
+            return chart;
+        }
     }
 
     public JPanel getDanceabilityHistogram(List<Float> data) {

@@ -42,7 +42,7 @@ public class User {
                 .build();
         try {
             final Paging<PlaylistSimplified> playlistSimplifiedPaging = getListOfCurrentUsersPlaylistsRequest.execute();
-            int playlist_number = 7;
+            int playlist_number = 1;
             PlaylistSimplified playlist = playlistSimplifiedPaging.getItems()[playlist_number];
             System.out.println(playlist.getName());
             return playlist.getId();
@@ -73,7 +73,7 @@ public class User {
 
             }
             return tracks_indeces;
-        } catch (IOException | SpotifyWebApiException | ParseException e) {
+        } catch (IOException | SpotifyWebApiException | ParseException | NullPointerException e) {
             System.out.println("Error: " + e.getMessage());
             return new ArrayList<String>();
         }
