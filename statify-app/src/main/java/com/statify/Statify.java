@@ -3,12 +3,13 @@ package com.statify;
 import org.knowm.xchart.CategoryChart;
 import org.knowm.xchart.CategoryChartBuilder;
 import org.knowm.xchart.style.Styler.LegendPosition;
+import org.knowm.xchart.XChartPanel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import org.knowm.xchart.SwingWrapper;
 import java.util.List;
 import java.lang.Math;
+import javax.swing.JPanel;
 
 public class Statify {
 
@@ -35,7 +36,7 @@ public class Statify {
         return chart;
     }
 
-    public void getDanceabilityHistogram(List<Float> data) {
+    public JPanel getDanceabilityHistogram(List<Float> data) {
         // int valuesLen = data.size();
         // List<Integer> keysArray = IntStream.range(0, valuesLen).boxed().toList();
 
@@ -72,7 +73,7 @@ public class Statify {
         String yTitle = "Number of tracks";
 
         CategoryChart chart = getBarChart(keys, values, title, xTitle, yTitle);
-        new SwingWrapper<CategoryChart>(chart).displayChart();
+        return new XChartPanel<CategoryChart>(chart);
     }
 
     public static void main(String[] args) {
