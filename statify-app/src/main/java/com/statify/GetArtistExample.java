@@ -13,7 +13,7 @@ import java.util.concurrent.CompletionException;
 
 public class GetArtistExample {
     private static final String accessToken = "BQCNpsZf10n5lfPSgo9sABXL4pVYwZJN0qofDUB3c8Wj0f829XbpqJzKsBFeUw1TRCGcrArsLjTbPm4bBPqZZQLzxxxOW5i4_zdox3DC3rIrBOwzygsh9DaqoTrGXXdbTXayYiRUZTZ0d7SM8JaAvIGVenMxG58d0BuMwGlS_74-P8q12XPp7PaIJr_R0YWra2FxFBY";
-    private static final String id = "0LcJLqbBmaGUft1e9Mm8HV";
+    private static final String id = "bdea0ff2378440aeb89acfde01674470";
 
     private static final SpotifyApi spotifyApi = new SpotifyApi.Builder()
             .setAccessToken(accessToken)
