@@ -138,7 +138,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         centrePanel.setLayout(new java.awt.BorderLayout());
 
-        actionPanel.setBackground(new java.awt.Color(46, 79, 79));
+        actionPanel.setBackground(new java.awt.Color(0, 102, 0));
 
         javax.swing.GroupLayout actionPanelLayout = new javax.swing.GroupLayout(actionPanel);
         actionPanel.setLayout(actionPanelLayout);
@@ -153,12 +153,11 @@ public class MainWindow extends javax.swing.JFrame {
 
         centrePanel.add(actionPanel, java.awt.BorderLayout.CENTER);
 
-        timePeriodPanel.setBackground(new java.awt.Color(46, 79, 79));
+        timePeriodPanel.setBackground(new java.awt.Color(0, 102, 0));
         timePeriodPanel.setPreferredSize(new java.awt.Dimension(20, 120));
         timePeriodPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 97, 48));
 
-        weeks4Button.setBackground(new java.awt.Color(46, 79, 79));
-        weeks4Button.setForeground(new java.awt.Color(255, 255, 255));
+        weeks4Button.setForeground(new java.awt.Color(44, 51, 51));
         weeks4Button.setText("4 tygodnie");
         weeks4Button.setPreferredSize(new java.awt.Dimension(108, 54));
         weeks4Button.addActionListener(new java.awt.event.ActionListener() {
@@ -168,8 +167,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
         timePeriodPanel.add(weeks4Button);
 
-        months6Button.setBackground(new java.awt.Color(46, 79, 79));
-        months6Button.setForeground(new java.awt.Color(255, 255, 255));
+        months6Button.setForeground(new java.awt.Color(44, 51, 51));
         months6Button.setText("6 miesięcy");
         months6Button.setPreferredSize(new java.awt.Dimension(108, 54));
         months6Button.addActionListener(new java.awt.event.ActionListener() {
@@ -179,8 +177,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
         timePeriodPanel.add(months6Button);
 
-        allTimeHistoryButton.setBackground(new java.awt.Color(46, 79, 79));
-        allTimeHistoryButton.setForeground(new java.awt.Color(255, 255, 255));
+        allTimeHistoryButton.setForeground(new java.awt.Color(44, 51, 51));
         allTimeHistoryButton.setText("cała historia");
         allTimeHistoryButton.setPreferredSize(new java.awt.Dimension(108, 54));
         allTimeHistoryButton.addActionListener(new java.awt.event.ActionListener() {

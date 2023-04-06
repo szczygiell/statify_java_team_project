@@ -218,7 +218,7 @@
                 <Container class="javax.swing.JPanel" name="actionPanel">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="4f" green="4f" red="2e" type="rgb"/>
+                      <Color blue="0" green="66" red="0" type="rgb"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -243,7 +243,7 @@
                 <Container class="javax.swing.JPanel" name="timePeriodPanel">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="4f" green="4f" red="2e" type="rgb"/>
+                      <Color blue="0" green="66" red="0" type="rgb"/>
                     </Property>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[20, 120]"/>
@@ -262,11 +262,8 @@
                   <SubComponents>
                     <Component class="javax.swing.JButton" name="weeks4Button">
                       <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="4f" green="4f" red="2e" type="rgb"/>
-                        </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                          <Color blue="33" green="33" red="2c" type="rgb"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="4 tygodnie"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -279,11 +276,8 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="months6Button">
                       <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="4f" green="4f" red="2e" type="rgb"/>
-                        </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                          <Color blue="33" green="33" red="2c" type="rgb"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="6 miesi&#x119;cy"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -296,11 +290,8 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="allTimeHistoryButton">
                       <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="4f" green="4f" red="2e" type="rgb"/>
-                        </Property>
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                          <Color blue="33" green="33" red="2c" type="rgb"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="ca&#x142;a historia"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">

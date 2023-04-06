@@ -34,7 +34,7 @@ public class Statify {
     public void getDanceabilityHistogram(List<Float> values) {
         int valuesLen = values.size();
         List<Integer> keys_array = IntStream.range(0, valuesLen).boxed().toList();
-
+        
         CategoryChart chart = getBarChart(keys_array, values);
         new SwingWrapper<CategoryChart>(chart).displayChart();
     }
