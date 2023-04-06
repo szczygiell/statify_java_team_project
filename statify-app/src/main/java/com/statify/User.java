@@ -16,6 +16,7 @@ import se.michaelthelin.spotify.requests.data.playlists.GetPlaylistsItemsRequest
 import se.michaelthelin.spotify.model_objects.specification.PlaylistTrack;
 import se.michaelthelin.spotify.model_objects.specification.Track;
 import se.michaelthelin.spotify.requests.data.tracks.GetTrackRequest;
+import se.michaelthelin.spotify.model_objects.IPlaylistItem;
 import se.michaelthelin.spotify.model_objects.specification.AudioFeatures;
 import se.michaelthelin.spotify.requests.data.tracks.GetAudioFeaturesForTrackRequest;
 
@@ -41,8 +42,11 @@ public class User {
                 .build();
         try {
             final Paging<PlaylistSimplified> playlistSimplifiedPaging = getListOfCurrentUsersPlaylistsRequest.execute();
+            int playlist_number = 7;
+            PlaylistSimplified playlist = playlistSimplifiedPaging.getItems()[playlist_number];
+            System.out.println(playlist.getName());
+            return playlist.getId();
 
-            return playlistSimplifiedPaging.getItems()[0].getId();
         } catch (IOException | SpotifyWebApiException | ParseException e) {
             System.out.println("Error: " + e.getMessage());
             return e.getMessage();
@@ -53,7 +57,7 @@ public class User {
         final GetPlaylistsItemsRequest getPlaylistsItemsRequest = spotifyApi
                 .getPlaylistsItems(playlistId)
                 // .fields("description")
-                .limit(10)
+                // .limit(100)
                 // .offset(0)
                 // .market(CountryCode.SE)
                 // .additionalTypes("track,episode")
@@ -62,9 +66,11 @@ public class User {
         try {
             final Paging<PlaylistTrack> playlistTrackPaging = getPlaylistsItemsRequest.execute();
             List<String> tracks_indeces = new ArrayList<String>();
-            System.out.println(playlistTrackPaging.getItems()[0].getTrack().getName());
+            // System.out.println(playlistTrackPaging.getItems()[0].getTrack().getName());
             for (PlaylistTrack pl_track : playlistTrackPaging.getItems()) {
-                tracks_indeces.add(pl_track.getTrack().getId());
+                IPlaylistItem track = pl_track.getTrack();
+                tracks_indeces.add(track.getId());
+
             }
             return tracks_indeces;
         } catch (IOException | SpotifyWebApiException | ParseException e) {
