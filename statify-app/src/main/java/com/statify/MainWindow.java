@@ -67,13 +67,9 @@ public class MainWindow extends javax.swing.JFrame {
         typeActionPanel.setPreferredSize(new java.awt.Dimension(210, 220));
         typeActionPanel.setLayout(new javax.swing.BoxLayout(typeActionPanel, javax.swing.BoxLayout.PAGE_AXIS));
 
-        jScrollPane1.setBorder(null);
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
         timeActionPanel.setBackground(new java.awt.Color(44, 51, 51));
-        timeActionPanel.setPreferredSize(new java.awt.Dimension(190, 444));
+        timeActionPanel.setPreferredSize(new java.awt.Dimension(188, 440));
 
-        artistButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-musician-male-32.png"))); // NOI18N
         artistButton.setText("artists");
         artistButton.setBorder(null);
         artistButton.setMaximumSize(new java.awt.Dimension(80, 24));
@@ -85,7 +81,6 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        genreButon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-music-record-32.png"))); // NOI18N
         genreButon.setText("genre");
         genreButon.setBorder(null);
         genreButon.addActionListener(new java.awt.event.ActionListener() {
@@ -94,7 +89,6 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        topTracksButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-music-record-32.png"))); // NOI18N
         topTracksButton.setText("top tracks");
         topTracksButton.setBorder(null);
         topTracksButton.addActionListener(new java.awt.event.ActionListener() {
@@ -103,7 +97,6 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        tracksAnyliseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-music-record-32.png"))); // NOI18N
         tracksAnyliseButton.setText("analise tracks");
         tracksAnyliseButton.setBorder(null);
         tracksAnyliseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -112,7 +105,6 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        analisePlaylistButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-musician-male-32.png"))); // NOI18N
         analisePlaylistButton.setText("anylise playlist");
         analisePlaylistButton.setBorder(null);
         analisePlaylistButton.setMaximumSize(new java.awt.Dimension(80, 24));
@@ -124,7 +116,6 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        generatePlaylistButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-musician-male-32.png"))); // NOI18N
         generatePlaylistButton.setText("generate playlist");
         generatePlaylistButton.setBorder(null);
         generatePlaylistButton.setMaximumSize(new java.awt.Dimension(80, 24));
@@ -184,7 +175,7 @@ public class MainWindow extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 76, Short.MAX_VALUE)
+            .addGap(0, 77, Short.MAX_VALUE)
         );
 
         typeActionPanel.add(jPanel2);
@@ -200,6 +191,7 @@ public class MainWindow extends javax.swing.JFrame {
         centrePanel.setLayout(new java.awt.BorderLayout());
 
         actionPanel.setBackground(new java.awt.Color(46, 79, 79));
+        actionPanel.setPreferredSize(new java.awt.Dimension(750, 420));
 
         javax.swing.GroupLayout actionPanelLayout = new javax.swing.GroupLayout(actionPanel);
         actionPanel.setLayout(actionPanelLayout);
@@ -209,7 +201,7 @@ public class MainWindow extends javax.swing.JFrame {
         );
         actionPanelLayout.setVerticalGroup(
             actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+            .addGap(0, 422, Short.MAX_VALUE)
         );
 
         centrePanel.add(actionPanel, java.awt.BorderLayout.CENTER);
