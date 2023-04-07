@@ -148,8 +148,8 @@ public class User {
             trackInfo.put("name", track.getName());
             trackInfo.put("artist", track.getArtists()[0].getName());
             trackInfo.put("duration", track.getDurationMs().toString(0)); //track length in milliseconds
-            trackInfo.put("duration", track.getAlbum().getName());
-            trackInfo.put("duration", track.getAlbum().getImages()[0].toString()); // "Image(height=" + height + ", url=" + url + ", width=" + width + ")"
+            trackInfo.put("album", track.getAlbum().getName());
+            trackInfo.put("image", track.getAlbum().getImages()[0].toString()); // "Image(height=" + height + ", url=" + url + ", width=" + width + ")"
             return trackInfo;
             // System.out.println("Name: " + track.getName());
         } catch (IOException | SpotifyWebApiException | ParseException e) {
