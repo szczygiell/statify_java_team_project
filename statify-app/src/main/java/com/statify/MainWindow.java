@@ -4,6 +4,10 @@
  */
 package com.statify;
 
+
+import javax.swing.JButton;
+//import javax.swing.event.Mouse;
+
 /**
  *
  * @author mwewior
@@ -15,6 +19,12 @@ public class MainWindow extends javax.swing.JFrame {
      */
     public MainWindow() {
         initComponents();
+        JButton [] buttons = {
+            artistButton, genreButton, weeks4Button, months6Button, allTimeHistoryButton
+        };
+//        for(JButton btn : buttons){
+//            btn.addMouseListener(new MouseListener());
+//        }
     }
 
     /**
@@ -30,8 +40,8 @@ public class MainWindow extends javax.swing.JFrame {
         sidePanel = new javax.swing.JPanel();
         additionalPanel = new javax.swing.JPanel();
         typeActionPanel = new javax.swing.JPanel();
-        genreButon = new javax.swing.JButton();
-        artistButton1 = new javax.swing.JButton();
+        genreButton = new javax.swing.JButton();
+        artistButton = new javax.swing.JButton();
         logoPanel = new javax.swing.JPanel();
         mainPanel = new javax.swing.JPanel();
         centrePanel = new javax.swing.JPanel();
@@ -70,21 +80,23 @@ public class MainWindow extends javax.swing.JFrame {
         typeActionPanel.setBackground(new java.awt.Color(44, 51, 51));
         typeActionPanel.setPreferredSize(new java.awt.Dimension(210, 420));
 
-        genreButon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-music-record-32.png"))); // NOI18N
-        genreButon.setText("gatunek");
-        genreButon.setBorder(null);
-        genreButon.addActionListener(new java.awt.event.ActionListener() {
+        genreButton.setBackground(new java.awt.Color(204, 204, 204));
+        genreButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-music-record-32.png"))); // NOI18N
+        genreButton.setText("gatunek");
+        genreButton.setBorder(null);
+        genreButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                genreButonActionPerformed(evt);
+                genreButtonActionPerformed(evt);
             }
         });
 
-        artistButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-musician-male-32.png"))); // NOI18N
-        artistButton1.setText("artysta");
-        artistButton1.setBorder(null);
-        artistButton1.addActionListener(new java.awt.event.ActionListener() {
+        artistButton.setBackground(new java.awt.Color(204, 204, 204));
+        artistButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-musician-male-32.png"))); // NOI18N
+        artistButton.setText("artysta");
+        artistButton.setBorder(null);
+        artistButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                artistButton1ActionPerformed(evt);
+                artistButtonActionPerformed(evt);
             }
         });
 
@@ -96,20 +108,20 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(typeActionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(typeActionPanelLayout.createSequentialGroup()
-                        .addComponent(artistButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(artistButton, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, typeActionPanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(genreButon, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(genreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18))))
         );
         typeActionPanelLayout.setVerticalGroup(
             typeActionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(typeActionPanelLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(artistButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(artistButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(genreButon, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(genreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(158, Short.MAX_VALUE))
         );
 
@@ -138,7 +150,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         centrePanel.setLayout(new java.awt.BorderLayout());
 
-        actionPanel.setBackground(new java.awt.Color(0, 102, 0));
+        actionPanel.setBackground(new java.awt.Color(4, 81, 4));
 
         javax.swing.GroupLayout actionPanelLayout = new javax.swing.GroupLayout(actionPanel);
         actionPanel.setLayout(actionPanelLayout);
@@ -153,7 +165,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         centrePanel.add(actionPanel, java.awt.BorderLayout.CENTER);
 
-        timePeriodPanel.setBackground(new java.awt.Color(0, 102, 0));
+        timePeriodPanel.setBackground(new java.awt.Color(4, 81, 4));
         timePeriodPanel.setPreferredSize(new java.awt.Dimension(20, 120));
         timePeriodPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 97, 48));
 
@@ -198,13 +210,13 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void genreButonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genreButonActionPerformed
+    private void genreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genreButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_genreButonActionPerformed
+    }//GEN-LAST:event_genreButtonActionPerformed
 
-    private void artistButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_artistButton1ActionPerformed
+    private void artistButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_artistButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_artistButton1ActionPerformed
+    }//GEN-LAST:event_artistButtonActionPerformed
 
     private void months6ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_months6ButtonActionPerformed
         // TODO add your handling code here:
@@ -257,9 +269,9 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel actionPanel;
     private javax.swing.JPanel additionalPanel;
     private javax.swing.JButton allTimeHistoryButton;
-    private javax.swing.JButton artistButton1;
+    private javax.swing.JButton artistButton;
     private javax.swing.JPanel centrePanel;
-    private javax.swing.JButton genreButon;
+    private javax.swing.JButton genreButton;
     private javax.swing.JPanel logoPanel;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JButton months6Button;
