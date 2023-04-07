@@ -7,29 +7,29 @@ import org.apache.commons.configuration2.plist.Token;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
- 
+
 public class LoginWindow extends JFrame implements ActionListener {
- 
+
     Container container = getContentPane();
     JLabel passwordLabel = new JLabel("ACCES_TOKEN");
     JPasswordField passwordField = new JPasswordField();
     JButton loginButton = new JButton("LOGIN");
     JButton resetButton = new JButton("RESET");
     JCheckBox showPassword = new JCheckBox("Show token");
- 
- 
+
+
     LoginWindow() {
         setLayoutManager();
         setLocationAndSize();
         addComponentsToContainer();
         addActionEvent();
- 
+
     }
- 
+
     public void setLayoutManager() {
         container.setLayout(null);
     }
- 
+
     public void setLocationAndSize() {
         container.setBackground(new java.awt.Color(52, 235, 107));
         passwordLabel.setBounds(50, 220, 100, 30);
@@ -43,10 +43,10 @@ public class LoginWindow extends JFrame implements ActionListener {
         resetButton.setBounds(200, 300, 100, 30);
         resetButton.setBackground(new java.awt.Color(0, 0, 0));
         resetButton.setForeground(new java.awt.Color(255, 255, 255));
-        setMinimumSize(new java.awt.Dimension(350, 540));
- 
+
+
     }
- 
+
     public void addComponentsToContainer() {
         container.add(passwordLabel);
         container.add(passwordField);
@@ -54,14 +54,14 @@ public class LoginWindow extends JFrame implements ActionListener {
         container.add(loginButton);
         container.add(resetButton);
     }
- 
+
     public void addActionEvent() {
         loginButton.addActionListener(this);
         resetButton.addActionListener(this);
         showPassword.addActionListener(this);
     }
- 
- 
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
         //Coding Part of LOGIN button
@@ -76,7 +76,7 @@ public class LoginWindow extends JFrame implements ActionListener {
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid Acces Token");
             }
- 
+
         }
         //Coding Part of RESET button
         if (e.getSource() == resetButton) {
@@ -89,8 +89,8 @@ public class LoginWindow extends JFrame implements ActionListener {
             } else {
                 passwordField.setEchoChar('*');
             }
- 
- 
+
+
         }
     }
     public static void main(String[] a) {
@@ -100,7 +100,7 @@ public class LoginWindow extends JFrame implements ActionListener {
         frame.setBounds(10, 10, 370, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
- 
+
     }
- 
+
 }
