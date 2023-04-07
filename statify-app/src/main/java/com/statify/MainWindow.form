@@ -97,6 +97,11 @@
               </Layout>
               <SubComponents>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+                  <Properties>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="null"/>
+                    </Property>
+                  </Properties>
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
@@ -116,8 +121,8 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="analisePlaylistButton" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="tracksAnyliseButton" alignment="0" pref="180" max="32767" attributes="0"/>
+                                      <Component id="playlistAnaliseButton" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="tracksAnaliseButton" alignment="0" pref="180" max="32767" attributes="0"/>
                                       <Component id="topTracksButton" alignment="0" max="32767" attributes="0"/>
                                       <Component id="genreButon" alignment="0" max="32767" attributes="0"/>
                                       <Component id="artistButton" alignment="0" max="32767" attributes="0"/>
@@ -137,9 +142,9 @@
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="topTracksButton" min="-2" pref="60" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="tracksAnyliseButton" min="-2" pref="60" max="-2" attributes="0"/>
+                                  <Component id="tracksAnaliseButton" min="-2" pref="60" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="analisePlaylistButton" min="-2" pref="60" max="-2" attributes="0"/>
+                                  <Component id="playlistAnaliseButton" min="-2" pref="60" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="generatePlaylistButton" min="-2" pref="60" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
@@ -150,6 +155,9 @@
                       <SubComponents>
                         <Component class="javax.swing.JButton" name="artistButton">
                           <Properties>
+                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                              <Image iconType="3" name="/com/icons/icons8-musician-male-32.png"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="artists"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="null"/>
@@ -170,6 +178,9 @@
                         </Component>
                         <Component class="javax.swing.JButton" name="genreButon">
                           <Properties>
+                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                              <Image iconType="3" name="/com/icons/icons8-music-record-32.png"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="genre"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="null"/>
@@ -181,6 +192,9 @@
                         </Component>
                         <Component class="javax.swing.JButton" name="topTracksButton">
                           <Properties>
+                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                              <Image iconType="3" name="/com/icons/icons8-volume-level-32.png"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="top tracks"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="null"/>
@@ -190,20 +204,26 @@
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="topTracksButtonActionPerformed"/>
                           </Events>
                         </Component>
-                        <Component class="javax.swing.JButton" name="tracksAnyliseButton">
+                        <Component class="javax.swing.JButton" name="tracksAnaliseButton">
                           <Properties>
+                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                              <Image iconType="3" name="/com/icons/icons8-sample-rate-32.png"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="analise tracks"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="null"/>
                             </Property>
                           </Properties>
                           <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tracksAnyliseButtonActionPerformed"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tracksAnaliseButtonActionPerformed"/>
                           </Events>
                         </Component>
-                        <Component class="javax.swing.JButton" name="analisePlaylistButton">
+                        <Component class="javax.swing.JButton" name="playlistAnaliseButton">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="anylise playlist"/>
+                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                              <Image iconType="3" name="/com/icons/icons8-audio-wave2-32.png"/>
+                            </Property>
+                            <Property name="text" type="java.lang.String" value="analise playlist"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="null"/>
                             </Property>
@@ -218,11 +238,14 @@
                             </Property>
                           </Properties>
                           <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="analisePlaylistButtonActionPerformed"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="playlistAnaliseButtonActionPerformed"/>
                           </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="generatePlaylistButton">
                           <Properties>
+                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                              <Image iconType="3" name="/com/icons/icons8-add-album-32.png"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="generate playlist"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="null"/>
@@ -354,7 +377,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="4 tygodnie"/>
+                        <Property name="text" type="java.lang.String" value="4 weeks"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[108, 54]"/>
                         </Property>
@@ -371,7 +394,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="6 miesi&#x119;cy"/>
+                        <Property name="text" type="java.lang.String" value="6 months"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[108, 54]"/>
                         </Property>
@@ -388,7 +411,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="ca&#x142;a historia"/>
+                        <Property name="text" type="java.lang.String" value="all-time"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[108, 54]"/>
                         </Property>

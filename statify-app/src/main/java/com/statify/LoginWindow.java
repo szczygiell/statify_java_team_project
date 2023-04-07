@@ -43,7 +43,7 @@ public class LoginWindow extends JFrame implements ActionListener {
         resetButton.setBounds(200, 300, 100, 30);
         resetButton.setBackground(new java.awt.Color(0, 0, 0));
         resetButton.setForeground(new java.awt.Color(255, 255, 255));
- 
+        setMinimumSize(new java.awt.Dimension(350, 540));
  
     }
  

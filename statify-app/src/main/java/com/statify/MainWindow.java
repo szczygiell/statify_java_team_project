@@ -35,8 +35,8 @@ public class MainWindow extends javax.swing.JFrame {
         artistButton = new javax.swing.JButton();
         genreButon = new javax.swing.JButton();
         topTracksButton = new javax.swing.JButton();
-        tracksAnyliseButton = new javax.swing.JButton();
-        analisePlaylistButton = new javax.swing.JButton();
+        tracksAnaliseButton = new javax.swing.JButton();
+        playlistAnaliseButton = new javax.swing.JButton();
         generatePlaylistButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         mainPanel = new javax.swing.JPanel();
@@ -67,9 +67,12 @@ public class MainWindow extends javax.swing.JFrame {
         typeActionPanel.setPreferredSize(new java.awt.Dimension(210, 220));
         typeActionPanel.setLayout(new javax.swing.BoxLayout(typeActionPanel, javax.swing.BoxLayout.PAGE_AXIS));
 
+        jScrollPane1.setBorder(null);
+
         timeActionPanel.setBackground(new java.awt.Color(44, 51, 51));
         timeActionPanel.setPreferredSize(new java.awt.Dimension(188, 440));
 
+        artistButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons/icons8-musician-male-32.png"))); // NOI18N
         artistButton.setText("artists");
         artistButton.setBorder(null);
         artistButton.setMaximumSize(new java.awt.Dimension(80, 24));
@@ -81,6 +84,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        genreButon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons/icons8-music-record-32.png"))); // NOI18N
         genreButon.setText("genre");
         genreButon.setBorder(null);
         genreButon.addActionListener(new java.awt.event.ActionListener() {
@@ -89,6 +93,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        topTracksButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons/icons8-volume-level-32.png"))); // NOI18N
         topTracksButton.setText("top tracks");
         topTracksButton.setBorder(null);
         topTracksButton.addActionListener(new java.awt.event.ActionListener() {
@@ -97,25 +102,28 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        tracksAnyliseButton.setText("analise tracks");
-        tracksAnyliseButton.setBorder(null);
-        tracksAnyliseButton.addActionListener(new java.awt.event.ActionListener() {
+        tracksAnaliseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons/icons8-sample-rate-32.png"))); // NOI18N
+        tracksAnaliseButton.setText("analise tracks");
+        tracksAnaliseButton.setBorder(null);
+        tracksAnaliseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tracksAnyliseButtonActionPerformed(evt);
+                tracksAnaliseButtonActionPerformed(evt);
             }
         });
 
-        analisePlaylistButton.setText("anylise playlist");
-        analisePlaylistButton.setBorder(null);
-        analisePlaylistButton.setMaximumSize(new java.awt.Dimension(80, 24));
-        analisePlaylistButton.setMinimumSize(new java.awt.Dimension(80, 24));
-        analisePlaylistButton.setPreferredSize(new java.awt.Dimension(80, 24));
-        analisePlaylistButton.addActionListener(new java.awt.event.ActionListener() {
+        playlistAnaliseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons/icons8-audio-wave2-32.png"))); // NOI18N
+        playlistAnaliseButton.setText("analise playlist");
+        playlistAnaliseButton.setBorder(null);
+        playlistAnaliseButton.setMaximumSize(new java.awt.Dimension(80, 24));
+        playlistAnaliseButton.setMinimumSize(new java.awt.Dimension(80, 24));
+        playlistAnaliseButton.setPreferredSize(new java.awt.Dimension(80, 24));
+        playlistAnaliseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                analisePlaylistButtonActionPerformed(evt);
+                playlistAnaliseButtonActionPerformed(evt);
             }
         });
 
+        generatePlaylistButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons/icons8-add-album-32.png"))); // NOI18N
         generatePlaylistButton.setText("generate playlist");
         generatePlaylistButton.setBorder(null);
         generatePlaylistButton.setMaximumSize(new java.awt.Dimension(80, 24));
@@ -134,8 +142,8 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(timeActionPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(timeActionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(analisePlaylistButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tracksAnyliseButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                    .addComponent(playlistAnaliseButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tracksAnaliseButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                     .addComponent(topTracksButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(genreButon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(artistButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -152,9 +160,9 @@ public class MainWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(topTracksButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tracksAnyliseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tracksAnaliseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(analisePlaylistButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(playlistAnaliseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(generatePlaylistButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -212,7 +220,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         weeks4Button.setBackground(new java.awt.Color(46, 79, 79));
         weeks4Button.setForeground(new java.awt.Color(255, 255, 255));
-        weeks4Button.setText("4 tygodnie");
+        weeks4Button.setText("4 weeks");
         weeks4Button.setPreferredSize(new java.awt.Dimension(108, 54));
         weeks4Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -223,7 +231,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         months6Button.setBackground(new java.awt.Color(46, 79, 79));
         months6Button.setForeground(new java.awt.Color(255, 255, 255));
-        months6Button.setText("6 miesięcy");
+        months6Button.setText("6 months");
         months6Button.setPreferredSize(new java.awt.Dimension(108, 54));
         months6Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -234,7 +242,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         allTimeHistoryButton.setBackground(new java.awt.Color(46, 79, 79));
         allTimeHistoryButton.setForeground(new java.awt.Color(255, 255, 255));
-        allTimeHistoryButton.setText("cała historia");
+        allTimeHistoryButton.setText("all-time");
         allTimeHistoryButton.setPreferredSize(new java.awt.Dimension(108, 54));
         allTimeHistoryButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -274,9 +282,9 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_allTimeHistoryButtonActionPerformed
 
-    private void analisePlaylistButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analisePlaylistButtonActionPerformed
+    private void playlistAnaliseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playlistAnaliseButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_analisePlaylistButtonActionPerformed
+    }//GEN-LAST:event_playlistAnaliseButtonActionPerformed
 
     private void generatePlaylistButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generatePlaylistButtonActionPerformed
         // TODO add your handling code here:
@@ -286,9 +294,9 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_genreButonActionPerformed
 
-    private void tracksAnyliseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tracksAnyliseButtonActionPerformed
+    private void tracksAnaliseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tracksAnaliseButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tracksAnyliseButtonActionPerformed
+    }//GEN-LAST:event_tracksAnaliseButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -328,7 +336,6 @@ public class MainWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel actionPanel;
     private javax.swing.JButton allTimeHistoryButton;
-    private javax.swing.JButton analisePlaylistButton;
     private javax.swing.JButton artistButton;
     private javax.swing.JPanel centrePanel;
     private javax.swing.JButton generatePlaylistButton;
@@ -339,11 +346,12 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel mainPanel;
     private javax.swing.JButton months6Button;
     private javax.swing.JPanel planeRoot;
+    private javax.swing.JButton playlistAnaliseButton;
     private javax.swing.JPanel sidePanel;
     private javax.swing.JPanel timeActionPanel;
     private javax.swing.JPanel timePeriodPanel;
     private javax.swing.JButton topTracksButton;
-    private javax.swing.JButton tracksAnyliseButton;
+    private javax.swing.JButton tracksAnaliseButton;
     private javax.swing.JPanel typeActionPanel;
     private javax.swing.JButton weeks4Button;
     // End of variables declaration//GEN-END:variables
