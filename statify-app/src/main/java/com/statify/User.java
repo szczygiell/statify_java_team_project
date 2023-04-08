@@ -34,23 +34,25 @@ public class User {
                 .build();
     }
 
-    public String getFirstPlaylistId() {
-
+    public List<String> getPlaylistsIds(int limit) {
         final GetListOfCurrentUsersPlaylistsRequest getListOfCurrentUsersPlaylistsRequest = spotifyApi
                 .getListOfCurrentUsersPlaylists()
-                .limit(10)
+                .limit(limit)
                 .offset(0)
                 .build();
+        List<String> playlists_ids = new ArrayList<>();
         try {
             final Paging<PlaylistSimplified> playlistSimplifiedPaging = getListOfCurrentUsersPlaylistsRequest.execute();
-            int playlist_number = 1;
-            PlaylistSimplified playlist = playlistSimplifiedPaging.getItems()[playlist_number];
-            System.out.println(playlist.getName());
-            return playlist.getId();
+            PlaylistSimplified[] playlists = playlistSimplifiedPaging.getItems();
+            for (PlaylistSimplified playlist : playlists) {
+                playlists_ids.add(playlist.getId());
+            }
+            System.out.println(playlists[0].getName());
+            return playlists_ids;
 
         } catch (IOException | SpotifyWebApiException | ParseException e) {
             System.out.println("Error: " + e.getMessage());
-            return e.getMessage();
+            return playlists_ids;
         }
     }
 
@@ -70,8 +72,10 @@ public class User {
             // System.out.println(playlistTrackPaging.getItems()[0].getTrack().getName());
             for (PlaylistTrack pl_track : playlistTrackPaging.getItems()) {
                 IPlaylistItem track = pl_track.getTrack();
+                if (track == null) {
+                    continue;
+                }
                 tracks_indeces.add(track.getId());
-
             }
             return tracks_indeces;
         } catch (IOException | SpotifyWebApiException | ParseException | NullPointerException e) {
