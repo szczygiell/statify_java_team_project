@@ -4,6 +4,9 @@
  */
 package com.statify;
 
+import javax.swing.JPanel;
+
+
 /**
  *
  * @author mwewior
@@ -20,11 +23,35 @@ public class MainWindow extends javax.swing.JFrame {
     
     public final void panelsSetDefault(){
         timeButtonsPanel.setVisible(false);
+        optionsPanel.setVisible(false);
+        
         redPanel.setVisible(false);
         bluePanel.setVisible(false);
         
         planeBasePanel.setVisible(true);
         planeUpperPanel.setVisible(true);
+    }
+    
+    public final void upperPanelDefault() {
+        timeButtonsPanel.setVisible(false);
+        optionsPanel.setVisible(false);
+        planeUpperPanel.setVisible(true);
+    }
+    
+    public void panelInit(JPanel panel){
+//        panel.setBackground(new java.awt.Color(255, 0, 0));
+
+        javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
+        panel.setLayout(panelLayout);
+        panelLayout.setHorizontalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 750, Short.MAX_VALUE)
+        );
+        panelLayout.setVerticalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 422, Short.MAX_VALUE)
+        );
+        actionPanel.add(panel);
     }
 
     /**
@@ -44,7 +71,7 @@ public class MainWindow extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         chooseActionPanel = new javax.swing.JPanel();
         artistButton = new javax.swing.JButton();
-        genreButon = new javax.swing.JButton();
+        genreButton = new javax.swing.JButton();
         topTracksButton = new javax.swing.JButton();
         tracksAnaliseButton = new javax.swing.JButton();
         playlistAnaliseButton = new javax.swing.JButton();
@@ -53,6 +80,10 @@ public class MainWindow extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
         centrePanel = new javax.swing.JPanel();
         actionButtonsPanel = new javax.swing.JPanel();
+        optionsPanel = new javax.swing.JPanel();
+        optionButton1 = new javax.swing.JButton();
+        optionButton2 = new javax.swing.JButton();
+        optionButton3 = new javax.swing.JButton();
         timeButtonsPanel = new javax.swing.JPanel();
         weeks4Button = new javax.swing.JButton();
         months6Button = new javax.swing.JButton();
@@ -88,7 +119,6 @@ public class MainWindow extends javax.swing.JFrame {
         chooseActionPanel.setBackground(new java.awt.Color(44, 51, 51));
         chooseActionPanel.setPreferredSize(new java.awt.Dimension(188, 440));
 
-        artistButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons/icons8-musician-male-32.png"))); // NOI18N
         artistButton.setText("artists");
         artistButton.setBorder(null);
         artistButton.setMaximumSize(new java.awt.Dimension(80, 24));
@@ -100,16 +130,14 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        genreButon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons/icons8-music-record-32.png"))); // NOI18N
-        genreButon.setText("genre");
-        genreButon.setBorder(null);
-        genreButon.addActionListener(new java.awt.event.ActionListener() {
+        genreButton.setText("genre");
+        genreButton.setBorder(null);
+        genreButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                genreButonActionPerformed(evt);
+                genreButtonActionPerformed(evt);
             }
         });
 
-        topTracksButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons/icons8-volume-level-32.png"))); // NOI18N
         topTracksButton.setText("top tracks");
         topTracksButton.setBorder(null);
         topTracksButton.addActionListener(new java.awt.event.ActionListener() {
@@ -118,7 +146,6 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        tracksAnaliseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons/icons8-sample-rate-32.png"))); // NOI18N
         tracksAnaliseButton.setText("analise tracks");
         tracksAnaliseButton.setBorder(null);
         tracksAnaliseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -127,7 +154,6 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        playlistAnaliseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons/icons8-audio-wave2-32.png"))); // NOI18N
         playlistAnaliseButton.setText("analise playlist");
         playlistAnaliseButton.setBorder(null);
         playlistAnaliseButton.setMaximumSize(new java.awt.Dimension(80, 24));
@@ -139,7 +165,6 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        generatePlaylistButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons/icons8-add-album-32.png"))); // NOI18N
         generatePlaylistButton.setText("generate playlist");
         generatePlaylistButton.setBorder(null);
         generatePlaylistButton.setMaximumSize(new java.awt.Dimension(80, 24));
@@ -161,7 +186,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(playlistAnaliseButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tracksAnaliseButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                     .addComponent(topTracksButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(genreButon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(genreButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(artistButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(generatePlaylistButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(14, 14, 14))
@@ -172,7 +197,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(artistButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(genreButon, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(genreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(topTracksButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -214,9 +239,48 @@ public class MainWindow extends javax.swing.JFrame {
 
         centrePanel.setLayout(new java.awt.BorderLayout());
 
-        actionButtonsPanel.setBackground(new java.awt.Color(46, 79, 79));
+        actionButtonsPanel.setBackground(new java.awt.Color(4, 81, 4));
         actionButtonsPanel.setPreferredSize(new java.awt.Dimension(20, 120));
         actionButtonsPanel.setLayout(new java.awt.CardLayout());
+
+        optionsPanel.setBackground(new java.awt.Color(46, 79, 79));
+        optionsPanel.setPreferredSize(new java.awt.Dimension(20, 120));
+        optionsPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 97, 48));
+
+        optionButton1.setBackground(new java.awt.Color(46, 79, 79));
+        optionButton1.setForeground(new java.awt.Color(255, 255, 255));
+        optionButton1.setText("option 1");
+        optionButton1.setPreferredSize(new java.awt.Dimension(108, 54));
+        optionButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optionButton1ActionPerformed(evt);
+            }
+        });
+        optionsPanel.add(optionButton1);
+
+        optionButton2.setBackground(new java.awt.Color(46, 79, 79));
+        optionButton2.setForeground(new java.awt.Color(255, 255, 255));
+        optionButton2.setText("histogram");
+        optionButton2.setPreferredSize(new java.awt.Dimension(108, 54));
+        optionButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optionButton2ActionPerformed(evt);
+            }
+        });
+        optionsPanel.add(optionButton2);
+
+        optionButton3.setBackground(new java.awt.Color(46, 79, 79));
+        optionButton3.setForeground(new java.awt.Color(255, 255, 255));
+        optionButton3.setText("option 3");
+        optionButton3.setPreferredSize(new java.awt.Dimension(108, 54));
+        optionButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optionButton3ActionPerformed(evt);
+            }
+        });
+        optionsPanel.add(optionButton3);
+
+        actionButtonsPanel.add(optionsPanel, "card2");
 
         timeButtonsPanel.setBackground(new java.awt.Color(46, 79, 79));
         timeButtonsPanel.setPreferredSize(new java.awt.Dimension(20, 120));
@@ -288,10 +352,10 @@ public class MainWindow extends javax.swing.JFrame {
         );
         redPanelLayout.setVerticalGroup(
             redPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+            .addGap(0, 422, Short.MAX_VALUE)
         );
 
-        actionPanel.add(redPanel, "card3");
+        actionPanel.add(redPanel, "card2");
 
         bluePanel.setBackground(new java.awt.Color(0, 51, 255));
 
@@ -303,10 +367,10 @@ public class MainWindow extends javax.swing.JFrame {
         );
         bluePanelLayout.setVerticalGroup(
             bluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+            .addGap(0, 422, Short.MAX_VALUE)
         );
 
-        actionPanel.add(bluePanel, "card3");
+        actionPanel.add(bluePanel, "card1");
 
         planeBasePanel.setBackground(new java.awt.Color(46, 79, 79));
 
@@ -318,12 +382,12 @@ public class MainWindow extends javax.swing.JFrame {
         );
         planeBasePanelLayout.setVerticalGroup(
             planeBasePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+            .addGap(0, 422, Short.MAX_VALUE)
         );
 
-        actionPanel.add(planeBasePanel, "card2");
+        actionPanel.add(planeBasePanel, "card0");
 
-        centrePanel.add(actionPanel, java.awt.BorderLayout.SOUTH);
+        centrePanel.add(actionPanel, java.awt.BorderLayout.CENTER);
 
         mainPanel.add(centrePanel, java.awt.BorderLayout.CENTER);
 
@@ -334,45 +398,79 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void topTracksButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_topTracksButtonActionPerformed
-        panelsSetDefault();
+    
+    private void optionButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionButton1ActionPerformed
+        upperPanelDefault();
+        optionsPanel.setVisible(true);
+    }//GEN-LAST:event_optionButton1ActionPerformed
+
+    private void optionButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionButton2ActionPerformed
+        upperPanelDefault();
+        JPanel histo = (new Statify()).getDanceabilityHistogram(java.util.Arrays.asList(1.4f, 5.0f, 6.4f));
+        panelInit(histo);
+        histo.setVisible(true);
+        optionsPanel.setVisible(true);
+    }//GEN-LAST:event_optionButton2ActionPerformed
+
+    private void optionButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionButton3ActionPerformed
+        upperPanelDefault();
+        optionsPanel.setVisible(true);
+    }//GEN-LAST:event_optionButton3ActionPerformed
+
+    
+
+    private void weeks4ButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_weeks4ButtonActionPerformed
+        upperPanelDefault();
         timeButtonsPanel.setVisible(true);
-        redPanel.setVisible(true);
-    }// GEN-LAST:event_topTracksButtonActionPerformed
+    }// GEN-LAST:event_weeks4ButtonActionPerformed
+
+    private void months6ButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_months6ButtonActionPerformed
+        upperPanelDefault();
+        timeButtonsPanel.setVisible(true);
+    }// GEN-LAST:event_months6ButtonActionPerformed
+
+    private void allTimeHistoryButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_allTimeHistoryButtonActionPerformed
+        upperPanelDefault();
+        timeButtonsPanel.setVisible(true);
+    }// GEN-LAST:event_allTimeHistoryButtonActionPerformed
+
+    
+    
 
     private void artistButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_artistButtonActionPerformed
         panelsSetDefault();
+        timeButtonsPanel.setVisible(true);
         bluePanel.setVisible(true);
     }// GEN-LAST:event_artistButtonActionPerformed
 
-    private void months6ButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_months6ButtonActionPerformed
+    private void genreButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_genreButtonActionPerformed
         panelsSetDefault();
-    }// GEN-LAST:event_months6ButtonActionPerformed
+        timeButtonsPanel.setVisible(true);
+        redPanel.setVisible(true);
+    }// GEN-LAST:event_genreButtonActionPerformed
 
-    private void weeks4ButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_weeks4ButtonActionPerformed
+    private void topTracksButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_topTracksButtonActionPerformed
         panelsSetDefault();
-    }// GEN-LAST:event_weeks4ButtonActionPerformed
+        timeButtonsPanel.setVisible(true);
+    }// GEN-LAST:event_topTracksButtonActionPerformed
 
-    private void allTimeHistoryButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_allTimeHistoryButtonActionPerformed
+    private void tracksAnaliseButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_tracksAnaliseButtonActionPerformed
         panelsSetDefault();
-    }// GEN-LAST:event_allTimeHistoryButtonActionPerformed
+        optionsPanel.setVisible(true);
+        bluePanel.setVisible(true);
+    }// GEN-LAST:event_tracksAnaliseButtonActionPerformed
 
     private void playlistAnaliseButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_playlistAnaliseButtonActionPerformed
         panelsSetDefault();
+        optionsPanel.setVisible(true);
     }// GEN-LAST:event_playlistAnaliseButtonActionPerformed
 
     private void generatePlaylistButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_generatePlaylistButtonActionPerformed
         panelsSetDefault();
+        optionsPanel.setVisible(true);
     }// GEN-LAST:event_generatePlaylistButtonActionPerformed
 
-    private void genreButonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_genreButonActionPerformed
-        panelsSetDefault();
-    }// GEN-LAST:event_genreButonActionPerformed
-
-    private void tracksAnaliseButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_tracksAnaliseButtonActionPerformed
-        panelsSetDefault();
-    }// GEN-LAST:event_tracksAnaliseButtonActionPerformed
-
+    
     /**
      * @param args the command line arguments
      */
@@ -426,11 +524,15 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel centrePanel;
     private javax.swing.JPanel chooseActionPanel;
     private javax.swing.JButton generatePlaylistButton;
-    private javax.swing.JButton genreButon;
+    private javax.swing.JButton genreButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel logoPanel;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JButton months6Button;
+    private javax.swing.JButton optionButton1;
+    private javax.swing.JButton optionButton2;
+    private javax.swing.JButton optionButton3;
+    private javax.swing.JPanel optionsPanel;
     private javax.swing.JPanel planeBasePanel;
     private javax.swing.JPanel planeRoot;
     private javax.swing.JPanel planeUpperPanel;

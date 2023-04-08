@@ -1,3 +1,5 @@
 .vscode/
 statify-app/target/
 .editorconfig
+statify-app/target/*
+statify-app/target/classes/com/statify/MainWindow*
