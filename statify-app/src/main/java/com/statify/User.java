@@ -16,8 +16,10 @@ import se.michaelthelin.spotify.requests.data.playlists.GetPlaylistsItemsRequest
 import se.michaelthelin.spotify.model_objects.specification.PlaylistTrack;
 import se.michaelthelin.spotify.model_objects.specification.Track;
 import se.michaelthelin.spotify.requests.data.tracks.GetTrackRequest;
+import se.michaelthelin.spotify.model_objects.IPlaylistItem;
 import se.michaelthelin.spotify.model_objects.specification.AudioFeatures;
 import se.michaelthelin.spotify.requests.data.tracks.GetAudioFeaturesForTrackRequest;
+import se.michaelthelin.spotify.requests.data.personalization.simplified.GetUsersTopTracksRequest;
 
 import java.io.IOException;
 
@@ -41,8 +43,11 @@ public class User {
                 .build();
         try {
             final Paging<PlaylistSimplified> playlistSimplifiedPaging = getListOfCurrentUsersPlaylistsRequest.execute();
+            int playlist_number = 1;
+            PlaylistSimplified playlist = playlistSimplifiedPaging.getItems()[playlist_number];
+            System.out.println(playlist.getName());
+            return playlist.getId();
 
-            return playlistSimplifiedPaging.getItems()[0].getId();
         } catch (IOException | SpotifyWebApiException | ParseException e) {
             System.out.println("Error: " + e.getMessage());
             return e.getMessage();
@@ -53,7 +58,7 @@ public class User {
         final GetPlaylistsItemsRequest getPlaylistsItemsRequest = spotifyApi
                 .getPlaylistsItems(playlistId)
                 // .fields("description")
-                .limit(10)
+                // .limit(100)
                 // .offset(0)
                 // .market(CountryCode.SE)
                 // .additionalTypes("track,episode")
@@ -62,12 +67,14 @@ public class User {
         try {
             final Paging<PlaylistTrack> playlistTrackPaging = getPlaylistsItemsRequest.execute();
             List<String> tracks_indeces = new ArrayList<String>();
-            System.out.println(playlistTrackPaging.getItems()[0].getTrack().getName());
+            // System.out.println(playlistTrackPaging.getItems()[0].getTrack().getName());
             for (PlaylistTrack pl_track : playlistTrackPaging.getItems()) {
-                tracks_indeces.add(pl_track.getTrack().getId());
+                IPlaylistItem track = pl_track.getTrack();
+                tracks_indeces.add(track.getId());
+
             }
             return tracks_indeces;
-        } catch (IOException | SpotifyWebApiException | ParseException e) {
+        } catch (IOException | SpotifyWebApiException | ParseException | NullPointerException e) {
             System.out.println("Error: " + e.getMessage());
             return new ArrayList<String>();
         }
@@ -104,4 +111,48 @@ public class User {
         }
 
     }
+
+    public List<String> getTopTrackIds(int limit, String time_range) {
+        List<String> trackIds = new ArrayList<>();
+        final GetUsersTopTracksRequest getUsersTopTracksRequest = spotifyApi.getUsersTopTracks()
+                .time_range(time_range) // "short_term": 4 weeks; "medium_term": 6 months; "long_term": years
+                .limit(limit) // number of tracks
+                .build();
+        try {
+            final Paging<Track> trackPaging = getUsersTopTracksRequest.execute();
+            Track[] tracks = trackPaging.getItems();
+            for (int i = 0; i < limit; i++) {
+                trackIds.add(tracks[i].getId());
+            }
+            return trackIds;
+
+        } catch (IOException | SpotifyWebApiException | ParseException | NullPointerException e) {
+            System.out.println("Error: " + e.getMessage());
+            return new ArrayList<String>();
+        }
+
+    }
+
+    public Dictionary<String, String> getTrackInfo(String trackId) {
+        final GetTrackRequest getTrackRequest = spotifyApi.getTrack(trackId)
+                .build();
+
+        Dictionary<String, String> trackInfo = new Hashtable<>();
+
+        try {
+            final Track track = getTrackRequest.execute();
+            trackInfo.put("name", track.getName());
+            trackInfo.put("artist", track.getArtists()[0].getName());
+            trackInfo.put("duration", track.getDurationMs().toString(0)); // track length in milliseconds
+            trackInfo.put("album", track.getAlbum().getName());
+            trackInfo.put("image", track.getAlbum().getImages()[0].toString()); // "Image(height=" + height + ", url=" +
+                                                                                // url + ", width=" + width + ")"
+            return trackInfo;
+            // System.out.println("Name: " + track.getName());
+        } catch (IOException | SpotifyWebApiException | ParseException e) {
+            System.out.println("Error: " + e.getMessage());
+            return trackInfo;
+        }
+    }
+
 }
