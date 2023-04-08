@@ -7,6 +7,7 @@ import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.Histogram;
 import org.knowm.xchart.style.Styler.ChartTheme;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.lang.Math;
@@ -17,6 +18,7 @@ public class Statify {
     private CategoryChart getBarChart(List<Double> x_values,
             List<Double> y_values,
             String title,
+            String seriesName,
             String xAxisTitle,
             String yAxisTitle) {
         CategoryChart chart = new CategoryChartBuilder()
@@ -35,7 +37,7 @@ public class Statify {
 
         // Series
         try {
-            chart.addSeries("playlists", x_values, y_values);
+            chart.addSeries(seriesName, x_values, y_values);
             chart.getStyler().setAvailableSpaceFill(.96);
 
             return chart;
@@ -51,16 +53,21 @@ public class Statify {
         String title = String.format("Danceability Histogram of your %o playlists", playlists_num);
         String xTitle = "Mean";
         String yTitle = "Tracks count";
-
-        Histogram histogram = new Histogram(data, binsNum);
-        List<Double> ydata = histogram.getyAxisData();
-        List<Double> xdata = histogram.getxAxisData();
-
+        String seriesName = "Tracks in your playlists";
+        List<Double> ydata = new ArrayList<>();
+        List<Double> xdata = new ArrayList<>();
+        try {
+            Histogram histogram = new Histogram(data, binsNum);
+            ydata = histogram.getyAxisData();
+            xdata = histogram.getxAxisData();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
+        }
         for (int i = 0; i < xdata.size(); i++) {
             double newValue = (double) Math.round(xdata.get(i) * 100d) / 100d;
             xdata.set(i, newValue);
         }
-        CategoryChart chart = getBarChart(xdata, ydata, title, xTitle, yTitle);
+        CategoryChart chart = getBarChart(xdata, ydata, title, seriesName, xTitle, yTitle);
 
         return new XChartPanel<CategoryChart>(chart);
     }

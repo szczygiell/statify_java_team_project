@@ -17,28 +17,34 @@ public final class App {
      * 
      * @param args The arguments of the program.
      */
-    public static void main(String[] args) {
-        String user_token = "BQASdS2zvASHunhTiDfntD0iV188U1LZfWU8sonveRFeUBUxT1tKFdx8We4WfE70RxCcrFHFyy_LqlqBB7UBeMVJAEZJc5ajCdLzUKU3PVQoCPJJOgKfJOIr6Bi5wOklP2VhRV8FEGrci4L_Je0qIB9ISZwRuek4J-r_l4PiZc5Qn5G9BRKOZD7SKtNqukxw76qdzMg-XrGY8JD0rcRDIsCNaLNxzA9HDrrMdPkLKBNQP1yupXh5AcvxGEKieZtZFw2rQZ_wmGTLU303GIDvS2MPWW6Cy4h-JKuetVGLmic9D0Y8z9y71T5yfDiSvET5ub8";
+
+    public static void danceabilityHistogramSeveralTracks(String token) {
+        String user_token = token;
         User user = new User(user_token);
-        int limit = 15;
+        int limit = 30;
         List<String> playlistsIds = user.getPlaylistsIds(limit);
         List<String> tracksIds = new ArrayList<>();
         for (String pId : playlistsIds) {
             tracksIds.addAll(user.getPlaylistTracksIds(pId));
         }
-        // List<String> trackIds = user.getPlaylistTracksIds(playlistId);
         List<Float> danceability_table = new ArrayList<>();
-        for (String trackId : tracksIds) {
-            if (trackId == null) {
-                continue;
-            }
-            Dictionary<String, Float> audioFeatures = user.getTracksAudioFeatures(trackId);
-            danceability_table.add(audioFeatures.get("danceability"));
+        Dictionary<String, List<Float>> audioFeatures = user
+                .getAllTracksAudioFeatures(tracksIds.toArray(new String[0]));
+        try {
+            danceability_table.addAll(audioFeatures.get("danceability"));
+        } catch (NullPointerException e) {
+            System.out.println(e);
         }
-        // System.out.println(danceability_table);
         Statify statify = new Statify();
         JPanel chart = statify.getDanceabilityHistogram(danceability_table, limit);
         TopLevelWindow.createChartFrame(chart);
+
+    }
+
+    public static void main(String[] args) {
+        String user_token = "BQB7xCiuEbVOErMc6wTGq0edanpPQcEzrbX3wXkeNynCklJua4-q_vOpa0Q3shWBXMOwkdM8RjTVTXu5uDBY4CfwWImHXXvVdl3ZuAdlBiQnzdOpqxxQsAnhIUcDvAXdUQxQOZ1jS-D_Sh_QyYIxrOd3G5DoEFllPC3bb3tvYqE645T9PBtIO0xMjtHHR5g0VyXxiDzQnof0LGnJzgZ-rSNxm5UbgHGuE1jLJqD-OU1A3Xy9Dct2HqTlz5vK18G9v99URQ2NAllodA2fFh__85okwhLqPMdoxfI0Y3F3evUC1zALeyDq7tGHjEi_VVl2jAo";
+        // danceabilityHistogramSeparateTracks(user_token);
+        danceabilityHistogramSeveralTracks(user_token);
 
     }
 }

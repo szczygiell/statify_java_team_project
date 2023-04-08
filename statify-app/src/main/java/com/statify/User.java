@@ -1,15 +1,20 @@
 package com.statify;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Dictionary;
 import java.util.Hashtable;
+import java.lang.Math;
 
 import se.michaelthelin.spotify.SpotifyApi;
 import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
 import se.michaelthelin.spotify.model_objects.specification.Paging;
 
 import org.apache.hc.core5.http.ParseException;
+
+import com.fasterxml.jackson.annotation.JsonFormat.Feature;
+
 import se.michaelthelin.spotify.model_objects.specification.PlaylistSimplified;
 import se.michaelthelin.spotify.requests.data.playlists.GetListOfCurrentUsersPlaylistsRequest;
 import se.michaelthelin.spotify.requests.data.playlists.GetPlaylistsItemsRequest;
@@ -20,12 +25,14 @@ import se.michaelthelin.spotify.model_objects.IPlaylistItem;
 import se.michaelthelin.spotify.model_objects.specification.AudioFeatures;
 import se.michaelthelin.spotify.requests.data.tracks.GetAudioFeaturesForTrackRequest;
 import se.michaelthelin.spotify.requests.data.personalization.simplified.GetUsersTopTracksRequest;
+import se.michaelthelin.spotify.requests.data.tracks.GetAudioFeaturesForSeveralTracksRequest;
 
 import java.io.IOException;
 
 public class User {
     String accessToken = "";
     private final SpotifyApi spotifyApi;
+    public static final String[] audioFeaturesNames = { "danceability", "loudness", "acousticness" };
 
     User(String user_token) {
         this.accessToken = user_token;
@@ -96,24 +103,65 @@ public class User {
         }
     }
 
-    public Dictionary<String, Float> getTracksAudioFeatures(String trackId) {
-        final GetAudioFeaturesForTrackRequest getAudioFeaturesForTrackRequest = spotifyApi
-                .getAudioFeaturesForTrack(trackId)
+    public Dictionary<String, List<Float>> audioFeaturesRequest(String[] tracksIds) {
+        final GetAudioFeaturesForSeveralTracksRequest getAudioFeaturesForSeveralTracksRequest = spotifyApi
+                .getAudioFeaturesForSeveralTracks(tracksIds)
                 .build();
-
-        Dictionary<String, Float> selectedAudioFeatures = new Hashtable<>();
+        Dictionary<String, List<Float>> selectedAudioFeatures = new Hashtable<>();
+        List<List<Float>> featureBuffers = new ArrayList<>();
+        for (int feature_id = 0; feature_id < audioFeaturesNames.length; feature_id++) {
+            featureBuffers.add(new ArrayList<>());
+        }
 
         try {
-            final AudioFeatures audioFeatures = getAudioFeaturesForTrackRequest.execute();
-            selectedAudioFeatures.put("danceability", audioFeatures.getDanceability());
-            selectedAudioFeatures.put("loudness", audioFeatures.getLoudness());
-            selectedAudioFeatures.put("acousticness", audioFeatures.getAcousticness());
+            final AudioFeatures[] audioFeaturesList = getAudioFeaturesForSeveralTracksRequest.execute();
+            for (AudioFeatures aFeatures : audioFeaturesList) {
+                featureBuffers.get(0).add(aFeatures.getDanceability());
+                featureBuffers.get(1).add(aFeatures.getLoudness());
+                featureBuffers.get(2).add(aFeatures.getAcousticness());
+
+            }
+            for (int feature_id = 0; feature_id < audioFeaturesNames.length; feature_id++) {
+                selectedAudioFeatures.put(audioFeaturesNames[feature_id], featureBuffers.get(feature_id));
+            }
+
             return selectedAudioFeatures;
-        } catch (IOException | SpotifyWebApiException | ParseException e) {
+        } catch (IOException | SpotifyWebApiException | ParseException | NullPointerException e) {
             System.out.println("Error: " + e.getMessage());
             return selectedAudioFeatures;
         }
+    }
 
+    public Dictionary<String, List<Float>> getAllTracksAudioFeatures(String[] tracksIds) {
+        Dictionary<String, List<Float>> audioFeatures = new Hashtable<>();
+
+        int sublistLimit = 50;
+        int sublistNum = (int) Math.ceil((float) tracksIds.length / sublistLimit);
+        System.out.println("sublist num = " + sublistNum);
+        // create feature bufers
+        List<List<Float>> featureBuffers = new ArrayList<>();
+        for (int feature_id = 0; feature_id < audioFeaturesNames.length; feature_id++) {
+            featureBuffers.add(new ArrayList<>());
+        }
+
+        for (int sublist_id = 0; sublist_id < sublistNum; sublist_id++) {
+            String[] sublist = Arrays.copyOfRange(tracksIds, sublist_id * sublistLimit,
+                    Math.min((sublist_id + 1) * sublistLimit, tracksIds.length));
+            Dictionary<String, List<Float>> sublistAudioFeatures = this.audioFeaturesRequest(sublist);
+
+            if (sublistAudioFeatures.isEmpty()) {
+                continue;
+            }
+            // add sublist's audio features to feature Buffers
+            for (int feature_id = 0; feature_id < audioFeaturesNames.length; feature_id++) {
+                featureBuffers.get(feature_id).addAll(sublistAudioFeatures.get(audioFeaturesNames[feature_id]));
+            }
+        }
+
+        for (int feature_id = 0; feature_id < audioFeaturesNames.length; feature_id++) {
+            audioFeatures.put(audioFeaturesNames[feature_id], featureBuffers.get(feature_id));
+        }
+        return audioFeatures;
     }
 
     public List<String> getTopTrackIds(int limit, String time_range) {
