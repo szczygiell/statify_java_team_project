@@ -5,9 +5,6 @@
 package com.statify;
 
 
-import javax.swing.JButton;
-//import javax.swing.event.Mouse;
-
 /**
  *
  * @author mwewior
@@ -337,7 +334,7 @@ public class MainWindow extends javax.swing.JFrame {
         );
         redPanelLayout.setVerticalGroup(
             redPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+            .addGap(0, 422, Short.MAX_VALUE)
         );
 
         actionPanel.add(redPanel, "card3");
@@ -352,7 +349,7 @@ public class MainWindow extends javax.swing.JFrame {
         );
         bluePanelLayout.setVerticalGroup(
             bluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+            .addGap(0, 422, Short.MAX_VALUE)
         );
 
         actionPanel.add(bluePanel, "card3");
@@ -367,12 +364,12 @@ public class MainWindow extends javax.swing.JFrame {
         );
         planeBasePanelLayout.setVerticalGroup(
             planeBasePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+            .addGap(0, 422, Short.MAX_VALUE)
         );
 
         actionPanel.add(planeBasePanel, "card2");
 
-        centrePanel.add(actionPanel, java.awt.BorderLayout.SOUTH);
+        centrePanel.add(actionPanel, java.awt.BorderLayout.CENTER);
 
         mainPanel.add(centrePanel, java.awt.BorderLayout.CENTER);
 
