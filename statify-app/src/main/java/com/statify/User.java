@@ -30,7 +30,7 @@ import se.michaelthelin.spotify.requests.data.tracks.GetAudioFeaturesForSeveralT
 import java.io.IOException;
 
 public class User {
-    String accessToken = "";
+    String accessToken = "BQDDrSIx56T9K5q4epymXm0laLA0WTZAldKm-xB3TRxDP8aWDHRcPY603U-Jf1pRIzKbQndFe_MqfqPxJKcXV_BeMGeoJJAT0v0CVoSObaGdMQu3CHYW6jMx8ZYyg4mNOMjPqURAh3lomocgWm2nrXrFXkQ66TNDXU-adLGUE5DFDv1wMWOuAs2Shi8YLcQluNhj0ooIPxIxbE6IbDuK6u5FgifEXCE0gE3wnMai6OmlS7rGdC1zGhy5UhVTYuAwYG83ZLYehIV90u3pqNn48lKKrelc5bwn9vZ4lNcXwxiHIhgj1rGxK4kyCg6-JP5eq_B8eNtF8_WpRIqALMxzr86SiA";
     private final SpotifyApi spotifyApi;
     public static final String[] audioFeaturesNames = { "danceability", "loudness", "acousticness" };
 
@@ -205,6 +205,20 @@ public class User {
             System.out.println("Error: " + e.getMessage());
             return trackInfo;
         }
+    }
+
+    public List<Dictionary<String, String>> getTopTracksInfoList(int limit, String time_range) {
+        List<Dictionary<String, String>> dictionaryList = new ArrayList<>();
+
+        List<String> topTracksIds = getTopTrackIds(limit, time_range);
+
+        for (int i = 0; i < limit; i++) {
+            Dictionary<String, String> dictionary = getTrackInfo(topTracksIds.get(i));
+            dictionaryList.add(dictionary);
+
+        }
+
+        return dictionaryList;
     }
 
 }
