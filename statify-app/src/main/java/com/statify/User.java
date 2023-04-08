@@ -13,6 +13,8 @@ import se.michaelthelin.spotify.model_objects.specification.Paging;
 
 import org.apache.hc.core5.http.ParseException;
 
+import com.fasterxml.jackson.annotation.JsonFormat.Feature;
+
 import se.michaelthelin.spotify.model_objects.specification.PlaylistSimplified;
 import se.michaelthelin.spotify.requests.data.playlists.GetListOfCurrentUsersPlaylistsRequest;
 import se.michaelthelin.spotify.requests.data.playlists.GetPlaylistsItemsRequest;
