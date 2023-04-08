@@ -167,8 +167,8 @@ public class Statify {
 
         String accessToken = "BQDhj22beeKO4Yl02SXA_cIppBdJ9-LKrUgoRIko0QTp5Zn2ltDFFjvpXMcvKU9ipzLPK0IuMjvGaFmx6bFmGVOc47NbaYdhJarWcNK_KXEe0sMnLMH1b_XPrVKXh52Bcfp3hcbtDHGfk2xaCLE8ihXA3b1lidI0lLR_Bi-LMFKeZv9Dhn5WKyk1WFJ_vy1ehxC8BMb7TR4G87Mf0jyjoIm233Xgc4Q7Z6T2_dX46_jjcu4_lkN_IpHCpW6VUv2pNH_1rL7LF2_NSuSD3zBjjIvFGM9xR6M1L_fMeAzmrrQpati7dkovbe2_dAIp3jjVInYTz12l0IzFnHZ9ixDjNJGnoA";
         User user = new User(accessToken);
-        String timeRange = "medium_term";
-        int tracksNumber = 50;
+        String timeRange = "long_term";
+        int tracksNumber = 20;
 
         List<Dictionary<String, String>> dictionaryListFromMethod = user.getTopTracksInfoList(tracksNumber, timeRange);
 
