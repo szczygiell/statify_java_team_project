@@ -112,9 +112,9 @@ public class Statify {
         return new XChartPanel<CategoryChart>(chart);
     }
 
-    public JPanel createTopTracksPanel(int tracksNum, List<Dictionary<String, String>> data) {
+    public JPanel createTopTracksPanel(List<Dictionary<String, String>> data) {
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(tracksNum+1, 3, 10, 10)); // n+1 rows, 2 columns, 10px between each row and ech column
+        panel.setLayout(new GridLayout(data.size()+1, 3, 10, 10)); // n+1 rows, 2 columns, 10px between each row and ech column
         JLabel mainPositionLabel = new JLabel("Position");
             panel.add(mainPositionLabel);
         JLabel mainTitleLabel = new JLabel("Title");
@@ -124,7 +124,7 @@ public class Statify {
         JLabel mainAlbumLabel = new JLabel("Album");
             panel.add(mainAlbumLabel);
         // Adding 10 string fields to panel
-        for (int i = 0; i < tracksNum; i++) {
+        for (int i = 0; i < data.size(); i++) {
             JLabel positionLabel = new JLabel(Integer.toString(i+1));
             panel.add(positionLabel);
 
@@ -169,14 +169,14 @@ public class Statify {
         // dictionary3.put("album", "wahefgsdteverr");
         // dictionaryList.add(dictionary3);
 
-        String accessToken = "BQDhj22beeKO4Yl02SXA_cIppBdJ9-LKrUgoRIko0QTp5Zn2ltDFFjvpXMcvKU9ipzLPK0IuMjvGaFmx6bFmGVOc47NbaYdhJarWcNK_KXEe0sMnLMH1b_XPrVKXh52Bcfp3hcbtDHGfk2xaCLE8ihXA3b1lidI0lLR_Bi-LMFKeZv9Dhn5WKyk1WFJ_vy1ehxC8BMb7TR4G87Mf0jyjoIm233Xgc4Q7Z6T2_dX46_jjcu4_lkN_IpHCpW6VUv2pNH_1rL7LF2_NSuSD3zBjjIvFGM9xR6M1L_fMeAzmrrQpati7dkovbe2_dAIp3jjVInYTz12l0IzFnHZ9ixDjNJGnoA";
+        String accessToken = "BQAF2bHTIeOHgKhI_sj1D9aE2cLyAG_ODfhXUEtIwytjQA7bIlMD5c1sIiYityH7KzALN05l4ufO-mj-sfa-NjS3AVRR-ujjmxy1QuQ3SLf2vkQM4W20N5JQliQ1PjC7cwcZiCzEMZ_WmW0wTtjdplkw_AtuTX4AHYz3e4yGOWUZz86RtBcz1vnBxOqoNzu6y5KFbaLgDOHeGOV_w7x0RLTjvLPqsQObJB_CxMCewa1tCiiDN0AdJPVVnosl6IK_8Cow4Rdrmu9aL-GJOPsT-6-bj4r6vsUhsGPF1nEycEbMIIishUOn0F12hWWNpmpcG783cPlKQBpWERPAeiiRw3vCMw";
         User user = new User(accessToken);
         String timeRange = "long_term";
         int tracksNumber = 20;
 
         List<Dictionary<String, String>> dictionaryListFromMethod = user.getTopTracksInfoList(tracksNumber, timeRange);
 
-        frame.add(statify.createTopTracksPanel(tracksNumber, dictionaryListFromMethod));
+        frame.add(statify.createTopTracksPanel(dictionaryListFromMethod));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
