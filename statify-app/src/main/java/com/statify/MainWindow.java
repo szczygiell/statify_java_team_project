@@ -24,6 +24,8 @@ public class MainWindow extends javax.swing.JFrame {
     
     public final void panelsSetDefault(){
         timeButtonsPanel.setVisible(false);
+        optionsPanel.setVisible(false);
+        
         redPanel.setVisible(false);
         bluePanel.setVisible(false);
         
@@ -57,6 +59,10 @@ public class MainWindow extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
         centrePanel = new javax.swing.JPanel();
         actionButtonsPanel = new javax.swing.JPanel();
+        optionsPanel = new javax.swing.JPanel();
+        optionButton1 = new javax.swing.JButton();
+        optionButton2 = new javax.swing.JButton();
+        optionButton3 = new javax.swing.JButton();
         timeButtonsPanel = new javax.swing.JPanel();
         weeks4Button = new javax.swing.JButton();
         months6Button = new javax.swing.JButton();
@@ -218,9 +224,48 @@ public class MainWindow extends javax.swing.JFrame {
 
         centrePanel.setLayout(new java.awt.BorderLayout());
 
-        actionButtonsPanel.setBackground(new java.awt.Color(46, 79, 79));
+        actionButtonsPanel.setBackground(new java.awt.Color(4, 81, 4));
         actionButtonsPanel.setPreferredSize(new java.awt.Dimension(20, 120));
         actionButtonsPanel.setLayout(new java.awt.CardLayout());
+
+        optionsPanel.setBackground(new java.awt.Color(46, 79, 79));
+        optionsPanel.setPreferredSize(new java.awt.Dimension(20, 120));
+        optionsPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 97, 48));
+
+        optionButton1.setBackground(new java.awt.Color(46, 79, 79));
+        optionButton1.setForeground(new java.awt.Color(255, 255, 255));
+        optionButton1.setText("option 1");
+        optionButton1.setPreferredSize(new java.awt.Dimension(108, 54));
+        optionButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optionButton1ActionPerformed(evt);
+            }
+        });
+        optionsPanel.add(optionButton1);
+
+        optionButton2.setBackground(new java.awt.Color(46, 79, 79));
+        optionButton2.setForeground(new java.awt.Color(255, 255, 255));
+        optionButton2.setText("option 2");
+        optionButton2.setPreferredSize(new java.awt.Dimension(108, 54));
+        optionButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optionButton2ActionPerformed(evt);
+            }
+        });
+        optionsPanel.add(optionButton2);
+
+        optionButton3.setBackground(new java.awt.Color(46, 79, 79));
+        optionButton3.setForeground(new java.awt.Color(255, 255, 255));
+        optionButton3.setText("option 2");
+        optionButton3.setPreferredSize(new java.awt.Dimension(108, 54));
+        optionButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optionButton3ActionPerformed(evt);
+            }
+        });
+        optionsPanel.add(optionButton3);
+
+        actionButtonsPanel.add(optionsPanel, "card2");
 
         timeButtonsPanel.setBackground(new java.awt.Color(46, 79, 79));
         timeButtonsPanel.setPreferredSize(new java.awt.Dimension(20, 120));
@@ -338,45 +383,72 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void topTracksButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_topTracksButtonActionPerformed
+    
+    private void optionButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionButton1ActionPerformed
         panelsSetDefault();
-        timeButtonsPanel.setVisible(true);
-        redPanel.setVisible(true);
-    }// GEN-LAST:event_topTracksButtonActionPerformed
+        optionsPanel.setVisible(true);
+    }//GEN-LAST:event_optionButton1ActionPerformed
 
-    private void artistButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_artistButtonActionPerformed
+    private void optionButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionButton2ActionPerformed
         panelsSetDefault();
-        bluePanel.setVisible(true);
-    }// GEN-LAST:event_artistButtonActionPerformed
+        optionsPanel.setVisible(true);
+    }//GEN-LAST:event_optionButton2ActionPerformed
+
+    private void optionButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionButton3ActionPerformed
+        panelsSetDefault();
+        optionsPanel.setVisible(true);
+    }//GEN-LAST:event_optionButton3ActionPerformed
+
+    
+    
+    private void weeks4ButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_weeks4ButtonActionPerformed
+        panelsSetDefault();
+    }// GEN-LAST:event_weeks4ButtonActionPerformed
 
     private void months6ButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_months6ButtonActionPerformed
         panelsSetDefault();
     }// GEN-LAST:event_months6ButtonActionPerformed
 
-    private void weeks4ButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_weeks4ButtonActionPerformed
-        panelsSetDefault();
-    }// GEN-LAST:event_weeks4ButtonActionPerformed
-
     private void allTimeHistoryButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_allTimeHistoryButtonActionPerformed
         panelsSetDefault();
     }// GEN-LAST:event_allTimeHistoryButtonActionPerformed
 
+    
+    
+    
+    private void artistButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_artistButtonActionPerformed
+        panelsSetDefault();
+        timeButtonsPanel.setVisible(true);
+        bluePanel.setVisible(true);
+    }// GEN-LAST:event_artistButtonActionPerformed
+
+    private void genreButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_genreButtonActionPerformed
+        panelsSetDefault();
+        timeButtonsPanel.setVisible(true);
+        redPanel.setVisible(true);
+    }// GEN-LAST:event_genreButtonActionPerformed
+
+    private void topTracksButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_topTracksButtonActionPerformed
+        panelsSetDefault();
+        timeButtonsPanel.setVisible(true);
+    }// GEN-LAST:event_topTracksButtonActionPerformed
+
+    private void tracksAnaliseButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_tracksAnaliseButtonActionPerformed
+        panelsSetDefault();
+        optionsPanel.setVisible(true);
+    }// GEN-LAST:event_tracksAnaliseButtonActionPerformed
+
     private void playlistAnaliseButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_playlistAnaliseButtonActionPerformed
         panelsSetDefault();
+        optionsPanel.setVisible(true);
     }// GEN-LAST:event_playlistAnaliseButtonActionPerformed
 
     private void generatePlaylistButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_generatePlaylistButtonActionPerformed
         panelsSetDefault();
+        optionsPanel.setVisible(true);
     }// GEN-LAST:event_generatePlaylistButtonActionPerformed
 
-    private void genreButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_genreButtonActionPerformed
-        panelsSetDefault();
-    }// GEN-LAST:event_genreButtonActionPerformed
-
-    private void tracksAnaliseButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_tracksAnaliseButtonActionPerformed
-        panelsSetDefault();
-    }// GEN-LAST:event_tracksAnaliseButtonActionPerformed
-
+    
     /**
      * @param args the command line arguments
      */
@@ -435,6 +507,10 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel logoPanel;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JButton months6Button;
+    private javax.swing.JButton optionButton1;
+    private javax.swing.JButton optionButton2;
+    private javax.swing.JButton optionButton3;
+    private javax.swing.JPanel optionsPanel;
     private javax.swing.JPanel planeBasePanel;
     private javax.swing.JPanel planeRoot;
     private javax.swing.JPanel planeUpperPanel;
