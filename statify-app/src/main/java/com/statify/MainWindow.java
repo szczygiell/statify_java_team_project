@@ -39,7 +39,6 @@ public class MainWindow extends javax.swing.JFrame {
     }
     
     public void panelInit(JPanel panel){
-//        panel.setBackground(new java.awt.Color(255, 0, 0));
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
@@ -406,10 +405,12 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void optionButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionButton2ActionPerformed
         upperPanelDefault();
-        JPanel histo = (new Statify()).getDanceabilityHistogram(java.util.Arrays.asList(1.4f, 5.0f, 6.4f));
+        JPanel histo = (new Statify()).getDanceabilityHistogram(java.util.Arrays.asList(1.4f, 5.0f, 6.4f), 2);
         panelInit(histo);
         histo.setVisible(true);
         optionsPanel.setVisible(true);
+        // trzeba to jesszcze jakoś wyłączyć potem
+
     }//GEN-LAST:event_optionButton2ActionPerformed
 
     private void optionButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionButton3ActionPerformed
