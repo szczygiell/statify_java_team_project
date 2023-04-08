@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 public class Statify {
 
     private static User currentUser;
+    private static int playlists_num;
 
     public static void setUser(User user) {
         currentUser = user;
@@ -73,7 +74,7 @@ public class Statify {
         return danceabilityTable;
     }
 
-    public static JPanel getDanceabilityHistogram(int playlists_num) {
+    public static JPanel getDanceabilityHistogram() {
         List<Float> data = Statify.getDancebilityPlaylistsData(playlists_num);
         int binsNum = (int) Math.cbrt(data.size());
         String title = String.format("Danceability Histogram of your %o playlists", playlists_num);
@@ -96,6 +97,10 @@ public class Statify {
         CategoryChart chart = getBarChart(xdata, ydata, title, seriesName, xTitle, yTitle);
 
         return new XChartPanel<CategoryChart>(chart);
+    }
+
+    public static void SetPlaylistsNum(int new_playlist_num) {
+        playlists_num = new_playlist_num;
     }
 
     public static void main(String[] args) {

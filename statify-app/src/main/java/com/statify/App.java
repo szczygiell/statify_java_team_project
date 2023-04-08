@@ -22,7 +22,8 @@ public final class App {
         int limit = 1;
 
         Statify.setUser(user);
-        JPanel chart = Statify.getDanceabilityHistogram(limit);
+        Statify.SetPlaylistsNum(limit);
+        JPanel chart = Statify.getDanceabilityHistogram();
         TopLevelWindow.createChartFrame(chart);
 
     }
