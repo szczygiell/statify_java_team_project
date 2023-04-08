@@ -29,6 +29,12 @@ public class MainWindow extends javax.swing.JFrame {
         planeBasePanel.setVisible(true);
         planeUpperPanel.setVisible(true);
     }
+    
+    public final void upperPanelDefault() {
+        timeButtonsPanel.setVisible(false);
+        optionsPanel.setVisible(false);
+        planeUpperPanel.setVisible(true);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -95,7 +101,6 @@ public class MainWindow extends javax.swing.JFrame {
         chooseActionPanel.setBackground(new java.awt.Color(44, 51, 51));
         chooseActionPanel.setPreferredSize(new java.awt.Dimension(188, 440));
 
-        artistButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons/icons8-musician-male-32.png"))); // NOI18N
         artistButton.setText("artists");
         artistButton.setBorder(null);
         artistButton.setMaximumSize(new java.awt.Dimension(80, 24));
@@ -107,7 +112,6 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        genreButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons/icons8-music-record-32.png"))); // NOI18N
         genreButton.setText("genre");
         genreButton.setBorder(null);
         genreButton.addActionListener(new java.awt.event.ActionListener() {
@@ -116,7 +120,6 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        topTracksButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons/icons8-volume-level-32.png"))); // NOI18N
         topTracksButton.setText("top tracks");
         topTracksButton.setBorder(null);
         topTracksButton.addActionListener(new java.awt.event.ActionListener() {
@@ -125,7 +128,6 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        tracksAnaliseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons/icons8-sample-rate-32.png"))); // NOI18N
         tracksAnaliseButton.setText("analise tracks");
         tracksAnaliseButton.setBorder(null);
         tracksAnaliseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -134,7 +136,6 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        playlistAnaliseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons/icons8-audio-wave2-32.png"))); // NOI18N
         playlistAnaliseButton.setText("analise playlist");
         playlistAnaliseButton.setBorder(null);
         playlistAnaliseButton.setMaximumSize(new java.awt.Dimension(80, 24));
@@ -146,7 +147,6 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        generatePlaylistButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons/icons8-add-album-32.png"))); // NOI18N
         generatePlaylistButton.setText("generate playlist");
         generatePlaylistButton.setBorder(null);
         generatePlaylistButton.setMaximumSize(new java.awt.Dimension(80, 24));
@@ -382,37 +382,40 @@ public class MainWindow extends javax.swing.JFrame {
 
     
     private void optionButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionButton1ActionPerformed
-        panelsSetDefault();
+        upperPanelDefault();
         optionsPanel.setVisible(true);
     }//GEN-LAST:event_optionButton1ActionPerformed
 
     private void optionButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionButton2ActionPerformed
-        panelsSetDefault();
+        upperPanelDefault();
         optionsPanel.setVisible(true);
     }//GEN-LAST:event_optionButton2ActionPerformed
 
     private void optionButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionButton3ActionPerformed
-        panelsSetDefault();
+        upperPanelDefault();
         optionsPanel.setVisible(true);
     }//GEN-LAST:event_optionButton3ActionPerformed
 
     
-    
+
     private void weeks4ButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_weeks4ButtonActionPerformed
-        panelsSetDefault();
+        upperPanelDefault();
+        timeButtonsPanel.setVisible(true);
     }// GEN-LAST:event_weeks4ButtonActionPerformed
 
     private void months6ButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_months6ButtonActionPerformed
-        panelsSetDefault();
+        upperPanelDefault();
+        timeButtonsPanel.setVisible(true);
     }// GEN-LAST:event_months6ButtonActionPerformed
 
     private void allTimeHistoryButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_allTimeHistoryButtonActionPerformed
-        panelsSetDefault();
+        upperPanelDefault();
+        timeButtonsPanel.setVisible(true);
     }// GEN-LAST:event_allTimeHistoryButtonActionPerformed
 
     
     
-    
+
     private void artistButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_artistButtonActionPerformed
         panelsSetDefault();
         timeButtonsPanel.setVisible(true);

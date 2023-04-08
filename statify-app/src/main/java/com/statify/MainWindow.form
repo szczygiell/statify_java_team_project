@@ -155,9 +155,6 @@
                       <SubComponents>
                         <Component class="javax.swing.JButton" name="artistButton">
                           <Properties>
-                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                              <Image iconType="3" name="/com/icons/icons8-musician-male-32.png"/>
-                            </Property>
                             <Property name="text" type="java.lang.String" value="artists"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="null"/>
@@ -178,9 +175,6 @@
                         </Component>
                         <Component class="javax.swing.JButton" name="genreButton">
                           <Properties>
-                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                              <Image iconType="3" name="/com/icons/icons8-music-record-32.png"/>
-                            </Property>
                             <Property name="text" type="java.lang.String" value="genre"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="null"/>
@@ -192,9 +186,6 @@
                         </Component>
                         <Component class="javax.swing.JButton" name="topTracksButton">
                           <Properties>
-                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                              <Image iconType="3" name="/com/icons/icons8-volume-level-32.png"/>
-                            </Property>
                             <Property name="text" type="java.lang.String" value="top tracks"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="null"/>
@@ -206,9 +197,6 @@
                         </Component>
                         <Component class="javax.swing.JButton" name="tracksAnaliseButton">
                           <Properties>
-                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                              <Image iconType="3" name="/com/icons/icons8-sample-rate-32.png"/>
-                            </Property>
                             <Property name="text" type="java.lang.String" value="analise tracks"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="null"/>
@@ -220,9 +208,6 @@
                         </Component>
                         <Component class="javax.swing.JButton" name="playlistAnaliseButton">
                           <Properties>
-                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                              <Image iconType="3" name="/com/icons/icons8-audio-wave2-32.png"/>
-                            </Property>
                             <Property name="text" type="java.lang.String" value="analise playlist"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="null"/>
@@ -243,9 +228,6 @@
                         </Component>
                         <Component class="javax.swing.JButton" name="generatePlaylistButton">
                           <Properties>
-                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                              <Image iconType="3" name="/com/icons/icons8-add-album-32.png"/>
-                            </Property>
                             <Property name="text" type="java.lang.String" value="generate playlist"/>
                             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                               <Border info="null"/>
