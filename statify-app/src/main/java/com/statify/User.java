@@ -20,10 +20,6 @@ import se.michaelthelin.spotify.model_objects.IPlaylistItem;
 import se.michaelthelin.spotify.model_objects.specification.AudioFeatures;
 import se.michaelthelin.spotify.requests.data.tracks.GetAudioFeaturesForTrackRequest;
 import se.michaelthelin.spotify.requests.data.personalization.simplified.GetUsersTopTracksRequest;
-import se.michaelthelin.spotify.requests.data.AbstractDataPagingRequest;
-import se.michaelthelin.spotify.requests.data.AbstractDataRequest;
-import se.michaelthelin.spotify.requests.data.tracks.GetSeveralTracksRequest;
-
 
 import java.io.IOException;
 
@@ -139,7 +135,7 @@ public class User {
 
     public Dictionary<String, String> getTrackInfo(String trackId) {
         final GetTrackRequest getTrackRequest = spotifyApi.getTrack(trackId)
-            .build();
+                .build();
 
         Dictionary<String, String> trackInfo = new Hashtable<>();
 
@@ -147,16 +143,16 @@ public class User {
             final Track track = getTrackRequest.execute();
             trackInfo.put("name", track.getName());
             trackInfo.put("artist", track.getArtists()[0].getName());
-            trackInfo.put("duration", track.getDurationMs().toString(0)); //track length in milliseconds
+            trackInfo.put("duration", track.getDurationMs().toString(0)); // track length in milliseconds
             trackInfo.put("album", track.getAlbum().getName());
-            trackInfo.put("image", track.getAlbum().getImages()[0].toString()); // "Image(height=" + height + ", url=" + url + ", width=" + width + ")"
+            trackInfo.put("image", track.getAlbum().getImages()[0].toString()); // "Image(height=" + height + ", url=" +
+                                                                                // url + ", width=" + width + ")"
             return trackInfo;
             // System.out.println("Name: " + track.getName());
         } catch (IOException | SpotifyWebApiException | ParseException e) {
             System.out.println("Error: " + e.getMessage());
             return trackInfo;
         }
-      }
-
+    }
 
 }

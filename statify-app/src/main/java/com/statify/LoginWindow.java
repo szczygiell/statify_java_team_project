@@ -2,8 +2,6 @@ package com.statify;
 
 import javax.swing.*;
 
-import org.apache.commons.configuration2.plist.Token;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,7 +14,6 @@ public class LoginWindow extends JFrame implements ActionListener {
     JButton loginButton = new JButton("LOGIN");
     JButton resetButton = new JButton("RESET");
     JCheckBox showPassword = new JCheckBox("Show token");
-
 
     LoginWindow() {
         setLayoutManager();
@@ -45,7 +42,6 @@ public class LoginWindow extends JFrame implements ActionListener {
         resetButton.setForeground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(350, 540));
 
-
     }
 
     public void addComponentsToContainer() {
@@ -62,10 +58,9 @@ public class LoginWindow extends JFrame implements ActionListener {
         showPassword.addActionListener(this);
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
-        //Coding Part of LOGIN button
+        // Coding Part of LOGIN button
         if (e.getSource() == loginButton) {
             String pwdText;
             pwdText = passwordField.getText();
@@ -79,11 +74,11 @@ public class LoginWindow extends JFrame implements ActionListener {
             }
 
         }
-        //Coding Part of RESET button
+        // Coding Part of RESET button
         if (e.getSource() == resetButton) {
             passwordField.setText("");
         }
-       //Coding Part of showPassword JCheckBox
+        // Coding Part of showPassword JCheckBox
         if (e.getSource() == showPassword) {
             if (showPassword.isSelected()) {
                 passwordField.setEchoChar((char) 0);
@@ -91,9 +86,9 @@ public class LoginWindow extends JFrame implements ActionListener {
                 passwordField.setEchoChar('*');
             }
 
-
         }
     }
+
     public static void main(String[] a) {
         LoginWindow frame = new LoginWindow();
         frame.setTitle("Login Form");
