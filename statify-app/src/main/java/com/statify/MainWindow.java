@@ -409,8 +409,26 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void optionButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_optionButton1ActionPerformed
-        upperPanelDefault();
-        optionsPanel.setVisible(true);
+        String playlists_num = jTextField1.getText();
+        try{
+            int plNum = Integer.parseInt(playlists_num);
+            if(plNum <= 0){
+                javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of playlists");
+            }
+            else{
+                Statify.SetPlaylistsNum(plNum);
+                upperPanelDefault();
+                JPanel histo = Statify.getLoudnessHistogram();
+                panelInit(histo);
+                histo.setVisible(true);
+                optionsPanel.setVisible(true);
+            }
+        } catch(NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
+        } catch(NullPointerException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
+
+        }
     }// GEN-LAST:event_optionButton1ActionPerformed
 
     private void optionButton2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_optionButton2ActionPerformed
@@ -439,8 +457,26 @@ public class MainWindow extends javax.swing.JFrame {
     }// GEN-LAST:event_optionButton2ActionPerformed
 
     private void optionButton3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_optionButton3ActionPerformed
-        upperPanelDefault();
-        optionsPanel.setVisible(true);
+        String playlists_num = jTextField1.getText();
+        try{
+            int plNum = Integer.parseInt(playlists_num);
+            if(plNum <= 0){
+                javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of playlists");
+            }
+            else{
+                Statify.SetPlaylistsNum(plNum);
+                upperPanelDefault();
+                JPanel histo = Statify.getAcousticnessHistogram();
+                panelInit(histo);
+                histo.setVisible(true);
+                optionsPanel.setVisible(true);
+            }
+        } catch(NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
+        } catch(NullPointerException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
+
+        }
     }// GEN-LAST:event_optionButton3ActionPerformed
 
     private void weeks4ButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_weeks4ButtonActionPerformed

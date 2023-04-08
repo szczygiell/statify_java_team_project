@@ -28,6 +28,29 @@ public final class App {
 
     }
 
+    public static void loudnessHistogramSeveralTracks(String token) {
+        String user_token = token;
+        User user = new User(user_token);
+        int limit = 1;
+
+        Statify.setUser(user);
+        Statify.SetPlaylistsNum(limit);
+        JPanel chart = Statify.getLoudnessHistogram();
+        TopLevelWindow.createChartFrame(chart);
+
+    }
+
+    public static void acousticnessHistogramSeveralTracks(String token) {
+        String user_token = token;
+        User user = new User(user_token);
+        int limit = 1;
+
+        Statify.setUser(user);
+        Statify.SetPlaylistsNum(limit);
+        JPanel chart = Statify.getLoudnessHistogram();
+        TopLevelWindow.createChartFrame(chart);
+    }
+
     public static void login_window() {
         LoginWindow frame = new LoginWindow();
         frame.setTitle("Login Form");
