@@ -4,6 +4,8 @@
  */
 package com.statify;
 
+import javax.swing.JPanel;
+
 
 /**
  *
@@ -34,6 +36,22 @@ public class MainWindow extends javax.swing.JFrame {
         timeButtonsPanel.setVisible(false);
         optionsPanel.setVisible(false);
         planeUpperPanel.setVisible(true);
+    }
+    
+    public void panelInit(JPanel panel){
+//        panel.setBackground(new java.awt.Color(255, 0, 0));
+
+        javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
+        panel.setLayout(panelLayout);
+        panelLayout.setHorizontalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 750, Short.MAX_VALUE)
+        );
+        panelLayout.setVerticalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 422, Short.MAX_VALUE)
+        );
+        actionPanel.add(panel);
     }
 
     /**
@@ -242,7 +260,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         optionButton2.setBackground(new java.awt.Color(46, 79, 79));
         optionButton2.setForeground(new java.awt.Color(255, 255, 255));
-        optionButton2.setText("option 2");
+        optionButton2.setText("histogram");
         optionButton2.setPreferredSize(new java.awt.Dimension(108, 54));
         optionButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -253,7 +271,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         optionButton3.setBackground(new java.awt.Color(46, 79, 79));
         optionButton3.setForeground(new java.awt.Color(255, 255, 255));
-        optionButton3.setText("option 2");
+        optionButton3.setText("option 3");
         optionButton3.setPreferredSize(new java.awt.Dimension(108, 54));
         optionButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -337,7 +355,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGap(0, 422, Short.MAX_VALUE)
         );
 
-        actionPanel.add(redPanel, "card3");
+        actionPanel.add(redPanel, "card2");
 
         bluePanel.setBackground(new java.awt.Color(0, 51, 255));
 
@@ -352,7 +370,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGap(0, 422, Short.MAX_VALUE)
         );
 
-        actionPanel.add(bluePanel, "card3");
+        actionPanel.add(bluePanel, "card1");
 
         planeBasePanel.setBackground(new java.awt.Color(46, 79, 79));
 
@@ -367,7 +385,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGap(0, 422, Short.MAX_VALUE)
         );
 
-        actionPanel.add(planeBasePanel, "card2");
+        actionPanel.add(planeBasePanel, "card0");
 
         centrePanel.add(actionPanel, java.awt.BorderLayout.CENTER);
 
@@ -388,6 +406,9 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void optionButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optionButton2ActionPerformed
         upperPanelDefault();
+        JPanel histo = (new Statify()).getDanceabilityHistogram(java.util.Arrays.asList(1.4f, 5.0f, 6.4f));
+        panelInit(histo);
+        histo.setVisible(true);
         optionsPanel.setVisible(true);
     }//GEN-LAST:event_optionButton2ActionPerformed
 
@@ -436,6 +457,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void tracksAnaliseButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_tracksAnaliseButtonActionPerformed
         panelsSetDefault();
         optionsPanel.setVisible(true);
+        bluePanel.setVisible(true);
     }// GEN-LAST:event_tracksAnaliseButtonActionPerformed
 
     private void playlistAnaliseButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_playlistAnaliseButtonActionPerformed
