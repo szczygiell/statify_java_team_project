@@ -1,15 +1,20 @@
 package com.statify;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Dictionary;
 import java.util.Hashtable;
+import java.lang.Math;
 
 import se.michaelthelin.spotify.SpotifyApi;
 import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
 import se.michaelthelin.spotify.model_objects.specification.Paging;
 
 import org.apache.hc.core5.http.ParseException;
+
+import com.fasterxml.jackson.annotation.JsonFormat.Feature;
+
 import se.michaelthelin.spotify.model_objects.specification.PlaylistSimplified;
 import se.michaelthelin.spotify.requests.data.playlists.GetListOfCurrentUsersPlaylistsRequest;
 import se.michaelthelin.spotify.requests.data.playlists.GetPlaylistsItemsRequest;
@@ -20,16 +25,14 @@ import se.michaelthelin.spotify.model_objects.IPlaylistItem;
 import se.michaelthelin.spotify.model_objects.specification.AudioFeatures;
 import se.michaelthelin.spotify.requests.data.tracks.GetAudioFeaturesForTrackRequest;
 import se.michaelthelin.spotify.requests.data.personalization.simplified.GetUsersTopTracksRequest;
-import se.michaelthelin.spotify.requests.data.AbstractDataPagingRequest;
-import se.michaelthelin.spotify.requests.data.AbstractDataRequest;
-import se.michaelthelin.spotify.requests.data.tracks.GetSeveralTracksRequest;
-
+import se.michaelthelin.spotify.requests.data.tracks.GetAudioFeaturesForSeveralTracksRequest;
 
 import java.io.IOException;
 
 public class User {
-    String accessToken = "";
+    String accessToken = "BQDDrSIx56T9K5q4epymXm0laLA0WTZAldKm-xB3TRxDP8aWDHRcPY603U-Jf1pRIzKbQndFe_MqfqPxJKcXV_BeMGeoJJAT0v0CVoSObaGdMQu3CHYW6jMx8ZYyg4mNOMjPqURAh3lomocgWm2nrXrFXkQ66TNDXU-adLGUE5DFDv1wMWOuAs2Shi8YLcQluNhj0ooIPxIxbE6IbDuK6u5FgifEXCE0gE3wnMai6OmlS7rGdC1zGhy5UhVTYuAwYG83ZLYehIV90u3pqNn48lKKrelc5bwn9vZ4lNcXwxiHIhgj1rGxK4kyCg6-JP5eq_B8eNtF8_WpRIqALMxzr86SiA";
     private final SpotifyApi spotifyApi;
+    public static final String[] audioFeaturesNames = { "danceability", "loudness", "acousticness" };
 
     User(String user_token) {
         this.accessToken = user_token;
@@ -38,23 +41,25 @@ public class User {
                 .build();
     }
 
-    public String getFirstPlaylistId() {
-
+    public List<String> getPlaylistsIds(int limit) {
         final GetListOfCurrentUsersPlaylistsRequest getListOfCurrentUsersPlaylistsRequest = spotifyApi
                 .getListOfCurrentUsersPlaylists()
-                .limit(10)
+                .limit(limit)
                 .offset(0)
                 .build();
+        List<String> playlists_ids = new ArrayList<>();
         try {
             final Paging<PlaylistSimplified> playlistSimplifiedPaging = getListOfCurrentUsersPlaylistsRequest.execute();
-            int playlist_number = 1;
-            PlaylistSimplified playlist = playlistSimplifiedPaging.getItems()[playlist_number];
-            System.out.println(playlist.getName());
-            return playlist.getId();
+            PlaylistSimplified[] playlists = playlistSimplifiedPaging.getItems();
+            for (PlaylistSimplified playlist : playlists) {
+                playlists_ids.add(playlist.getId());
+            }
+            System.out.println(playlists[0].getName());
+            return playlists_ids;
 
         } catch (IOException | SpotifyWebApiException | ParseException e) {
             System.out.println("Error: " + e.getMessage());
-            return e.getMessage();
+            return playlists_ids;
         }
     }
 
@@ -74,8 +79,10 @@ public class User {
             // System.out.println(playlistTrackPaging.getItems()[0].getTrack().getName());
             for (PlaylistTrack pl_track : playlistTrackPaging.getItems()) {
                 IPlaylistItem track = pl_track.getTrack();
+                if (track == null) {
+                    continue;
+                }
                 tracks_indeces.add(track.getId());
-
             }
             return tracks_indeces;
         } catch (IOException | SpotifyWebApiException | ParseException | NullPointerException e) {
@@ -96,24 +103,65 @@ public class User {
         }
     }
 
-    public Dictionary<String, Float> getTracksAudioFeatures(String trackId) {
-        final GetAudioFeaturesForTrackRequest getAudioFeaturesForTrackRequest = spotifyApi
-                .getAudioFeaturesForTrack(trackId)
+    public Dictionary<String, List<Float>> audioFeaturesRequest(String[] tracksIds) {
+        final GetAudioFeaturesForSeveralTracksRequest getAudioFeaturesForSeveralTracksRequest = spotifyApi
+                .getAudioFeaturesForSeveralTracks(tracksIds)
                 .build();
-
-        Dictionary<String, Float> selectedAudioFeatures = new Hashtable<>();
+        Dictionary<String, List<Float>> selectedAudioFeatures = new Hashtable<>();
+        List<List<Float>> featureBuffers = new ArrayList<>();
+        for (int feature_id = 0; feature_id < audioFeaturesNames.length; feature_id++) {
+            featureBuffers.add(new ArrayList<>());
+        }
 
         try {
-            final AudioFeatures audioFeatures = getAudioFeaturesForTrackRequest.execute();
-            selectedAudioFeatures.put("danceability", audioFeatures.getDanceability());
-            selectedAudioFeatures.put("loudness", audioFeatures.getLoudness());
-            selectedAudioFeatures.put("acousticness", audioFeatures.getAcousticness());
+            final AudioFeatures[] audioFeaturesList = getAudioFeaturesForSeveralTracksRequest.execute();
+            for (AudioFeatures aFeatures : audioFeaturesList) {
+                featureBuffers.get(0).add(aFeatures.getDanceability());
+                featureBuffers.get(1).add(aFeatures.getLoudness());
+                featureBuffers.get(2).add(aFeatures.getAcousticness());
+
+            }
+            for (int feature_id = 0; feature_id < audioFeaturesNames.length; feature_id++) {
+                selectedAudioFeatures.put(audioFeaturesNames[feature_id], featureBuffers.get(feature_id));
+            }
+
             return selectedAudioFeatures;
-        } catch (IOException | SpotifyWebApiException | ParseException e) {
+        } catch (IOException | SpotifyWebApiException | ParseException | NullPointerException e) {
             System.out.println("Error: " + e.getMessage());
             return selectedAudioFeatures;
         }
+    }
 
+    public Dictionary<String, List<Float>> getAllTracksAudioFeatures(String[] tracksIds) {
+        Dictionary<String, List<Float>> audioFeatures = new Hashtable<>();
+
+        int sublistLimit = 50;
+        int sublistNum = (int) Math.ceil((float) tracksIds.length / sublistLimit);
+        System.out.println("sublist num = " + sublistNum);
+        // create feature bufers
+        List<List<Float>> featureBuffers = new ArrayList<>();
+        for (int feature_id = 0; feature_id < audioFeaturesNames.length; feature_id++) {
+            featureBuffers.add(new ArrayList<>());
+        }
+
+        for (int sublist_id = 0; sublist_id < sublistNum; sublist_id++) {
+            String[] sublist = Arrays.copyOfRange(tracksIds, sublist_id * sublistLimit,
+                    Math.min((sublist_id + 1) * sublistLimit, tracksIds.length));
+            Dictionary<String, List<Float>> sublistAudioFeatures = this.audioFeaturesRequest(sublist);
+
+            if (sublistAudioFeatures.isEmpty()) {
+                continue;
+            }
+            // add sublist's audio features to feature Buffers
+            for (int feature_id = 0; feature_id < audioFeaturesNames.length; feature_id++) {
+                featureBuffers.get(feature_id).addAll(sublistAudioFeatures.get(audioFeaturesNames[feature_id]));
+            }
+        }
+
+        for (int feature_id = 0; feature_id < audioFeaturesNames.length; feature_id++) {
+            audioFeatures.put(audioFeaturesNames[feature_id], featureBuffers.get(feature_id));
+        }
+        return audioFeatures;
     }
 
     public List<String> getTopTrackIds(int limit, String time_range) {
@@ -139,7 +187,7 @@ public class User {
 
     public Dictionary<String, String> getTrackInfo(String trackId) {
         final GetTrackRequest getTrackRequest = spotifyApi.getTrack(trackId)
-            .build();
+                .build();
 
         Dictionary<String, String> trackInfo = new Hashtable<>();
 
@@ -147,16 +195,30 @@ public class User {
             final Track track = getTrackRequest.execute();
             trackInfo.put("name", track.getName());
             trackInfo.put("artist", track.getArtists()[0].getName());
-            trackInfo.put("duration", track.getDurationMs().toString(0)); //track length in milliseconds
+            trackInfo.put("duration", track.getDurationMs().toString(0)); // track length in milliseconds
             trackInfo.put("album", track.getAlbum().getName());
-            trackInfo.put("image", track.getAlbum().getImages()[0].toString()); // "Image(height=" + height + ", url=" + url + ", width=" + width + ")"
+            trackInfo.put("image", track.getAlbum().getImages()[0].toString()); // "Image(height=" + height + ", url=" +
+                                                                                // url + ", width=" + width + ")"
             return trackInfo;
             // System.out.println("Name: " + track.getName());
         } catch (IOException | SpotifyWebApiException | ParseException e) {
             System.out.println("Error: " + e.getMessage());
             return trackInfo;
         }
-      }
+    }
 
+    public List<Dictionary<String, String>> getTopTracksInfoList(int limit, String time_range) {
+        List<Dictionary<String, String>> dictionaryList = new ArrayList<>();
+
+        List<String> topTracksIds = getTopTrackIds(limit, time_range);
+
+        for (int i = 0; i < limit; i++) {
+            Dictionary<String, String> dictionary = getTrackInfo(topTracksIds.get(i));
+            dictionaryList.add(dictionary);
+
+        }
+
+        return dictionaryList;
+    }
 
 }
