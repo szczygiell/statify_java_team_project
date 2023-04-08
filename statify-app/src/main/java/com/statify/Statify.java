@@ -79,6 +79,7 @@ public class Statify {
         List<Float> danceabilityTable = new ArrayList<>();
         Dictionary<String, List<Float>> audioFeatures = Statify.currentUser
                 .getAllTracksAudioFeatures(tracksIds.toArray(new String[0]));
+        System.out.println(audioFeatures);
         try {
             danceabilityTable.addAll(audioFeatures.get("danceability"));
         } catch (NullPointerException e) {
@@ -139,6 +140,94 @@ public class Statify {
         }
 
         return panel;
+    }
+
+    private static List<Float> getLoudnessPlaylistsData(int limit) {
+        List<String> playlistsIds = Statify.currentUser.getPlaylistsIds(limit);
+        List<String> tracksIds = new ArrayList<>();
+        for (String pId : playlistsIds) {
+            tracksIds.addAll(Statify.currentUser.getPlaylistTracksIds(pId));
+        }
+        System.out.println(tracksIds);
+        List<Float> danceabilityTable = new ArrayList<>();
+        Dictionary<String, List<Float>> audioFeatures = Statify.currentUser
+                .getAllTracksAudioFeatures(tracksIds.toArray(new String[0]));
+        //System.out.println(audioFeatures);
+        try {
+            danceabilityTable.addAll(audioFeatures.get("loudness"));
+        } catch (NullPointerException e) {
+            System.out.println(e);
+        }
+        return danceabilityTable;
+    }
+
+    public static JPanel getLoudnessHistogram() {
+        List<Float> data = Statify.getLoudnessPlaylistsData(playlists_num);
+        int binsNum = (int) Math.cbrt(data.size());
+        String title = String.format("Loudness Histogram of your %o playlists", playlists_num);
+        String xTitle = "Mean";
+        String yTitle = "Tracks count";
+        String seriesName = "Tracks in your playlists";
+        List<Double> ydata = new ArrayList<>();
+        List<Double> xdata = new ArrayList<>();
+        try {
+            Histogram histogram = new Histogram(data, binsNum);
+            ydata = histogram.getyAxisData();
+            xdata = histogram.getxAxisData();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
+        }
+        for (int i = 0; i < xdata.size(); i++) {
+            double newValue = (double) Math.round(xdata.get(i) * 100d) / 100d;
+            xdata.set(i, newValue);
+        }
+        CategoryChart chart = getBarChart(xdata, ydata, title, seriesName, xTitle, yTitle);
+
+        return new XChartPanel<CategoryChart>(chart);
+    }
+
+    private static List<Float> getAcousticnessPlaylistsData(int limit) {
+        List<String> playlistsIds = Statify.currentUser.getPlaylistsIds(limit);
+        List<String> tracksIds = new ArrayList<>();
+        for (String pId : playlistsIds) {
+            tracksIds.addAll(Statify.currentUser.getPlaylistTracksIds(pId));
+        }
+        System.out.println(tracksIds);
+        List<Float> danceabilityTable = new ArrayList<>();
+        Dictionary<String, List<Float>> audioFeatures = Statify.currentUser
+                .getAllTracksAudioFeatures(tracksIds.toArray(new String[0]));
+        //System.out.println(audioFeatures);
+        try {
+            danceabilityTable.addAll(audioFeatures.get("acousticness"));
+        } catch (NullPointerException e) {
+            System.out.println(e);
+        }
+        return danceabilityTable;
+    }
+
+    public static JPanel getAcousticnessHistogram() {
+        List<Float> data = Statify.getAcousticnessPlaylistsData(playlists_num);
+        int binsNum = (int) Math.cbrt(data.size());
+        String title = String.format("Acousticness Histogram of your %o playlists", playlists_num);
+        String xTitle = "Mean";
+        String yTitle = "Tracks count";
+        String seriesName = "Tracks in your playlists";
+        List<Double> ydata = new ArrayList<>();
+        List<Double> xdata = new ArrayList<>();
+        try {
+            Histogram histogram = new Histogram(data, binsNum);
+            ydata = histogram.getyAxisData();
+            xdata = histogram.getxAxisData();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
+        }
+        for (int i = 0; i < xdata.size(); i++) {
+            double newValue = (double) Math.round(xdata.get(i) * 100d) / 100d;
+            xdata.set(i, newValue);
+        }
+        CategoryChart chart = getBarChart(xdata, ydata, title, seriesName, xTitle, yTitle);
+
+        return new XChartPanel<CategoryChart>(chart);
     }
 
 

@@ -246,6 +246,11 @@ public class MainWindow extends javax.swing.JFrame {
         optionsPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 45, 30));
 
         jTextField1.setText("Amount of playlists");
+        jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField1FocusGained(evt);
+            }
+        });
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -255,7 +260,8 @@ public class MainWindow extends javax.swing.JFrame {
 
         optionButton1.setBackground(new java.awt.Color(46, 79, 79));
         optionButton1.setForeground(new java.awt.Color(255, 255, 255));
-        optionButton1.setText("option 1");
+        optionButton1.setText("loudness");
+        optionButton1.setToolTipText("");
         optionButton1.setPreferredSize(new java.awt.Dimension(108, 54));
         optionButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -266,7 +272,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         optionButton2.setBackground(new java.awt.Color(46, 79, 79));
         optionButton2.setForeground(new java.awt.Color(255, 255, 255));
-        optionButton2.setText("histogram");
+        optionButton2.setText("danceability");
         optionButton2.setPreferredSize(new java.awt.Dimension(108, 54));
         optionButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -277,8 +283,8 @@ public class MainWindow extends javax.swing.JFrame {
 
         optionButton3.setBackground(new java.awt.Color(46, 79, 79));
         optionButton3.setForeground(new java.awt.Color(255, 255, 255));
-        optionButton3.setText("option 3");
-        optionButton3.setPreferredSize(new java.awt.Dimension(108, 54));
+        optionButton3.setText("acousticness");
+        optionButton3.setPreferredSize(new java.awt.Dimension(120, 54));
         optionButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 optionButton3ActionPerformed(evt);
@@ -405,12 +411,34 @@ public class MainWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
+        jTextField1.setText("");
+    }//GEN-LAST:event_jTextField1FocusGained
+
     private void optionButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_optionButton1ActionPerformed
-        upperPanelDefault();
-        optionsPanel.setVisible(true);
+        String playlists_num = jTextField1.getText();
+        try{
+            int plNum = Integer.parseInt(playlists_num);
+            if(plNum <= 0){
+                javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of playlists");
+            }
+            else{
+                Statify.SetPlaylistsNum(plNum);
+                upperPanelDefault();
+                JPanel histo = Statify.getLoudnessHistogram();
+                panelInit(histo);
+                histo.setVisible(true);
+                optionsPanel.setVisible(true);
+            }
+        } catch(NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
+        } catch(NullPointerException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
+
+        }
     }// GEN-LAST:event_optionButton1ActionPerformed
 
     private void optionButton2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_optionButton2ActionPerformed
@@ -439,8 +467,26 @@ public class MainWindow extends javax.swing.JFrame {
     }// GEN-LAST:event_optionButton2ActionPerformed
 
     private void optionButton3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_optionButton3ActionPerformed
-        upperPanelDefault();
-        optionsPanel.setVisible(true);
+        String playlists_num = jTextField1.getText();
+        try{
+            int plNum = Integer.parseInt(playlists_num);
+            if(plNum <= 0){
+                javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of playlists");
+            }
+            else{
+                Statify.SetPlaylistsNum(plNum);
+                upperPanelDefault();
+                JPanel histo = Statify.getAcousticnessHistogram();
+                panelInit(histo);
+                histo.setVisible(true);
+                optionsPanel.setVisible(true);
+            }
+        } catch(NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
+        } catch(NullPointerException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
+
+        }
     }// GEN-LAST:event_optionButton3ActionPerformed
 
     private void weeks4ButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_weeks4ButtonActionPerformed
