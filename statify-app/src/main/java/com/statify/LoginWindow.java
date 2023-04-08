@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 public class LoginWindow extends JFrame implements ActionListener {
 
     Container container = getContentPane();
-    JLabel passwordLabel = new JLabel("ACCES_TOKEN");
+    JLabel passwordLabel = new JLabel("ACCESS TOKEN");
     JPasswordField passwordField = new JPasswordField();
     JButton loginButton = new JButton("LOGIN");
     JButton resetButton = new JButton("RESET");
@@ -43,6 +43,7 @@ public class LoginWindow extends JFrame implements ActionListener {
         resetButton.setBounds(200, 300, 100, 30);
         resetButton.setBackground(new java.awt.Color(0, 0, 0));
         resetButton.setForeground(new java.awt.Color(255, 255, 255));
+        setMinimumSize(new java.awt.Dimension(350, 540));
 
 
     }
