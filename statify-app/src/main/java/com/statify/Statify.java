@@ -10,12 +10,20 @@ import org.knowm.xchart.style.Styler.ChartTheme;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Dictionary;
 import java.lang.Math;
+
 import javax.swing.JPanel;
 
 public class Statify {
 
-    private CategoryChart getBarChart(List<Double> x_values,
+    private static User currentUser;
+
+    public static void setUser(User user) {
+        currentUser = user;
+    }
+
+    private static CategoryChart getBarChart(List<Double> x_values,
             List<Double> y_values,
             String title,
             String seriesName,
@@ -48,7 +56,25 @@ public class Statify {
         }
     }
 
-    public JPanel getDanceabilityHistogram(List<Float> data, int playlists_num) {
+    private static List<Float> getDancebilityPlaylistsData(int limit) {
+        List<String> playlistsIds = Statify.currentUser.getPlaylistsIds(limit);
+        List<String> tracksIds = new ArrayList<>();
+        for (String pId : playlistsIds) {
+            tracksIds.addAll(Statify.currentUser.getPlaylistTracksIds(pId));
+        }
+        List<Float> danceabilityTable = new ArrayList<>();
+        Dictionary<String, List<Float>> audioFeatures = Statify.currentUser
+                .getAllTracksAudioFeatures(tracksIds.toArray(new String[0]));
+        try {
+            danceabilityTable.addAll(audioFeatures.get("danceability"));
+        } catch (NullPointerException e) {
+            System.out.println(e);
+        }
+        return danceabilityTable;
+    }
+
+    public static JPanel getDanceabilityHistogram(int playlists_num) {
+        List<Float> data = Statify.getDancebilityPlaylistsData(playlists_num);
         int binsNum = (int) Math.cbrt(data.size());
         String title = String.format("Danceability Histogram of your %o playlists", playlists_num);
         String xTitle = "Mean";
@@ -73,8 +99,6 @@ public class Statify {
     }
 
     public static void main(String[] args) {
-        Statify statify = new Statify();
-        statify.getDanceabilityHistogram(Arrays.asList(1.4f, 5.0f, 6.4f), 2);
     }
 
 }
