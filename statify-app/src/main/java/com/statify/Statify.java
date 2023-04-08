@@ -33,6 +33,10 @@ public class Statify {
         currentUser = user;
     }
 
+    public static void SetPlaylistsNum(int new_playlists_num) { 
+        playlists_num = new_playlists_num;
+    }
+
     private static CategoryChart getBarChart(List<Double> x_values,
             List<Double> y_values,
             String title,
