@@ -12,6 +12,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.lang.Math;
 import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import java.awt.GridLayout;
+import javax.swing.JFrame;
+
+import java.util.Dictionary;
+import java.util.Hashtable;
+
 
 public class Statify {
 
@@ -72,9 +80,64 @@ public class Statify {
         return new XChartPanel<CategoryChart>(chart);
     }
 
+    public JPanel createTopTracksPanel(int tracksNum, List<Dictionary<String, String>> data) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(tracksNum+1, 3, 10, 10)); // n+1 rows, 2 columns, 10px between each row and ech column
+        JLabel mainPositionLabel = new JLabel("Position");
+            panel.add(mainPositionLabel);
+        JLabel mainTitleLabel = new JLabel("Title");
+            panel.add(mainTitleLabel);
+        JLabel mainArtistLabel = new JLabel("Artist");
+            panel.add(mainArtistLabel);
+        JLabel mainAlbumLabel = new JLabel("Album");
+            panel.add(mainAlbumLabel);
+        // Adding 10 string fields to panel
+        for (int i = 0; i < tracksNum; i++) {
+            JLabel positionLabel = new JLabel(Integer.toString(i+1));
+            panel.add(positionLabel);
+
+            JLabel titleLabel = new JLabel(data.get(i).get("name"));
+            panel.add(titleLabel);
+
+            JLabel artistLabel = new JLabel(data.get(i).get("artist"));
+            panel.add(artistLabel);
+
+            JLabel albumLabel = new JLabel(data.get(i).get("album"));
+            panel.add(albumLabel);
+        }
+
+        return panel;
+    }
+
+
     public static void main(String[] args) {
         Statify statify = new Statify();
-        statify.getDanceabilityHistogram(Arrays.asList(1.4f, 5.0f, 6.4f), 2);
+        // statify.getDanceabilityHistogram(Arrays.asList(1.4f, 5.0f, 6.4f), 2);
+        JFrame frame = new JFrame("Song Form");
+        List<Dictionary<String, String>> dictionaryList = new ArrayList<>();
+
+        Dictionary<String, String> dictionary1 = new Hashtable<>();
+        dictionary1.put("name", "hello");
+        dictionary1.put("artist", "adele");
+        dictionary1.put("album", "waheteverr");
+        dictionaryList.add(dictionary1);
+
+        Dictionary<String, String> dictionary2 = new Hashtable<>();
+        dictionary2.put("name", "bebe");
+        dictionary2.put("artist", "adadadasele");
+        dictionary2.put("album", "verr");
+        dictionaryList.add(dictionary2);
+
+        Dictionary<String, String> dictionary3 = new Hashtable<>();
+        dictionary3.put("name", "sbglo");
+        dictionary3.put("artist", "tet");
+        dictionary3.put("album", "wahefgsdteverr");
+        dictionaryList.add(dictionary3);
+
+        frame.add(statify.createTopTracksPanel(3, dictionaryList));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
     }
 
 }
