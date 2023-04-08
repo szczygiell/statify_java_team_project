@@ -14,6 +14,7 @@ public class LoginWindow extends JFrame implements ActionListener {
     JButton loginButton = new JButton("LOGIN");
     JButton resetButton = new JButton("RESET");
     JCheckBox showPassword = new JCheckBox("Show token");
+    private String accessToken;
 
     LoginWindow() {
         setLayoutManager();
@@ -27,9 +28,17 @@ public class LoginWindow extends JFrame implements ActionListener {
         container.setLayout(null);
     }
 
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    private void setAccessToken(String token) {
+        accessToken = token;
+    }
+
     public void setLocationAndSize() {
         container.setBackground(new java.awt.Color(52, 235, 107));
-        passwordLabel.setBounds(50, 220, 100, 30);
+        passwordLabel.setBounds(40, 220, 150, 30);
         passwordLabel.setForeground(new java.awt.Color(0, 0, 0));
         passwordField.setBounds(150, 220, 150, 30);
         showPassword.setBounds(150, 250, 150, 30);
@@ -67,6 +76,7 @@ public class LoginWindow extends JFrame implements ActionListener {
             TokenTest token_test = new TokenTest(pwdText);
             if (token_test.TokenTestFun()) {
                 JOptionPane.showMessageDialog(this, "Login Successful");
+                Statify.setUser(new User(pwdText));
                 MainWindow main_window = new MainWindow();
                 main_window.setVisible(true);
             } else {
