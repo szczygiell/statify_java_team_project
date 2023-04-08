@@ -115,30 +115,33 @@ public class Statify {
         Statify statify = new Statify();
         // statify.getDanceabilityHistogram(Arrays.asList(1.4f, 5.0f, 6.4f), 2);
         JFrame frame = new JFrame("Song Form");
-        List<Dictionary<String, String>> dictionaryList = new ArrayList<>();
 
-        Dictionary<String, String> dictionary1 = new Hashtable<>();
-        dictionary1.put("name", "hello");
-        dictionary1.put("artist", "adele");
-        dictionary1.put("album", "waheteverr");
-        dictionaryList.add(dictionary1);
+        // SORRY ZA SYF ALE PROSZĘ TEGO NIE USUWAĆ NA RAZIE!
 
-        Dictionary<String, String> dictionary2 = new Hashtable<>();
-        dictionary2.put("name", "bebe");
-        dictionary2.put("artist", "adadadasele");
-        dictionary2.put("album", "verr");
-        dictionaryList.add(dictionary2);
+        // List<Dictionary<String, String>> dictionaryList = new ArrayList<>();
 
-        Dictionary<String, String> dictionary3 = new Hashtable<>();
-        dictionary3.put("name", "sbglo");
-        dictionary3.put("artist", "tet");
-        dictionary3.put("album", "wahefgsdteverr");
-        dictionaryList.add(dictionary3);
+        // Dictionary<String, String> dictionary1 = new Hashtable<>();
+        // dictionary1.put("name", "hello");
+        // dictionary1.put("artist", "adele");
+        // dictionary1.put("album", "waheteverr");
+        // dictionaryList.add(dictionary1);
+
+        // Dictionary<String, String> dictionary2 = new Hashtable<>();
+        // dictionary2.put("name", "bebe");
+        // dictionary2.put("artist", "adadadasele");
+        // dictionary2.put("album", "verr");
+        // dictionaryList.add(dictionary2);
+
+        // Dictionary<String, String> dictionary3 = new Hashtable<>();
+        // dictionary3.put("name", "sbglo");
+        // dictionary3.put("artist", "tet");
+        // dictionary3.put("album", "wahefgsdteverr");
+        // dictionaryList.add(dictionary3);
 
         String accessToken = "BQDhj22beeKO4Yl02SXA_cIppBdJ9-LKrUgoRIko0QTp5Zn2ltDFFjvpXMcvKU9ipzLPK0IuMjvGaFmx6bFmGVOc47NbaYdhJarWcNK_KXEe0sMnLMH1b_XPrVKXh52Bcfp3hcbtDHGfk2xaCLE8ihXA3b1lidI0lLR_Bi-LMFKeZv9Dhn5WKyk1WFJ_vy1ehxC8BMb7TR4G87Mf0jyjoIm233Xgc4Q7Z6T2_dX46_jjcu4_lkN_IpHCpW6VUv2pNH_1rL7LF2_NSuSD3zBjjIvFGM9xR6M1L_fMeAzmrrQpati7dkovbe2_dAIp3jjVInYTz12l0IzFnHZ9ixDjNJGnoA";
         User user = new User(accessToken);
         String timeRange = "medium_term";
-        int tracksNumber = 10;
+        int tracksNumber = 50;
 
         List<Dictionary<String, String>> dictionaryListFromMethod = user.getTopTracksInfoList(tracksNumber, timeRange);
 
