@@ -33,7 +33,7 @@ public class Statify {
         currentUser = user;
     }
 
-    public static void SetPlaylistsNum(int new_playlists_num) { 
+    public static void SetPlaylistsNum(int new_playlists_num) {
         playlists_num = new_playlists_num;
     }
 
