@@ -4,6 +4,8 @@ import org.knowm.xchart.CategoryChart;
 import org.knowm.xchart.CategoryChartBuilder;
 import org.knowm.xchart.style.Styler.LegendPosition;
 import org.knowm.xchart.XChartPanel;
+import org.knowm.xchart.Histogram;
+import org.knowm.xchart.style.Styler.ChartTheme;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,14 +15,16 @@ import javax.swing.JPanel;
 
 public class Statify {
 
-    private CategoryChart getBarChart(List<Float> x_values,
-            List<Integer> y_values,
+    private CategoryChart getBarChart(List<Double> x_values,
+            List<Double> y_values,
             String title,
+            String seriesName,
             String xAxisTitle,
             String yAxisTitle) {
         CategoryChart chart = new CategoryChartBuilder()
                 .width(800)
                 .height(600)
+                .theme(ChartTheme.GGPlot2)
                 .title(title)
                 .xAxisTitle(xAxisTitle)
                 .yAxisTitle(yAxisTitle)
@@ -33,7 +37,9 @@ public class Statify {
 
         // Series
         try {
-            chart.addSeries("playlist 1", x_values, y_values);
+            chart.addSeries(seriesName, x_values, y_values);
+            chart.getStyler().setAvailableSpaceFill(.96);
+
             return chart;
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e);
@@ -42,49 +48,33 @@ public class Statify {
         }
     }
 
-    public JPanel getDanceabilityHistogram(List<Float> data) {
-        // int valuesLen = data.size();
-        // List<Integer> keysArray = IntStream.range(0, valuesLen).boxed().toList();
-
+    public JPanel getDanceabilityHistogram(List<Float> data, int playlists_num) {
         int binsNum = (int) Math.cbrt(data.size());
-        int[] binCounts = new int[binsNum];
-        float min = Float.MAX_VALUE;
-        float max = Float.MIN_VALUE;
-        for (float value : data) {
-            if (value < min) {
-                min = value;
-            }
-            if (value > max) {
-                max = value;
-            }
+        String title = String.format("Danceability Histogram of your %o playlists", playlists_num);
+        String xTitle = "Mean";
+        String yTitle = "Tracks count";
+        String seriesName = "Tracks in your playlists";
+        List<Double> ydata = new ArrayList<>();
+        List<Double> xdata = new ArrayList<>();
+        try {
+            Histogram histogram = new Histogram(data, binsNum);
+            ydata = histogram.getyAxisData();
+            xdata = histogram.getxAxisData();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
         }
-        float binWidth = (max - min) / binsNum;
-        for (float value : data) {
-            int binIndex = (int) ((value - min) / binWidth);
-            if (binIndex == binsNum) {
-                binIndex = binsNum - 1;
-            }
-            binCounts[binIndex]++;
+        for (int i = 0; i < xdata.size(); i++) {
+            double newValue = (double) Math.round(xdata.get(i) * 100d) / 100d;
+            xdata.set(i, newValue);
         }
-        List<Float> keys = new ArrayList<>();
-        List<Integer> values = new ArrayList<>();
-        for (int i = 0; i < binsNum; i++) {
-            float binStart = min + i * binWidth;
-            // float binEnd = binStart + binWidth;
-            keys.add(binStart);
-            values.add(binCounts[i]);
-        }
-        String title = "Danceability Histogram";
-        String xTitle = "Minimal danceability rate";
-        String yTitle = "Number of tracks";
+        CategoryChart chart = getBarChart(xdata, ydata, title, seriesName, xTitle, yTitle);
 
-        CategoryChart chart = getBarChart(keys, values, title, xTitle, yTitle);
         return new XChartPanel<CategoryChart>(chart);
     }
 
     public static void main(String[] args) {
         Statify statify = new Statify();
-        statify.getDanceabilityHistogram(Arrays.asList(1.4f, 5.0f, 6.4f));
+        statify.getDanceabilityHistogram(Arrays.asList(1.4f, 5.0f, 6.4f), 2);
     }
 
 }

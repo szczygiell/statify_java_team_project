@@ -17,21 +17,34 @@ public final class App {
      * 
      * @param args The arguments of the program.
      */
-    public static void main(String[] args) {
-        String user_token = "BQA9FRATlnaXOGZCWbG7rmOUWetlDI9fEhwYyjXoDf-tkZ1coMDi549Ms7IjWirU737LWtDLSXh54S0wG3SQBP28BR1f0OcmlReIwGZi7JFx4JIORr0-5RZxWCIaEfEdWDhnWjH6flu1anp6tDXUDRsrR2raObdaw9miWpxpAdDay6rMO5zT21mvHkDZQVtUszZNs42WscGCokhc9paOWtp5OxC5qg6nN9nNzLQ5jm5SNdQw4AgNSoHhWJwDzLy_Obm2o8Ei0Xpfo7NlTb0KqLkmVD_KcQlerBwkmrrq1CSCsJSZgx3OHaLlcTnhlZsFcUI";
-        User user = new User(user_token);
-        String playlistId = user.getFirstPlaylistId();
-        List<String> trackIds = user.getPlaylistTracksIds(playlistId);
-        List<Float> danceability_table = new ArrayList<>();
 
-        for (String trackId : trackIds) {
-            Dictionary<String, Float> audioFeatures = user.getTracksAudioFeatures(trackId);
-            danceability_table.add(audioFeatures.get("danceability"));
+    public static void danceabilityHistogramSeveralTracks(String token) {
+        String user_token = token;
+        User user = new User(user_token);
+        int limit = 30;
+        List<String> playlistsIds = user.getPlaylistsIds(limit);
+        List<String> tracksIds = new ArrayList<>();
+        for (String pId : playlistsIds) {
+            tracksIds.addAll(user.getPlaylistTracksIds(pId));
         }
-        // System.out.println(danceability_table);
+        List<Float> danceability_table = new ArrayList<>();
+        Dictionary<String, List<Float>> audioFeatures = user
+                .getAllTracksAudioFeatures(tracksIds.toArray(new String[0]));
+        try {
+            danceability_table.addAll(audioFeatures.get("danceability"));
+        } catch (NullPointerException e) {
+            System.out.println(e);
+        }
         Statify statify = new Statify();
-        JPanel chart = statify.getDanceabilityHistogram(danceability_table);
+        JPanel chart = statify.getDanceabilityHistogram(danceability_table, limit);
         TopLevelWindow.createChartFrame(chart);
+
+    }
+
+    public static void main(String[] args) {
+        String user_token = "BQB7xCiuEbVOErMc6wTGq0edanpPQcEzrbX3wXkeNynCklJua4-q_vOpa0Q3shWBXMOwkdM8RjTVTXu5uDBY4CfwWImHXXvVdl3ZuAdlBiQnzdOpqxxQsAnhIUcDvAXdUQxQOZ1jS-D_Sh_QyYIxrOd3G5DoEFllPC3bb3tvYqE645T9PBtIO0xMjtHHR5g0VyXxiDzQnof0LGnJzgZ-rSNxm5UbgHGuE1jLJqD-OU1A3Xy9Dct2HqTlz5vK18G9v99URQ2NAllodA2fFh__85okwhLqPMdoxfI0Y3F3evUC1zALeyDq7tGHjEi_VVl2jAo";
+        // danceabilityHistogramSeparateTracks(user_token);
+        danceabilityHistogramSeveralTracks(user_token);
 
     }
 }
