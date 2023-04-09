@@ -104,7 +104,7 @@ public class MainWindow extends javax.swing.JFrame {
         sidePanel.setPreferredSize(new java.awt.Dimension(210, 540));
         sidePanel.setLayout(new java.awt.BorderLayout());
 
-        logoPanel.setBackground(new java.awt.Color(52, 235, 107));
+        logoPanel.setBackground(new java.awt.Color(25, 20, 20));
         logoPanel.setPreferredSize(new java.awt.Dimension(210, 120));
         logoPanel.setLayout(new java.awt.BorderLayout());
         sidePanel.add(logoPanel, java.awt.BorderLayout.NORTH);
@@ -116,7 +116,7 @@ public class MainWindow extends javax.swing.JFrame {
         jScrollPane1.setBackground(new java.awt.Color(52, 235, 107));
         jScrollPane1.setBorder(null);
 
-        chooseActionPanel.setBackground(new java.awt.Color(52, 235, 107));
+        chooseActionPanel.setBackground(new java.awt.Color(25, 20, 20));
         chooseActionPanel.setPreferredSize(new java.awt.Dimension(188, 440));
 
         artistButton.setBackground(new java.awt.Color(44, 51, 51));
@@ -225,7 +225,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         typeActionPanel.add(jScrollPane1);
 
-        bottomSidePanel.setBackground(new java.awt.Color(52, 235, 107));
+        bottomSidePanel.setBackground(new java.awt.Color(25, 20, 20));
         bottomSidePanel.setPreferredSize(new java.awt.Dimension(210, 100));
 
         javax.swing.GroupLayout bottomSidePanelLayout = new javax.swing.GroupLayout(bottomSidePanel);
@@ -255,7 +255,7 @@ public class MainWindow extends javax.swing.JFrame {
         actionButtonsPanel.setPreferredSize(new java.awt.Dimension(20, 120));
         actionButtonsPanel.setLayout(new java.awt.CardLayout());
 
-        optionsPanel.setBackground(new java.awt.Color(52, 235, 107));
+        optionsPanel.setBackground(new java.awt.Color(29, 185, 84));
         optionsPanel.setPreferredSize(new java.awt.Dimension(20, 120));
         optionsPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 45, 30));
 
@@ -274,7 +274,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
         optionsPanel.add(jTextField1);
 
-        optionButton1.setBackground(new java.awt.Color(44, 51, 70));
+        optionButton1.setBackground(new java.awt.Color(44, 51, 51));
         optionButton1.setForeground(new java.awt.Color(255, 255, 255));
         optionButton1.setText("loudness");
         optionButton1.setToolTipText("");
@@ -310,7 +310,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         actionButtonsPanel.add(optionsPanel, "card2");
 
-        timeButtonsPanel.setBackground(new java.awt.Color(52, 235, 107));
+        timeButtonsPanel.setBackground(new java.awt.Color(29, 185, 84));
         timeButtonsPanel.setPreferredSize(new java.awt.Dimension(20, 120));
         timeButtonsPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 50, 40));
 
@@ -359,7 +359,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         actionButtonsPanel.add(timeButtonsPanel, "card2");
 
-        planeUpperPanel.setBackground(new java.awt.Color(52, 235, 107));
+        planeUpperPanel.setBackground(new java.awt.Color(29, 185, 84));
 
         javax.swing.GroupLayout planeUpperPanelLayout = new javax.swing.GroupLayout(planeUpperPanel);
         planeUpperPanel.setLayout(planeUpperPanelLayout);
@@ -380,7 +380,7 @@ public class MainWindow extends javax.swing.JFrame {
         actionPanel.setPreferredSize(new java.awt.Dimension(750, 420));
         actionPanel.setLayout(new java.awt.CardLayout());
 
-        redPanel.setBackground(new java.awt.Color(52, 235, 107));
+        redPanel.setBackground(new java.awt.Color(29, 185, 84));
 
         javax.swing.GroupLayout redPanelLayout = new javax.swing.GroupLayout(redPanel);
         redPanel.setLayout(redPanelLayout);
@@ -395,7 +395,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         actionPanel.add(redPanel, "card2");
 
-        bluePanel.setBackground(new java.awt.Color(0, 51, 255));
+        bluePanel.setBackground(new java.awt.Color(29, 185, 84));
 
         javax.swing.GroupLayout bluePanelLayout = new javax.swing.GroupLayout(bluePanel);
         bluePanel.setLayout(bluePanelLayout);
@@ -410,7 +410,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         actionPanel.add(bluePanel, "card1");
 
-        planeBasePanel.setBackground(new java.awt.Color(52, 235, 107));
+        planeBasePanel.setBackground(new java.awt.Color(29, 185, 84));
 
         javax.swing.GroupLayout planeBasePanelLayout = new javax.swing.GroupLayout(planeBasePanel);
         planeBasePanel.setLayout(planeBasePanelLayout);

@@ -37,12 +37,12 @@ public class LoginWindow extends JFrame implements ActionListener {
     }
 
     public void setLocationAndSize() {
-        container.setBackground(new java.awt.Color(52, 235, 107));
+        container.setBackground(new java.awt.Color(29,185,84));
         passwordLabel.setBounds(40, 220, 150, 30);
         passwordLabel.setForeground(new java.awt.Color(0, 0, 0));
         passwordField.setBounds(150, 220, 150, 30);
         showPassword.setBounds(150, 250, 150, 30);
-        showPassword.setBackground(new java.awt.Color(52, 235, 107));
+        showPassword.setBackground(new java.awt.Color(29,185,84));
         loginButton.setBounds(50, 300, 100, 30);
         loginButton.setBackground(new java.awt.Color(0, 0, 0));
         loginButton.setForeground(new java.awt.Color(255, 255, 255));
