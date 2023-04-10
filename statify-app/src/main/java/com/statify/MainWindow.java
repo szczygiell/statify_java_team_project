@@ -43,6 +43,30 @@ public class MainWindow extends javax.swing.JFrame {
         planeUpperPanel.setVisible(true);
     }
 
+    public void trackListGrapher(String timeRange){
+        String track_num = numTracksTextField.getText();
+        try{
+            int trNum = Integer.parseInt(track_num);
+            if(trNum <= 0){
+                javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of tracks");
+            }
+            else{
+                upperPanelDefault();
+                javax.swing.JScrollPane graph = Statify.createTopTracksPanel(trNum, timeRange);
+                //panelInit(histo);
+                // System.out.print("tutaj");
+                actionPanel.add(graph);
+                graph.setVisible(true);
+                timeButtonsPanel.setVisible(true);
+            }
+        } catch(NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
+        } catch(NullPointerException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
+
+        }
+    }
+
     public void panelInit(JPanel panel) {
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
@@ -103,6 +127,7 @@ public class MainWindow extends javax.swing.JFrame {
         jTextArea2 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Statify PAP23L edition");
         setMinimumSize(new java.awt.Dimension(830, 440));
 
         planeRoot.setMaximumSize(new java.awt.Dimension(1980, 1080));
@@ -384,7 +409,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         timeButtonsPanel.add(weeks4Button, gridBagConstraints);
 
@@ -401,7 +426,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         timeButtonsPanel.add(months6Button, gridBagConstraints);
 
@@ -409,7 +434,6 @@ public class MainWindow extends javax.swing.JFrame {
         allTimeHistoryButton.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         allTimeHistoryButton.setForeground(new java.awt.Color(255, 255, 255));
         allTimeHistoryButton.setText("all-time");
-        allTimeHistoryButton.setBorder(null);
         allTimeHistoryButton.setMaximumSize(new java.awt.Dimension(130, 54));
         allTimeHistoryButton.setMinimumSize(new java.awt.Dimension(130, 54));
         allTimeHistoryButton.setPreferredSize(new java.awt.Dimension(130, 54));
@@ -619,75 +643,15 @@ public class MainWindow extends javax.swing.JFrame {
     }// GEN-LAST:event_optionButton3ActionPerformed
 
     private void weeks4ButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_weeks4ButtonActionPerformed
-        String track_num = numTracksTextField.getText();
-        try{
-            int trNum = Integer.parseInt(track_num);
-            if(trNum <= 0){
-                javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of tracks");
-            }
-            else{
-                upperPanelDefault();
-                javax.swing.JScrollPane histo = Statify.createTopTracksPanel(trNum, "short_term");
-                //panelInit(histo);
-                System.out.print("tutaj");
-                actionPanel.add(histo);
-                histo.setVisible(true);
-                timeButtonsPanel.setVisible(true);
-            }
-        } catch(NumberFormatException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
-        } catch(NullPointerException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
-
-        }
+        trackListGrapher("short_term");
     }// GEN-LAST:event_weeks4ButtonActionPerformed
 
     private void months6ButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_months6ButtonActionPerformed
-        String track_num = numTracksTextField.getText();
-        try{
-            int trNum = Integer.parseInt(track_num);
-            if(trNum <= 0){
-                javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of tracks");
-            }
-            else{
-                upperPanelDefault();
-                javax.swing.JScrollPane histo = Statify.createTopTracksPanel(trNum, "medium_term");
-                //panelInit(histo);
-                System.out.print("tutaj");
-                actionPanel.add(histo);
-                histo.setVisible(true);
-                timeButtonsPanel.setVisible(true);
-            }
-        } catch(NumberFormatException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
-        } catch(NullPointerException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
-
-        }
+        trackListGrapher("medium_term");
     }// GEN-LAST:event_months6ButtonActionPerformed
 
     private void allTimeHistoryButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_allTimeHistoryButtonActionPerformed
-        String track_num = numTracksTextField.getText();
-        try{
-            int trNum = Integer.parseInt(track_num);
-            if(trNum <= 0){
-                javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of tracks");
-            }
-            else{
-                upperPanelDefault();
-                javax.swing.JScrollPane histo = Statify.createTopTracksPanel(trNum, "long_term");
-                //panelInit(histo);
-                System.out.print("tutaj");
-                actionPanel.add(histo);
-                histo.setVisible(true);
-                timeButtonsPanel.setVisible(true);
-            }
-        } catch(NumberFormatException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
-        } catch(NullPointerException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
-
-        }
+        trackListGrapher("long_term");
     }// GEN-LAST:event_allTimeHistoryButtonActionPerformed
 
     private void artistButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_artistButtonActionPerformed

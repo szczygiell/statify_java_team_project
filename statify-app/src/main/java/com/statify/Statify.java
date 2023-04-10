@@ -120,6 +120,7 @@ public class Statify {
         JPanel panel = new JPanel();
         
         panel.setLayout(new GridLayout(data.size()+1, 3, 10, 10)); // n+1 rows, 2 columns, 10px between each row and ech column
+        // lepiej to zrobić GridBagLayout bo można dodawać kolumny różnych szerokości
         JLabel mainPositionLabel = new JLabel("Position");
             panel.add(mainPositionLabel);
         JLabel mainTitleLabel = new JLabel("Title");
