@@ -79,6 +79,7 @@ public class LoginWindow extends JFrame implements ActionListener {
                 Statify.setUser(new User(pwdText));
                 MainWindow main_window = new MainWindow();
                 main_window.setVisible(true);
+                this.setVisible(false);
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid Acces Token");
             }
