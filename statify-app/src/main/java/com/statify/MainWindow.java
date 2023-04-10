@@ -18,23 +18,53 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow() {
         initComponents();
         panelsSetDefault();
+        creditsPanel.setVisible(true);
     }
 
     public final void panelsSetDefault() {
+        // setting upper panels off
         timeButtonsPanel.setVisible(false);
         optionsPanel.setVisible(false);
-
-        redPanel.setVisible(false);
-        bluePanel.setVisible(false);
-
-        planeBasePanel.setVisible(true);
+        // turning base upper panel on
         planeUpperPanel.setVisible(true);
+
+
+        //setting action panels off
+        bluePanel.setVisible(false);
+        creditsPanel.setVisible(false);
+        // turning base (credits) action panel on
+        planeBasePanel.setVisible(true);
+        
     }
 
     public final void upperPanelDefault() {
         timeButtonsPanel.setVisible(false);
         optionsPanel.setVisible(false);
         planeUpperPanel.setVisible(true);
+    }
+
+    public void trackListGrapher(String timeRange){
+        String track_num = numTracksTextField.getText();
+        try{
+            int trNum = Integer.parseInt(track_num);
+            if(trNum <= 0){
+                javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of tracks");
+            }
+            else{
+                upperPanelDefault();
+                javax.swing.JScrollPane graph = Statify.createTopTracksPanel(trNum, timeRange);
+                //panelInit(histo);
+                // System.out.print("tutaj");
+                actionPanel.add(graph);
+                graph.setVisible(true);
+                timeButtonsPanel.setVisible(true);
+            }
+        } catch(NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
+        } catch(NullPointerException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
+
+        }
     }
 
     public void panelInit(JPanel panel) {
@@ -90,11 +120,14 @@ public class MainWindow extends javax.swing.JFrame {
         numTracksTextField = new javax.swing.JTextField();
         planeUpperPanel = new javax.swing.JPanel();
         actionPanel = new javax.swing.JPanel();
-        planeBasePanel = new javax.swing.JPanel();
-        redPanel = new javax.swing.JPanel();
         bluePanel = new javax.swing.JPanel();
+        planeBasePanel = new javax.swing.JPanel();
+        creditsPanel = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Statify PAP23L edition");
         setMinimumSize(new java.awt.Dimension(830, 440));
 
         planeRoot.setMaximumSize(new java.awt.Dimension(1980, 1080));
@@ -376,7 +409,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         timeButtonsPanel.add(weeks4Button, gridBagConstraints);
 
@@ -393,7 +426,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         timeButtonsPanel.add(months6Button, gridBagConstraints);
 
@@ -401,7 +434,6 @@ public class MainWindow extends javax.swing.JFrame {
         allTimeHistoryButton.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         allTimeHistoryButton.setForeground(new java.awt.Color(255, 255, 255));
         allTimeHistoryButton.setText("all-time");
-        allTimeHistoryButton.setBorder(null);
         allTimeHistoryButton.setMaximumSize(new java.awt.Dimension(130, 54));
         allTimeHistoryButton.setMinimumSize(new java.awt.Dimension(130, 54));
         allTimeHistoryButton.setPreferredSize(new java.awt.Dimension(130, 54));
@@ -463,6 +495,22 @@ public class MainWindow extends javax.swing.JFrame {
         actionPanel.setPreferredSize(new java.awt.Dimension(750, 420));
         actionPanel.setLayout(new java.awt.CardLayout());
 
+        bluePanel.setBackground(new java.awt.Color(29, 185, 84));
+        bluePanel.setMinimumSize(new java.awt.Dimension(620, 320));
+
+        javax.swing.GroupLayout bluePanelLayout = new javax.swing.GroupLayout(bluePanel);
+        bluePanel.setLayout(bluePanelLayout);
+        bluePanelLayout.setHorizontalGroup(
+            bluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 620, Short.MAX_VALUE)
+        );
+        bluePanelLayout.setVerticalGroup(
+            bluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 440, Short.MAX_VALUE)
+        );
+
+        actionPanel.add(bluePanel, "card1");
+
         planeBasePanel.setBackground(new java.awt.Color(29, 185, 84));
         planeBasePanel.setMinimumSize(new java.awt.Dimension(620, 320));
 
@@ -479,37 +527,22 @@ public class MainWindow extends javax.swing.JFrame {
 
         actionPanel.add(planeBasePanel, "card0");
 
-        redPanel.setBackground(new java.awt.Color(29, 185, 84));
-        redPanel.setMinimumSize(new java.awt.Dimension(620, 320));
+        creditsPanel.setBackground(new java.awt.Color(29, 185, 84));
+        creditsPanel.setMinimumSize(new java.awt.Dimension(620, 320));
+        creditsPanel.setLayout(new java.awt.GridLayout(1, 0));
 
-        javax.swing.GroupLayout redPanelLayout = new javax.swing.GroupLayout(redPanel);
-        redPanel.setLayout(redPanelLayout);
-        redPanelLayout.setHorizontalGroup(
-            redPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 620, Short.MAX_VALUE)
-        );
-        redPanelLayout.setVerticalGroup(
-            redPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
-        );
+        jScrollPane3.setBorder(null);
 
-        actionPanel.add(redPanel, "card2");
+        jTextArea2.setBackground(new java.awt.Color(29, 185, 84));
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jTextArea2.setText("\n\n\n\tStatify PAP 23L edition\n\n\tdevelopers:\n\tMilosz Kowalewski\n\tJulia Macuga\n\tFilip Szczygielski\n\tMikolaj Wewior\n\n\tversion 1.0 (stable)");
+        jTextArea2.setBorder(null);
+        jScrollPane3.setViewportView(jTextArea2);
 
-        bluePanel.setBackground(new java.awt.Color(29, 185, 84));
-        bluePanel.setMinimumSize(new java.awt.Dimension(620, 320));
+        creditsPanel.add(jScrollPane3);
 
-        javax.swing.GroupLayout bluePanelLayout = new javax.swing.GroupLayout(bluePanel);
-        bluePanel.setLayout(bluePanelLayout);
-        bluePanelLayout.setHorizontalGroup(
-            bluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 620, Short.MAX_VALUE)
-        );
-        bluePanelLayout.setVerticalGroup(
-            bluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
-        );
-
-        actionPanel.add(bluePanel, "card1");
+        actionPanel.add(creditsPanel, "card0");
 
         centrePanel.add(actionPanel, java.awt.BorderLayout.CENTER);
 
@@ -610,75 +643,15 @@ public class MainWindow extends javax.swing.JFrame {
     }// GEN-LAST:event_optionButton3ActionPerformed
 
     private void weeks4ButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_weeks4ButtonActionPerformed
-        String track_num = numTracksTextField.getText();
-        try{
-            int trNum = Integer.parseInt(track_num);
-            if(trNum <= 0){
-                javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of tracks");
-            }
-            else{
-                upperPanelDefault();
-                javax.swing.JScrollPane histo = Statify.createTopTracksPanel(trNum, "short_term");
-                //panelInit(histo);
-                System.out.print("tutaj");
-                actionPanel.add(histo);
-                histo.setVisible(true);
-                timeButtonsPanel.setVisible(true);
-            }
-        } catch(NumberFormatException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
-        } catch(NullPointerException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
-
-        }
+        trackListGrapher("short_term");
     }// GEN-LAST:event_weeks4ButtonActionPerformed
 
     private void months6ButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_months6ButtonActionPerformed
-        String track_num = numTracksTextField.getText();
-        try{
-            int trNum = Integer.parseInt(track_num);
-            if(trNum <= 0){
-                javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of tracks");
-            }
-            else{
-                upperPanelDefault();
-                javax.swing.JScrollPane histo = Statify.createTopTracksPanel(trNum, "medium_term");
-                //panelInit(histo);
-                System.out.print("tutaj");
-                actionPanel.add(histo);
-                histo.setVisible(true);
-                timeButtonsPanel.setVisible(true);
-            }
-        } catch(NumberFormatException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
-        } catch(NullPointerException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
-
-        }
+        trackListGrapher("medium_term");
     }// GEN-LAST:event_months6ButtonActionPerformed
 
     private void allTimeHistoryButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_allTimeHistoryButtonActionPerformed
-        String track_num = numTracksTextField.getText();
-        try{
-            int trNum = Integer.parseInt(track_num);
-            if(trNum <= 0){
-                javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of tracks");
-            }
-            else{
-                upperPanelDefault();
-                javax.swing.JScrollPane histo = Statify.createTopTracksPanel(trNum, "long_term");
-                //panelInit(histo);
-                System.out.print("tutaj");
-                actionPanel.add(histo);
-                histo.setVisible(true);
-                timeButtonsPanel.setVisible(true);
-            }
-        } catch(NumberFormatException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
-        } catch(NullPointerException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
-
-        }
+        trackListGrapher("long_term");
     }// GEN-LAST:event_allTimeHistoryButtonActionPerformed
 
     private void artistButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_artistButtonActionPerformed
@@ -766,9 +739,12 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel bottomSidePanel;
     private javax.swing.JPanel centrePanel;
     private javax.swing.JPanel chooseActionPanel;
+    private javax.swing.JPanel creditsPanel;
     private javax.swing.JButton generatePlaylistButton;
     private javax.swing.JButton genreButton;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JPanel logoPanel;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JButton months6Button;
@@ -782,7 +758,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel planeRoot;
     private javax.swing.JPanel planeUpperPanel;
     private javax.swing.JButton playlistAnaliseButton;
-    private javax.swing.JPanel redPanel;
     private javax.swing.JPanel sidePanel;
     private javax.swing.JPanel timeButtonsPanel;
     private javax.swing.JButton topTracksButton;
