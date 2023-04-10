@@ -29,7 +29,7 @@ import se.michaelthelin.spotify.requests.data.tracks.GetAudioFeaturesForSeveralT
 import java.io.IOException;
 
 public class User {
-    String accessToken = "BQDDrSIx56T9K5q4epymXm0laLA0WTZAldKm-xB3TRxDP8aWDHRcPY603U-Jf1pRIzKbQndFe_MqfqPxJKcXV_BeMGeoJJAT0v0CVoSObaGdMQu3CHYW6jMx8ZYyg4mNOMjPqURAh3lomocgWm2nrXrFXkQ66TNDXU-adLGUE5DFDv1wMWOuAs2Shi8YLcQluNhj0ooIPxIxbE6IbDuK6u5FgifEXCE0gE3wnMai6OmlS7rGdC1zGhy5UhVTYuAwYG83ZLYehIV90u3pqNn48lKKrelc5bwn9vZ4lNcXwxiHIhgj1rGxK4kyCg6-JP5eq_B8eNtF8_WpRIqALMxzr86SiA";
+    String accessToken = "BQARqoieJea1CkOzBNWAVMwW8qUdrT-PlzEVODfhSme66vkAwoKP7C975qi5l07uA9EYYfyP8VUFWDdzkJoeLKWRH9JYkuKucO_lRtCMFsELhcGZd1Ur-63o5UT5RLatXraOeChOWVRIhb7NWL2nvgBzSIfrMmiq79_ZMnyQWqXONaFez4Me7CRiQwzVzBj5kqReyZtKRc5aVeyh-qWIxHNrzgZo2llDwbiwIDMh0wQ1KyJ7x-FWXIGHpKp8sG8hLk1y0OHtw4QEWg4IrY3pxaUkdPSwEhoyt8yXp91wyrkZuotfRsu-sCgGkxzoubBD1_kRQIioGCN666noFOVZEQ";
     private final SpotifyApi spotifyApi;
     public static final String[] audioFeaturesNames = { "danceability", "loudness", "acousticness" };
 

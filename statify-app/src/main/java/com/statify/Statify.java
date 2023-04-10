@@ -278,7 +278,7 @@ public class Statify {
         // frame1.setBounds(10, 10, 370, 600);
         // frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // frame1.setResizable(false);
-        User user = new User("BQDYeRNDwTpM1UlGEBxGaDd6aHeypMSlbbEuIyYT_l0eHnbE3sWD3hYruH_zwmYjRiV6JrXdSCndBZVtHCot6m3TkzLy-KvFTOzOioxPbA2EtA7xY_lrP-Qjw00OSIVn-C-KuFi_cpfCK0UJTeNriMD9FSDpcF3nDRuXwkjKddyPD4d6lIQ2Mezu04knubswlI1bPQv3vWS8wb8Qrmr5NYVjwDKE4jX4jwtbC_UoQVyu1eL-PawlCK9YbRWd5MIosReBw3PiMaNDE5vENHQ3xBQpI3h-habc_Xc9UrCPFYRVYGJTrnKGTVNA4rSXLoaNg9JdBUcp");
+        User user = new User("BQARqoieJea1CkOzBNWAVMwW8qUdrT-PlzEVODfhSme66vkAwoKP7C975qi5l07uA9EYYfyP8VUFWDdzkJoeLKWRH9JYkuKucO_lRtCMFsELhcGZd1Ur-63o5UT5RLatXraOeChOWVRIhb7NWL2nvgBzSIfrMmiq79_ZMnyQWqXONaFez4Me7CRiQwzVzBj5kqReyZtKRc5aVeyh-qWIxHNrzgZo2llDwbiwIDMh0wQ1KyJ7x-FWXIGHpKp8sG8hLk1y0OHtw4QEWg4IrY3pxaUkdPSwEhoyt8yXp91wyrkZuotfRsu-sCgGkxzoubBD1_kRQIioGCN666noFOVZEQ");
         statify.setUser(user);
         String timeRange = "long_term";
         int tracksNumber = 50;
