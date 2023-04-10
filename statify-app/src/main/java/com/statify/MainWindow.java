@@ -163,6 +163,7 @@ public class MainWindow extends javax.swing.JFrame {
         artistButton.setBackground(new java.awt.Color(44, 51, 51));
         artistButton.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         artistButton.setForeground(new java.awt.Color(255, 255, 255));
+        artistButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons8-musician-male-32.png"))); // NOI18N
         artistButton.setText("artists");
         artistButton.setBorder(null);
         artistButton.setMaximumSize(new java.awt.Dimension(80, 24));
@@ -177,6 +178,7 @@ public class MainWindow extends javax.swing.JFrame {
         genreButton.setBackground(new java.awt.Color(44, 51, 51));
         genreButton.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         genreButton.setForeground(new java.awt.Color(255, 255, 255));
+        genreButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons8-music-record-32.png"))); // NOI18N
         genreButton.setText("genre");
         genreButton.setBorder(null);
         genreButton.addActionListener(new java.awt.event.ActionListener() {
@@ -188,6 +190,7 @@ public class MainWindow extends javax.swing.JFrame {
         topTracksButton.setBackground(new java.awt.Color(44, 51, 51));
         topTracksButton.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         topTracksButton.setForeground(new java.awt.Color(255, 255, 255));
+        topTracksButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons8-volume-level-32.png"))); // NOI18N
         topTracksButton.setText("top tracks");
         topTracksButton.setBorder(null);
         topTracksButton.addActionListener(new java.awt.event.ActionListener() {
@@ -199,6 +202,7 @@ public class MainWindow extends javax.swing.JFrame {
         tracksAnaliseButton.setBackground(new java.awt.Color(44, 51, 51));
         tracksAnaliseButton.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         tracksAnaliseButton.setForeground(new java.awt.Color(255, 255, 255));
+        tracksAnaliseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons8-sample-rate-32.png"))); // NOI18N
         tracksAnaliseButton.setText("analise tracks");
         tracksAnaliseButton.setBorder(null);
         tracksAnaliseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -210,6 +214,7 @@ public class MainWindow extends javax.swing.JFrame {
         playlistAnaliseButton.setBackground(new java.awt.Color(44, 51, 51));
         playlistAnaliseButton.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         playlistAnaliseButton.setForeground(new java.awt.Color(255, 255, 255));
+        playlistAnaliseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons8-audio-wave2-32.png"))); // NOI18N
         playlistAnaliseButton.setText("analise playlist");
         playlistAnaliseButton.setBorder(null);
         playlistAnaliseButton.setMaximumSize(new java.awt.Dimension(80, 24));
@@ -224,6 +229,7 @@ public class MainWindow extends javax.swing.JFrame {
         generatePlaylistButton.setBackground(new java.awt.Color(44, 51, 51));
         generatePlaylistButton.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         generatePlaylistButton.setForeground(new java.awt.Color(255, 255, 255));
+        generatePlaylistButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons8-music-library-32.png"))); // NOI18N
         generatePlaylistButton.setText("generate playlist");
         generatePlaylistButton.setBorder(null);
         generatePlaylistButton.setMaximumSize(new java.awt.Dimension(80, 24));
