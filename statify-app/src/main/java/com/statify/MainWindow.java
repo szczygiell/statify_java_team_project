@@ -32,6 +32,7 @@ public class MainWindow extends javax.swing.JFrame {
         //setting action panels off
         bluePanel.setVisible(false);
         creditsPanel.setVisible(false);
+        actionPanel.removeAll();
         // turning base (credits) action panel on
         planeBasePanel.setVisible(true);
         
@@ -51,6 +52,7 @@ public class MainWindow extends javax.swing.JFrame {
                 javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of tracks");
             }
             else{
+                actionPanel.removeAll();
                 upperPanelDefault();
                 javax.swing.JScrollPane graph = Statify.createTopTracksPanel(trNum, timeRange);
                 //panelInit(histo);
@@ -109,9 +111,9 @@ public class MainWindow extends javax.swing.JFrame {
         centrePanel = new javax.swing.JPanel();
         actionButtonsPanel = new javax.swing.JPanel();
         optionsPanel = new javax.swing.JPanel();
-        optionButton1 = new javax.swing.JButton();
-        optionButton2 = new javax.swing.JButton();
-        optionButton3 = new javax.swing.JButton();
+        laundnessButton = new javax.swing.JButton();
+        danceabilityButton = new javax.swing.JButton();
+        acousticnessButton = new javax.swing.JButton();
         numPlaylistTextField = new javax.swing.JTextField();
         timeButtonsPanel = new javax.swing.JPanel();
         weeks4Button = new javax.swing.JButton();
@@ -124,7 +126,7 @@ public class MainWindow extends javax.swing.JFrame {
         planeBasePanel = new javax.swing.JPanel();
         creditsPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        creditsTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Statify PAP23L edition");
@@ -134,7 +136,7 @@ public class MainWindow extends javax.swing.JFrame {
         planeRoot.setPreferredSize(new java.awt.Dimension(960, 540));
         planeRoot.setLayout(new java.awt.BorderLayout());
 
-        sidePanel.setBackground(new java.awt.Color(44, 51, 51));
+        sidePanel.setBackground(new java.awt.Color(25, 20, 20));
         sidePanel.setMinimumSize(new java.awt.Dimension(210, 440));
         sidePanel.setPreferredSize(new java.awt.Dimension(210, 540));
         sidePanel.setLayout(new java.awt.BorderLayout());
@@ -145,7 +147,7 @@ public class MainWindow extends javax.swing.JFrame {
         logoPanel.setLayout(new java.awt.BorderLayout());
         sidePanel.add(logoPanel, java.awt.BorderLayout.NORTH);
 
-        typeActionPanel.setBackground(new java.awt.Color(44, 51, 51));
+        typeActionPanel.setBackground(new java.awt.Color(25, 20, 20));
         typeActionPanel.setMinimumSize(new java.awt.Dimension(210, 320));
         typeActionPanel.setPreferredSize(new java.awt.Dimension(210, 220));
         typeActionPanel.setLayout(new javax.swing.BoxLayout(typeActionPanel, javax.swing.BoxLayout.PAGE_AXIS));
@@ -291,13 +293,14 @@ public class MainWindow extends javax.swing.JFrame {
 
         planeRoot.add(sidePanel, java.awt.BorderLayout.WEST);
 
-        mainPanel.setBackground(new java.awt.Color(46, 79, 79));
+        mainPanel.setBackground(new java.awt.Color(29, 185, 84));
         mainPanel.setPreferredSize(new java.awt.Dimension(750, 540));
         mainPanel.setLayout(new java.awt.BorderLayout());
 
+        centrePanel.setBackground(new java.awt.Color(29, 185, 84));
         centrePanel.setLayout(new java.awt.BorderLayout());
 
-        actionButtonsPanel.setBackground(new java.awt.Color(4, 81, 4));
+        actionButtonsPanel.setBackground(new java.awt.Color(29, 185, 84));
         actionButtonsPanel.setPreferredSize(new java.awt.Dimension(20, 120));
         actionButtonsPanel.setLayout(new java.awt.CardLayout());
 
@@ -309,57 +312,57 @@ public class MainWindow extends javax.swing.JFrame {
         optionsPanelLayout.rowHeights = new int[] {0, 10, 0};
         optionsPanel.setLayout(optionsPanelLayout);
 
-        optionButton1.setBackground(new java.awt.Color(44, 51, 51));
-        optionButton1.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
-        optionButton1.setForeground(new java.awt.Color(255, 255, 255));
-        optionButton1.setText("loudness");
-        optionButton1.setToolTipText("");
-        optionButton1.setMaximumSize(new java.awt.Dimension(130, 54));
-        optionButton1.setMinimumSize(new java.awt.Dimension(130, 54));
-        optionButton1.setPreferredSize(new java.awt.Dimension(130, 54));
-        optionButton1.addActionListener(new java.awt.event.ActionListener() {
+        laundnessButton.setBackground(new java.awt.Color(44, 51, 51));
+        laundnessButton.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        laundnessButton.setForeground(new java.awt.Color(255, 255, 255));
+        laundnessButton.setText("loudness");
+        laundnessButton.setToolTipText("");
+        laundnessButton.setMaximumSize(new java.awt.Dimension(130, 54));
+        laundnessButton.setMinimumSize(new java.awt.Dimension(130, 54));
+        laundnessButton.setPreferredSize(new java.awt.Dimension(130, 54));
+        laundnessButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                optionButton1ActionPerformed(evt);
+                laundnessButtonActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        optionsPanel.add(optionButton1, gridBagConstraints);
+        optionsPanel.add(laundnessButton, gridBagConstraints);
 
-        optionButton2.setBackground(new java.awt.Color(44, 51, 51));
-        optionButton2.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
-        optionButton2.setForeground(new java.awt.Color(255, 255, 255));
-        optionButton2.setText("danceability");
-        optionButton2.setMaximumSize(new java.awt.Dimension(130, 54));
-        optionButton2.setMinimumSize(new java.awt.Dimension(130, 54));
-        optionButton2.setPreferredSize(new java.awt.Dimension(130, 54));
-        optionButton2.addActionListener(new java.awt.event.ActionListener() {
+        danceabilityButton.setBackground(new java.awt.Color(44, 51, 51));
+        danceabilityButton.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        danceabilityButton.setForeground(new java.awt.Color(255, 255, 255));
+        danceabilityButton.setText("danceability");
+        danceabilityButton.setMaximumSize(new java.awt.Dimension(130, 54));
+        danceabilityButton.setMinimumSize(new java.awt.Dimension(130, 54));
+        danceabilityButton.setPreferredSize(new java.awt.Dimension(130, 54));
+        danceabilityButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                optionButton2ActionPerformed(evt);
+                danceabilityButtonActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
-        optionsPanel.add(optionButton2, gridBagConstraints);
+        optionsPanel.add(danceabilityButton, gridBagConstraints);
 
-        optionButton3.setBackground(new java.awt.Color(44, 51, 51));
-        optionButton3.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
-        optionButton3.setForeground(new java.awt.Color(255, 255, 255));
-        optionButton3.setText("acousticness");
-        optionButton3.setMaximumSize(new java.awt.Dimension(130, 54));
-        optionButton3.setMinimumSize(new java.awt.Dimension(130, 54));
-        optionButton3.setPreferredSize(new java.awt.Dimension(130, 54));
-        optionButton3.addActionListener(new java.awt.event.ActionListener() {
+        acousticnessButton.setBackground(new java.awt.Color(44, 51, 51));
+        acousticnessButton.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        acousticnessButton.setForeground(new java.awt.Color(255, 255, 255));
+        acousticnessButton.setText("acousticness");
+        acousticnessButton.setMaximumSize(new java.awt.Dimension(130, 54));
+        acousticnessButton.setMinimumSize(new java.awt.Dimension(130, 54));
+        acousticnessButton.setPreferredSize(new java.awt.Dimension(130, 54));
+        acousticnessButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                optionButton3ActionPerformed(evt);
+                acousticnessButtonActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
-        optionsPanel.add(optionButton3, gridBagConstraints);
+        optionsPanel.add(acousticnessButton, gridBagConstraints);
 
         numPlaylistTextField.setBackground(new java.awt.Color(44, 51, 51));
         numPlaylistTextField.setFont(new java.awt.Font("Liberation Sans", 2, 15)); // NOI18N
@@ -491,7 +494,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         centrePanel.add(actionButtonsPanel, java.awt.BorderLayout.NORTH);
 
-        actionPanel.setBackground(new java.awt.Color(46, 79, 79));
+        actionPanel.setBackground(new java.awt.Color(29, 185, 84));
         actionPanel.setPreferredSize(new java.awt.Dimension(750, 420));
         actionPanel.setLayout(new java.awt.CardLayout());
 
@@ -533,12 +536,12 @@ public class MainWindow extends javax.swing.JFrame {
 
         jScrollPane3.setBorder(null);
 
-        jTextArea2.setBackground(new java.awt.Color(29, 185, 84));
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jTextArea2.setText("\n\n\n\tStatify PAP 23L edition\n\n\tdevelopers:\n\tMilosz Kowalewski\n\tJulia Macuga\n\tFilip Szczygielski\n\tMikolaj Wewior\n\n\tversion 1.0 (stable)");
-        jTextArea2.setBorder(null);
-        jScrollPane3.setViewportView(jTextArea2);
+        creditsTextArea.setBackground(new java.awt.Color(29, 185, 84));
+        creditsTextArea.setColumns(20);
+        creditsTextArea.setRows(5);
+        creditsTextArea.setText("\n\n\n\tStatify PAP 23L edition\n\n\tdevelopers:\n\tMilosz Kowalewski\n\tJulia Macuga\n\tFilip Szczygielski\n\tMikolaj Wewior\n\n\tversion 1.0 (stable)");
+        creditsTextArea.setBorder(null);
+        jScrollPane3.setViewportView(creditsTextArea);
 
         creditsPanel.add(jScrollPane3);
 
@@ -571,7 +574,7 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_numTracksTextFieldActionPerformed
 
-    private void optionButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_optionButton1ActionPerformed
+    private void laundnessButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_optionButton1ActionPerformed
         String playlists_num = numPlaylistTextField.getText();
         try{
             int plNum = Integer.parseInt(playlists_num);
@@ -579,6 +582,7 @@ public class MainWindow extends javax.swing.JFrame {
                 javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of playlists");
             }
             else{
+                actionPanel.removeAll();
                 Statify.SetPlaylistsNum(plNum);
                 upperPanelDefault();
                 JPanel histo = Statify.getLoudnessHistogram();
@@ -594,7 +598,7 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }// GEN-LAST:event_optionButton1ActionPerformed
 
-    private void optionButton2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_optionButton2ActionPerformed
+    private void danceabilityButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_optionButton2ActionPerformed
         String playlists_num = numPlaylistTextField.getText();
         try{
             int plNum = Integer.parseInt(playlists_num);
@@ -602,6 +606,7 @@ public class MainWindow extends javax.swing.JFrame {
                 javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of playlists");
             }
             else{
+                actionPanel.removeAll();
                 Statify.SetPlaylistsNum(plNum);
                 upperPanelDefault();
                 JPanel histo = Statify.getDanceabilityHistogram();
@@ -619,7 +624,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     }// GEN-LAST:event_optionButton2ActionPerformed
 
-    private void optionButton3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_optionButton3ActionPerformed
+    private void acousticnessButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_optionButton3ActionPerformed
         String playlists_num = numPlaylistTextField.getText();
         try{
             int plNum = Integer.parseInt(playlists_num);
@@ -627,6 +632,7 @@ public class MainWindow extends javax.swing.JFrame {
                 javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of playlists");
             }
             else{
+                actionPanel.removeAll();
                 Statify.SetPlaylistsNum(plNum);
                 upperPanelDefault();
                 JPanel histo = Statify.getAcousticnessHistogram();
@@ -642,6 +648,7 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }// GEN-LAST:event_optionButton3ActionPerformed
 
+
     private void weeks4ButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_weeks4ButtonActionPerformed
         trackListGrapher("short_term");
     }// GEN-LAST:event_weeks4ButtonActionPerformed
@@ -654,16 +661,16 @@ public class MainWindow extends javax.swing.JFrame {
         trackListGrapher("long_term");
     }// GEN-LAST:event_allTimeHistoryButtonActionPerformed
 
+
+
     private void artistButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_artistButtonActionPerformed
         panelsSetDefault();
         timeButtonsPanel.setVisible(true);
-        //bluePanel.setVisible(true);
     }// GEN-LAST:event_artistButtonActionPerformed
 
     private void genreButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_genreButtonActionPerformed
         panelsSetDefault();
         timeButtonsPanel.setVisible(true);
-        //redPanel.setVisible(true);
     }// GEN-LAST:event_genreButtonActionPerformed
 
     private void topTracksButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_topTracksButtonActionPerformed
@@ -674,7 +681,6 @@ public class MainWindow extends javax.swing.JFrame {
     private void tracksAnaliseButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_tracksAnaliseButtonActionPerformed
         panelsSetDefault();
         optionsPanel.setVisible(true);
-        //bluePanel.setVisible(true);
     }// GEN-LAST:event_tracksAnaliseButtonActionPerformed
 
     private void playlistAnaliseButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_playlistAnaliseButtonActionPerformed
@@ -686,6 +692,7 @@ public class MainWindow extends javax.swing.JFrame {
         panelsSetDefault();
         optionsPanel.setVisible(true);
     }// GEN-LAST:event_generatePlaylistButtonActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -731,6 +738,7 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton acousticnessButton;
     private javax.swing.JPanel actionButtonsPanel;
     private javax.swing.JPanel actionPanel;
     private javax.swing.JButton allTimeHistoryButton;
@@ -740,19 +748,18 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel centrePanel;
     private javax.swing.JPanel chooseActionPanel;
     private javax.swing.JPanel creditsPanel;
+    private javax.swing.JTextArea creditsTextArea;
+    private javax.swing.JButton danceabilityButton;
     private javax.swing.JButton generatePlaylistButton;
     private javax.swing.JButton genreButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JButton laundnessButton;
     private javax.swing.JPanel logoPanel;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JButton months6Button;
     private javax.swing.JTextField numPlaylistTextField;
     private javax.swing.JTextField numTracksTextField;
-    private javax.swing.JButton optionButton1;
-    private javax.swing.JButton optionButton2;
-    private javax.swing.JButton optionButton3;
     private javax.swing.JPanel optionsPanel;
     private javax.swing.JPanel planeBasePanel;
     private javax.swing.JPanel planeRoot;
