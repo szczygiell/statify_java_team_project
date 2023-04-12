@@ -28,14 +28,13 @@ public class MainWindow extends javax.swing.JFrame {
         // turning base upper panel on
         planeUpperPanel.setVisible(true);
 
-
-        //setting action panels off
+        // setting action panels off
         bluePanel.setVisible(false);
         creditsPanel.setVisible(false);
         actionPanel.removeAll();
         // turning base (credits) action panel on
         planeBasePanel.setVisible(true);
-        
+
     }
 
     public final void upperPanelDefault() {
@@ -44,26 +43,25 @@ public class MainWindow extends javax.swing.JFrame {
         planeUpperPanel.setVisible(true);
     }
 
-    public void trackListGrapher(String timeRange){
+    public void trackListGrapher(String timeRange) {
         String track_num = numTracksTextField.getText();
-        try{
+        try {
             int trNum = Integer.parseInt(track_num);
-            if(trNum <= 0){
+            if (trNum <= 0) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of tracks");
-            }
-            else{
+            } else {
                 actionPanel.removeAll();
                 upperPanelDefault();
                 javax.swing.JScrollPane graph = Statify.createTopTracksPanel(trNum, timeRange);
-                //panelInit(histo);
+                // panelInit(histo);
                 // System.out.print("tutaj");
                 actionPanel.add(graph);
                 graph.setVisible(true);
                 timeButtonsPanel.setVisible(true);
             }
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
-        } catch(NullPointerException e) {
+        } catch (NullPointerException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
 
         }
@@ -90,7 +88,8 @@ public class MainWindow extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
@@ -202,7 +201,8 @@ public class MainWindow extends javax.swing.JFrame {
         tracksAnaliseButton.setBackground(new java.awt.Color(44, 51, 51));
         tracksAnaliseButton.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         tracksAnaliseButton.setForeground(new java.awt.Color(255, 255, 255));
-        tracksAnaliseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons8-sample-rate-32.png"))); // NOI18N
+        tracksAnaliseButton
+                .setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons8-sample-rate-32.png"))); // NOI18N
         tracksAnaliseButton.setText("analise tracks");
         tracksAnaliseButton.setBorder(null);
         tracksAnaliseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -214,7 +214,8 @@ public class MainWindow extends javax.swing.JFrame {
         playlistAnaliseButton.setBackground(new java.awt.Color(44, 51, 51));
         playlistAnaliseButton.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         playlistAnaliseButton.setForeground(new java.awt.Color(255, 255, 255));
-        playlistAnaliseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons8-audio-wave2-32.png"))); // NOI18N
+        playlistAnaliseButton
+                .setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons8-audio-wave2-32.png"))); // NOI18N
         playlistAnaliseButton.setText("analise playlist");
         playlistAnaliseButton.setBorder(null);
         playlistAnaliseButton.setMaximumSize(new java.awt.Dimension(80, 24));
@@ -229,7 +230,8 @@ public class MainWindow extends javax.swing.JFrame {
         generatePlaylistButton.setBackground(new java.awt.Color(44, 51, 51));
         generatePlaylistButton.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         generatePlaylistButton.setForeground(new java.awt.Color(255, 255, 255));
-        generatePlaylistButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons8-music-library-32.png"))); // NOI18N
+        generatePlaylistButton
+                .setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons8-music-library-32.png"))); // NOI18N
         generatePlaylistButton.setText("generate playlist");
         generatePlaylistButton.setBorder(null);
         generatePlaylistButton.setMaximumSize(new java.awt.Dimension(80, 24));
@@ -244,35 +246,50 @@ public class MainWindow extends javax.swing.JFrame {
         javax.swing.GroupLayout chooseActionPanelLayout = new javax.swing.GroupLayout(chooseActionPanel);
         chooseActionPanel.setLayout(chooseActionPanelLayout);
         chooseActionPanelLayout.setHorizontalGroup(
-            chooseActionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(chooseActionPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(chooseActionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(playlistAnaliseButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tracksAnaliseButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                    .addComponent(topTracksButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(genreButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(artistButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(generatePlaylistButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(14, 14, 14))
-        );
+                chooseActionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(chooseActionPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(chooseActionPanelLayout
+                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(playlistAnaliseButton, javax.swing.GroupLayout.Alignment.LEADING,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(tracksAnaliseButton, javax.swing.GroupLayout.Alignment.LEADING,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                                        .addComponent(topTracksButton, javax.swing.GroupLayout.Alignment.LEADING,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(genreButton, javax.swing.GroupLayout.Alignment.LEADING,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(artistButton, javax.swing.GroupLayout.Alignment.LEADING,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(generatePlaylistButton, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(14, 14, 14)));
         chooseActionPanelLayout.setVerticalGroup(
-            chooseActionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(chooseActionPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(artistButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(genreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(topTracksButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tracksAnaliseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(playlistAnaliseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(generatePlaylistButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+                chooseActionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(chooseActionPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(artistButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(genreButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(topTracksButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tracksAnaliseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(playlistAnaliseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(generatePlaylistButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         jScrollPane1.setViewportView(chooseActionPanel);
 
@@ -285,13 +302,11 @@ public class MainWindow extends javax.swing.JFrame {
         javax.swing.GroupLayout bottomSidePanelLayout = new javax.swing.GroupLayout(bottomSidePanel);
         bottomSidePanel.setLayout(bottomSidePanelLayout);
         bottomSidePanelLayout.setHorizontalGroup(
-            bottomSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 210, Short.MAX_VALUE)
-        );
+                bottomSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 210, Short.MAX_VALUE));
         bottomSidePanelLayout.setVerticalGroup(
-            bottomSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
+                bottomSidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 100, Short.MAX_VALUE));
 
         typeActionPanel.add(bottomSidePanel);
 
@@ -314,8 +329,8 @@ public class MainWindow extends javax.swing.JFrame {
         optionsPanel.setMinimumSize(new java.awt.Dimension(620, 120));
         optionsPanel.setPreferredSize(new java.awt.Dimension(20, 120));
         java.awt.GridBagLayout optionsPanelLayout = new java.awt.GridBagLayout();
-        optionsPanelLayout.columnWidths = new int[] {0, 40, 0, 40, 0};
-        optionsPanelLayout.rowHeights = new int[] {0, 10, 0};
+        optionsPanelLayout.columnWidths = new int[] { 0, 40, 0, 40, 0 };
+        optionsPanelLayout.rowHeights = new int[] { 0, 10, 0 };
         optionsPanel.setLayout(optionsPanelLayout);
 
         laundnessButton.setBackground(new java.awt.Color(44, 51, 51));
@@ -401,8 +416,8 @@ public class MainWindow extends javax.swing.JFrame {
         timeButtonsPanel.setMinimumSize(new java.awt.Dimension(620, 120));
         timeButtonsPanel.setPreferredSize(new java.awt.Dimension(620, 120));
         java.awt.GridBagLayout timeButtonsPanelLayout = new java.awt.GridBagLayout();
-        timeButtonsPanelLayout.columnWidths = new int[] {0, 40, 0, 40, 0};
-        timeButtonsPanelLayout.rowHeights = new int[] {0, 10, 0};
+        timeButtonsPanelLayout.columnWidths = new int[] { 0, 40, 0, 40, 0 };
+        timeButtonsPanelLayout.rowHeights = new int[] { 0, 10, 0 };
         timeButtonsPanel.setLayout(timeButtonsPanelLayout);
 
         weeks4Button.setBackground(new java.awt.Color(44, 51, 51));
@@ -488,13 +503,11 @@ public class MainWindow extends javax.swing.JFrame {
         javax.swing.GroupLayout planeUpperPanelLayout = new javax.swing.GroupLayout(planeUpperPanel);
         planeUpperPanel.setLayout(planeUpperPanelLayout);
         planeUpperPanelLayout.setHorizontalGroup(
-            planeUpperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 620, Short.MAX_VALUE)
-        );
+                planeUpperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 620, Short.MAX_VALUE));
         planeUpperPanelLayout.setVerticalGroup(
-            planeUpperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 120, Short.MAX_VALUE)
-        );
+                planeUpperPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 120, Short.MAX_VALUE));
 
         actionButtonsPanel.add(planeUpperPanel, "card3");
 
@@ -510,13 +523,11 @@ public class MainWindow extends javax.swing.JFrame {
         javax.swing.GroupLayout bluePanelLayout = new javax.swing.GroupLayout(bluePanel);
         bluePanel.setLayout(bluePanelLayout);
         bluePanelLayout.setHorizontalGroup(
-            bluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 620, Short.MAX_VALUE)
-        );
+                bluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 620, Short.MAX_VALUE));
         bluePanelLayout.setVerticalGroup(
-            bluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
-        );
+                bluePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 440, Short.MAX_VALUE));
 
         actionPanel.add(bluePanel, "card1");
 
@@ -526,13 +537,11 @@ public class MainWindow extends javax.swing.JFrame {
         javax.swing.GroupLayout planeBasePanelLayout = new javax.swing.GroupLayout(planeBasePanel);
         planeBasePanel.setLayout(planeBasePanelLayout);
         planeBasePanelLayout.setHorizontalGroup(
-            planeBasePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 620, Short.MAX_VALUE)
-        );
+                planeBasePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 620, Short.MAX_VALUE));
         planeBasePanelLayout.setVerticalGroup(
-            planeBasePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
-        );
+                planeBasePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 440, Short.MAX_VALUE));
 
         actionPanel.add(planeBasePanel, "card0");
 
@@ -545,7 +554,8 @@ public class MainWindow extends javax.swing.JFrame {
         creditsTextArea.setBackground(new java.awt.Color(29, 185, 84));
         creditsTextArea.setColumns(20);
         creditsTextArea.setRows(5);
-        creditsTextArea.setText("\n\n\n\tStatify PAP 23L edition\n\n\tdevelopers:\n\tMilosz Kowalewski\n\tJulia Macuga\n\tFilip Szczygielski\n\tMikolaj Wewior\n\n\tversion 1.0 (stable)");
+        creditsTextArea.setText(
+                "\n\n\n\tStatify PAP 23L edition\n\n\tdevelopers:\n\tMilosz Kowalewski\n\tJulia Macuga\n\tFilip Szczygielski\n\tMikolaj Wewior\n\n\tversion 1.0 (stable)");
         creditsTextArea.setBorder(null);
         jScrollPane3.setViewportView(creditsTextArea);
 
@@ -564,30 +574,29 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void numPlaylistTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numPlaylistTextFieldActionPerformed
+    private void numPlaylistTextFieldActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_numPlaylistTextFieldActionPerformed
 
-    }//GEN-LAST:event_numPlaylistTextFieldActionPerformed
+    }// GEN-LAST:event_numPlaylistTextFieldActionPerformed
 
-    private void numPlaylistTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_numPlaylistTextFieldFocusGained
+    private void numPlaylistTextFieldFocusGained(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_numPlaylistTextFieldFocusGained
         numPlaylistTextField.setText("");
-    }//GEN-LAST:event_numPlaylistTextFieldFocusGained
+    }// GEN-LAST:event_numPlaylistTextFieldFocusGained
 
-    private void numTracksTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_numTracksTextFieldFocusGained
+    private void numTracksTextFieldFocusGained(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_numTracksTextFieldFocusGained
         numTracksTextField.setText("");
-    }//GEN-LAST:event_numTracksTextFieldFocusGained
+    }// GEN-LAST:event_numTracksTextFieldFocusGained
 
-    private void numTracksTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numTracksTextFieldActionPerformed
+    private void numTracksTextFieldActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_numTracksTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_numTracksTextFieldActionPerformed
+    }// GEN-LAST:event_numTracksTextFieldActionPerformed
 
     private void laundnessButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_optionButton1ActionPerformed
         String playlists_num = numPlaylistTextField.getText();
-        try{
+        try {
             int plNum = Integer.parseInt(playlists_num);
-            if(plNum <= 0){
+            if (plNum <= 0) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of playlists");
-            }
-            else{
+            } else {
                 actionPanel.removeAll();
                 Statify.SetPlaylistsNum(plNum);
                 upperPanelDefault();
@@ -596,9 +605,9 @@ public class MainWindow extends javax.swing.JFrame {
                 histo.setVisible(true);
                 optionsPanel.setVisible(true);
             }
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
-        } catch(NullPointerException e) {
+        } catch (NullPointerException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
 
         }
@@ -606,12 +615,11 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void danceabilityButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_optionButton2ActionPerformed
         String playlists_num = numPlaylistTextField.getText();
-        try{
+        try {
             int plNum = Integer.parseInt(playlists_num);
-            if(plNum <= 0){
+            if (plNum <= 0) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of playlists");
-            }
-            else{
+            } else {
                 actionPanel.removeAll();
                 Statify.SetPlaylistsNum(plNum);
                 upperPanelDefault();
@@ -620,9 +628,9 @@ public class MainWindow extends javax.swing.JFrame {
                 histo.setVisible(true);
                 optionsPanel.setVisible(true);
             }
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
-        } catch(NullPointerException e) {
+        } catch (NullPointerException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
 
         }
@@ -632,12 +640,11 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void acousticnessButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_optionButton3ActionPerformed
         String playlists_num = numPlaylistTextField.getText();
-        try{
+        try {
             int plNum = Integer.parseInt(playlists_num);
-            if(plNum <= 0){
+            if (plNum <= 0) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of playlists");
-            }
-            else{
+            } else {
                 actionPanel.removeAll();
                 Statify.SetPlaylistsNum(plNum);
                 upperPanelDefault();
@@ -646,14 +653,13 @@ public class MainWindow extends javax.swing.JFrame {
                 histo.setVisible(true);
                 optionsPanel.setVisible(true);
             }
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
-        } catch(NullPointerException e) {
+        } catch (NullPointerException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
 
         }
     }// GEN-LAST:event_optionButton3ActionPerformed
-
 
     private void weeks4ButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_weeks4ButtonActionPerformed
         trackListGrapher("short_term");
@@ -666,8 +672,6 @@ public class MainWindow extends javax.swing.JFrame {
     private void allTimeHistoryButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_allTimeHistoryButtonActionPerformed
         trackListGrapher("long_term");
     }// GEN-LAST:event_allTimeHistoryButtonActionPerformed
-
-
 
     private void artistButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_artistButtonActionPerformed
         panelsSetDefault();
@@ -698,7 +702,6 @@ public class MainWindow extends javax.swing.JFrame {
         panelsSetDefault();
         optionsPanel.setVisible(true);
     }// GEN-LAST:event_generatePlaylistButtonActionPerformed
-
 
     /**
      * @param args the command line arguments
