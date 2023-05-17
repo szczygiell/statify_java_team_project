@@ -5,6 +5,7 @@
 package com.statify;
 
 import javax.swing.JPanel;
+import java.awt.Font;
 
 /**
  *
@@ -15,11 +16,19 @@ public class MainWindow extends javax.swing.JFrame {
     /**
      * Creates new form MainWindow
      */
+
+    
     public MainWindow() {
-        initComponents();
+        int heightInit = 1080; //this.getHeight();
+        int widthInit = 1920; //this.getWidth();
+        // to trzeba jakoś naprawić, ogarnąć
+
+        initComponents(widthInit, heightInit);
         panelsSetDefault();
+        this.setBounds(100, 100, 960, 540);
+        setTransparent();
         creditsPanel.setVisible(true);
-        this.setBounds(100, 100, 960, 540);;
+        setMinimumSize(new java.awt.Dimension(960, 540));
     }
 
     public final void panelsSetDefault() {
@@ -28,14 +37,32 @@ public class MainWindow extends javax.swing.JFrame {
         optionsPanel.setVisible(false);
         // turning base upper panel on
         planeUpperPanel.setVisible(true);
-
         // setting action panels off
-        // bluePanel.setVisible(false);
         creditsPanel.setVisible(false);
-        actionPanel.removeAll();
+        creditsLabel.setVisible(false);
         // turning base (credits) action panel on
         planeBasePanel.setVisible(true);
+    }
 
+    public void setTransparent(){
+        centrePanel.revalidate();
+        centrePanel.repaint();
+        actionButtonsPanel.setOpaque(false);
+        optionsPanel.setOpaque(false);
+        timeButtonsPanel.setOpaque(false);
+        planeUpperPanel.setOpaque(false);
+        actionPanel.setOpaque(false);
+        creditsPanel.setOpaque(false);
+        planeBasePanel.setOpaque(false);
+        centrePanel.setVisible(true);
+    }
+
+    public void addNewPanel(JPanel newPanel){
+        actionPanel.removeAll();
+        actionPanel.add(newPanel);
+        actionPanel.revalidate();
+        actionPanel.repaint();
+        newPanel.setVisible(true);
     }
 
     public final void upperPanelDefault() {
@@ -91,9 +118,8 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents(int widthF, int heightF) {
         java.awt.GridBagConstraints gridBagConstraints;
-
         planeRoot = new javax.swing.JPanel();
         sidePanel = new javax.swing.JPanel();
         logoPanel = new javax.swing.JPanel();
@@ -109,7 +135,7 @@ public class MainWindow extends javax.swing.JFrame {
         bottomSidePanel = new javax.swing.JPanel();
         homeButton = new javax.swing.JButton();
         mainPanel = new javax.swing.JPanel();
-        centrePanel = new javax.swing.JPanel();
+        centrePanel = new GradientPanel(widthF, heightF);
         actionButtonsPanel = new javax.swing.JPanel();
         optionsPanel = new javax.swing.JPanel();
         laundnessButton = new javax.swing.JButton();
@@ -124,8 +150,7 @@ public class MainWindow extends javax.swing.JFrame {
         planeUpperPanel = new javax.swing.JPanel();
         actionPanel = new javax.swing.JPanel();
         creditsPanel = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        creditsTextArea = new javax.swing.JTextArea();
+        creditsLabel = new javax.swing.JLabel();
         planeBasePanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -301,24 +326,20 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         bottomSidePanel.add(homeButton);
-        homeButton.setBounds(7, 20, 180, 60);
+        homeButton.setBounds(12, 20, 180, 60);
 
         sidePanel.add(bottomSidePanel, java.awt.BorderLayout.PAGE_END);
 
         planeRoot.add(sidePanel, java.awt.BorderLayout.WEST);
 
-        mainPanel.setBackground(new java.awt.Color(29, 185, 84));
         mainPanel.setPreferredSize(new java.awt.Dimension(750, 540));
         mainPanel.setLayout(new java.awt.BorderLayout());
 
-        centrePanel.setBackground(new java.awt.Color(29, 185, 84));
         centrePanel.setLayout(new java.awt.BorderLayout());
-
-        actionButtonsPanel.setBackground(new java.awt.Color(29, 185, 84));
+        centrePanel.setVisible(true);
         actionButtonsPanel.setPreferredSize(new java.awt.Dimension(20, 120));
         actionButtonsPanel.setLayout(new java.awt.CardLayout());
 
-        optionsPanel.setBackground(new java.awt.Color(29, 185, 84));
         optionsPanel.setMinimumSize(new java.awt.Dimension(620, 120));
         optionsPanel.setPreferredSize(new java.awt.Dimension(20, 120));
         java.awt.GridBagLayout optionsPanelLayout = new java.awt.GridBagLayout();
@@ -331,6 +352,7 @@ public class MainWindow extends javax.swing.JFrame {
         laundnessButton.setForeground(new java.awt.Color(255, 255, 255));
         laundnessButton.setText("loudness");
         laundnessButton.setToolTipText("");
+        laundnessButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         laundnessButton.setMaximumSize(new java.awt.Dimension(130, 54));
         laundnessButton.setMinimumSize(new java.awt.Dimension(130, 54));
         laundnessButton.setPreferredSize(new java.awt.Dimension(130, 54));
@@ -405,7 +427,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         actionButtonsPanel.add(optionsPanel, "card2");
 
-        timeButtonsPanel.setBackground(new java.awt.Color(29, 185, 84));
         timeButtonsPanel.setMinimumSize(new java.awt.Dimension(620, 120));
         timeButtonsPanel.setPreferredSize(new java.awt.Dimension(620, 120));
         java.awt.GridBagLayout timeButtonsPanelLayout = new java.awt.GridBagLayout();
@@ -490,7 +511,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         actionButtonsPanel.add(timeButtonsPanel, "card2");
 
-        planeUpperPanel.setBackground(new java.awt.Color(29, 185, 84));
         planeUpperPanel.setMinimumSize(new java.awt.Dimension(620, 120));
 
         javax.swing.GroupLayout planeUpperPanelLayout = new javax.swing.GroupLayout(planeUpperPanel);
@@ -505,31 +525,36 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         actionButtonsPanel.add(planeUpperPanel, "card3");
+        actionButtonsPanel.setVisible(true);
 
         centrePanel.add(actionButtonsPanel, java.awt.BorderLayout.NORTH);
 
-        actionPanel.setBackground(new java.awt.Color(29, 185, 84));
         actionPanel.setPreferredSize(new java.awt.Dimension(750, 420));
         actionPanel.setLayout(new java.awt.CardLayout());
 
-        creditsPanel.setBackground(new java.awt.Color(29, 185, 84));
         creditsPanel.setMinimumSize(new java.awt.Dimension(620, 320));
         creditsPanel.setLayout(new java.awt.GridLayout(1, 0));
 
-        jScrollPane3.setBorder(null);
-
-        creditsTextArea.setBackground(new java.awt.Color(29, 185, 84));
-        creditsTextArea.setColumns(20);
-        creditsTextArea.setRows(5);
-        creditsTextArea.setText("\n\n\n\tStatify PAP 23L edition\n\n\tdevelopers:\n\tMilosz Kowalewski\n\tJulia Macuga\n\tFilip Szczygielski\n\tMikolaj Wewior\n\n\tversion 1.2 (pretty stable)");
-        creditsTextArea.setBorder(null);
-        jScrollPane3.setViewportView(creditsTextArea);
-
-        creditsPanel.add(jScrollPane3);
+        creditsLabel.setText(
+            "<html><font color='white'><p>&emsp; &emsp; Statify PAP 23L</p>\n" +
+            "<p><br></p>\n" +
+            "<p>&emsp; &emsp; developers:</p>\n" +
+            "<p>&emsp; &emsp; &ensp; Milosz Kowalewski</p>\n" +
+            "<p>&emsp; &emsp; &ensp; Julia Macuga</p>\n" +
+            "<p>&emsp; &emsp; &ensp; Filip Szczygielski</p>\n" +
+            "<p>&emsp; &emsp; &ensp; Mikolaj Wewior</p>\n" +
+            "<p><br></p>\n" +
+            "<p>&emsp; &emsp; version 1.2 (pretty stable)</p></font></html>"
+        );
+        
+        creditsLabel.setFont(new Font("Verdana", Font.PLAIN, 18));
+        creditsLabel.setOpaque(false);
+        creditsPanel.add(creditsLabel, java.awt.BorderLayout.CENTER);
+        
+        creditsPanel.add(creditsLabel);
 
         actionPanel.add(creditsPanel, "card0");
 
-        planeBasePanel.setBackground(new java.awt.Color(29, 185, 84));
         planeBasePanel.setMinimumSize(new java.awt.Dimension(620, 320));
 
         javax.swing.GroupLayout planeBasePanelLayout = new javax.swing.GroupLayout(planeBasePanel);
@@ -558,10 +583,8 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void homeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeButtonActionPerformed
         panelsSetDefault();
-        actionPanel.removeAll();
-        actionPanel.add(creditsPanel);
-        actionPanel.revalidate();
-        actionPanel.repaint();
+        addNewPanel(creditsPanel);
+        creditsLabel.setVisible(true);
     }//GEN-LAST:event_homeButtonActionPerformed
 
     private void numPlaylistTextFieldActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_numPlaylistTextFieldActionPerformed
@@ -592,7 +615,7 @@ public class MainWindow extends javax.swing.JFrame {
                 upperPanelDefault();
                 JPanel histo = Statify.getLoudnessHistogram();
                 panelInit(histo);
-                histo.setVisible(true);
+                addNewPanel(histo);
                 optionsPanel.setVisible(true);
             }
         } catch (NumberFormatException e) {
@@ -647,7 +670,6 @@ public class MainWindow extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
         } catch (NullPointerException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
-
         }
     }// GEN-LAST:event_optionButton3ActionPerformed
 
@@ -732,7 +754,9 @@ public class MainWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainWindow().setVisible(true);
+                MainWindow mainFrame = new MainWindow();
+                mainFrame.setVisible(true);
+                System.out.println(mainFrame.getHeight() + "   " + mainFrame.getWidth());
             }
         });
     }
@@ -747,13 +771,12 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel centrePanel;
     private javax.swing.JPanel chooseActionPanel;
     private javax.swing.JPanel creditsPanel;
-    private javax.swing.JTextArea creditsTextArea;
+    private javax.swing.JLabel creditsLabel;
     private javax.swing.JButton danceabilityButton;
     private javax.swing.JButton generatePlaylistButton;
     private javax.swing.JButton genreButton;
     private javax.swing.JButton homeButton;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton laundnessButton;
     private javax.swing.JPanel logoPanel;
     private javax.swing.JPanel mainPanel;

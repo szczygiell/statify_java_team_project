@@ -6,29 +6,37 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// import javax.swing.UIManager;
+// import javax.swing.UIManager.LookAndFeelInfo;
+// import javax.swing.UnsupportedLookAndFeelException;
+
 public class LoginWindow extends JFrame implements ActionListener {
 
     // Container container = getContentPane();
     JLabel passwordLabel = new JLabel("ACCESS TOKEN");
     JPasswordField passwordField = new JPasswordField();
     JButton loginButton = new JButton("LOGIN");
+
     JButton resetButton = new JButton("RESET");
     JCheckBox showPassword = new JCheckBox("Show token");
-    JPanel backPanel = new GradientPanel();
     private String accessToken;
-    public static int hight = 600;
+    public static int height = 660;
     public static int width = 370;
     public static int bound = 100;
+    JPanel backPanel = new GradientPanel(width, height);
 
     LoginWindow() {
         setLayoutManager();
         setLocationAndSize();
         addComponentsToContainer();
         addActionEvent();
+        // System.out.println(this.getLocationOnScreen());
     }
     
     public int getHeight(){
-        return hight;
+        // System.out.println(this.getLocation());
+        // this.getLocation();
+        return height;
     }
     
     public int getWidth(){
@@ -99,14 +107,16 @@ public class LoginWindow extends JFrame implements ActionListener {
         if (e.getSource() == loginButton) {
             String pwdText;
             pwdText = passwordField.getText();
+            // pwdText = passwordField.getPassword();
             TokenTest token_test = new TokenTest(pwdText);
             if (token_test.TokenTestFun()) {
                 JOptionPane.showMessageDialog(this, "Login Successful");
                 Statify.setUser(new User(pwdText));
-                MainWindow main_window = new MainWindow();
-                main_window.setVisible(true);
+                // MainWindow main_window = new MainWindow();
+                // main_window.setVisible(true);
                 this.setVisible(false);
                 this.remove(this);
+                new MainWindow().setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid Acces Token");
             }
@@ -115,6 +125,7 @@ public class LoginWindow extends JFrame implements ActionListener {
         // Coding Part of RESET button
         if (e.getSource() == resetButton) {
             passwordField.setText("");
+            // System.out.println(this.getLocationOnScreen());
         }
         // Coding Part of showPassword JCheckBox
         if (e.getSource() == showPassword) {
