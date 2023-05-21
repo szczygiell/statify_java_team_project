@@ -61,9 +61,23 @@ public final class App {
 
     }
 
+    public static void runApp() {
+        String accessToken = Authorization.getAccessToken();
+
+        TokenTest token_test = new TokenTest(accessToken);
+        if (token_test.TokenTestFun()) {
+            Statify.setUser(new User(accessToken));
+            MainWindow main_window = new MainWindow();
+            main_window.setVisible(true);
+        } else {
+            System.out.println("Invalid access token :(((");
+        }
+    }
+
     public static void main(String[] args) {
 
-        login_window();
+        // login_window();
+        runApp();
 
     }
 }

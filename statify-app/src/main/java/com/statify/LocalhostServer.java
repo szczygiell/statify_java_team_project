@@ -14,18 +14,14 @@ public class LocalhostServer {
     public void startServer() {
         int port = 8080; // Specify the desired port number
         try (ServerSocket serverSocket = new ServerSocket(port)) {
-
-            System.out.println("Server started on port " + port);
-
             while (queryString == null) {
                 clientSocket = serverSocket.accept();
-                System.out.println("Client connected: " + clientSocket.getInetAddress().getHostAddress());
+
                 readCallbackQuery();
 
                 clientSocket.close();
             }
             serverSocket.close();
-            System.out.println("server closed");
         } catch (IOException e) {
             e.printStackTrace();
         }
