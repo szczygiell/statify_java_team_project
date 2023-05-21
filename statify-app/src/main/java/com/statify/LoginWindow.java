@@ -32,21 +32,21 @@ public class LoginWindow extends JFrame implements ActionListener {
         addActionEvent();
         // System.out.println(this.getLocationOnScreen());
     }
-    
+
     public int getHeight(){
         // System.out.println(this.getLocation());
         // this.getLocation();
         return height;
     }
-    
+
     public int getWidth(){
         return width;
     }
-    
+
     public int getBound(){
         return bound;
     }
-    
+
 
     public void setLayoutManager() {
         // container.setLayout(null);
@@ -60,7 +60,7 @@ public class LoginWindow extends JFrame implements ActionListener {
     private void setAccessToken(String token) {
         accessToken = token;
     }
- 
+
     public void setLocationAndSize() {
         // container.setBackground(new java.awt.Color(29,185,84));
         passwordLabel.setBounds(40, 220, 150, 30);

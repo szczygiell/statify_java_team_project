@@ -17,7 +17,7 @@ public class MainWindow extends javax.swing.JFrame {
      * Creates new form MainWindow
      */
 
-    
+
     public MainWindow() {
         int heightInit = 1080; //this.getHeight();
         int widthInit = 1920; //this.getWidth();
@@ -546,11 +546,11 @@ public class MainWindow extends javax.swing.JFrame {
             "<p><br></p>\n" +
             "<p>&emsp; &emsp; version 1.2 (pretty stable)</p></font></html>"
         );
-        
+
         creditsLabel.setFont(new Font("Verdana", Font.PLAIN, 18));
         creditsLabel.setOpaque(false);
         creditsPanel.add(creditsLabel, java.awt.BorderLayout.CENTER);
-        
+
         creditsPanel.add(creditsLabel);
 
         actionPanel.add(creditsPanel, "card0");

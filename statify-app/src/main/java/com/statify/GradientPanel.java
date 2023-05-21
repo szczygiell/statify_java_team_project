@@ -26,27 +26,27 @@ public class GradientPanel extends JPanel{
         this.height = height;
 
     }
-    
+
     @Override
     protected void paintComponent(Graphics g) {
 //        public void paintComponents(Graphics g) {
         super.paintComponent(g);
-        
+
         Graphics2D graph2d = (Graphics2D) g;
         graph2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        
+
         GradientPaint gradientPaint;
-        
+
         // #horizontal
         // gradientPaint = new GradientPaint(0, 330, color1, 370, 330, color2);
-        
+
         // #digonal
         // gradientPaint = new GradientPaint(0, 660, color1, 370, 0, color2);
         gradientPaint = new GradientPaint(0, this.height, color1, this.width, 0, color2);
 
         graph2d.setPaint(gradientPaint);
         graph2d.fillRect(0, 0, this.width, this.height);
-        
+
     }
 }
 

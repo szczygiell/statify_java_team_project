@@ -12,7 +12,7 @@ public final class App {
 
     /**
      * Says hello to the world.
-     * 
+     *
      * @param args The arguments of the program.
      */
 
