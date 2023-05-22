@@ -75,8 +75,8 @@ public final class App {
     }
 
     public static void main(String[] args) {
-        login_window();
-        // runApp();
+        // login_window();
+        runApp();
 
     }
 }

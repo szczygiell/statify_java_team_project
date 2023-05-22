@@ -166,7 +166,6 @@ public class Statify {
         List<Float> data = new ArrayList<>();
         Dictionary<String, List<Float>> audioFeatures = Statify.currentUser
                 .getAllTracksAudioFeatures(tracksIds.toArray(new String[0]));
-        // System.out.println(audioFeatures);
         try {
             data.addAll(audioFeatures.get(feature.keyName()));
         } catch (NullPointerException e) {
