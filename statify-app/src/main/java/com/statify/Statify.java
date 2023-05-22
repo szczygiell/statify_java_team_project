@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Dictionary;
+import java.util.HashMap;
 import java.lang.Math;
 
 import javax.swing.JPanel;
@@ -19,11 +20,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
 import javax.swing.JFrame;
-
+import javax.swing.JList;
 import java.util.Dictionary;
 import java.util.Hashtable;
-
+import javax.swing.ListSelectionModel;
 import com.statify.User;
+import java.awt.Dimension;
 
 public class Statify {
 
@@ -209,6 +211,23 @@ public class Statify {
 
     public static JPanel getDanceabilityHistogram() {
         return getAudioFeatureHistogram(FeatureName.DANCEABILITY);
+    }
+
+    public static JScrollPane getPlaylistsSelectableList() {
+        HashMap<String, String> playlistsDictionary = currentUser.getPlaylistsHashMap();
+        Object[] names = playlistsDictionary.keySet().toArray();
+
+        JList<String> playlistsNamesList = new JList(names);
+
+        playlistsNamesList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        playlistsNamesList.setLayoutOrientation(JList.VERTICAL);
+        playlistsNamesList.setCellRenderer(new CheckboxListCellRenderer());
+
+        JScrollPane listScroller = new JScrollPane(playlistsNamesList);
+        listScroller.setPreferredSize(new Dimension(250, 80));
+
+        JScrollPane scrollPane = new JScrollPane(playlistsNamesList);
+        return scrollPane;
     }
 
     public static void main(String[] args) {

@@ -4,17 +4,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.lang.Math;
+import java.io.IOException;
+import org.apache.hc.core5.http.ParseException;
 
 import se.michaelthelin.spotify.SpotifyApi;
 import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
 import se.michaelthelin.spotify.model_objects.specification.Paging;
-
-import org.apache.hc.core5.http.ParseException;
-
-import com.fasterxml.jackson.annotation.JsonFormat.Feature;
-
 import se.michaelthelin.spotify.model_objects.specification.PlaylistSimplified;
 import se.michaelthelin.spotify.requests.data.playlists.GetListOfCurrentUsersPlaylistsRequest;
 import se.michaelthelin.spotify.requests.data.playlists.GetPlaylistsItemsRequest;
@@ -29,8 +27,6 @@ import se.michaelthelin.spotify.requests.data.personalization.simplified.GetUser
 import se.michaelthelin.spotify.requests.data.personalization.simplified.GetUsersTopArtistsRequest;
 import se.michaelthelin.spotify.requests.data.tracks.GetAudioFeaturesForSeveralTracksRequest;
 
-import java.io.IOException;
-
 public class User {
     String accessToken = "BQDSqmePvpeHlxENAQzi1804OcGzKIYqC20ErKTNdBGE13xV5m8BFtAWJAQYEaJ5eZxP7vM06iThXMA5ekTz8RIIELZRMgNpUn9RXMWytclL52kT0-nyu042YF1joliW5w7FAQuUDmdiSkPDS52fNaJEzdisHmh3lHZJ2hD3gRFhZkClQqrIGbO4WImojHwmvxp1mgJPKHGm-GEN8Up389Az3kc_dfhZHpF5fwi1N7q5JJZEADif4z6VP-59NG_hOA43wPPX9VuLvTPhhzXIqr0md64KL2jbr6Y6g7S2wWVl3cXKEd6dHFVqWtNXcwUb1HK44vZcn7f2VpRIfR2WKwoMCg";
     private final SpotifyApi spotifyApi;
@@ -43,26 +39,42 @@ public class User {
                 .build();
     }
 
-    public List<String> getPlaylistsIds(int limit) {
+    public PlaylistSimplified[] getPlaylists(int limit) {
         final GetListOfCurrentUsersPlaylistsRequest getListOfCurrentUsersPlaylistsRequest = spotifyApi
                 .getListOfCurrentUsersPlaylists()
                 .limit(limit)
                 .offset(0)
                 .build();
-        List<String> playlists_ids = new ArrayList<>();
+        PlaylistSimplified[] playlists = new PlaylistSimplified[0];
         try {
             final Paging<PlaylistSimplified> playlistSimplifiedPaging = getListOfCurrentUsersPlaylistsRequest.execute();
-            PlaylistSimplified[] playlists = playlistSimplifiedPaging.getItems();
-            for (PlaylistSimplified playlist : playlists) {
-                playlists_ids.add(playlist.getId());
-            }
-            System.out.println(playlists[0].getName());
-            return playlists_ids;
+            return playlistSimplifiedPaging.getItems();
 
         } catch (IOException | SpotifyWebApiException | ParseException e) {
             System.out.println("Error: " + e.getMessage());
-            return playlists_ids;
+            return playlists;
         }
+    }
+
+    public HashMap<String, String> getPlaylistsHashMap() {
+        int limit = 50;
+        PlaylistSimplified[] playlists = getPlaylists(limit);
+        HashMap<String, String> playlistsDictionary = new HashMap<>();
+
+        for (PlaylistSimplified playlist : playlists) {
+            playlistsDictionary.put(playlist.getName(), playlist.getId());
+        }
+        return playlistsDictionary;
+    }
+
+    public List<String> getPlaylistsIds(int limit) {
+        List<String> playlists_ids = new ArrayList<>();
+        PlaylistSimplified[] playlists = getPlaylists(limit);
+        for (PlaylistSimplified playlist : playlists) {
+            playlists_ids.add(playlist.getId());
+        }
+        System.out.println(playlists[0].getName());
+        return playlists_ids;
     }
 
     public List<String> getPlaylistTracksIds(String playlistId) {
@@ -278,5 +290,3 @@ public class User {
     }
 
 }
-
-
