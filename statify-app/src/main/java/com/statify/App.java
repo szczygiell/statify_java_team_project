@@ -2,6 +2,8 @@ package com.statify;
 
 import javax.swing.JPanel;
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import java.awt.BorderLayout;
 
 /**
  * Hello world!
@@ -51,6 +53,24 @@ public final class App {
         TopLevelWindow.createChartFrame(chart);
     }
 
+    public static void playlistSelectablePanel(String token) {
+        String user_token = token;
+        User user = new User(user_token);
+        int limit = 1;
+
+        Statify.setUser(user);
+        Statify.SetPlaylistsNum(limit);
+
+        JScrollPane scrollPane = Statify.getPlaylistsSelectableList();
+        // Create a frame and add the scroll pane
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(200, 200);
+        frame.getContentPane().setLayout(new BorderLayout());
+        frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
+        frame.setVisible(true);
+    }
+
     public static void login_window() {
         LoginWindow frame = new LoginWindow();
         frame.setTitle("Login Form");
@@ -75,8 +95,10 @@ public final class App {
     }
 
     public static void main(String[] args) {
+        String token = "BQC9-m8EZCpwkxJ_Fu8BLvq5HhcQGHknGsdlWfzyL1X1_3qBGGK6wb_3qjnBXlFVdpAxl_G23QPXjerZkuwgL2ZnkryH0okkm5BV2-C8B3rqdl7vOOHK4XaFuS-wFS20O-XbQdpPWFcf2pzEIq24dQdqwf4ml2iGlF3XQZT7fjbTzNC5He_8BNo3ZW0koHjkBuIvGuoDP8jVq0An3xz6xcZ8tVSPmw";
+        playlistSelectablePanel(token);
         // login_window();
-        runApp();
+        // runApp();
 
     }
 }
