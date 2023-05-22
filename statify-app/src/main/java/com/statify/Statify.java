@@ -96,7 +96,6 @@ public class Statify {
         // Adding 10 string fields to panel
         for (int i = 0; i < data.size(); i++) {
             JLabel positionLabel = new JLabel(Integer.toString(i + 1));
-            JLabel positionLabel = new JLabel(Integer.toString(i + 1));
             panel.add(positionLabel);
 
             JLabel titleLabel = new JLabel(data.get(i).get("name"));
@@ -250,8 +249,7 @@ public class Statify {
         // frame1.setBounds(10, 10, 370, 600);
         // frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // frame1.setResizable(false);
-        User user = new User(
-                "BQDSqmePvpeHlxENAQzi1804OcGzKIYqC20ErKTNdBGE13xV5m8BFtAWJAQYEaJ5eZxP7vM06iThXMA5ekTz8RIIELZRMgNpUn9RXMWytclL52kT0-nyu042YF1joliW5w7FAQuUDmdiSkPDS52fNaJEzdisHmh3lHZJ2hD3gRFhZkClQqrIGbO4WImojHwmvxp1mgJPKHGm-GEN8Up389Az3kc_dfhZHpF5fwi1N7q5JJZEADif4z6VP-59NG_hOA43wPPX9VuLvTPhhzXIqr0md64KL2jbr6Y6g7S2wWVl3cXKEd6dHFVqWtNXcwUb1HK44vZcn7f2VpRIfR2WKwoMCg");
+
         User user = new User(
                 "BQDYeRNDwTpM1UlGEBxGaDd6aHeypMSlbbEuIyYT_l0eHnbE3sWD3hYruH_zwmYjRiV6JrXdSCndBZVtHCot6m3TkzLy-KvFTOzOioxPbA2EtA7xY_lrP-Qjw00OSIVn-C-KuFi_cpfCK0UJTeNriMD9FSDpcF3nDRuXwkjKddyPD4d6lIQ2Mezu04knubswlI1bPQv3vWS8wb8Qrmr5NYVjwDKE4jX4jwtbC_UoQVyu1eL-PawlCK9YbRWd5MIosReBw3PiMaNDE5vENHQ3xBQpI3h-habc_Xc9UrCPFYRVYGJTrnKGTVNA4rSXLoaNg9JdBUcp");
         statify.setUser(user);
@@ -264,7 +262,6 @@ public class Statify {
         // user.getTopTracksInfoList(tracksNumber, timeRange);
 
         JScrollPane scrollPane = createTopArtistsPanel(artistsNumber, timeRange);
-        JScrollPane scrollPane = createTopTracksPanel(tracksNumber, timeRange);
         frame.add(scrollPane);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
