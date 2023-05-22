@@ -10,6 +10,10 @@ import java.awt.Font;
 /**
  *
  * @author mwewior
+ * @author jmacuga
+ * @author fszczygi
+ * @author mkowale2
+ * 
  */
 public class MainWindow extends javax.swing.JFrame {
 
@@ -21,6 +25,7 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow() {
         int heightInit = 1080; //this.getHeight();
         int widthInit = 1920; //this.getWidth();
+        
         // to trzeba jakoś naprawić, ogarnąć
 
         initComponents(widthInit, heightInit);
@@ -81,8 +86,6 @@ public class MainWindow extends javax.swing.JFrame {
                 actionPanel.removeAll();
                 upperPanelDefault();
                 javax.swing.JScrollPane graph = Statify.createTopTracksPanel(trNum, timeRange);
-                // panelInit(histo);
-                // System.out.print("tutaj");
                 actionPanel.add(graph);
                 graph.setVisible(true);
                 timeButtonsPanel.setVisible(true);
@@ -92,6 +95,48 @@ public class MainWindow extends javax.swing.JFrame {
         } catch (NullPointerException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
 
+        }
+    }
+
+    public void artistListGrapher(String timeRange) {
+        String artist_num = numTracksTextField.getText();
+        try {
+            int trNum = Integer.parseInt(artist_num);
+            if (trNum <= 0) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of tracks");
+            } else {
+                actionPanel.removeAll();
+                upperPanelDefault();
+                javax.swing.JScrollPane graph = Statify.createTopArtistsPanel(trNum, timeRange);
+                actionPanel.add(graph);
+                graph.setVisible(true);
+                timeButtonsPanel.setVisible(true);
+            }
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
+        } catch (NullPointerException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
+        }
+    }
+
+    public void genreListGrapher(String timeRange){
+        // TODO later
+    }
+
+    public void chooseTypeTopList(String timeRange){
+        if(buttonFlag.equals("tracks")){
+            trackListGrapher(timeRange);
+        }
+        else if(buttonFlag.equals("artist")){
+            artistListGrapher(timeRange);
+        }
+        // else if(buttonFlag.equals("genre")){
+        //     genreListGrapher(timeRange);
+        // }
+        else{
+            // actionPanel.removeAll();
+            panelsSetDefault();
+            addNewPanel(planeBasePanel);
         }
     }
 
@@ -152,6 +197,7 @@ public class MainWindow extends javax.swing.JFrame {
         creditsPanel = new javax.swing.JPanel();
         creditsLabel = new javax.swing.JLabel();
         planeBasePanel = new javax.swing.JPanel();
+        buttonFlag = "";
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Statify PAP23L edition");
@@ -674,29 +720,44 @@ public class MainWindow extends javax.swing.JFrame {
     }// GEN-LAST:event_optionButton3ActionPerformed
 
     private void weeks4ButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_weeks4ButtonActionPerformed
-        trackListGrapher("short_term");
-    }// GEN-LAST:event_weeks4ButtonActionPerformed
+        chooseTypeTopList("short_term");
+        // if(buttonFlag.equals("tracks")){
+        //     trackListGrapher("short_term");
+        // }
+        // else if(buttonFlag.equals("artist")){
+        //     artistListGrapher("short_term");
+        // }
+        // // else if(buttonFlag.equals("artist")){
+        // //     genreListGrapher("short_term");
+        // // }
+        // else{
+        //     panelsSetDefault();
+        // }
+        }// GEN-LAST:event_weeks4ButtonActionPerformed
 
     private void months6ButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_months6ButtonActionPerformed
-        trackListGrapher("medium_term");
+        chooseTypeTopList("medium_term");
     }// GEN-LAST:event_months6ButtonActionPerformed
 
     private void allTimeHistoryButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_allTimeHistoryButtonActionPerformed
-        trackListGrapher("long_term");
+        chooseTypeTopList("long_term");
     }// GEN-LAST:event_allTimeHistoryButtonActionPerformed
 
     private void artistButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_artistButtonActionPerformed
+        buttonFlag = "artist";
         panelsSetDefault();
         timeButtonsPanel.setVisible(true);
         // actionPanel.removeAll();
     }// GEN-LAST:event_artistButtonActionPerformed
 
     private void genreButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_genreButtonActionPerformed
+        buttonFlag = "genre";
         panelsSetDefault();
         timeButtonsPanel.setVisible(true);
     }// GEN-LAST:event_genreButtonActionPerformed
 
     private void topTracksButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_topTracksButtonActionPerformed
+        buttonFlag = "tracks";
         panelsSetDefault();
         timeButtonsPanel.setVisible(true);
     }// GEN-LAST:event_topTracksButtonActionPerformed
@@ -794,5 +855,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton tracksAnaliseButton;
     private javax.swing.JPanel typeActionPanel;
     private javax.swing.JButton weeks4Button;
+    private String buttonFlag;
     // End of variables declaration//GEN-END:variables
 }
