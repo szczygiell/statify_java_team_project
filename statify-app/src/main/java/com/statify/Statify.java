@@ -1,5 +1,6 @@
 package com.statify;
 
+import org.apache.commons.compress.archivers.zip.UnsupportedZipFeatureException.Feature;
 import org.knowm.xchart.CategoryChart;
 import org.knowm.xchart.CategoryChartBuilder;
 import org.knowm.xchart.style.Styler.LegendPosition;
@@ -14,17 +15,10 @@ import java.util.Dictionary;
 import java.lang.Math;
 
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
 import javax.swing.JFrame;
-
-import java.util.Dictionary;
-import java.util.Hashtable;
-
-import com.statify.User;
-
 
 public class Statify {
 
@@ -72,65 +66,23 @@ public class Statify {
         }
     }
 
-    private static List<Float> getDancebilityPlaylistsData(int limit) {
-        List<String> playlistsIds = Statify.currentUser.getPlaylistsIds(limit);
-        List<String> tracksIds = new ArrayList<>();
-        for (String pId : playlistsIds) {
-            tracksIds.addAll(Statify.currentUser.getPlaylistTracksIds(pId));
-        }
-        List<Float> danceabilityTable = new ArrayList<>();
-        Dictionary<String, List<Float>> audioFeatures = Statify.currentUser
-                .getAllTracksAudioFeatures(tracksIds.toArray(new String[0]));
-        System.out.println(audioFeatures);
-        try {
-            danceabilityTable.addAll(audioFeatures.get("danceability"));
-        } catch (NullPointerException e) {
-            System.out.println(e);
-        }
-        return danceabilityTable;
-    }
-
-    public static JPanel getDanceabilityHistogram() {
-        List<Float> data = Statify.getDancebilityPlaylistsData(playlists_num);
-        int binsNum = (int) Math.cbrt(data.size());
-        String title = String.format("Danceability Histogram of your %o playlists", playlists_num);
-        String xTitle = "Mean";
-        String yTitle = "Tracks count";
-        String seriesName = "Tracks in your playlists";
-        List<Double> ydata = new ArrayList<>();
-        List<Double> xdata = new ArrayList<>();
-        try {
-            Histogram histogram = new Histogram(data, binsNum);
-            ydata = histogram.getyAxisData();
-            xdata = histogram.getxAxisData();
-        } catch (IllegalArgumentException e) {
-            System.out.println(e);
-        }
-        for (int i = 0; i < xdata.size(); i++) {
-            double newValue = (double) Math.round(xdata.get(i) * 100d) / 100d;
-            xdata.set(i, newValue);
-        }
-        CategoryChart chart = getBarChart(xdata, ydata, title, seriesName, xTitle, yTitle);
-
-        return new XChartPanel<CategoryChart>(chart);
-    }
-
     public static JScrollPane createTopTracksPanel(int tracksNumber, String timeRange) {
         List<Dictionary<String, String>> data = Statify.currentUser.getTopTracksInfoList(tracksNumber, timeRange);
         JPanel panel = new JPanel();
-        
-        panel.setLayout(new GridLayout(data.size()+1, 3, 10, 10)); // n+1 rows, 2 columns, 10px between each row and ech column
+
+        panel.setLayout(new GridLayout(data.size() + 1, 3, 10, 10)); // n+1 rows, 2 columns, 10px between each row and
+                                                                     // ech column
         JLabel mainPositionLabel = new JLabel("Position");
-            panel.add(mainPositionLabel);
+        panel.add(mainPositionLabel);
         JLabel mainTitleLabel = new JLabel("Title");
-            panel.add(mainTitleLabel);
+        panel.add(mainTitleLabel);
         JLabel mainArtistLabel = new JLabel("Artist");
-            panel.add(mainArtistLabel);
+        panel.add(mainArtistLabel);
         JLabel mainAlbumLabel = new JLabel("Album");
-            panel.add(mainAlbumLabel);
+        panel.add(mainAlbumLabel);
         // Adding 10 string fields to panel
         for (int i = 0; i < data.size(); i++) {
-            JLabel positionLabel = new JLabel(Integer.toString(i+1));
+            JLabel positionLabel = new JLabel(Integer.toString(i + 1));
             panel.add(positionLabel);
 
             JLabel titleLabel = new JLabel(data.get(i).get("name"));
@@ -148,35 +100,33 @@ public class Statify {
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         // scroll_panel.add(panel);
         // JPanel main_panel = new JPanel();
-        
+
         // main_panel.add(scroll_panel);
 
         return scrollPane;
     }
 
-    private static List<Float> getLoudnessPlaylistsData(int limit) {
+    public static List<Float> getFeaturePlaylistData(int limit, FeatureName feature) {
         List<String> playlistsIds = Statify.currentUser.getPlaylistsIds(limit);
         List<String> tracksIds = new ArrayList<>();
         for (String pId : playlistsIds) {
             tracksIds.addAll(Statify.currentUser.getPlaylistTracksIds(pId));
         }
-        System.out.println(tracksIds);
-        List<Float> danceabilityTable = new ArrayList<>();
+        List<Float> data = new ArrayList<>();
         Dictionary<String, List<Float>> audioFeatures = Statify.currentUser
                 .getAllTracksAudioFeatures(tracksIds.toArray(new String[0]));
-        //System.out.println(audioFeatures);
         try {
-            danceabilityTable.addAll(audioFeatures.get("loudness"));
+            data.addAll(audioFeatures.get(feature.keyName()));
         } catch (NullPointerException e) {
             System.out.println(e);
         }
-        return danceabilityTable;
+        return data;
     }
 
-    public static JPanel getLoudnessHistogram() {
-        List<Float> data = Statify.getLoudnessPlaylistsData(playlists_num);
+    public static JPanel getAudioFeatureHistogram(FeatureName feature) {
+        List<Float> data = getFeaturePlaylistData(playlists_num, feature);
         int binsNum = (int) Math.cbrt(data.size());
-        String title = String.format("Loudness Histogram of your %o playlists", playlists_num);
+        String title = feature.toString() + String.format(" Histogram of your %o playlists", playlists_num);
         String xTitle = "Mean";
         String yTitle = "Tracks count";
         String seriesName = "Tracks in your playlists";
@@ -196,52 +146,19 @@ public class Statify {
         CategoryChart chart = getBarChart(xdata, ydata, title, seriesName, xTitle, yTitle);
 
         return new XChartPanel<CategoryChart>(chart);
-    }
-
-    private static List<Float> getAcousticnessPlaylistsData(int limit) {
-        List<String> playlistsIds = Statify.currentUser.getPlaylistsIds(limit);
-        List<String> tracksIds = new ArrayList<>();
-        for (String pId : playlistsIds) {
-            tracksIds.addAll(Statify.currentUser.getPlaylistTracksIds(pId));
-        }
-        System.out.println(tracksIds);
-        List<Float> danceabilityTable = new ArrayList<>();
-        Dictionary<String, List<Float>> audioFeatures = Statify.currentUser
-                .getAllTracksAudioFeatures(tracksIds.toArray(new String[0]));
-        //System.out.println(audioFeatures);
-        try {
-            danceabilityTable.addAll(audioFeatures.get("acousticness"));
-        } catch (NullPointerException e) {
-            System.out.println(e);
-        }
-        return danceabilityTable;
     }
 
     public static JPanel getAcousticnessHistogram() {
-        List<Float> data = Statify.getAcousticnessPlaylistsData(playlists_num);
-        int binsNum = (int) Math.cbrt(data.size());
-        String title = String.format("Acousticness Histogram of your %o playlists", playlists_num);
-        String xTitle = "Mean";
-        String yTitle = "Tracks count";
-        String seriesName = "Tracks in your playlists";
-        List<Double> ydata = new ArrayList<>();
-        List<Double> xdata = new ArrayList<>();
-        try {
-            Histogram histogram = new Histogram(data, binsNum);
-            ydata = histogram.getyAxisData();
-            xdata = histogram.getxAxisData();
-        } catch (IllegalArgumentException e) {
-            System.out.println(e);
-        }
-        for (int i = 0; i < xdata.size(); i++) {
-            double newValue = (double) Math.round(xdata.get(i) * 100d) / 100d;
-            xdata.set(i, newValue);
-        }
-        CategoryChart chart = getBarChart(xdata, ydata, title, seriesName, xTitle, yTitle);
-
-        return new XChartPanel<CategoryChart>(chart);
+        return getAudioFeatureHistogram(FeatureName.ACOUSTICNESS);
     }
 
+    public static JPanel getLoudnessHistogram() {
+        return getAudioFeatureHistogram(FeatureName.LOUDNESS);
+    }
+
+    public static JPanel getDanceabilityHistogram() {
+        return getAudioFeatureHistogram(FeatureName.DANCEABILITY);
+    }
 
     public static void main(String[] args) {
         Statify statify = new Statify();
@@ -270,7 +187,8 @@ public class Statify {
         // dictionary3.put("album", "wahefgsdteverr");
         // dictionaryList.add(dictionary3);
 
-        // String accessToken = "BQAVQB6_0uvh43j3ABrWlHglI0R7kolM1Ph8cJjKz3RuwHyTeaujE85q8-BVfwILJIf10dC82ZX_D3lClNZcIGp9n_jHknNtmjVhWazVwug1vJZ4toPr4rFROwfA9AXf03TvAD5dk8mHovCA3o1onUH6QprhzkxKCaxK_bV4uHmBjv5l3Zg3F_SYG3Fsd2qQ9HcieS1UO7P-55eOQyNoMrMv1srluX5t9px1tJP-R70DLo1tIhshDjdmt3fpS7DySCdAReQ9oEt18eybwsfV1jjsiuaLii-dnpGe0729uNwQiAV9qiDT8ol8N6Ablk1UKJaQP1vc";
+        // String accessToken =
+        // "BQAVQB6_0uvh43j3ABrWlHglI0R7kolM1Ph8cJjKz3RuwHyTeaujE85q8-BVfwILJIf10dC82ZX_D3lClNZcIGp9n_jHknNtmjVhWazVwug1vJZ4toPr4rFROwfA9AXf03TvAD5dk8mHovCA3o1onUH6QprhzkxKCaxK_bV4uHmBjv5l3Zg3F_SYG3Fsd2qQ9HcieS1UO7P-55eOQyNoMrMv1srluX5t9px1tJP-R70DLo1tIhshDjdmt3fpS7DySCdAReQ9oEt18eybwsfV1jjsiuaLii-dnpGe0729uNwQiAV9qiDT8ol8N6Ablk1UKJaQP1vc";
         // User user = new User(accessToken);
         // LoginWindow frame1 = new LoginWindow();
         // frame1.setTitle("Login Form");
@@ -278,14 +196,16 @@ public class Statify {
         // frame1.setBounds(10, 10, 370, 600);
         // frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // frame1.setResizable(false);
-        User user = new User("BQDYeRNDwTpM1UlGEBxGaDd6aHeypMSlbbEuIyYT_l0eHnbE3sWD3hYruH_zwmYjRiV6JrXdSCndBZVtHCot6m3TkzLy-KvFTOzOioxPbA2EtA7xY_lrP-Qjw00OSIVn-C-KuFi_cpfCK0UJTeNriMD9FSDpcF3nDRuXwkjKddyPD4d6lIQ2Mezu04knubswlI1bPQv3vWS8wb8Qrmr5NYVjwDKE4jX4jwtbC_UoQVyu1eL-PawlCK9YbRWd5MIosReBw3PiMaNDE5vENHQ3xBQpI3h-habc_Xc9UrCPFYRVYGJTrnKGTVNA4rSXLoaNg9JdBUcp");
+        User user = new User(
+                "BQDYeRNDwTpM1UlGEBxGaDd6aHeypMSlbbEuIyYT_l0eHnbE3sWD3hYruH_zwmYjRiV6JrXdSCndBZVtHCot6m3TkzLy-KvFTOzOioxPbA2EtA7xY_lrP-Qjw00OSIVn-C-KuFi_cpfCK0UJTeNriMD9FSDpcF3nDRuXwkjKddyPD4d6lIQ2Mezu04knubswlI1bPQv3vWS8wb8Qrmr5NYVjwDKE4jX4jwtbC_UoQVyu1eL-PawlCK9YbRWd5MIosReBw3PiMaNDE5vENHQ3xBQpI3h-habc_Xc9UrCPFYRVYGJTrnKGTVNA4rSXLoaNg9JdBUcp");
         statify.setUser(user);
         String timeRange = "long_term";
         int tracksNumber = 50;
 
-        //List<Dictionary<String, String>> dictionaryListFromMethod = user.getTopTracksInfoList(tracksNumber, timeRange);
+        // List<Dictionary<String, String>> dictionaryListFromMethod =
+        // user.getTopTracksInfoList(tracksNumber, timeRange);
 
-        JScrollPane scrollPane  = createTopTracksPanel(tracksNumber, timeRange);
+        JScrollPane scrollPane = createTopTracksPanel(tracksNumber, timeRange);
         frame.add(scrollPane);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
