@@ -22,14 +22,17 @@ import se.michaelthelin.spotify.model_objects.specification.PlaylistTrack;
 import se.michaelthelin.spotify.model_objects.specification.Track;
 import se.michaelthelin.spotify.requests.data.tracks.GetTrackRequest;
 import se.michaelthelin.spotify.model_objects.IPlaylistItem;
+import se.michaelthelin.spotify.model_objects.specification.Artist;
+import se.michaelthelin.spotify.requests.data.artists.GetArtistRequest;
 import se.michaelthelin.spotify.model_objects.specification.AudioFeatures;
 import se.michaelthelin.spotify.requests.data.personalization.simplified.GetUsersTopTracksRequest;
+import se.michaelthelin.spotify.requests.data.personalization.simplified.GetUsersTopArtistsRequest;
 import se.michaelthelin.spotify.requests.data.tracks.GetAudioFeaturesForSeveralTracksRequest;
 
 import java.io.IOException;
 
 public class User {
-    String accessToken = "BQDDrSIx56T9K5q4epymXm0laLA0WTZAldKm-xB3TRxDP8aWDHRcPY603U-Jf1pRIzKbQndFe_MqfqPxJKcXV_BeMGeoJJAT0v0CVoSObaGdMQu3CHYW6jMx8ZYyg4mNOMjPqURAh3lomocgWm2nrXrFXkQ66TNDXU-adLGUE5DFDv1wMWOuAs2Shi8YLcQluNhj0ooIPxIxbE6IbDuK6u5FgifEXCE0gE3wnMai6OmlS7rGdC1zGhy5UhVTYuAwYG83ZLYehIV90u3pqNn48lKKrelc5bwn9vZ4lNcXwxiHIhgj1rGxK4kyCg6-JP5eq_B8eNtF8_WpRIqALMxzr86SiA";
+    String accessToken = "BQDSqmePvpeHlxENAQzi1804OcGzKIYqC20ErKTNdBGE13xV5m8BFtAWJAQYEaJ5eZxP7vM06iThXMA5ekTz8RIIELZRMgNpUn9RXMWytclL52kT0-nyu042YF1joliW5w7FAQuUDmdiSkPDS52fNaJEzdisHmh3lHZJ2hD3gRFhZkClQqrIGbO4WImojHwmvxp1mgJPKHGm-GEN8Up389Az3kc_dfhZHpF5fwi1N7q5JJZEADif4z6VP-59NG_hOA43wPPX9VuLvTPhhzXIqr0md64KL2jbr6Y6g7S2wWVl3cXKEd6dHFVqWtNXcwUb1HK44vZcn7f2VpRIfR2WKwoMCg";
     private final SpotifyApi spotifyApi;
     public static final String[] audioFeaturesNames = { "danceability", "loudness", "acousticness" };
 
@@ -220,4 +223,60 @@ public class User {
         return dictionaryList;
     }
 
+    public List<String> getTopArtistsIds(int limit, String time_range) {
+        List<String> trackIds = new ArrayList<>();
+        final GetUsersTopArtistsRequest getUsersTopArtistsRequest = spotifyApi.getUsersTopArtists()
+                .time_range(time_range) // "short_term": 4 weeks; "medium_term": 6 months; "long_term": years
+                .limit(limit) // number of tracks
+                .build();
+        try {
+            final Paging<Artist> artistsPaging = getUsersTopArtistsRequest.execute();
+            Artist[] artists = artistsPaging.getItems();
+            for (int i = 0; i < limit; i++) {
+                trackIds.add(artists[i].getId());
+            }
+            return trackIds;
+
+        } catch (IOException | SpotifyWebApiException | ParseException | NullPointerException e) {
+            System.out.println("Error: " + e.getMessage());
+            return new ArrayList<String>();
+        }
+
+    }
+
+    public Dictionary<String, String> getArtistInfo(String artistId) {
+        final GetArtistRequest getArtistRequest = spotifyApi.getArtist(artistId)
+                .build();
+
+        Dictionary<String, String> artistInfo = new Hashtable<>();
+
+        try {
+            final Artist artist = getArtistRequest.execute();
+            artistInfo.put("name", artist.getName());
+            artistInfo.put("genres", String.join(", ", artist.getGenres()));
+
+            return artistInfo;
+            // System.out.println("Name: " + artistInfo.getName());
+        } catch (IOException | SpotifyWebApiException | ParseException e) {
+            System.out.println("Error: " + e.getMessage());
+            return artistInfo;
+        }
+    }
+
+    public List<Dictionary<String, String>> getTopArtistsInfoList(int limit, String time_range) {
+        List<Dictionary<String, String>> dictionaryList = new ArrayList<>();
+
+        List<String> topArtistsIds = getTopArtistsIds(limit, time_range);
+
+        for (int i = 0; i < limit; i++) {
+            Dictionary<String, String> dictionary = getArtistInfo(topArtistsIds.get(i));
+            dictionaryList.add(dictionary);
+
+        }
+
+        return dictionaryList;
+    }
+
 }
+
+

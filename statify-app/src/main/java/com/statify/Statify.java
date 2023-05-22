@@ -20,6 +20,11 @@ import javax.swing.JLabel;
 import java.awt.GridLayout;
 import javax.swing.JFrame;
 
+import java.util.Dictionary;
+import java.util.Hashtable;
+
+import com.statify.User;
+
 public class Statify {
 
     private static User currentUser;
@@ -72,16 +77,25 @@ public class Statify {
 
         panel.setLayout(new GridLayout(data.size() + 1, 3, 10, 10)); // n+1 rows, 2 columns, 10px between each row and
                                                                      // ech column
+        // lepiej to zrobić GridBagLayout bo można dodawać kolumny różnych szerokości
+
+        panel.setLayout(new GridLayout(data.size() + 1, 3, 10, 10)); // n+1 rows, 2 columns, 10px between each row and
+                                                                     // ech column
         JLabel mainPositionLabel = new JLabel("Position");
+        panel.add(mainPositionLabel);
         panel.add(mainPositionLabel);
         JLabel mainTitleLabel = new JLabel("Title");
         panel.add(mainTitleLabel);
+        panel.add(mainTitleLabel);
         JLabel mainArtistLabel = new JLabel("Artist");
+        panel.add(mainArtistLabel);
         panel.add(mainArtistLabel);
         JLabel mainAlbumLabel = new JLabel("Album");
         panel.add(mainAlbumLabel);
+        panel.add(mainAlbumLabel);
         // Adding 10 string fields to panel
         for (int i = 0; i < data.size(); i++) {
+            JLabel positionLabel = new JLabel(Integer.toString(i + 1));
             JLabel positionLabel = new JLabel(Integer.toString(i + 1));
             panel.add(positionLabel);
 
@@ -106,6 +120,44 @@ public class Statify {
         return scrollPane;
     }
 
+    public static JScrollPane createTopArtistsPanel(int artistsNumber, String timeRange) {
+        List<Dictionary<String, String>> data = Statify.currentUser.getTopArtistsInfoList(artistsNumber, timeRange);
+        JPanel panel = new JPanel();
+
+        panel.setLayout(new GridLayout(data.size() + 1, 2, 10, 10)); // n+1 rows, 2 columns, 10px between each row and
+                                                                     // ech column
+        // lepiej to zrobić GridBagLayout bo można dodawać kolumny różnych szerokości
+        JLabel mainPositionLabel = new JLabel("Position");
+        panel.add(mainPositionLabel);
+        JLabel mainArtistLabel = new JLabel("Artist");
+        panel.add(mainArtistLabel);
+        JLabel mainGenresLabel = new JLabel("Genres");
+        panel.add(mainGenresLabel);
+
+        // Adding 10 string fields to panel
+        for (int i = 0; i < data.size(); i++) {
+            JLabel positionLabel = new JLabel(Integer.toString(i + 1));
+            panel.add(positionLabel);
+
+            JLabel nameLabel = new JLabel(data.get(i).get("name"));
+            panel.add(nameLabel);
+
+            JLabel genresLabel = new JLabel(data.get(i).get("genres"));
+            panel.add(genresLabel);
+
+        }
+        JScrollPane scrollPane = new JScrollPane(panel); // Create a JScrollPane and pass in the JPanel
+        scrollPane.setPreferredSize(new java.awt.Dimension(800, 600));
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        // scroll_panel.add(panel);
+        // JPanel main_panel = new JPanel();
+
+        // main_panel.add(scroll_panel);
+
+        return scrollPane;
+    }
+
     public static List<Float> getFeaturePlaylistData(int limit, FeatureName feature) {
         List<String> playlistsIds = Statify.currentUser.getPlaylistsIds(limit);
         List<String> tracksIds = new ArrayList<>();
@@ -115,6 +167,7 @@ public class Statify {
         List<Float> data = new ArrayList<>();
         Dictionary<String, List<Float>> audioFeatures = Statify.currentUser
                 .getAllTracksAudioFeatures(tracksIds.toArray(new String[0]));
+        // System.out.println(audioFeatures);
         try {
             data.addAll(audioFeatures.get(feature.keyName()));
         } catch (NullPointerException e) {
@@ -188,6 +241,7 @@ public class Statify {
         // dictionaryList.add(dictionary3);
 
         // String accessToken =
+        //
         // "BQAVQB6_0uvh43j3ABrWlHglI0R7kolM1Ph8cJjKz3RuwHyTeaujE85q8-BVfwILJIf10dC82ZX_D3lClNZcIGp9n_jHknNtmjVhWazVwug1vJZ4toPr4rFROwfA9AXf03TvAD5dk8mHovCA3o1onUH6QprhzkxKCaxK_bV4uHmBjv5l3Zg3F_SYG3Fsd2qQ9HcieS1UO7P-55eOQyNoMrMv1srluX5t9px1tJP-R70DLo1tIhshDjdmt3fpS7DySCdAReQ9oEt18eybwsfV1jjsiuaLii-dnpGe0729uNwQiAV9qiDT8ol8N6Ablk1UKJaQP1vc";
         // User user = new User(accessToken);
         // LoginWindow frame1 = new LoginWindow();
@@ -197,14 +251,19 @@ public class Statify {
         // frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // frame1.setResizable(false);
         User user = new User(
+                "BQDSqmePvpeHlxENAQzi1804OcGzKIYqC20ErKTNdBGE13xV5m8BFtAWJAQYEaJ5eZxP7vM06iThXMA5ekTz8RIIELZRMgNpUn9RXMWytclL52kT0-nyu042YF1joliW5w7FAQuUDmdiSkPDS52fNaJEzdisHmh3lHZJ2hD3gRFhZkClQqrIGbO4WImojHwmvxp1mgJPKHGm-GEN8Up389Az3kc_dfhZHpF5fwi1N7q5JJZEADif4z6VP-59NG_hOA43wPPX9VuLvTPhhzXIqr0md64KL2jbr6Y6g7S2wWVl3cXKEd6dHFVqWtNXcwUb1HK44vZcn7f2VpRIfR2WKwoMCg");
+        User user = new User(
                 "BQDYeRNDwTpM1UlGEBxGaDd6aHeypMSlbbEuIyYT_l0eHnbE3sWD3hYruH_zwmYjRiV6JrXdSCndBZVtHCot6m3TkzLy-KvFTOzOioxPbA2EtA7xY_lrP-Qjw00OSIVn-C-KuFi_cpfCK0UJTeNriMD9FSDpcF3nDRuXwkjKddyPD4d6lIQ2Mezu04knubswlI1bPQv3vWS8wb8Qrmr5NYVjwDKE4jX4jwtbC_UoQVyu1eL-PawlCK9YbRWd5MIosReBw3PiMaNDE5vENHQ3xBQpI3h-habc_Xc9UrCPFYRVYGJTrnKGTVNA4rSXLoaNg9JdBUcp");
         statify.setUser(user);
-        String timeRange = "long_term";
-        int tracksNumber = 50;
+        String timeRange = "short_term";
+        int artistsNumber = 10;
 
         // List<Dictionary<String, String>> dictionaryListFromMethod =
         // user.getTopTracksInfoList(tracksNumber, timeRange);
+        // List<Dictionary<String, String>> dictionaryListFromMethod =
+        // user.getTopTracksInfoList(tracksNumber, timeRange);
 
+        JScrollPane scrollPane = createTopArtistsPanel(artistsNumber, timeRange);
         JScrollPane scrollPane = createTopTracksPanel(tracksNumber, timeRange);
         frame.add(scrollPane);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
