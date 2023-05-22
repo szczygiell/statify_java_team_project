@@ -10,7 +10,6 @@ import java.net.URI;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
-import java.io.IOException;
 
 public class Authorization {
     private static final String clientId = "9f99ac817d684668944750770c078eb7";
@@ -25,7 +24,7 @@ public class Authorization {
             .build();
     private static final AuthorizationCodeUriRequest authorizationCodeUriRequest = spotifyApi.authorizationCodeUri()
             // .state("x4xkmn9pu3j6ukrs8n")
-            // .scope("user-read-birthdate,user-read-email")
+            .scope("user-read-private user-read-email user-library-read playlist-read-private user-top-read")
             .show_dialog(true)
             .build();
 
