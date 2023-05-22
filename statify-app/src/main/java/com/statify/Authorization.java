@@ -80,7 +80,9 @@ public class Authorization {
         code = localhostServer.getCodePrameterValue();
         System.out.println("Code=" + code);
         authorizationCode_Async();
-        return spotifyApi.getAccessToken();
+        String token = spotifyApi.getAccessToken();
+        System.out.println(token);
+        return token;
 
     }
 }
