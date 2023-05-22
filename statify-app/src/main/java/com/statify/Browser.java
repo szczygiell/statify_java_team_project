@@ -11,7 +11,10 @@ public class Browser {
     public void setUp(String url) {
 
         WebDriverManager.chromedriver().setup();
+
+        System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
         driver = new ChromeDriver();
+
         driver.get(url);
     }
 
