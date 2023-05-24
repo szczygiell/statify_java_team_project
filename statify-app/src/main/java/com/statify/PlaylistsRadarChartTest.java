@@ -1,11 +1,7 @@
 package com.statify;
 
 import java.util.HashMap;
-
-import javax.management.ValueExp;
-
 import org.knowm.xchart.XChartPanel;
-import org.checkerframework.checker.fenum.qual.FenumTop;
 import org.knowm.xchart.RadarChart;
 
 public class PlaylistsRadarChartTest {
