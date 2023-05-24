@@ -31,7 +31,8 @@ import se.michaelthelin.spotify.requests.data.tracks.GetAudioFeaturesForSeveralT
 public class User {
     String accessToken = "BQDSqmePvpeHlxENAQzi1804OcGzKIYqC20ErKTNdBGE13xV5m8BFtAWJAQYEaJ5eZxP7vM06iThXMA5ekTz8RIIELZRMgNpUn9RXMWytclL52kT0-nyu042YF1joliW5w7FAQuUDmdiSkPDS52fNaJEzdisHmh3lHZJ2hD3gRFhZkClQqrIGbO4WImojHwmvxp1mgJPKHGm-GEN8Up389Az3kc_dfhZHpF5fwi1N7q5JJZEADif4z6VP-59NG_hOA43wPPX9VuLvTPhhzXIqr0md64KL2jbr6Y6g7S2wWVl3cXKEd6dHFVqWtNXcwUb1HK44vZcn7f2VpRIfR2WKwoMCg";
     private final SpotifyApi spotifyApi;
-    public static final String[] audioFeaturesNames = { "danceability", "loudness", "acousticness" };
+    public static final String[] audioFeaturesNames = { "danceability", "loudness", "acousticness", "liveness",
+            "energy" };
 
     User(String user_token) {
         this.accessToken = user_token;
@@ -58,9 +59,13 @@ public class User {
         }
     }
 
-    // Returns hashmap of pairs playlist name :playlist id
     public HashMap<String, String> getPlaylistsHashMap() {
-        int limit = 50;
+        int limit = 20;
+        return this.getPlaylistsHashMap(limit);
+    }
+
+    // Returns hashmap of pairs playlist name :playlist id
+    public HashMap<String, String> getPlaylistsHashMap(int limit) {
         PlaylistSimplified[] playlists = getPlaylists(limit);
         HashMap<String, String> playlistsDictionary = new HashMap<>();
 
@@ -120,6 +125,7 @@ public class User {
         }
     }
 
+    // gets dictionary with feature name: list of values in all tracks
     public Dictionary<String, List<Float>> audioFeaturesRequest(String[] tracksIds) {
         final GetAudioFeaturesForSeveralTracksRequest getAudioFeaturesForSeveralTracksRequest = spotifyApi
                 .getAudioFeaturesForSeveralTracks(tracksIds)
@@ -136,6 +142,8 @@ public class User {
                 featureBuffers.get(0).add(aFeatures.getDanceability());
                 featureBuffers.get(1).add(aFeatures.getLoudness());
                 featureBuffers.get(2).add(aFeatures.getAcousticness());
+                featureBuffers.get(3).add(aFeatures.getLiveness());
+                featureBuffers.get(4).add(aFeatures.getEnergy());
 
             }
             for (int feature_id = 0; feature_id < audioFeaturesNames.length; feature_id++) {
@@ -155,8 +163,7 @@ public class User {
 
         int sublistLimit = 50;
         int sublistNum = (int) Math.ceil((float) tracksIds.length / sublistLimit);
-        System.out.println("sublist num = " + sublistNum);
-        // create feature bufers
+        // create feature buffers
         List<List<Float>> featureBuffers = new ArrayList<>();
         for (int feature_id = 0; feature_id < audioFeaturesNames.length; feature_id++) {
             featureBuffers.add(new ArrayList<>());

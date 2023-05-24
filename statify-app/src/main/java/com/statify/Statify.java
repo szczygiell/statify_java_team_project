@@ -96,12 +96,16 @@ public class Statify {
         RadarChart radarChart = radarChartBuilder.build();
         radarChart.setRadiiLabels(radiiLabels);
         for (int i = 0; i < dataSeriesNames.length; i++) {
-            radarChart.addSeries(dataSeriesNames[i], dataSeries.get(0));
+            radarChart.addSeries(dataSeriesNames[i], dataSeries.get(i));
         }
         RadarStyler radarStyler = radarChart.getStyler();
-        Color[] colorSeries = { new Color(255, 205, 178, 255), new Color(229, 152,
-                155, 150),
-                new Color(229, 152, 155) };
+        Color[] colorSeries = {
+                new Color(170, 246, 131, 150),
+                new Color(238, 96, 85, 230),
+                new Color(255, 155, 133, 80),
+                new Color(255, 217, 125, 100),
+                new Color(96, 211, 148, 200),
+        };
         radarStyler.setSeriesColors(colorSeries);
         Font monsterratFont = new Font("Noto Sans CJK JP", Font.PLAIN, 25);
         radarStyler.setBaseFont(monsterratFont);
@@ -259,15 +263,18 @@ public class Statify {
         return valuesArray;
     }
 
-    // TODO PRZETESTOWAĆ
-    public static JPanel getTracksRadarChartFromPlaylists(HashMap<String, String> playlistsHashMap, String[] features) {
+    public static XChartPanel<RadarChart> getTracksRadarChartFromPlaylists(HashMap<String, String> playlistsHashMap,
+            String[] features) {
         List<double[]> dataSeriesList = new ArrayList();
         String[] playlistNames = playlistsHashMap.keySet().toArray(new String[0]);
-        for (String playlistId : playlistsHashMap.keySet()) {
+        for (String playlistId : playlistsHashMap.values()) {
+            // get playlist's dict track_id : [features list]
             Dictionary<String, List<Float>> playlistTracksAllAudioFeatures = currentUser
                     .getAllTracksAudioFeatures(currentUser.getPlaylistTracksIds(playlistId).toArray(new String[0]));
+            // create same dict with only selected features
             Dictionary<String, List<Float>> playlistTracksAudioFeatures = sliceDictionary(
                     playlistTracksAllAudioFeatures, features);
+            // convert dict to
             Dictionary<String, Float> meanPlaylistFeatures = MeanFeatureValues(playlistTracksAudioFeatures);
             double[] dataSeries = convertValuesToDoubleArray(meanPlaylistFeatures);
             dataSeriesList.add(dataSeries);
