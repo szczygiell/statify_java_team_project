@@ -31,8 +31,6 @@ import se.michaelthelin.spotify.requests.data.tracks.GetAudioFeaturesForSeveralT
 public class User {
     String accessToken = "BQDSqmePvpeHlxENAQzi1804OcGzKIYqC20ErKTNdBGE13xV5m8BFtAWJAQYEaJ5eZxP7vM06iThXMA5ekTz8RIIELZRMgNpUn9RXMWytclL52kT0-nyu042YF1joliW5w7FAQuUDmdiSkPDS52fNaJEzdisHmh3lHZJ2hD3gRFhZkClQqrIGbO4WImojHwmvxp1mgJPKHGm-GEN8Up389Az3kc_dfhZHpF5fwi1N7q5JJZEADif4z6VP-59NG_hOA43wPPX9VuLvTPhhzXIqr0md64KL2jbr6Y6g7S2wWVl3cXKEd6dHFVqWtNXcwUb1HK44vZcn7f2VpRIfR2WKwoMCg";
     private final SpotifyApi spotifyApi;
-    public static final String[] audioFeaturesNames = { "danceability", "loudness", "acousticness", "liveness",
-            "energy" };
 
     User(String user_token) {
         this.accessToken = user_token;
@@ -131,25 +129,18 @@ public class User {
                 .getAudioFeaturesForSeveralTracks(tracksIds)
                 .build();
         Dictionary<String, List<Float>> selectedAudioFeatures = new Hashtable<>();
-        List<List<Float>> featureBuffers = new ArrayList<>();
-        for (int feature_id = 0; feature_id < audioFeaturesNames.length; feature_id++) {
-            featureBuffers.add(new ArrayList<>());
+        for (FeatureName feature : FeatureName.values()) {
+            selectedAudioFeatures.put(feature.keyName, new ArrayList<Float>());
         }
-
         try {
             final AudioFeatures[] audioFeaturesList = getAudioFeaturesForSeveralTracksRequest.execute();
             for (AudioFeatures aFeatures : audioFeaturesList) {
-                featureBuffers.get(0).add(aFeatures.getDanceability());
-                featureBuffers.get(1).add(aFeatures.getLoudness());
-                featureBuffers.get(2).add(aFeatures.getAcousticness());
-                featureBuffers.get(3).add(aFeatures.getLiveness());
-                featureBuffers.get(4).add(aFeatures.getEnergy());
-
+                selectedAudioFeatures.get(FeatureName.DANCEABILITY.keyName).add(aFeatures.getDanceability());
+                selectedAudioFeatures.get(FeatureName.LOUDNESS.keyName).add(aFeatures.getLoudness());
+                selectedAudioFeatures.get(FeatureName.ACOUSTICNESS.keyName).add(aFeatures.getAcousticness());
+                selectedAudioFeatures.get(FeatureName.INSTRUMENTALNESS.keyName).add(aFeatures.getInstrumentalness());
+                selectedAudioFeatures.get(FeatureName.ENERGY.keyName).add(aFeatures.getEnergy());
             }
-            for (int feature_id = 0; feature_id < audioFeaturesNames.length; feature_id++) {
-                selectedAudioFeatures.put(audioFeaturesNames[feature_id], featureBuffers.get(feature_id));
-            }
-
             return selectedAudioFeatures;
         } catch (IOException | SpotifyWebApiException | ParseException | NullPointerException e) {
             System.out.println("Error: " + e.getMessage());
@@ -160,15 +151,11 @@ public class User {
     // returns dictionary of feature_name: feature value
     public Dictionary<String, List<Float>> getAllTracksAudioFeatures(String[] tracksIds) {
         Dictionary<String, List<Float>> audioFeatures = new Hashtable<>();
-
         int sublistLimit = 50;
         int sublistNum = (int) Math.ceil((float) tracksIds.length / sublistLimit);
-        // create feature buffers
-        List<List<Float>> featureBuffers = new ArrayList<>();
-        for (int feature_id = 0; feature_id < audioFeaturesNames.length; feature_id++) {
-            featureBuffers.add(new ArrayList<>());
+        for (FeatureName feature : FeatureName.values()) {
+            audioFeatures.put(feature.keyName, new ArrayList<>());
         }
-
         for (int sublist_id = 0; sublist_id < sublistNum; sublist_id++) {
             String[] sublist = Arrays.copyOfRange(tracksIds, sublist_id * sublistLimit,
                     Math.min((sublist_id + 1) * sublistLimit, tracksIds.length));
@@ -177,14 +164,11 @@ public class User {
             if (sublistAudioFeatures.isEmpty()) {
                 continue;
             }
-            // add sublist's audio features to feature Buffers
-            for (int feature_id = 0; feature_id < audioFeaturesNames.length; feature_id++) {
-                featureBuffers.get(feature_id).addAll(sublistAudioFeatures.get(audioFeaturesNames[feature_id]));
+            // add sublist's audio features to featureBuffer
+            for (FeatureName feature : FeatureName.values()) {
+                String fName = feature.keyName;
+                audioFeatures.get(fName).addAll(sublistAudioFeatures.get(fName));
             }
-        }
-
-        for (int feature_id = 0; feature_id < audioFeaturesNames.length; feature_id++) {
-            audioFeatures.put(audioFeaturesNames[feature_id], featureBuffers.get(feature_id));
         }
         return audioFeatures;
     }
