@@ -9,6 +9,7 @@ import java.util.Hashtable;
 import java.lang.Math;
 import java.io.IOException;
 import org.apache.hc.core5.http.ParseException;
+import se.michaelthelin.spotify.model_objects.specification.Playlist;
 
 import se.michaelthelin.spotify.SpotifyApi;
 import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
@@ -39,6 +40,7 @@ public class User {
                 .build();
     }
 
+    // gets list of firsy {limit} playlists from library
     public PlaylistSimplified[] getPlaylists(int limit) {
         final GetListOfCurrentUsersPlaylistsRequest getListOfCurrentUsersPlaylistsRequest = spotifyApi
                 .getListOfCurrentUsersPlaylists()
@@ -56,6 +58,7 @@ public class User {
         }
     }
 
+    // Returns hashmap of pairs playlist name :playlist id
     public HashMap<String, String> getPlaylistsHashMap() {
         int limit = 50;
         PlaylistSimplified[] playlists = getPlaylists(limit);
@@ -146,6 +149,7 @@ public class User {
         }
     }
 
+    // returns dictionary of feature_name: feature value
     public Dictionary<String, List<Float>> getAllTracksAudioFeatures(String[] tracksIds) {
         Dictionary<String, List<Float>> audioFeatures = new Hashtable<>();
 
@@ -283,9 +287,7 @@ public class User {
         for (int i = 0; i < limit; i++) {
             Dictionary<String, String> dictionary = getArtistInfo(topArtistsIds.get(i));
             dictionaryList.add(dictionary);
-
         }
-
         return dictionaryList;
     }
 
