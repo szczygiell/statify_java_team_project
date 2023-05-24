@@ -1,6 +1,7 @@
 package com.statify;
 
 import org.apache.commons.compress.archivers.zip.UnsupportedZipFeatureException.Feature;
+import org.checkerframework.checker.units.qual.radians;
 import org.knowm.xchart.CategoryChart;
 import org.knowm.xchart.CategoryChartBuilder;
 import org.knowm.xchart.style.Styler.LegendPosition;
@@ -21,11 +22,15 @@ import javax.swing.JLabel;
 import java.awt.GridLayout;
 import javax.swing.JFrame;
 import javax.swing.JList;
-import java.util.Dictionary;
 import java.util.Hashtable;
 import javax.swing.ListSelectionModel;
-import com.statify.User;
 import java.awt.Dimension;
+import org.knowm.xchart.RadarChart;
+import org.knowm.xchart.RadarChartBuilder;
+import org.knowm.xchart.style.RadarStyler;
+import java.awt.Color;
+import java.awt.Font;
+import java.util.Enumeration;
 
 public class Statify {
 
@@ -71,6 +76,33 @@ public class Statify {
             chart.addSeries("Error", Arrays.asList(0.0f), Arrays.asList(0));
             return chart;
         }
+    }
+
+    private static RadarChart getRadarChart(String[] radiiLabels,
+            String[] dataSeriesNames,
+            List<double[]> dataSeries,
+            String title) {
+
+        RadarChartBuilder radarChartBuilder = new RadarChartBuilder();
+        RadarChart radarChart = radarChartBuilder.build();
+        radarChart.setRadiiLabels(radiiLabels);
+        for (int i = 0; i < dataSeriesNames.length; i++) {
+            radarChart.addSeries(dataSeriesNames[i], dataSeries.get(i));
+        }
+        RadarStyler radarStyler = radarChart.getStyler();
+        Color[] colorSeries = {
+                new Color(170, 246, 131, 150),
+                new Color(238, 96, 85, 230),
+                new Color(255, 155, 133, 80),
+                new Color(255, 217, 125, 100),
+                new Color(96, 211, 148, 200),
+        };
+        radarStyler.setSeriesColors(colorSeries);
+        Font monsterratFont = new Font("Noto Sans CJK JP", Font.PLAIN, 25);
+        radarStyler.setBaseFont(monsterratFont);
+        radarStyler.setRadiiTitleFont(monsterratFont);
+        radarStyler.setLegendFont(monsterratFont);
+        return radarChart;
     }
 
     public static JScrollPane createTopTracksPanel(int tracksNumber, String timeRange) {
@@ -169,17 +201,103 @@ public class Statify {
         Dictionary<String, List<Float>> audioFeatures = Statify.currentUser
                 .getAllTracksAudioFeatures(tracksIds.toArray(new String[0]));
         try {
-            data.addAll(audioFeatures.get(feature.keyName()));
+            data.addAll(audioFeatures.get(feature.keyName));
         } catch (NullPointerException e) {
             System.out.println(e);
         }
         return data;
     }
 
+    public static Float getMaxAbsoluteValue(List<Float> inputList) {
+        float maxAbsoluteValue = 0;
+        for (float value : inputList) {
+            float absoluteValue = Math.abs(value);
+            if (absoluteValue > maxAbsoluteValue) {
+                maxAbsoluteValue = absoluteValue;
+            }
+        }
+        return maxAbsoluteValue;
+    }
+
+    private static Dictionary<String, Float> MeanFeatureValues(
+            Dictionary<String, List<Float>> tracksAudioFeaturesInput) {
+        Dictionary<String, Float> meanAudioFeaturesDict = new Hashtable<>();
+
+        Enumeration<String> keys = tracksAudioFeaturesInput.keys();
+        while (keys.hasMoreElements()) {
+            String key = keys.nextElement();
+            List<Float> values = tracksAudioFeaturesInput.get(key);
+            Float maxValue = getMaxAbsoluteValue(values);
+            float sum = 0;
+            for (Float value : values) {
+                sum += value;
+            }
+            float mean = sum / values.size();
+            if (key.equals(FeatureName.LOUDNESS.keyName)) {
+                Float maxLoudness = Math.max(15.0f, maxValue);
+                mean = -mean / maxLoudness;
+            }
+            meanAudioFeaturesDict.put(key, mean);
+        }
+        return meanAudioFeaturesDict;
+    }
+
+    private static Dictionary<String, List<Float>> sliceDictionary(
+            Dictionary<String, List<Float>> inputDictionary,
+            FeatureName[] keysToKeep) {
+        Dictionary<String, List<Float>> slicedDictionary = new Hashtable<>();
+        for (FeatureName key : keysToKeep) {
+            if (inputDictionary.get(key.keyName) != null) {
+                List<Float> values = inputDictionary.get(key.keyName);
+                slicedDictionary.put(key.keyName, values);
+            }
+        }
+        return slicedDictionary;
+    }
+
+    private static double[] convertValuesToDoubleArray(Dictionary<String, Float> dictionary) {
+        int size = dictionary.size();
+        double[] valuesArray = new double[size];
+
+        Enumeration<Float> values = dictionary.elements();
+        int index = 0;
+        while (values.hasMoreElements()) {
+            float floatValue = values.nextElement();
+            double doubleValue = (double) floatValue;
+            valuesArray[index] = doubleValue;
+            index++;
+        }
+
+        return valuesArray;
+    }
+
+    public static XChartPanel<RadarChart> getTracksRadarChartFromPlaylists(HashMap<String, String> playlistsHashMap,
+            FeatureName[] features) {
+        List<double[]> dataSeriesList = new ArrayList();
+        String[] playlistNames = playlistsHashMap.keySet().toArray(new String[0]);
+        for (String playlistId : playlistsHashMap.values()) {
+            // get playlist's dict track_id : [features list]
+            Dictionary<String, List<Float>> playlistTracksAllAudioFeatures = currentUser
+                    .getAllTracksAudioFeatures(currentUser.getPlaylistTracksIds(playlistId).toArray(new String[0]));
+            // create same dict with only selected features
+            Dictionary<String, List<Float>> playlistTracksAudioFeatures = sliceDictionary(
+                    playlistTracksAllAudioFeatures, features);
+            // convert dict to
+            Dictionary<String, Float> meanPlaylistFeatures = MeanFeatureValues(playlistTracksAudioFeatures);
+            double[] dataSeries = convertValuesToDoubleArray(meanPlaylistFeatures);
+            dataSeriesList.add(dataSeries);
+        }
+        RadarChart radarChart = getRadarChart(FeatureName.toArray(features), playlistNames, dataSeriesList,
+                "Your playlists Features RadarChart");
+
+        return new XChartPanel<RadarChart>(radarChart);
+    }
+
+    // TODO wykres z wybranych playlist
     public static JPanel getAudioFeatureHistogram(FeatureName feature) {
         List<Float> data = getFeaturePlaylistData(playlists_num, feature);
         int binsNum = (int) Math.cbrt(data.size());
-        String title = feature.toString() + String.format(" Histogram of your %o playlists", playlists_num);
+        String title = feature.keyName + String.format(" Histogram of your %o playlists", playlists_num);
         String xTitle = "Mean";
         String yTitle = "Tracks count";
         String seriesName = "Tracks in your playlists";

@@ -95,10 +95,11 @@ public final class App {
     }
 
     public static void main(String[] args) {
-        String token = "BQC9-m8EZCpwkxJ_Fu8BLvq5HhcQGHknGsdlWfzyL1X1_3qBGGK6wb_3qjnBXlFVdpAxl_G23QPXjerZkuwgL2ZnkryH0okkm5BV2-C8B3rqdl7vOOHK4XaFuS-wFS20O-XbQdpPWFcf2pzEIq24dQdqwf4ml2iGlF3XQZT7fjbTzNC5He_8BNo3ZW0koHjkBuIvGuoDP8jVq0An3xz6xcZ8tVSPmw";
-        playlistSelectablePanel(token);
+        // String token =
+        // "BQC9-m8EZCpwkxJ_Fu8BLvq5HhcQGHknGsdlWfzyL1X1_3qBGGK6wb_3qjnBXlFVdpAxl_G23QPXjerZkuwgL2ZnkryH0okkm5BV2-C8B3rqdl7vOOHK4XaFuS-wFS20O-XbQdpPWFcf2pzEIq24dQdqwf4ml2iGlF3XQZT7fjbTzNC5He_8BNo3ZW0koHjkBuIvGuoDP8jVq0An3xz6xcZ8tVSPmw";
+        // playlistSelectablePanel(token);
         // login_window();
-        // runApp();
+        runApp();
 
     }
 }
