@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
+import java.awt.GridBagLayout;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import java.util.Hashtable;
@@ -30,6 +31,7 @@ import org.knowm.xchart.RadarChartBuilder;
 import org.knowm.xchart.style.RadarStyler;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
 import java.util.Enumeration;
 
 public class Statify {
@@ -157,26 +159,44 @@ public class Statify {
         List<Dictionary<String, String>> data = Statify.currentUser.getTopArtistsInfoList(artistsNumber, timeRange);
         JPanel panel = new JPanel();
 
-        panel.setLayout(new GridLayout(data.size() + 1, 2, 10, 10)); // n+1 rows, 2 columns, 10px between each row and
-                                                                     // ech column
+        panel.setLayout(new GridBagLayout()); // n+1 rows, 2 columns, 10px between each row and
+        GridBagConstraints c = new GridBagConstraints();                                                             // ech column
         // lepiej to zrobić GridBagLayout bo można dodawać kolumny różnych szerokości
         JLabel mainPositionLabel = new JLabel("Position");
-        panel.add(mainPositionLabel);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 0;
+        panel.add(mainPositionLabel, c);
         JLabel mainArtistLabel = new JLabel("Artist");
-        panel.add(mainArtistLabel);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 1;
+        c.gridy = 0;
+        panel.add(mainArtistLabel, c);
         JLabel mainGenresLabel = new JLabel("Genres");
-        panel.add(mainGenresLabel);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 2;
+        c.gridy = 0;
+        panel.add(mainGenresLabel, c);
 
         // Adding 10 string fields to panel
         for (int i = 0; i < data.size(); i++) {
             JLabel positionLabel = new JLabel(Integer.toString(i + 1));
-            panel.add(positionLabel);
+            c.fill = GridBagConstraints.HORIZONTAL;
+            c.gridx = 0;
+            c.gridy = i+1;
+            panel.add(positionLabel, c);
 
             JLabel nameLabel = new JLabel(data.get(i).get("name"));
-            panel.add(nameLabel);
+            c.fill = GridBagConstraints.HORIZONTAL;
+            c.gridx = 1;
+            c.gridy = i+1;
+            panel.add(nameLabel, c);
 
             JLabel genresLabel = new JLabel(data.get(i).get("genres"));
-            panel.add(genresLabel);
+            c.fill = GridBagConstraints.HORIZONTAL;
+            c.gridx = 2;
+            c.gridy = i+1;
+            panel.add(genresLabel, c);
 
         }
         JScrollPane scrollPane = new JScrollPane(panel); // Create a JScrollPane and pass in the JPanel
