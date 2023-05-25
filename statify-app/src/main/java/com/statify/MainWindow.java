@@ -6,8 +6,10 @@ package com.statify;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JFrame;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.Dimension;
 
 /**
  *
@@ -766,16 +768,30 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void artistButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_artistButtonMouseEntered
         System.out.println("entered");
+        JPanel infoPanel = new JPanel();
+        JFrame temp = new JFrame();
+        temp.setAlwaysOnTop(true);
+        Dimension size = new Dimension(300, 300);
+        temp.setSize(300, 300);
+        temp.setPreferredSize(size);
         JLabel d = new JLabel();
-        int alpha = 30; // 128 = 50% transparency
+        int alpha = 200; // 128 = 50% transparency
         Color translucentColor = new Color(0, 0, 255, alpha);
         d.setAutoscrolls(true);
         d.setBackground(translucentColor);
+        infoPanel.setForeground(translucentColor);
+        infoPanel.setSize(300, 300);
+        //infoPanel.setLocation(alpha, alpha);
         d.setText("test");
         d.setSize(100, 200);
         //d.setLocation(150, 150);
         d.setVisible(true);
-        mainPanel.add(d);
+        infoPanel.add(d);
+        infoPanel.setVisible(true);
+        temp.setContentPane(infoPanel);
+        temp.setVisible(true);
+        
+
 
     }//GEN-LAST:event_artistButtonMouseEntered
 
