@@ -111,37 +111,63 @@ public class Statify {
         List<Dictionary<String, String>> data = Statify.currentUser.getTopTracksInfoList(tracksNumber, timeRange);
         JPanel panel = new JPanel();
 
-        panel.setLayout(new GridLayout(data.size() + 1, 3, 10, 10)); // n+1 rows, 2 columns, 10px between each row and
-                                                                     // ech column
+        panel.setLayout(new GridBagLayout()); // n+1 rows, 2 columns, 10px between each row and
+        GridBagConstraints c = new GridBagConstraints();                                                             // ech column
         // lepiej to zrobić GridBagLayout bo można dodawać kolumny różnych szerokości
 
-        panel.setLayout(new GridLayout(data.size() + 1, 3, 10, 10)); // n+1 rows, 2 columns, 10px between each row and
+        panel.setLayout(new GridBagLayout()); // n+1 rows, 2 columns, 10px between each row and
                                                                      // ech column
         JLabel mainPositionLabel = new JLabel("Position");
-        panel.add(mainPositionLabel);
-        panel.add(mainPositionLabel);
+        c.fill = GridBagConstraints.BOTH + 10;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.weightx = 1;
+        c.weighty = 1;
+        panel.add(mainPositionLabel, c);
+        panel.add(mainPositionLabel, c);
         JLabel mainTitleLabel = new JLabel("Title");
-        panel.add(mainTitleLabel);
-        panel.add(mainTitleLabel);
+        c.fill = GridBagConstraints.BOTH + 10;
+        c.gridx = 1;
+        c.gridy = 0;
+        panel.add(mainTitleLabel, c);
+        panel.add(mainTitleLabel, c);
         JLabel mainArtistLabel = new JLabel("Artist");
-        panel.add(mainArtistLabel);
-        panel.add(mainArtistLabel);
+        c.fill = GridBagConstraints.BOTH + 10;
+        c.gridx = 2;
+        c.gridy = 0;
+        panel.add(mainArtistLabel, c);
+        panel.add(mainArtistLabel, c);
         JLabel mainAlbumLabel = new JLabel("Album");
-        panel.add(mainAlbumLabel);
-        panel.add(mainAlbumLabel);
+        c.fill = GridBagConstraints.BOTH + 10;
+        c.gridx = 3;
+        c.gridy = 0;
+        panel.add(mainAlbumLabel, c);
+        panel.add(mainAlbumLabel, c);
         // Adding 10 string fields to panel
         for (int i = 0; i < data.size(); i++) {
             JLabel positionLabel = new JLabel(Integer.toString(i + 1));
-            panel.add(positionLabel);
+            c.fill = GridBagConstraints.BOTH + 10;
+            c.gridx = 0;
+            c.gridy = i+1;
+            panel.add(positionLabel, c);
 
             JLabel titleLabel = new JLabel(data.get(i).get("name"));
-            panel.add(titleLabel);
+            c.fill = GridBagConstraints.BOTH + 10;
+            c.gridx = 1;
+            c.gridy = i+1;
+            panel.add(titleLabel, c);
 
             JLabel artistLabel = new JLabel(data.get(i).get("artist"));
-            panel.add(artistLabel);
+            c.fill = GridBagConstraints.BOTH + 10;
+            c.gridx = 2;
+            c.gridy = i+1;
+            panel.add(artistLabel, c);
 
             JLabel albumLabel = new JLabel(data.get(i).get("album"));
-            panel.add(albumLabel);
+            c.fill = GridBagConstraints.BOTH + 10;
+            c.gridx = 3;
+            c.gridy = i+1;
+            panel.add(albumLabel, c);
         }
         JScrollPane scrollPane = new JScrollPane(panel); // Create a JScrollPane and pass in the JPanel
         scrollPane.setPreferredSize(new java.awt.Dimension(800, 600));
@@ -163,17 +189,19 @@ public class Statify {
         GridBagConstraints c = new GridBagConstraints();                                                             // ech column
         // lepiej to zrobić GridBagLayout bo można dodawać kolumny różnych szerokości
         JLabel mainPositionLabel = new JLabel("Position");
-        c.fill = GridBagConstraints.HORIZONTAL;
+        c.fill = GridBagConstraints.BOTH + 10;
         c.gridx = 0;
         c.gridy = 0;
+        c.weightx = 1;
+        c.weighty = 1;
         panel.add(mainPositionLabel, c);
         JLabel mainArtistLabel = new JLabel("Artist");
-        c.fill = GridBagConstraints.HORIZONTAL;
+        c.fill = GridBagConstraints.BOTH + 10;
         c.gridx = 1;
         c.gridy = 0;
         panel.add(mainArtistLabel, c);
         JLabel mainGenresLabel = new JLabel("Genres");
-        c.fill = GridBagConstraints.HORIZONTAL;
+        c.fill = GridBagConstraints.BOTH +10;
         c.gridx = 2;
         c.gridy = 0;
         panel.add(mainGenresLabel, c);
@@ -181,19 +209,19 @@ public class Statify {
         // Adding 10 string fields to panel
         for (int i = 0; i < data.size(); i++) {
             JLabel positionLabel = new JLabel(Integer.toString(i + 1));
-            c.fill = GridBagConstraints.HORIZONTAL;
+            c.fill = GridBagConstraints.BOTH+10;
             c.gridx = 0;
             c.gridy = i+1;
             panel.add(positionLabel, c);
 
             JLabel nameLabel = new JLabel(data.get(i).get("name"));
-            c.fill = GridBagConstraints.HORIZONTAL;
+            c.fill = GridBagConstraints.BOTH+10;
             c.gridx = 1;
             c.gridy = i+1;
             panel.add(nameLabel, c);
 
             JLabel genresLabel = new JLabel(data.get(i).get("genres"));
-            c.fill = GridBagConstraints.HORIZONTAL;
+            c.fill = GridBagConstraints.BOTH+10;
             c.gridx = 2;
             c.gridy = i+1;
             panel.add(genresLabel, c);
