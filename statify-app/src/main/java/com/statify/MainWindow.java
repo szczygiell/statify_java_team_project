@@ -6,10 +6,9 @@ package com.statify;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.JFrame;
 import java.awt.Font;
 import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.MouseInfo;
 
 /**
  *
@@ -203,10 +202,24 @@ public class MainWindow extends javax.swing.JFrame {
         creditsLabel = new javax.swing.JLabel();
         planeBasePanel = new javax.swing.JPanel();
         buttonFlag = "";
+        infoWindow = new javax.swing.JFrame();
+        infoText = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Statify PAP23L edition");
         setMinimumSize(new java.awt.Dimension(830, 440));
+
+        infoWindow.setUndecorated(true);
+        infoWindow.setBackground(new Color(255, 255, 255, 50));
+        infoWindow.setSize(400, 50);
+        int width = infoWindow.getWidth();
+        int height = infoWindow.getHeight();
+        infoText.setBounds(0, 0, width, height);
+        infoText.setHorizontalAlignment(JLabel.CENTER);
+        infoText.setVerticalAlignment(JLabel.CENTER);
+        infoText.setFont(new java.awt.Font("Liberation Sans", 1, 15));
+        infoText.setForeground(Color.BLACK);
+
 
         planeRoot.setMaximumSize(new java.awt.Dimension(1980, 1080));
         planeRoot.setPreferredSize(new java.awt.Dimension(960, 540));
@@ -768,35 +781,49 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void artistButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_artistButtonMouseEntered
         System.out.println("entered");
-        JPanel infoPanel = new JPanel();
-        JFrame temp = new JFrame();
-        temp.setAlwaysOnTop(true);
-        Dimension size = new Dimension(300, 300);
-        temp.setSize(300, 300);
-        temp.setPreferredSize(size);
-        JLabel d = new JLabel();
-        int alpha = 200; // 128 = 50% transparency
-        Color translucentColor = new Color(0, 0, 255, alpha);
-        d.setAutoscrolls(true);
-        d.setBackground(translucentColor);
-        infoPanel.setForeground(translucentColor);
-        infoPanel.setSize(300, 300);
-        //infoPanel.setLocation(alpha, alpha);
-        d.setText("test");
-        d.setSize(100, 200);
-        //d.setLocation(150, 150);
-        d.setVisible(true);
-        infoPanel.add(d);
-        infoPanel.setVisible(true);
-        temp.setContentPane(infoPanel);
-        temp.setVisible(true);
+        // JPanel infoPanel = new JPanel();
+        // JFrame temp = new JFrame();
+        // temp.setAlwaysOnTop(true);
+        // Dimension size = new Dimension(300, 300);
+        // temp.setSize(300, 300);
+        // temp.setPreferredSize(size);
+        // JLabel d = new JLabel();
+        // int alpha = 200; // 128 = 50% transparency
+        // Color translucentColor = new Color(0, 0, 255, alpha);
+        // d.setAutoscrolls(true);
+        // d.setBackground(translucentColor);
+        // infoPanel.setForeground(translucentColor);
+        // temp.setBackground(new Color(0, 0, 0, 0));
+        // temp.setUndecorated(true);
+        // temp.setOpacity(0.55f);
+        // infoPanel.setSize(300, 300);
+        // infoPanel.setLocation(alpha, alpha);
+        // d.setText("test");
+        // d.setSize(100, 200);
+        // //d.setLocation(150, 150);
+        // d.setVisible(true);
+        // infoPanel.add(d);
+        // infoPanel.setVisible(true);
+        // //temp.setContentPane(infoPanel);
+        // temp.setVisible(true);
+        String text = "<html> Tutaj poznasz swoich najczęściej słuchanych artystów";
+        infoText.setText(text);
+        infoWindow.add(infoText);
+        java.awt.PointerInfo a = MouseInfo.getPointerInfo();
+        java.awt.Point b = a.getLocation();
+        int mouse_x = (int) b.getX();
+        int mouse_y = (int) b.getY();
+        System.out.println(mouse_x);
+        System.out.println(mouse_y);
+        infoWindow.setLocation(mouse_x - 170, mouse_y - 50);
+        infoWindow.setVisible(true);
         
 
 
     }//GEN-LAST:event_artistButtonMouseEntered
 
     private void artistButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_artistButtonMouseExited
-        //d.setVisible(false);
+        infoWindow.setVisible(false);
     }//GEN-LAST:event_artistButtonMouseExited
 
     private void genreButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_genreButtonMouseEntered
@@ -1115,7 +1142,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton generatePlaylistButton;
     private javax.swing.JButton genreButton;
     private javax.swing.JButton homeButton;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JFrame infoWindow;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton laundnessButton;
     private javax.swing.JPanel logoPanel;
@@ -1135,5 +1162,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel typeActionPanel;
     private javax.swing.JButton weeks4Button;
     private String buttonFlag;
+    private javax.swing.JLabel infoText;
     // End of variables declaration//GEN-END:variables
 }
