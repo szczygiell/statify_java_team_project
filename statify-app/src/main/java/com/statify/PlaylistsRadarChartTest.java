@@ -27,9 +27,10 @@ public class PlaylistsRadarChartTest {
     }
 
     public static void main(String[] args) {
-        String token = "BQCAVu0ouWNP1gZEu0Z6tmArKeXdW1zn3GrMHi7m4n3zcP8FXLQXO8jDCSX5_dxgqfusf1a-Rd-xFsOrsP81zk_LeBtKByysNEcnpk6C8MReqlos4EV3Rg7eFWBQaH1DEuLaiu671I0tOV1RnINPSVNwz2S4ZJItPvqaNO2Y-mbIFcsWkkO-1BDYxEA4E0Via3RD92Mb9bdT4_cWmsVmmbQdBYjl0Q";
+        String token = "BQAu1DziRe3zmVAk0CLj1DEZj5j00izJ8mwbab7wL14WrDJjrtLOiQG557zYg-0Qea__VJw3YcoT3qlQCET91QZ-640l8VH5kxuZyQX9GeP40hqpoVqZWLrpaJ8qW1BXjOYmFtVsnYf2GoV4OYt0lbt0LfncGMKTScrirvrDIhEqYEAkuStFiP136jTFmn42sCOEQs2eXu2__IA5ThjUUS3icdMQfg";
         showPlaylistRadarChart(token);
         // featureNameTest();
+        
 
     }
 }

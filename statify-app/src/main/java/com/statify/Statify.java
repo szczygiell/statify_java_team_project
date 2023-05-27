@@ -84,7 +84,9 @@ public class Statify {
             String title) {
 
         RadarChartBuilder radarChartBuilder = new RadarChartBuilder();
-        RadarChart radarChart = radarChartBuilder.build();
+        RadarChart radarChart = new RadarChartBuilder().build();
+        radarChart.getStyler().setToolTipsEnabled(true);
+        radarChart.getStyler().setLegendPosition(LegendPosition.InsideSW);
         radarChart.setRadiiLabels(radiiLabels);
         for (int i = 0; i < dataSeriesNames.length; i++) {
             radarChart.addSeries(dataSeriesNames[i], dataSeries.get(i));

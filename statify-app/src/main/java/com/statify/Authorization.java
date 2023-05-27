@@ -60,8 +60,6 @@ public class Authorization {
             // Set access and refresh token for further "spotifyApi" object usage
             spotifyApi.setAccessToken(authorizationCodeCredentials.getAccessToken());
             spotifyApi.setRefreshToken(authorizationCodeCredentials.getRefreshToken());
-
-            System.out.println("Expires in: " + authorizationCodeCredentials.getExpiresIn());
         } catch (CompletionException e) {
             System.out.println("Error: " + e.getCause().getMessage());
         } catch (CancellationException e) {
@@ -77,10 +75,9 @@ public class Authorization {
         localhostServer.startServer();
         browser.driver.close();
         code = localhostServer.getCodePrameterValue();
-        System.out.println("Code=" + code);
         authorizationCode_Async();
         String token = spotifyApi.getAccessToken();
-        System.out.println(token);
+        System.out.println("TOKEN=" + token);
         return token;
 
     }
