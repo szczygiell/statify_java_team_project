@@ -85,7 +85,6 @@ public class User {
         for (PlaylistSimplified playlist : playlists) {
             playlists_ids.add(playlist.getId());
         }
-        System.out.println(playlists[0].getName());
         return playlists_ids;
     }
 
@@ -102,7 +101,6 @@ public class User {
         try {
             final Paging<PlaylistTrack> playlistTrackPaging = getPlaylistsItemsRequest.execute();
             List<String> tracks_indeces = new ArrayList<String>();
-            // System.out.println(playlistTrackPaging.getItems()[0].getTrack().getName());
             for (PlaylistTrack pl_track : playlistTrackPaging.getItems()) {
                 IPlaylistItem track = pl_track.getTrack();
                 if (track == null) {
@@ -215,7 +213,6 @@ public class User {
             trackInfo.put("image", track.getAlbum().getImages()[0].toString()); // "Image(height=" + height + ", url=" +
                                                                                 // url + ", width=" + width + ")"
             return trackInfo;
-            // System.out.println("Name: " + track.getName());
         } catch (IOException | SpotifyWebApiException | ParseException e) {
             System.out.println("Error: " + e.getMessage());
             return trackInfo;
@@ -269,7 +266,6 @@ public class User {
             artistInfo.put("genres", String.join(", ", artist.getGenres()));
 
             return artistInfo;
-            // System.out.println("Name: " + artistInfo.getName());
         } catch (IOException | SpotifyWebApiException | ParseException e) {
             System.out.println("Error: " + e.getMessage());
             return artistInfo;
@@ -330,7 +326,7 @@ public class User {
 
     public HashMap<String, String> getRecomendationsByTopArtists(String timeDuration) {
         List<String> topArtistsIds = getTopArtistsIds(5, timeDuration);
-        List<TrackSimplified> recommendedTracks = getRecomendations(new ArrayList<String>(), topArtistsIds);
+        List<TrackSimplified> recommendedTracks = getRecomendations(topArtistsIds, new ArrayList<String>());
         HashMap<String, String> tracks = new HashMap<>();
         for (TrackSimplified track : recommendedTracks) {
             tracks.put(track.getName(), track.getArtists()[0].getName());

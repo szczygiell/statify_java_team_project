@@ -1,6 +1,7 @@
 package com.statify;
 
 import org.apache.commons.compress.archivers.zip.UnsupportedZipFeatureException.Feature;
+import org.checkerframework.checker.units.qual.C;
 import org.checkerframework.checker.units.qual.radians;
 import se.michaelthelin.spotify.model_objects.specification.TrackSimplified;
 import org.knowm.xchart.CategoryChart;
@@ -352,7 +353,7 @@ public class Statify {
         return scrollPane;
     }
 
-    public static JScrollPane createRecommendationsPanel(HashMap<String, String> recomendedTracks) {
+    private static JScrollPane createRecommendationsPanel(HashMap<String, String> recomendedTracks) {
         JPanel panel = new JPanel();
 
         panel.setLayout(new GridLayout(recomendedTracks.size() + 1, 2, 10, 10)); // n+1 rows, 2 columns, 10px between
@@ -376,6 +377,16 @@ public class Statify {
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         return scrollPane;
+    }
+
+    public static JScrollPane getRecommendationsPanelByTopTracks(String timeDuration) {
+        HashMap<String, String> recommendations = currentUser.getRecomendationsByTopTracks("short_term");
+        return Statify.createRecommendationsPanel(recommendations);
+    }
+
+    public static JScrollPane getRecommendationsPanelByTopArtists(String timeDuration) {
+        HashMap<String, String> recommendations = currentUser.getRecomendationsByTopArtists("short_term");
+        return Statify.createRecommendationsPanel(recommendations);
     }
 
     public static void main(String[] args) {
