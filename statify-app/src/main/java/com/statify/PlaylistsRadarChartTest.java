@@ -17,7 +17,11 @@ public class PlaylistsRadarChartTest {
 
         Statify.setUser(user);
         Statify.SetPlaylistsNum(limit);
-        XChartPanel<RadarChart> chartPanel = Statify.getTracksRadarChartFromPlaylists();
+        HashMap<String, String> playlists = user.getPlaylistsHashMap(3);
+        FeatureName[] features = { FeatureName.ACOUSTICNESS, FeatureName.DANCEABILITY, FeatureName.ENERGY,
+                FeatureName.LOUDNESS, FeatureName.LIVENESS };
+
+        XChartPanel<RadarChart> chartPanel = Statify.getTracksRadarChartFromPlaylists(playlists, features);
         TopLevelWindow.createChartFrame(chartPanel);
     }
 

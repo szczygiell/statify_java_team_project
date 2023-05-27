@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.MouseInfo;
+import java.util.HashMap;
 
 /**
  *
@@ -1237,7 +1238,11 @@ public class MainWindow extends javax.swing.JFrame {
                         javax.swing.JOptionPane.showMessageDialog(this, "Maximum amount of playlist is 3");
                     }
                     else {
-                        JPanel radar = Statify.getTracksRadarChartFromPlaylists();
+                        User user = Statify.currentUser;
+                        HashMap<String, String> playlists = user.getPlaylistsHashMap(plNum);
+                        FeatureName[] features = { FeatureName.ACOUSTICNESS, FeatureName.DANCEABILITY, FeatureName.ENERGY,
+                        FeatureName.LOUDNESS, FeatureName.LIVENESS };
+                        JPanel radar = Statify.getTracksRadarChartFromPlaylists(playlists, features);
                         panelInit(radar);
                         radar.setVisible(true);
                     }
@@ -1272,7 +1277,11 @@ public class MainWindow extends javax.swing.JFrame {
                         javax.swing.JOptionPane.showMessageDialog(this, "Maximum amount of playlist is 3");
                     }
                     else {
-                        JPanel radar = Statify.getTracksRadarChartFromPlaylists();
+                        User user = Statify.currentUser;
+                        HashMap<String, String> playlists = user.getPlaylistsHashMap(plNum);
+                        FeatureName[] features = { FeatureName.ACOUSTICNESS, FeatureName.DANCEABILITY, FeatureName.ENERGY,
+                        FeatureName.LOUDNESS, FeatureName.LIVENESS };
+                        JPanel radar = Statify.getTracksRadarChartFromPlaylists(playlists, features);
                         panelInit(radar);
                         radar.setVisible(true);
                     }
@@ -1309,7 +1318,11 @@ public class MainWindow extends javax.swing.JFrame {
                         javax.swing.JOptionPane.showMessageDialog(this, "Maximum amount of playlist is 3");
                     }
                     else {
-                        JPanel radar = Statify.getTracksRadarChartFromPlaylists();
+                        User user = Statify.currentUser;
+                        HashMap<String, String> playlists = user.getPlaylistsHashMap(plNum);
+                        FeatureName[] features = { FeatureName.ACOUSTICNESS, FeatureName.DANCEABILITY, FeatureName.ENERGY,
+                        FeatureName.LOUDNESS, FeatureName.LIVENESS };
+                        JPanel radar = Statify.getTracksRadarChartFromPlaylists(playlists, features);
                         panelInit(radar);
                         radar.setVisible(true);
                     }
@@ -1369,6 +1382,8 @@ public class MainWindow extends javax.swing.JFrame {
     private void tracksAnaliseButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_tracksAnaliseButtonActionPerformed
         panelsSetDefault();
         actionPanel.removeAll();
+        actionPanel.revalidate();
+        actionPanel.repaint();
         analFlag = true;
         acousticnessButton.setVisible(true);
         laundnessButton.setVisible(true);
@@ -1379,6 +1394,8 @@ public class MainWindow extends javax.swing.JFrame {
     private void playlistAnaliseButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_playlistAnaliseButtonActionPerformed
         panelsSetDefault();
         actionPanel.removeAll();
+        actionPanel.revalidate();
+        actionPanel.repaint();
         analFlag = false;
         acousticnessButton.setVisible(false);
         laundnessButton.setVisible(false);

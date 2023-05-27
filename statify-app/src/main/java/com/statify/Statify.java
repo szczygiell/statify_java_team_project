@@ -36,7 +36,7 @@ import java.util.Enumeration;
 
 public class Statify {
 
-    private static User currentUser;
+    public static User currentUser;
     private static int playlists_num;
 
     public static void setUser(User user) {
@@ -319,10 +319,8 @@ public class Statify {
         return valuesArray;
     }
 
-    public static XChartPanel<RadarChart> getTracksRadarChartFromPlaylists() {
-        HashMap<String, String> playlistsHashMap = currentUser.getPlaylistsHashMap(playlists_num);
-        FeatureName[] features = { FeatureName.ACOUSTICNESS, FeatureName.DANCEABILITY, FeatureName.ENERGY,
-            FeatureName.LOUDNESS, FeatureName.LIVENESS };
+    public static XChartPanel<RadarChart> getTracksRadarChartFromPlaylists(HashMap<String, String> playlistsHashMap, 
+            FeatureName[] features) {
         List<double[]> dataSeriesList = new ArrayList();
         String[] playlistNames = playlistsHashMap.keySet().toArray(new String[0]);
         for (String playlistId : playlistsHashMap.values()) {
