@@ -240,16 +240,16 @@ public class MainWindow extends javax.swing.JFrame {
         infoWindow.setSize(400, 50);
         infoWindow1.setUndecorated(true);
         infoWindow1.setBackground(new Color(255, 255, 255, 50));
-        infoWindow1.setSize(400, 50);
+        infoWindow1.setSize(400, 100);
         infoWindow2.setUndecorated(true);
         infoWindow2.setBackground(new Color(255, 255, 255, 50));
-        infoWindow2.setSize(400, 50);
+        infoWindow2.setSize(400, 100);
         infoWindow3.setUndecorated(true);
         infoWindow3.setBackground(new Color(255, 255, 255, 50));
-        infoWindow3.setSize(400, 50);
+        infoWindow3.setSize(400, 100);
         infoWindow4.setUndecorated(true);
         infoWindow4.setBackground(new Color(255, 255, 255, 50));
-        infoWindow4.setSize(400, 50);
+        infoWindow4.setSize(400, 100);
         infoWindow5.setUndecorated(true);
         infoWindow5.setBackground(new Color(255, 255, 255, 50));
         infoWindow5.setSize(400, 50);
@@ -277,6 +277,7 @@ public class MainWindow extends javax.swing.JFrame {
         infoWindow13.setUndecorated(true);
         infoWindow13.setBackground(new Color(255, 255, 255, 50));
         infoWindow13.setSize(400, 50);
+        
 
         // int width = infoWindow.getWidth();
         // int height = infoWindow.getHeight();
@@ -298,30 +299,32 @@ public class MainWindow extends javax.swing.JFrame {
         infoText.setForeground(Color.BLACK);
         infoText.setText(text);
 
-        String text1 = "Tutaj poznasz swoich najczęściej słuchanych artystów"; // przycisk artists
-        infoText1.setBounds(0, 0, width, height);
+        String text1 = "<html> Tutaj poznasz swoich najczęściej słuchanych artystów<br/>W pole tekstowe wpisz ilość artystów, a następnie<br/>wybierz okres ostatnich 4 tygodnii, 6 miesięcy lub<br/> od początku korzystania ze Spotify<html>"; // przycisk artists
+        int width1 = infoWindow1.getWidth();
+        int height1 = infoWindow1.getHeight();
+        infoText1.setBounds(0, 0, width1, height1);
         infoText1.setHorizontalAlignment(JLabel.CENTER);
         infoText1.setVerticalAlignment(JLabel.CENTER);
         infoText1.setFont(new java.awt.Font("Liberation Sans", 1, 15));
         infoText1.setForeground(Color.BLACK);
         infoText1.setText(text1);
 
-        String text2= "Tutaj poznasz najczęściej słuchane, ulubione utwory"; // przycisk top tracks
-        infoText2.setBounds(0, 0, width, height);
+        String text2= "<html> Tutaj poznasz najczęściej słuchane, ulubione utwory<br/>W pole tekstowe wpisz ilość utworów, a następnie<br/>wybierz okres ostatnich 4 tygodnii, 6 miesięcy lub<br/> od początku korzystania ze Spotify<html>"; // przycisk top tracks
+        infoText2.setBounds(0, 0, width1, height1);
         infoText2.setHorizontalAlignment(JLabel.CENTER);
         infoText2.setVerticalAlignment(JLabel.CENTER);
         infoText2.setFont(new java.awt.Font("Liberation Sans", 1, 15));
         infoText2.setForeground(Color.BLACK);
         infoText2.setText(text2);
-        String text3 = "Poznaj różne statystyki swoich playlist z biblioteki"; // przycisk analyse tracks
-        infoText3.setBounds(0, 0, width, height);
+        String text3 = "<html>Poznaj różne statystyki swoich utworów z biblioteki <br/>W pole tekstowe wpisz ilość utworów, a następnie <br/>wybierz interesującą cię statystykę: głośność, <br/>taneczność lub dźwięczność<html>"; // przycisk analyse tracks
+        infoText3.setBounds(0, 0, width1, height1);
         infoText3.setHorizontalAlignment(JLabel.CENTER);
         infoText3.setVerticalAlignment(JLabel.CENTER);
         infoText3.setFont(new java.awt.Font("Liberation Sans", 1, 15));
         infoText3.setForeground(Color.BLACK);
         infoText3.setText(text3);
-        String text4 = "Uzyskaj wiele ciekawych statystyki o swoich playlistach"; // przycisk analyse playlists
-        infoText4.setBounds(0, 0, width, height);
+        String text4 = "<html>Poznaj różne statystyki swoich playlist z biblioteki <br/>W pole tekstowe wpisz ilość playlist, a następnie <br/>wybierz interesującą cię statystykę: głośność, <br/>taneczność lub dźwięczność<html>"; // przycisk analyse playlists
+        infoText4.setBounds(0, 0, width1, height1);
         infoText4.setHorizontalAlignment(JLabel.CENTER);
         infoText4.setVerticalAlignment(JLabel.CENTER);
         infoText4.setFont(new java.awt.Font("Liberation Sans", 1, 15));
@@ -651,14 +654,14 @@ public class MainWindow extends javax.swing.JFrame {
         laundnessButton.setMaximumSize(new java.awt.Dimension(130, 54));
         laundnessButton.setMinimumSize(new java.awt.Dimension(130, 54));
         laundnessButton.setPreferredSize(new java.awt.Dimension(130, 54));
-        laundnessButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                laundnessButtonMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                laundnessButtonMouseExited(evt);
-            }
-        });
+        // laundnessButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        //     public void mouseEntered(java.awt.event.MouseEvent evt) {
+        //         laundnessButtonMouseEntered(evt);
+        //     }
+        //     public void mouseExited(java.awt.event.MouseEvent evt) {
+        //         laundnessButtonMouseExited(evt);
+        //     }
+        // });
         laundnessButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 laundnessButtonActionPerformed(evt);
@@ -676,14 +679,14 @@ public class MainWindow extends javax.swing.JFrame {
         danceabilityButton.setMaximumSize(new java.awt.Dimension(130, 54));
         danceabilityButton.setMinimumSize(new java.awt.Dimension(130, 54));
         danceabilityButton.setPreferredSize(new java.awt.Dimension(130, 54));
-        danceabilityButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                danceabilityButtonMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                danceabilityButtonMouseExited(evt);
-            }
-        });
+        // danceabilityButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        //     public void mouseEntered(java.awt.event.MouseEvent evt) {
+        //         danceabilityButtonMouseEntered(evt);
+        //     }
+        //     public void mouseExited(java.awt.event.MouseEvent evt) {
+        //         danceabilityButtonMouseExited(evt);
+        //     }
+        // });
         danceabilityButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 danceabilityButtonActionPerformed(evt);
@@ -701,14 +704,14 @@ public class MainWindow extends javax.swing.JFrame {
         acousticnessButton.setMaximumSize(new java.awt.Dimension(130, 54));
         acousticnessButton.setMinimumSize(new java.awt.Dimension(130, 54));
         acousticnessButton.setPreferredSize(new java.awt.Dimension(130, 54));
-        acousticnessButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                acousticnessButtonMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                acousticnessButtonMouseExited(evt);
-            }
-        });
+        // acousticnessButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        //     public void mouseEntered(java.awt.event.MouseEvent evt) {
+        //         acousticnessButtonMouseEntered(evt);
+        //     }
+        //     public void mouseExited(java.awt.event.MouseEvent evt) {
+        //         acousticnessButtonMouseExited(evt);
+        //     }
+        // });
         acousticnessButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 acousticnessButtonActionPerformed(evt);
@@ -769,14 +772,14 @@ public class MainWindow extends javax.swing.JFrame {
         weeks4Button.setMaximumSize(new java.awt.Dimension(130, 54));
         weeks4Button.setMinimumSize(new java.awt.Dimension(130, 54));
         weeks4Button.setPreferredSize(new java.awt.Dimension(130, 54));
-        weeks4Button.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                weeks4ButtonMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                weeks4ButtonMouseExited(evt);
-            }
-        });
+        // weeks4Button.addMouseListener(new java.awt.event.MouseAdapter() {
+        //     public void mouseEntered(java.awt.event.MouseEvent evt) {
+        //         weeks4ButtonMouseEntered(evt);
+        //     }
+        //     public void mouseExited(java.awt.event.MouseEvent evt) {
+        //         weeks4ButtonMouseExited(evt);
+        //     }
+        // });
         weeks4Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 weeks4ButtonActionPerformed(evt);
@@ -794,14 +797,14 @@ public class MainWindow extends javax.swing.JFrame {
         months6Button.setMaximumSize(new java.awt.Dimension(130, 54));
         months6Button.setMinimumSize(new java.awt.Dimension(130, 54));
         months6Button.setPreferredSize(new java.awt.Dimension(130, 54));
-        months6Button.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                months6ButtonMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                months6ButtonMouseExited(evt);
-            }
-        });
+        // months6Button.addMouseListener(new java.awt.event.MouseAdapter() {
+        //     public void mouseEntered(java.awt.event.MouseEvent evt) {
+        //         months6ButtonMouseEntered(evt);
+        //     }
+        //     public void mouseExited(java.awt.event.MouseEvent evt) {
+        //         months6ButtonMouseExited(evt);
+        //     }
+        // });
         months6Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 months6ButtonActionPerformed(evt);
@@ -819,14 +822,14 @@ public class MainWindow extends javax.swing.JFrame {
         allTimeHistoryButton.setMaximumSize(new java.awt.Dimension(130, 54));
         allTimeHistoryButton.setMinimumSize(new java.awt.Dimension(130, 54));
         allTimeHistoryButton.setPreferredSize(new java.awt.Dimension(130, 54));
-        allTimeHistoryButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                allTimeHistoryButtonMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                allTimeHistoryButtonMouseExited(evt);
-            }
-        });
+        // allTimeHistoryButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        //     public void mouseEntered(java.awt.event.MouseEvent evt) {
+        //         allTimeHistoryButtonMouseEntered(evt);
+        //     }
+        //     public void mouseExited(java.awt.event.MouseEvent evt) {
+        //         allTimeHistoryButtonMouseExited(evt);
+        //     }
+        // });
         allTimeHistoryButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 allTimeHistoryButtonActionPerformed(evt);
@@ -959,7 +962,7 @@ public class MainWindow extends javax.swing.JFrame {
         int mouse_y = (int) b.getY();
         System.out.println(mouse_x);
         System.out.println(mouse_y);
-        infoWindow1.setLocation(mouse_x - 170, mouse_y - 50);
+        infoWindow1.setLocation(mouse_x - 170, mouse_y - 100);
         infoWindow1.setVisible(true);
         
 
@@ -996,7 +999,7 @@ public class MainWindow extends javax.swing.JFrame {
         int mouse_y = (int) b.getY();
         System.out.println(mouse_x);
         System.out.println(mouse_y);
-        infoWindow2.setLocation(mouse_x - 170, mouse_y - 50);
+        infoWindow2.setLocation(mouse_x - 170, mouse_y - 100);
         infoWindow2.setVisible(true);
     }//GEN-LAST:event_topTracksButtonMouseEntered
 
@@ -1012,7 +1015,7 @@ public class MainWindow extends javax.swing.JFrame {
         int mouse_y = (int) b.getY();
         System.out.println(mouse_x);
         System.out.println(mouse_y);
-        infoWindow3.setLocation(mouse_x - 170, mouse_y - 50);
+        infoWindow3.setLocation(mouse_x - 170, mouse_y - 100);
         infoWindow3.setVisible(true);
     }//GEN-LAST:event_tracksAnaliseButtonMouseEntered
 
@@ -1028,7 +1031,7 @@ public class MainWindow extends javax.swing.JFrame {
         int mouse_y = (int) b.getY();
         System.out.println(mouse_x);
         System.out.println(mouse_y);
-        infoWindow4.setLocation(mouse_x - 170, mouse_y - 50);
+        infoWindow4.setLocation(mouse_x - 170, mouse_y - 100);
         infoWindow4.setVisible(true);
     }//GEN-LAST:event_playlistAnaliseButtonMouseEntered
 
@@ -1068,53 +1071,55 @@ public class MainWindow extends javax.swing.JFrame {
         infoWindow6.setVisible(false);
     }//GEN-LAST:event_homeButtonMouseExited
 
-    private void laundnessButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_laundnessButtonMouseEntered
-        infoWindow7.add(infoText7);
-        java.awt.PointerInfo a = MouseInfo.getPointerInfo();
-        java.awt.Point b = a.getLocation();
-        int mouse_x = (int) b.getX();
-        int mouse_y = (int) b.getY();
-        System.out.println(mouse_x);
-        System.out.println(mouse_y);
-        infoWindow7.setLocation(mouse_x - 170, mouse_y - 50);
-        infoWindow7.setVisible(true);
-    }//GEN-LAST:event_laundnessButtonMouseEntered
+    // private void laundnessButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_laundnessButtonMouseEntered
 
-    private void laundnessButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_laundnessButtonMouseExited
-        infoWindow7.setVisible(false);
-    }//GEN-LAST:event_laundnessButtonMouseExited
+    //     infoWindow7.add(infoText7);
+    //     java.awt.PointerInfo a = MouseInfo.getPointerInfo();
+    //     java.awt.Point b = a.getLocation();
+    //     int mouse_x = (int) b.getX();
+    //     int mouse_y = (int) b.getY();
+    //     System.out.println(mouse_x);
+    //     System.out.println(mouse_y);
+    //     infoWindow7.setLocation(mouse_x - 170, mouse_y - 50);
+    //     infoWindow7.setVisible(true);
+    // }//GEN-LAST:event_laundnessButtonMouseEntered
 
-    private void danceabilityButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_danceabilityButtonMouseEntered
-        infoWindow8.add(infoText8);
-        java.awt.PointerInfo a = MouseInfo.getPointerInfo();
-        java.awt.Point b = a.getLocation();
-        int mouse_x = (int) b.getX();
-        int mouse_y = (int) b.getY();
-        System.out.println(mouse_x);
-        System.out.println(mouse_y);
-        infoWindow8.setLocation(mouse_x - 170, mouse_y - 50);
-        infoWindow8.setVisible(true);
-    }//GEN-LAST:event_danceabilityButtonMouseEntered
+    // private void laundnessButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_laundnessButtonMouseExited
+    //     infoWindow7.setVisible(false);
+    // }//GEN-LAST:event_laundnessButtonMouseExited
 
-    private void danceabilityButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_danceabilityButtonMouseExited
-        infoWindow8.setVisible(false);
-    }//GEN-LAST:event_danceabilityButtonMouseExited
+    // private void danceabilityButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_danceabilityButtonMouseEntered
 
-    private void acousticnessButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_acousticnessButtonMouseEntered
-        infoWindow9.add(infoText9);
-        java.awt.PointerInfo a = MouseInfo.getPointerInfo();
-        java.awt.Point b = a.getLocation();
-        int mouse_x = (int) b.getX();
-        int mouse_y = (int) b.getY();
-        System.out.println(mouse_x);
-        System.out.println(mouse_y);
-        infoWindow9.setLocation(mouse_x - 170, mouse_y - 50);
-        infoWindow9.setVisible(true);
-    }//GEN-LAST:event_acousticnessButtonMouseEntered
+    //     infoWindow8.add(infoText8);
+    //     java.awt.PointerInfo a = MouseInfo.getPointerInfo();
+    //     java.awt.Point b = a.getLocation();
+    //     int mouse_x = (int) b.getX();
+    //     int mouse_y = (int) b.getY();
+    //     System.out.println(mouse_x);
+    //     System.out.println(mouse_y);
+    //     infoWindow8.setLocation(mouse_x - 170, mouse_y - 50);
+    //     infoWindow8.setVisible(true);
+    // }//GEN-LAST:event_danceabilityButtonMouseEntered
 
-    private void acousticnessButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_acousticnessButtonMouseExited
-        infoWindow9.setVisible(false);
-    }//GEN-LAST:event_acousticnessButtonMouseExited
+    // private void danceabilityButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_danceabilityButtonMouseExited
+    //     infoWindow8.setVisible(false);
+    // }//GEN-LAST:event_danceabilityButtonMouseExited
+
+    // private void acousticnessButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_acousticnessButtonMouseEntered
+    //     infoWindow9.add(infoText9);
+    //     java.awt.PointerInfo a = MouseInfo.getPointerInfo();
+    //     java.awt.Point b = a.getLocation();
+    //     int mouse_x = (int) b.getX();
+    //     int mouse_y = (int) b.getY();
+    //     System.out.println(mouse_x);
+    //     System.out.println(mouse_y);
+    //     infoWindow9.setLocation(mouse_x - 170, mouse_y - 50);
+    //     infoWindow9.setVisible(true);
+    // }//GEN-LAST:event_acousticnessButtonMouseEntered
+
+    // private void acousticnessButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_acousticnessButtonMouseExited
+    //     infoWindow9.setVisible(false);
+    // }//GEN-LAST:event_acousticnessButtonMouseExited
 
     // private void numPlaylistTextFieldMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_numPlaylistTextFieldMouseEntered
     //     infoWindow1.add(infoText1);
@@ -1132,53 +1137,53 @@ public class MainWindow extends javax.swing.JFrame {
     //     infoWindow.setVisible(false);
     // }//GEN-LAST:event_numPlaylistTextFieldMouseExited
 
-    private void weeks4ButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_weeks4ButtonMouseEntered
-        infoWindow10.add(infoText10);
-        java.awt.PointerInfo a = MouseInfo.getPointerInfo();
-        java.awt.Point b = a.getLocation();
-        int mouse_x = (int) b.getX();
-        int mouse_y = (int) b.getY();
-        System.out.println(mouse_x);
-        System.out.println(mouse_y);
-        infoWindow10.setLocation(mouse_x - 170, mouse_y - 50);
-        infoWindow10.setVisible(true);
-    }//GEN-LAST:event_weeks4ButtonMouseEntered
+    // private void weeks4ButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_weeks4ButtonMouseEntered
+    //     infoWindow10.add(infoText10);
+    //     java.awt.PointerInfo a = MouseInfo.getPointerInfo();
+    //     java.awt.Point b = a.getLocation();
+    //     int mouse_x = (int) b.getX();
+    //     int mouse_y = (int) b.getY();
+    //     System.out.println(mouse_x);
+    //     System.out.println(mouse_y);
+    //     infoWindow10.setLocation(mouse_x - 170, mouse_y - 50);
+    //     infoWindow10.setVisible(true);
+    // }//GEN-LAST:event_weeks4ButtonMouseEntered
 
-    private void weeks4ButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_weeks4ButtonMouseExited
-        infoWindow10.setVisible(false);
-    }//GEN-LAST:event_weeks4ButtonMouseExited
+    // private void weeks4ButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_weeks4ButtonMouseExited
+    //     infoWindow10.setVisible(false);
+    // }//GEN-LAST:event_weeks4ButtonMouseExited
 
-    private void months6ButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_months6ButtonMouseEntered
-        infoWindow11.add(infoText11);
-        java.awt.PointerInfo a = MouseInfo.getPointerInfo();
-        java.awt.Point b = a.getLocation();
-        int mouse_x = (int) b.getX();
-        int mouse_y = (int) b.getY();
-        System.out.println(mouse_x);
-        System.out.println(mouse_y);
-        infoWindow11.setLocation(mouse_x - 170, mouse_y - 50);
-        infoWindow11.setVisible(true);
-    }//GEN-LAST:event_months6ButtonMouseEntered
+    // private void months6ButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_months6ButtonMouseEntered
+    //     infoWindow11.add(infoText11);
+    //     java.awt.PointerInfo a = MouseInfo.getPointerInfo();
+    //     java.awt.Point b = a.getLocation();
+    //     int mouse_x = (int) b.getX();
+    //     int mouse_y = (int) b.getY();
+    //     System.out.println(mouse_x);
+    //     System.out.println(mouse_y);
+    //     infoWindow11.setLocation(mouse_x - 170, mouse_y - 50);
+    //     infoWindow11.setVisible(true);
+    // }//GEN-LAST:event_months6ButtonMouseEntered
 
-    private void months6ButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_months6ButtonMouseExited
-        infoWindow11.setVisible(false);
-    }//GEN-LAST:event_months6ButtonMouseExited
+    // private void months6ButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_months6ButtonMouseExited
+    //     infoWindow11.setVisible(false);
+    // }//GEN-LAST:event_months6ButtonMouseExited
 
-    private void allTimeHistoryButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_allTimeHistoryButtonMouseEntered
-        infoWindow12.add(infoText12);
-        java.awt.PointerInfo a = MouseInfo.getPointerInfo();
-        java.awt.Point b = a.getLocation();
-        int mouse_x = (int) b.getX();
-        int mouse_y = (int) b.getY();
-        System.out.println(mouse_x);
-        System.out.println(mouse_y);
-        infoWindow12.setLocation(mouse_x - 170, mouse_y - 50);
-        infoWindow12.setVisible(true);
-    }//GEN-LAST:event_allTimeHistoryButtonMouseEntered
+    // private void allTimeHistoryButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_allTimeHistoryButtonMouseEntered
+    //     infoWindow12.add(infoText12);
+    //     java.awt.PointerInfo a = MouseInfo.getPointerInfo();
+    //     java.awt.Point b = a.getLocation();
+    //     int mouse_x = (int) b.getX();
+    //     int mouse_y = (int) b.getY();
+    //     System.out.println(mouse_x);
+    //     System.out.println(mouse_y);
+    //     infoWindow12.setLocation(mouse_x - 170, mouse_y - 50);
+    //     infoWindow12.setVisible(true);
+    // }//GEN-LAST:event_allTimeHistoryButtonMouseEntered
 
-    private void allTimeHistoryButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_allTimeHistoryButtonMouseExited
-        infoWindow12.setVisible(false);
-    }//GEN-LAST:event_allTimeHistoryButtonMouseExited
+    // private void allTimeHistoryButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_allTimeHistoryButtonMouseExited
+    //     infoWindow12.setVisible(false);
+    // }//GEN-LAST:event_allTimeHistoryButtonMouseExited
 
     // private void numTracksTextFieldMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_numTracksTextFieldMouseEntered
     //     infoWindow1.add(infoText1);
@@ -1447,6 +1452,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel infoText11;
     private javax.swing.JLabel infoText12;
     private javax.swing.JLabel infoText13;
+
 
     // End of variables declaration//GEN-END:variables
 }
