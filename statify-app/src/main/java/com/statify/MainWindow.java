@@ -491,7 +491,7 @@ public class MainWindow extends javax.swing.JFrame {
         tracksAnaliseButton.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         tracksAnaliseButton.setForeground(new java.awt.Color(255, 255, 255));
         tracksAnaliseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons8-sample-rate-32.png"))); // NOI18N
-        tracksAnaliseButton.setText("analise tracks");
+        tracksAnaliseButton.setText("analyse tracks");
         tracksAnaliseButton.setBorder(null);
         tracksAnaliseButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -511,7 +511,7 @@ public class MainWindow extends javax.swing.JFrame {
         playlistAnaliseButton.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         playlistAnaliseButton.setForeground(new java.awt.Color(255, 255, 255));
         playlistAnaliseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons8-audio-wave2-32.png"))); // NOI18N
-        playlistAnaliseButton.setText("analise playlist");
+        playlistAnaliseButton.setText("analyse playlist");
         playlistAnaliseButton.setBorder(null);
         playlistAnaliseButton.setMaximumSize(new java.awt.Dimension(80, 24));
         playlistAnaliseButton.setMinimumSize(new java.awt.Dimension(80, 24));
@@ -1227,9 +1227,21 @@ public class MainWindow extends javax.swing.JFrame {
                 actionPanel.removeAll();
                 Statify.SetPlaylistsNum(plNum);
                 upperPanelDefault();
-                JPanel histo = Statify.getLoudnessHistogram();
-                panelInit(histo);
-                addNewPanel(histo);
+                if(analFlag){
+                    JPanel histo = Statify.getLoudnessHistogram();
+                    panelInit(histo);
+                    addNewPanel(histo);
+                }
+                else {
+                    if (plNum > 3){
+                        javax.swing.JOptionPane.showMessageDialog(this, "Maximum amount of playlist is 3");
+                    }
+                    else {
+                        JPanel radar = Statify.getTracksRadarChartFromPlaylists();
+                        panelInit(radar);
+                        radar.setVisible(true);
+                    }
+                }
                 optionsPanel.setVisible(true);
             }
         } catch (NumberFormatException e) {
@@ -1250,9 +1262,21 @@ public class MainWindow extends javax.swing.JFrame {
                 actionPanel.removeAll();
                 Statify.SetPlaylistsNum(plNum);
                 upperPanelDefault();
-                JPanel histo = Statify.getDanceabilityHistogram();
-                panelInit(histo);
-                histo.setVisible(true);
+                if (analFlag) {
+                    JPanel histo = Statify.getDanceabilityHistogram();
+                    panelInit(histo);
+                    histo.setVisible(true);
+                }
+                else {
+                    if (plNum > 3){
+                        javax.swing.JOptionPane.showMessageDialog(this, "Maximum amount of playlist is 3");
+                    }
+                    else {
+                        JPanel radar = Statify.getTracksRadarChartFromPlaylists();
+                        panelInit(radar);
+                        radar.setVisible(true);
+                    }
+                }
                 optionsPanel.setVisible(true);
             }
         } catch (NumberFormatException e) {
@@ -1275,9 +1299,21 @@ public class MainWindow extends javax.swing.JFrame {
                 actionPanel.removeAll();
                 Statify.SetPlaylistsNum(plNum);
                 upperPanelDefault();
-                JPanel histo = Statify.getAcousticnessHistogram();
-                panelInit(histo);
-                histo.setVisible(true);
+                if (analFlag){
+                    JPanel histo = Statify.getAcousticnessHistogram();
+                    panelInit(histo);
+                    histo.setVisible(true);
+                }
+                else {
+                    if (plNum > 3){
+                        javax.swing.JOptionPane.showMessageDialog(this, "Maximum amount of playlist is 3");
+                    }
+                    else {
+                        JPanel radar = Statify.getTracksRadarChartFromPlaylists();
+                        panelInit(radar);
+                        radar.setVisible(true);
+                    }
+                }
                 optionsPanel.setVisible(true);
             }
         } catch (NumberFormatException e) {
@@ -1332,11 +1368,21 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void tracksAnaliseButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_tracksAnaliseButtonActionPerformed
         panelsSetDefault();
+        actionPanel.removeAll();
+        analFlag = true;
+        acousticnessButton.setVisible(true);
+        laundnessButton.setVisible(true);
+        danceabilityButton.setText("danceability");
         optionsPanel.setVisible(true);
     }// GEN-LAST:event_tracksAnaliseButtonActionPerformed
 
     private void playlistAnaliseButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_playlistAnaliseButtonActionPerformed
         panelsSetDefault();
+        actionPanel.removeAll();
+        analFlag = false;
+        acousticnessButton.setVisible(false);
+        laundnessButton.setVisible(false);
+        danceabilityButton.setText("Show chart");
         optionsPanel.setVisible(true);
     }// GEN-LAST:event_playlistAnaliseButtonActionPerformed
 
@@ -1452,6 +1498,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel infoText11;
     private javax.swing.JLabel infoText12;
     private javax.swing.JLabel infoText13;
+    private Boolean analFlag;
 
 
     // End of variables declaration//GEN-END:variables
