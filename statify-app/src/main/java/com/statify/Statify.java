@@ -319,8 +319,10 @@ public class Statify {
         return valuesArray;
     }
 
-    public static XChartPanel<RadarChart> getTracksRadarChartFromPlaylists(HashMap<String, String> playlistsHashMap,
-            FeatureName[] features) {
+    public static XChartPanel<RadarChart> getTracksRadarChartFromPlaylists() {
+        HashMap<String, String> playlistsHashMap = currentUser.getPlaylistsHashMap(playlists_num);
+        FeatureName[] features = { FeatureName.ACOUSTICNESS, FeatureName.DANCEABILITY, FeatureName.ENERGY,
+            FeatureName.LOUDNESS, FeatureName.LIVENESS };
         List<double[]> dataSeriesList = new ArrayList();
         String[] playlistNames = playlistsHashMap.keySet().toArray(new String[0]);
         for (String playlistId : playlistsHashMap.values()) {
