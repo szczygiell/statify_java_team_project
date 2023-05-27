@@ -19,6 +19,7 @@ import se.michaelthelin.spotify.requests.data.playlists.GetListOfCurrentUsersPla
 import se.michaelthelin.spotify.requests.data.playlists.GetPlaylistsItemsRequest;
 import se.michaelthelin.spotify.model_objects.specification.PlaylistTrack;
 import se.michaelthelin.spotify.model_objects.specification.Track;
+import se.michaelthelin.spotify.model_objects.specification.TrackSimplified;
 import se.michaelthelin.spotify.requests.data.tracks.GetTrackRequest;
 import se.michaelthelin.spotify.model_objects.IPlaylistItem;
 import se.michaelthelin.spotify.model_objects.specification.Artist;
@@ -27,6 +28,11 @@ import se.michaelthelin.spotify.model_objects.specification.AudioFeatures;
 import se.michaelthelin.spotify.requests.data.personalization.simplified.GetUsersTopTracksRequest;
 import se.michaelthelin.spotify.requests.data.personalization.simplified.GetUsersTopArtistsRequest;
 import se.michaelthelin.spotify.requests.data.tracks.GetAudioFeaturesForSeveralTracksRequest;
+import se.michaelthelin.spotify.model_objects.specification.Recommendations;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.CompletionException;
+import se.michaelthelin.spotify.requests.data.browse.GetRecommendationsRequest;
 
 public class User {
     String accessToken = "BQDSqmePvpeHlxENAQzi1804OcGzKIYqC20ErKTNdBGE13xV5m8BFtAWJAQYEaJ5eZxP7vM06iThXMA5ekTz8RIIELZRMgNpUn9RXMWytclL52kT0-nyu042YF1joliW5w7FAQuUDmdiSkPDS52fNaJEzdisHmh3lHZJ2hD3gRFhZkClQqrIGbO4WImojHwmvxp1mgJPKHGm-GEN8Up389Az3kc_dfhZHpF5fwi1N7q5JJZEADif4z6VP-59NG_hOA43wPPX9VuLvTPhhzXIqr0md64KL2jbr6Y6g7S2wWVl3cXKEd6dHFVqWtNXcwUb1HK44vZcn7f2VpRIfR2WKwoMCg";
@@ -79,7 +85,6 @@ public class User {
         for (PlaylistSimplified playlist : playlists) {
             playlists_ids.add(playlist.getId());
         }
-        System.out.println(playlists[0].getName());
         return playlists_ids;
     }
 
@@ -96,7 +101,6 @@ public class User {
         try {
             final Paging<PlaylistTrack> playlistTrackPaging = getPlaylistsItemsRequest.execute();
             List<String> tracks_indeces = new ArrayList<String>();
-            // System.out.println(playlistTrackPaging.getItems()[0].getTrack().getName());
             for (PlaylistTrack pl_track : playlistTrackPaging.getItems()) {
                 IPlaylistItem track = pl_track.getTrack();
                 if (track == null) {
@@ -209,7 +213,6 @@ public class User {
             trackInfo.put("image", track.getAlbum().getImages()[0].toString()); // "Image(height=" + height + ", url=" +
                                                                                 // url + ", width=" + width + ")"
             return trackInfo;
-            // System.out.println("Name: " + track.getName());
         } catch (IOException | SpotifyWebApiException | ParseException e) {
             System.out.println("Error: " + e.getMessage());
             return trackInfo;
@@ -263,7 +266,6 @@ public class User {
             artistInfo.put("genres", String.join(", ", artist.getGenres()));
 
             return artistInfo;
-            // System.out.println("Name: " + artistInfo.getName());
         } catch (IOException | SpotifyWebApiException | ParseException e) {
             System.out.println("Error: " + e.getMessage());
             return artistInfo;
@@ -280,6 +282,56 @@ public class User {
             dictionaryList.add(dictionary);
         }
         return dictionaryList;
+    }
+
+    // artistIds' and tracksIds' length must be max 5
+    public List<TrackSimplified> getRecomendations(List<String> artistsIds, List<String> tracksIds) {
+        String tracksIdsString = String.join(",", tracksIds);
+        String artistsIdsString = String.join(",", artistsIds);
+        final GetRecommendationsRequest getRecommendationsRequest = spotifyApi.getRecommendations()
+                .limit(10)
+                // .market(CountryCode.SE)
+                // .max_popularity(50)
+                // .min_popularity(10)
+                .seed_artists(artistsIdsString)
+                // .seed_genres("electro")
+                .seed_tracks(tracksIdsString)
+                // .target_popularity(20)
+                .build();
+        List<TrackSimplified> recommendedTracks = new ArrayList<TrackSimplified>();
+        try {
+            final CompletableFuture<Recommendations> recommendationsFuture = getRecommendationsRequest.executeAsync();
+
+            final Recommendations recommendations = recommendationsFuture.join();
+
+            recommendedTracks.addAll(new ArrayList<>(Arrays.asList(recommendations.getTracks())));
+
+        } catch (CompletionException e) {
+            System.out.println("Error: " + e.getCause().getMessage());
+        } catch (CancellationException e) {
+            System.out.println("Async operation cancelled.");
+        }
+        return recommendedTracks;
+    }
+
+    public HashMap<String, String> getRecomendationsByTopTracks(String timeDuration) {
+        List<String> topTracksIds = getTopTrackIds(5, timeDuration);
+        List<TrackSimplified> recommendedTracks = getRecomendations(new ArrayList<String>(), topTracksIds);
+        HashMap<String, String> tracks = new HashMap<>();
+        for (TrackSimplified track : recommendedTracks) {
+            tracks.put(track.getName(), track.getArtists()[0].getName());
+        }
+        return tracks;
+    }
+
+    public HashMap<String, String> getRecomendationsByTopArtists(String timeDuration) {
+        List<String> topArtistsIds = getTopArtistsIds(5, timeDuration);
+        List<TrackSimplified> recommendedTracks = getRecomendations(topArtistsIds, new ArrayList<String>());
+        HashMap<String, String> tracks = new HashMap<>();
+        for (TrackSimplified track : recommendedTracks) {
+            tracks.put(track.getName(), track.getArtists()[0].getName());
+        }
+        return tracks;
     }
 
 }

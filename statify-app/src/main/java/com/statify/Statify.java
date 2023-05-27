@@ -1,7 +1,9 @@
 package com.statify;
 
 import org.apache.commons.compress.archivers.zip.UnsupportedZipFeatureException.Feature;
+import org.checkerframework.checker.units.qual.C;
 import org.checkerframework.checker.units.qual.radians;
+import se.michaelthelin.spotify.model_objects.specification.TrackSimplified;
 import org.knowm.xchart.CategoryChart;
 import org.knowm.xchart.CategoryChartBuilder;
 import org.knowm.xchart.style.Styler.LegendPosition;
@@ -31,6 +33,7 @@ import org.knowm.xchart.style.RadarStyler;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.Enumeration;
+import java.util.HashMap;
 
 public class Statify {
 
@@ -348,6 +351,42 @@ public class Statify {
 
         JScrollPane scrollPane = new JScrollPane(playlistsNamesList);
         return scrollPane;
+    }
+
+    private static JScrollPane createRecommendationsPanel(HashMap<String, String> recomendedTracks) {
+        JPanel panel = new JPanel();
+
+        panel.setLayout(new GridLayout(recomendedTracks.size() + 1, 2, 10, 10)); // n+1 rows, 2 columns, 10px between
+                                                                                 // each row and
+        JLabel mainTitleLabel = new JLabel("Title");
+        panel.add(mainTitleLabel);
+        panel.add(mainTitleLabel);
+        JLabel mainArtistLabel = new JLabel("Artist");
+        panel.add(mainArtistLabel);
+        panel.add(mainArtistLabel);
+        // Adding 10 string fields to panel
+        for (String trackName : recomendedTracks.keySet()) {
+            JLabel titleLabel = new JLabel(trackName);
+            panel.add(titleLabel);
+            JLabel artistLabel = new JLabel(recomendedTracks.get(trackName));
+            panel.add(artistLabel);
+
+        }
+        JScrollPane scrollPane = new JScrollPane(panel); // Create a JScrollPane and pass in the JPanel
+        scrollPane.setPreferredSize(new java.awt.Dimension(800, 600));
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        return scrollPane;
+    }
+
+    public static JScrollPane getRecommendationsPanelByTopTracks(String timeDuration) {
+        HashMap<String, String> recommendations = currentUser.getRecomendationsByTopTracks("short_term");
+        return Statify.createRecommendationsPanel(recommendations);
+    }
+
+    public static JScrollPane getRecommendationsPanelByTopArtists(String timeDuration) {
+        HashMap<String, String> recommendations = currentUser.getRecomendationsByTopArtists("short_term");
+        return Statify.createRecommendationsPanel(recommendations);
     }
 
     public static void main(String[] args) {
