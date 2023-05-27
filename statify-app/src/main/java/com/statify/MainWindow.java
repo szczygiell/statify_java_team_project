@@ -5,11 +5,14 @@
 package com.statify;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.util.HashMap;
+import javax.swing.Timer;
 
 /**
  *
@@ -51,6 +54,9 @@ public class MainWindow extends javax.swing.JFrame {
         creditsLabel.setVisible(false);
         // turning base (credits) action panel on
         planeBasePanel.setVisible(true);
+        actionPanel.removeAll();
+        actionPanel.revalidate();
+        actionPanel.repaint();
     }
 
     public void setTransparent(){
@@ -74,12 +80,31 @@ public class MainWindow extends javax.swing.JFrame {
         newPanel.setVisible(true);
     }
 
+    public void addNewScrollPane(JScrollPane newScrollPane){
+        actionPanel.removeAll();
+        actionPanel.add(newScrollPane);
+        actionPanel.revalidate();
+        actionPanel.repaint();
+        newScrollPane.setVisible(true);
+    }
+
     public final void upperPanelDefault() {
         timeButtonsPanel.setVisible(false);
         optionsPanel.setVisible(false);
         planeUpperPanel.setVisible(true);
     }
 
+    public void infoWindowsHide(){
+        infoWindow.setVisible(false);
+        infoWindow1.setVisible(false);
+        infoWindow2.setVisible(false);
+        infoWindow3.setVisible(false);
+        infoWindow4.setVisible(false);
+        infoWindow5.setVisible(false);
+        infoWindow6.setVisible(false);
+    }
+
+    
     public void trackListGrapher(String timeRange) {
         String track_num = numTracksTextField.getText();
         try {
@@ -144,6 +169,32 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }
 
+    public void showInfoHint(java.awt.event.MouseEvent evt, String msg){
+        if (evt.getButton() == java.awt.event.MouseEvent.BUTTON3){
+            JLabel hintinfoText = new JLabel(msg);
+            hintinfoText.setBounds(0, 0, 400, 50);
+            hintinfoText.setHorizontalAlignment(JLabel.CENTER);
+            hintinfoText.setVerticalAlignment(JLabel.CENTER);
+            hintinfoText.setFont(new java.awt.Font("Liberation Sans", 1, 15));
+            hintinfoText.setForeground(Color.BLACK);
+            infoWindow1.add(hintinfoText);
+            java.awt.PointerInfo a = MouseInfo.getPointerInfo();
+            java.awt.Point b = a.getLocation();
+            int mouse_x = (int) b.getX();
+            int mouse_y = (int) b.getY();
+            infoWindow1.setLocation(mouse_x - 170, mouse_y - 100);
+            infoWindow1.setVisible(true);
+            Timer timer = new Timer(4000, e -> {
+                infoWindow1.setVisible(false);
+                // hintinfoText.setText("");
+                infoWindow1.revalidate();
+                infoWindow1.removeAll();
+            });
+            timer.setRepeats(false);
+            timer.start();            
+        }    
+    }
+    
     public void panelInit(JPanel panel) {
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
@@ -238,7 +289,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         infoWindow.setUndecorated(true);
         infoWindow.setBackground(new Color(255, 255, 255, 50));
-        infoWindow.setSize(400, 50);
+        infoWindow.setSize(400, 100);
         infoWindow1.setUndecorated(true);
         infoWindow1.setBackground(new Color(255, 255, 255, 50));
         infoWindow1.setSize(400, 100);
@@ -289,11 +340,13 @@ public class MainWindow extends javax.swing.JFrame {
         // infoText.setForeground(Color.BLACK);
         // infoWindow.add(infoText);
 
-        String text = "Jeszcze nic nie robi"; // przycisk genre
+        String text = "<html> Tutaj poznasz swoje najczęściej słuchane gatunki<br/>"+"W pole tekstowe wpisz ilość gatunków, a następnie<br/>"+"wybierz okres ostatnich 4 tygodnii, 6 miesięcy lub<br/>"+"od początku korzystania ze Spotify<html>"; // przycisk genre
         //javax.swing.JLabel infoText = new JLabel();
         int width = infoWindow.getWidth();
         int height = infoWindow.getHeight();
-        infoText.setBounds(0, 0, width, height);
+        int width1 = infoWindow1.getWidth();
+        int height1 = infoWindow1.getHeight();
+        infoText.setBounds(0, 0, width1, height1);
         infoText.setHorizontalAlignment(JLabel.CENTER);
         infoText.setVerticalAlignment(JLabel.CENTER);
         infoText.setFont(new java.awt.Font("Liberation Sans", 1, 15));
@@ -301,8 +354,6 @@ public class MainWindow extends javax.swing.JFrame {
         infoText.setText(text);
 
         String text1 = "<html> Tutaj poznasz swoich najczęściej słuchanych artystów<br/>W pole tekstowe wpisz ilość artystów, a następnie<br/>wybierz okres ostatnich 4 tygodnii, 6 miesięcy lub<br/> od początku korzystania ze Spotify<html>"; // przycisk artists
-        int width1 = infoWindow1.getWidth();
-        int height1 = infoWindow1.getHeight();
         infoText1.setBounds(0, 0, width1, height1);
         infoText1.setHorizontalAlignment(JLabel.CENTER);
         infoText1.setVerticalAlignment(JLabel.CENTER);
@@ -435,11 +486,14 @@ public class MainWindow extends javax.swing.JFrame {
         artistButton.setMinimumSize(new java.awt.Dimension(80, 24));
         artistButton.setPreferredSize(new java.awt.Dimension(80, 24));
         artistButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                artistButtonMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                artistButtonMouseEntered(evt);
+                // artistButtonMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                artistButtonMouseExited(evt);
+                // artistButtonMouseExited(evt);
             }
         });
         artistButton.addActionListener(new java.awt.event.ActionListener() {
@@ -455,11 +509,14 @@ public class MainWindow extends javax.swing.JFrame {
         genreButton.setText("genre");
         genreButton.setBorder(null);
         genreButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                genreButtonMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                genreButtonMouseEntered(evt);
+                // genreButtonMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                genreButtonMouseExited(evt);
+                // genreButtonMouseExited(evt);
             }
         });
         genreButton.addActionListener(new java.awt.event.ActionListener() {
@@ -475,11 +532,14 @@ public class MainWindow extends javax.swing.JFrame {
         topTracksButton.setText("top tracks");
         topTracksButton.setBorder(null);
         topTracksButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                topTracksButtonMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                topTracksButtonMouseEntered(evt);
+                // topTracksButtonMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                topTracksButtonMouseExited(evt);
+                // topTracksButtonMouseExited(evt);
             }
         });
         topTracksButton.addActionListener(new java.awt.event.ActionListener() {
@@ -496,10 +556,10 @@ public class MainWindow extends javax.swing.JFrame {
         tracksAnaliseButton.setBorder(null);
         tracksAnaliseButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                tracksAnaliseButtonMouseEntered(evt);
+                // tracksAnaliseButtonMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                tracksAnaliseButtonMouseExited(evt);
+                // tracksAnaliseButtonMouseExited(evt);
             }
         });
         tracksAnaliseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -519,10 +579,10 @@ public class MainWindow extends javax.swing.JFrame {
         playlistAnaliseButton.setPreferredSize(new java.awt.Dimension(80, 24));
         playlistAnaliseButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                playlistAnaliseButtonMouseEntered(evt);
+                // playlistAnaliseButtonMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                playlistAnaliseButtonMouseExited(evt);
+                // playlistAnaliseButtonMouseExited(evt);
             }
         });
         playlistAnaliseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -542,10 +602,10 @@ public class MainWindow extends javax.swing.JFrame {
         generatePlaylistButton.setPreferredSize(new java.awt.Dimension(80, 24));
         generatePlaylistButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                generatePlaylistButtonMouseEntered(evt);
+                // generatePlaylistButtonMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                generatePlaylistButtonMouseExited(evt);
+                // generatePlaylistButtonMouseExited(evt);
             }
         });
         generatePlaylistButton.addActionListener(new java.awt.event.ActionListener() {
@@ -610,10 +670,10 @@ public class MainWindow extends javax.swing.JFrame {
         homeButton.setPreferredSize(new java.awt.Dimension(180, 60));
         homeButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                homeButtonMouseEntered(evt);
+                // homeButtonMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                homeButtonMouseExited(evt);
+                // homeButtonMouseExited(evt);
             }
         });
         homeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -955,122 +1015,176 @@ public class MainWindow extends javax.swing.JFrame {
         creditsLabel.setVisible(true);
     }//GEN-LAST:event_homeButtonActionPerformed
 
-    private void artistButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_artistButtonMouseEntered
-        infoWindow1.add(infoText1);
-        java.awt.PointerInfo a = MouseInfo.getPointerInfo();
-        java.awt.Point b = a.getLocation();
-        int mouse_x = (int) b.getX();
-        int mouse_y = (int) b.getY();
-        System.out.println(mouse_x);
-        System.out.println(mouse_y);
-        infoWindow1.setLocation(mouse_x - 170, mouse_y - 100);
-        infoWindow1.setVisible(true);
+
+    private void artistButtonMouseClicked(java.awt.event.MouseEvent evt) {
+        if (evt.getButton() == java.awt.event.MouseEvent.BUTTON3){
+            infoWindowsHide();
+            infoWindow1.add(infoText1);
+            java.awt.PointerInfo a = MouseInfo.getPointerInfo();
+            java.awt.Point b = a.getLocation();
+            int mouse_x = (int) b.getX();
+            int mouse_y = (int) b.getY();
+            infoWindow1.setLocation(mouse_x - 170, mouse_y - 100);
+            infoWindow1.setVisible(true);
+            Timer timer = new Timer(4000, e -> {
+                infoWindow1.setVisible(false);
+            });
+            timer.setRepeats(false);
+            timer.start();            
+        }                                          
+    }
+
+    private void genreButtonMouseClicked(java.awt.event.MouseEvent evt) {
+        if (evt.getButton() == java.awt.event.MouseEvent.BUTTON3){
+            infoWindowsHide();
+            infoWindow.add(infoText);
+            java.awt.PointerInfo a = MouseInfo.getPointerInfo();
+            java.awt.Point b = a.getLocation();
+            int mouse_x = (int) b.getX();
+            int mouse_y = (int) b.getY();
+            infoWindow.setLocation(mouse_x - 170, mouse_y - 100);
+            infoWindow.setVisible(true);
+            Timer timer = new Timer(4000, e -> {
+                infoWindow.setVisible(false);
+            });
+            timer.setRepeats(false);
+            timer.start();            
+        }                 
+    }
+
+    private void topTracksButtonMouseClicked(java.awt.event.MouseEvent evt) {
+        if (evt.getButton() == java.awt.event.MouseEvent.BUTTON3){
+            infoWindowsHide();
+            infoWindow2.add(infoText2);
+            java.awt.PointerInfo a = MouseInfo.getPointerInfo();
+            java.awt.Point b = a.getLocation();
+            int mouse_x = (int) b.getX();
+            int mouse_y = (int) b.getY();
+            infoWindow2.setLocation(mouse_x - 170, mouse_y - 100);
+            infoWindow2.setVisible(true);
+            Timer timer = new Timer(4000, e -> {
+                infoWindow2.setVisible(false);
+            });
+            timer.setRepeats(false);
+            timer.start();            
+        }                 
+    }
+    // private void artistButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_artistButtonMouseEntered
+    //     infoWindow1.add(infoText1);
+    //     java.awt.PointerInfo a = MouseInfo.getPointerInfo();
+    //     java.awt.Point b = a.getLocation();
+    //     int mouse_x = (int) b.getX();
+    //     int mouse_y = (int) b.getY();
+    //     // System.out.println(mouse_x);
+    //     // System.out.println(mouse_y);
+    //     infoWindow1.setLocation(mouse_x - 170, mouse_y - 100);
+    //     infoWindow1.setVisible(true);
         
 
 
-    }//GEN-LAST:event_artistButtonMouseEntered
+    // }//GEN-LAST:event_artistButtonMouseEntered
 
-    private void artistButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_artistButtonMouseExited
-        infoWindow1.setVisible(false);
-    }//GEN-LAST:event_artistButtonMouseExited
+    // private void artistButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_artistButtonMouseExited
+    //     infoWindow1.setVisible(false);
+    // }//GEN-LAST:event_artistButtonMouseExited
 
-    private void genreButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_genreButtonMouseEntere
+    // private void genreButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_genreButtonMouseEntere
 
-        infoWindow.add(infoText);
-        java.awt.PointerInfo a = MouseInfo.getPointerInfo();
-        java.awt.Point b = a.getLocation();
-        int mouse_x = (int) b.getX();
-        int mouse_y = (int) b.getY();
-        System.out.println(mouse_x);
-        System.out.println(mouse_y);
-        infoWindow.setLocation(mouse_x - 170, mouse_y - 50);
-        infoWindow.setVisible(true);
-    }//GEN-LAST:event_genreButtonMouseEntered
+    //     infoWindow.add(infoText);
+    //     java.awt.PointerInfo a = MouseInfo.getPointerInfo();
+    //     java.awt.Point b = a.getLocation();
+    //     int mouse_x = (int) b.getX();
+    //     int mouse_y = (int) b.getY();
+    //     // System.out.println(mouse_x);
+    //     // System.out.println(mouse_y);
+    //     infoWindow.setLocation(mouse_x - 170, mouse_y - 50);
+    //     infoWindow.setVisible(true);
+    // }//GEN-LAST:event_genreButtonMouseEntered
 
-    private void genreButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_genreButtonMouseExited
-        infoWindow.setVisible(false);
-    }//GEN-LAST:event_genreButtonMouseExited
+    // private void genreButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_genreButtonMouseExited
+    //     infoWindow.setVisible(false);
+    // }//GEN-LAST:event_genreButtonMouseExited
 
-    private void topTracksButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topTracksButtonMouseEntered
+    // private void topTracksButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topTracksButtonMouseEntered
         
-        infoWindow2.add(infoText2);
-        java.awt.PointerInfo a = MouseInfo.getPointerInfo();
-        java.awt.Point b = a.getLocation();
-        int mouse_x = (int) b.getX();
-        int mouse_y = (int) b.getY();
-        System.out.println(mouse_x);
-        System.out.println(mouse_y);
-        infoWindow2.setLocation(mouse_x - 170, mouse_y - 100);
-        infoWindow2.setVisible(true);
-    }//GEN-LAST:event_topTracksButtonMouseEntered
+    //     infoWindow2.add(infoText2);
+    //     java.awt.PointerInfo a = MouseInfo.getPointerInfo();
+    //     java.awt.Point b = a.getLocation();
+    //     int mouse_x = (int) b.getX();
+    //     int mouse_y = (int) b.getY();
+    //     // System.out.println(mouse_x);
+    //     // System.out.println(mouse_y);
+    //     infoWindow2.setLocation(mouse_x - 170, mouse_y - 100);
+    //     infoWindow2.setVisible(true);
+    // }//GEN-LAST:event_topTracksButtonMouseEntered
 
-    private void topTracksButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topTracksButtonMouseExited
-        infoWindow2.setVisible(false);
-    }//GEN-LAST:event_topTracksButtonMouseExited
+    // private void topTracksButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topTracksButtonMouseExited
+    //     infoWindow2.setVisible(false);
+    // }//GEN-LAST:event_topTracksButtonMouseExited
 
-    private void tracksAnaliseButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tracksAnaliseButtonMouseEntered
-        infoWindow3.add(infoText3);
-        java.awt.PointerInfo a = MouseInfo.getPointerInfo();
-        java.awt.Point b = a.getLocation();
-        int mouse_x = (int) b.getX();
-        int mouse_y = (int) b.getY();
-        System.out.println(mouse_x);
-        System.out.println(mouse_y);
-        infoWindow3.setLocation(mouse_x - 170, mouse_y - 100);
-        infoWindow3.setVisible(true);
-    }//GEN-LAST:event_tracksAnaliseButtonMouseEntered
+    // private void tracksAnaliseButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tracksAnaliseButtonMouseEntered
+    //     infoWindow3.add(infoText3);
+    //     java.awt.PointerInfo a = MouseInfo.getPointerInfo();
+    //     java.awt.Point b = a.getLocation();
+    //     int mouse_x = (int) b.getX();
+    //     int mouse_y = (int) b.getY();
+    //     // System.out.println(mouse_x);
+    //     // System.out.println(mouse_y);
+    //     infoWindow3.setLocation(mouse_x - 170, mouse_y - 100);
+    //     infoWindow3.setVisible(true);
+    // }//GEN-LAST:event_tracksAnaliseButtonMouseEntered
 
-    private void tracksAnaliseButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tracksAnaliseButtonMouseExited
-        infoWindow3.setVisible(false);
-    }//GEN-LAST:event_tracksAnaliseButtonMouseExited
+    // private void tracksAnaliseButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tracksAnaliseButtonMouseExited
+    //     infoWindow3.setVisible(false);
+    // }//GEN-LAST:event_tracksAnaliseButtonMouseExited
 
-    private void playlistAnaliseButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playlistAnaliseButtonMouseEntered
-        infoWindow4.add(infoText4);
-        java.awt.PointerInfo a = MouseInfo.getPointerInfo();
-        java.awt.Point b = a.getLocation();
-        int mouse_x = (int) b.getX();
-        int mouse_y = (int) b.getY();
-        System.out.println(mouse_x);
-        System.out.println(mouse_y);
-        infoWindow4.setLocation(mouse_x - 170, mouse_y - 100);
-        infoWindow4.setVisible(true);
-    }//GEN-LAST:event_playlistAnaliseButtonMouseEntered
+    // private void playlistAnaliseButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playlistAnaliseButtonMouseEntered
+    //     infoWindow4.add(infoText4);
+    //     java.awt.PointerInfo a = MouseInfo.getPointerInfo();
+    //     java.awt.Point b = a.getLocation();
+    //     int mouse_x = (int) b.getX();
+    //     int mouse_y = (int) b.getY();
+    //     // System.out.println(mouse_x);
+    //     // System.out.println(mouse_y);
+    //     infoWindow4.setLocation(mouse_x - 170, mouse_y - 100);
+    //     infoWindow4.setVisible(true);
+    // }//GEN-LAST:event_playlistAnaliseButtonMouseEntered
 
-    private void playlistAnaliseButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playlistAnaliseButtonMouseExited
-        infoWindow4.setVisible(false);
-    }//GEN-LAST:event_playlistAnaliseButtonMouseExited
+    // private void playlistAnaliseButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playlistAnaliseButtonMouseExited
+    //     infoWindow4.setVisible(false);
+    // }//GEN-LAST:event_playlistAnaliseButtonMouseExited
 
-    private void generatePlaylistButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_generatePlaylistButtonMouseEntered
-        infoWindow5.add(infoText5);
-        java.awt.PointerInfo a = MouseInfo.getPointerInfo();
-        java.awt.Point b = a.getLocation();
-        int mouse_x = (int) b.getX();
-        int mouse_y = (int) b.getY();
-        System.out.println(mouse_x);
-        System.out.println(mouse_y);
-        infoWindow5.setLocation(mouse_x - 170, mouse_y - 50);
-        infoWindow5.setVisible(true);
-    }//GEN-LAST:event_generatePlaylistButtonMouseEntered
+    // private void generatePlaylistButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_generatePlaylistButtonMouseEntered
+    //     infoWindow5.add(infoText5);
+    //     java.awt.PointerInfo a = MouseInfo.getPointerInfo();
+    //     java.awt.Point b = a.getLocation();
+    //     int mouse_x = (int) b.getX();
+    //     int mouse_y = (int) b.getY();
+    //     // System.out.println(mouse_x);
+    //     // System.out.println(mouse_y);
+    //     infoWindow5.setLocation(mouse_x - 170, mouse_y - 50);
+    //     infoWindow5.setVisible(true);
+    // }//GEN-LAST:event_generatePlaylistButtonMouseEntered
 
-    private void generatePlaylistButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_generatePlaylistButtonMouseExited
-        infoWindow5.setVisible(false);
-    }//GEN-LAST:event_generatePlaylistButtonMouseExited
+    // private void generatePlaylistButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_generatePlaylistButtonMouseExited
+    //     infoWindow5.setVisible(false);
+    // }//GEN-LAST:event_generatePlaylistButtonMouseExited
 
-    private void homeButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeButtonMouseEntered
-        infoWindow6.add(infoText6);
-        java.awt.PointerInfo a = MouseInfo.getPointerInfo();
-        java.awt.Point b = a.getLocation();
-        int mouse_x = (int) b.getX();
-        int mouse_y = (int) b.getY();
-        System.out.println(mouse_x);
-        System.out.println(mouse_y);
-        infoWindow6.setLocation(mouse_x - 170, mouse_y - 50);
-        infoWindow6.setVisible(true);
-    }//GEN-LAST:event_homeButtonMouseEntered
+    // private void homeButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeButtonMouseEntered
+    //     infoWindow6.add(infoText6);
+    //     java.awt.PointerInfo a = MouseInfo.getPointerInfo();
+    //     java.awt.Point b = a.getLocation();
+    //     int mouse_x = (int) b.getX();
+    //     int mouse_y = (int) b.getY();
+    //     // System.out.println(mouse_x);
+    //     // System.out.println(mouse_y);
+    //     infoWindow6.setLocation(mouse_x - 170, mouse_y - 50);
+    //     infoWindow6.setVisible(true);
+    // }//GEN-LAST:event_homeButtonMouseEntered
 
-    private void homeButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeButtonMouseExited
-        infoWindow6.setVisible(false);
-    }//GEN-LAST:event_homeButtonMouseExited
+    // private void homeButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeButtonMouseExited
+    //     infoWindow6.setVisible(false);
+    // }//GEN-LAST:event_homeButtonMouseExited
 
     // private void laundnessButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_laundnessButtonMouseEntered
 
@@ -1085,6 +1199,17 @@ public class MainWindow extends javax.swing.JFrame {
     //     infoWindow7.setVisible(true);
     // }//GEN-LAST:event_laundnessButtonMouseEntered
 
+        // here
+
+    // SMTHButton{ msg }
+//   actionlistener(RClick)
+        // msg.show
+        // infoWindow7.add(infotext["artist"]);
+        // { 
+//          "artist": "twoi ulubiency"
+        // }
+        // infotxt.reset setclear
+        
     // private void laundnessButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_laundnessButtonMouseExited
     //     infoWindow7.setVisible(false);
     // }//GEN-LAST:event_laundnessButtonMouseExited
@@ -1234,8 +1359,8 @@ public class MainWindow extends javax.swing.JFrame {
                     addNewPanel(histo);
                 }
                 else {
-                    if (plNum > 3){
-                        javax.swing.JOptionPane.showMessageDialog(this, "Maximum amount of playlist is 3");
+                    if (plNum > 5){
+                        javax.swing.JOptionPane.showMessageDialog(this, "Maximum amount of playlist is 5");
                     }
                     else {
                         User user = Statify.currentUser;
@@ -1273,8 +1398,8 @@ public class MainWindow extends javax.swing.JFrame {
                     histo.setVisible(true);
                 }
                 else {
-                    if (plNum > 3){
-                        javax.swing.JOptionPane.showMessageDialog(this, "Maximum amount of playlist is 3");
+                    if (plNum > 5){
+                        javax.swing.JOptionPane.showMessageDialog(this, "Maximum amount of playlist is 5");
                     }
                     else {
                         User user = Statify.currentUser;
@@ -1314,8 +1439,8 @@ public class MainWindow extends javax.swing.JFrame {
                     histo.setVisible(true);
                 }
                 else {
-                    if (plNum > 3){
-                        javax.swing.JOptionPane.showMessageDialog(this, "Maximum amount of playlist is 3");
+                    if (plNum > 5){
+                        javax.swing.JOptionPane.showMessageDialog(this, "Maximum amount of playlist is 5");
                     }
                     else {
                         User user = Statify.currentUser;
@@ -1365,25 +1490,33 @@ public class MainWindow extends javax.swing.JFrame {
         panelsSetDefault();
         timeButtonsPanel.setVisible(true);
         // actionPanel.removeAll();
+        // actionPanel.revalidate();
+        // actionPanel.repaint();
     }// GEN-LAST:event_artistButtonActionPerformed
 
     private void genreButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_genreButtonActionPerformed
         buttonFlag = "genre";
         panelsSetDefault();
         timeButtonsPanel.setVisible(true);
+        // actionPanel.removeAll();
+        // actionPanel.revalidate();
+        // actionPanel.repaint();
     }// GEN-LAST:event_genreButtonActionPerformed
 
     private void topTracksButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_topTracksButtonActionPerformed
         buttonFlag = "tracks";
         panelsSetDefault();
         timeButtonsPanel.setVisible(true);
+        // actionPanel.removeAll();
+        // actionPanel.revalidate();
+        // actionPanel.repaint();
     }// GEN-LAST:event_topTracksButtonActionPerformed
 
     private void tracksAnaliseButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_tracksAnaliseButtonActionPerformed
         panelsSetDefault();
-        actionPanel.removeAll();
-        actionPanel.revalidate();
-        actionPanel.repaint();
+        // actionPanel.removeAll();
+        // actionPanel.revalidate();
+        // actionPanel.repaint();
         analFlag = true;
         acousticnessButton.setVisible(true);
         laundnessButton.setVisible(true);
@@ -1393,19 +1526,25 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void playlistAnaliseButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_playlistAnaliseButtonActionPerformed
         panelsSetDefault();
-        actionPanel.removeAll();
-        actionPanel.revalidate();
-        actionPanel.repaint();
+        // actionPanel.removeAll();
         analFlag = false;
         acousticnessButton.setVisible(false);
         laundnessButton.setVisible(false);
         danceabilityButton.setText("Show chart");
         optionsPanel.setVisible(true);
+        JScrollPane selectPanel = Statify.getPlaylistsSelectableList();
+        addNewScrollPane(selectPanel);
+        selectPanel.setVisible(true);
+        // actionPanel.revalidate();
+        // actionPanel.repaint();
     }// GEN-LAST:event_playlistAnaliseButtonActionPerformed
 
     private void generatePlaylistButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_generatePlaylistButtonActionPerformed
         panelsSetDefault();
         optionsPanel.setVisible(true);
+        // actionPanel.removeAll();
+        // actionPanel.revalidate();
+        // actionPanel.repaint();
     }// GEN-LAST:event_generatePlaylistButtonActionPerformed
 
     /**
@@ -1448,7 +1587,7 @@ public class MainWindow extends javax.swing.JFrame {
             public void run() {
                 MainWindow mainFrame = new MainWindow();
                 mainFrame.setVisible(true);
-                System.out.println(mainFrame.getHeight() + "   " + mainFrame.getWidth());
+                // System.out.println(mainFrame.getHeight() + "   " + mainFrame.getWidth());
             }
         });
     }

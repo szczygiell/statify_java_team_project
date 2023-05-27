@@ -33,6 +33,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.util.Enumeration;
+// import java.awt.CheckBoxList;
+
 
 public class Statify {
 
@@ -379,6 +381,7 @@ public class Statify {
         return getAudioFeatureHistogram(FeatureName.DANCEABILITY);
     }
 
+
     public static JScrollPane getPlaylistsSelectableList() {
         HashMap<String, String> playlistsDictionary = currentUser.getPlaylistsHashMap();
         Object[] names = playlistsDictionary.keySet().toArray();
@@ -395,6 +398,37 @@ public class Statify {
         JScrollPane scrollPane = new JScrollPane(playlistsNamesList);
         return scrollPane;
     }
+
+
+    // public static JScrollPane getPlaylistsSelectableList() {
+    //     HashMap<String, String> playlistsDictionary = currentUser.getPlaylistsHashMap();
+    //     Object[] names = playlistsDictionary.keySet().toArray();
+
+    //     JList<String> playlistsNamesList = new JList(names);
+
+    //     playlistsNamesList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+    //     playlistsNamesList.setLayoutOrientation(JList.VERTICAL);
+    //     playlistsNamesList.setCellRenderer(new CheckboxListCellRenderer());
+    //     // playlistsNamesList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+    //     playlistsNamesList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+    //     JScrollPane listScroller = new JScrollPane(playlistsNamesList);
+    //     listScroller.setPreferredSize(new Dimension(250, 80));
+
+    //     JScrollPane scrollPane = new JScrollPane(playlistsNamesList);
+    //     // playlistsNamesList.addMouseListener(new MouseAdapter() {
+    //     //     @Override
+    //     //     public void mouseClicked(MouseEvent event) {
+    //     //       JList list = (JList) event.getSource();
+    //     //       int index = list.locationToIndex(event.getPoint());// Get index of item
+    //     //                                                          // clicked
+    //     //       CheckListItem item = (CheckListItem) list.getModel()
+    //     //           .getElementAt(index);
+    //     //       item.setSelected(!item.isSelected()); // Toggle selected state
+    //     //       list.repaint(list.getCellBounds(index, index));// Repaint cell
+    //     //     }
+    //     //   });
+    //     return scrollPane;
+    // }
 
     public static void main(String[] args) {
         Statify statify = new Statify();
