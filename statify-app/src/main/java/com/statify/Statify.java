@@ -350,7 +350,7 @@ public class Statify {
     public static JPanel getAudioFeatureHistogram(FeatureName feature) {
         List<Float> data = getFeaturePlaylistData(playlists_num, feature);
         int binsNum = (int) Math.cbrt(data.size());
-        String title = feature.keyName + String.format(" Histogram of your %o playlists", playlists_num);
+        String title = feature.keyName + String.format(" Histogram of your %d playlists", playlists_num);
         String xTitle = "Mean";
         String yTitle = "Tracks count";
         String seriesName = "Tracks in your playlists";
