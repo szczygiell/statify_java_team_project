@@ -192,7 +192,26 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     public void genreListGrapher(String timeRange){
-        // TODO later
+
+        try {
+                int maxValue = Statify.currentUser.getMaxAmmount(50, timeRange, "artists");
+                actionPanel.removeAll();
+                upperPanelDefault();
+                User user = Statify.currentUser;
+                java.util.Dictionary<String, Integer> dict = user.getTopGenresDict(maxValue, timeRange);
+                java.util.Dictionary<String, Integer> outDict = user.analyzeDictionary(dict);
+                javax.swing.JPanel graph = Statify.createPieChart(outDict);
+                actionPanel.add(graph);
+                graph.setVisible(true);
+                timeButtonsPanel.setVisible(true);
+            }
+        catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Amount of tracks has to be a whole number");
+        } 
+        catch (NullPointerException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Amount of tracks has to be a whole number");
+
+        }
     }
 
     public void chooseTypeTopList(String timeRange){
@@ -202,9 +221,9 @@ public class MainWindow extends javax.swing.JFrame {
         else if(buttonFlag.equals("artist")){
             artistListGrapher(timeRange);
         }
-        // else if(buttonFlag.equals("genre")){
-        //     genreListGrapher(timeRange);
-        // }
+        else if(buttonFlag.equals("genre")){
+            genreListGrapher(timeRange);
+        }
         else{
             // actionPanel.removeAll();
             panelsSetDefault();
@@ -1594,6 +1613,7 @@ public class MainWindow extends javax.swing.JFrame {
         genFlag = false;
         timeButtonsPanelSetDefault();
         panelsSetDefault();
+        numTracksTextField.setVisible(false);
         timeButtonsPanel.setVisible(true);
         // actionPanel.removeAll();
         // actionPanel.revalidate();
