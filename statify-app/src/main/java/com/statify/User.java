@@ -241,7 +241,7 @@ public class User {
                 .time_range(time_range) // "short_term": 4 weeks; "medium_term": 6 months; "long_term": years
                 .limit(limit) // number of tracks
                 .build();
-                
+
         try {
             final Paging<Artist> artistsPaging = getUsersTopArtistsRequest.execute();
             Artist[] artists = artistsPaging.getItems();
@@ -332,14 +332,14 @@ public class User {
             }
         }
 
-        // Zliczenie łącznej sumy wartości pozostałych kluczy
-        while (!pq.isEmpty()) {
-            String key = pq.poll();
-            remainingSum += dictionary.get(key);
-        }
+        // Counting sum of rest values from keys - not used now but do not delete this
+        // while (!pq.isEmpty()) {
+        //     String key = pq.poll();
+        //     remainingSum += dictionary.get(key);
+        // }
 
-        // Dodanie klucza "others" z wartością sumy reszty kluczy
-        result.put("others", remainingSum);
+        // Adding ket "others" with its value from above - not used now but do not delete this
+        // result.put("others", remainingSum);
 
         return result;
     }
@@ -424,5 +424,5 @@ public class User {
         }
         return 1;
 
-    } 
+    }
 }
