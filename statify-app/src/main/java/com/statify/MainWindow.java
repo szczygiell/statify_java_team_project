@@ -48,15 +48,11 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     public final void panelsSetDefault() {
-        // setting upper panels off
         timeButtonsPanel.setVisible(false);
         optionsPanel.setVisible(false);
-        // turning base upper panel on
         planeUpperPanel.setVisible(true);
-        // setting action panels off
         creditsPanel.setVisible(false);
         creditsLabel.setVisible(false);
-        // turning base (credits) action panel on
         planeBasePanel.setVisible(true);
         actionPanel.removeAll();
         actionPanel.revalidate();
@@ -510,7 +506,7 @@ public class MainWindow extends javax.swing.JFrame {
         artistButton.setBackground(new java.awt.Color(44, 51, 51));
         artistButton.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         artistButton.setForeground(new java.awt.Color(255, 255, 255));
-        artistButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons8-musician-male-32.png"))); // NOI18N
+        artistButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons/icons8-musician-male-32.png"))); // NOI18N
         artistButton.setText("artists");
         artistButton.setBorder(null);
         artistButton.setMaximumSize(new java.awt.Dimension(80, 24));
@@ -530,7 +526,7 @@ public class MainWindow extends javax.swing.JFrame {
         genreButton.setBackground(new java.awt.Color(44, 51, 51));
         genreButton.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         genreButton.setForeground(new java.awt.Color(255, 255, 255));
-        genreButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons8-music-record-32.png"))); // NOI18N
+        genreButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons/icons8-music-record-32.png"))); // NOI18N
         genreButton.setText("genre");
         genreButton.setBorder(null);
         genreButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -547,7 +543,7 @@ public class MainWindow extends javax.swing.JFrame {
         topTracksButton.setBackground(new java.awt.Color(44, 51, 51));
         topTracksButton.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         topTracksButton.setForeground(new java.awt.Color(255, 255, 255));
-        topTracksButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons8-volume-level-32.png"))); // NOI18N
+        topTracksButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons/icons8-volume-level-32.png"))); // NOI18N
         topTracksButton.setText("top tracks");
         topTracksButton.setBorder(null);
         topTracksButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -564,7 +560,7 @@ public class MainWindow extends javax.swing.JFrame {
         tracksanalyseButton.setBackground(new java.awt.Color(44, 51, 51));
         tracksanalyseButton.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         tracksanalyseButton.setForeground(new java.awt.Color(255, 255, 255));
-        tracksanalyseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons8-sample-rate-32.png"))); // NOI18N
+        tracksanalyseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons/icons8-sample-rate-32.png"))); // NOI18N
         tracksanalyseButton.setText("analyse tracks");
         tracksanalyseButton.setBorder(null);
         tracksanalyseButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -581,7 +577,7 @@ public class MainWindow extends javax.swing.JFrame {
         playlistanalyseButton.setBackground(new java.awt.Color(44, 51, 51));
         playlistanalyseButton.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         playlistanalyseButton.setForeground(new java.awt.Color(255, 255, 255));
-        playlistanalyseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons8-audio-wave2-32.png"))); // NOI18N
+        playlistanalyseButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons/icons8-audio-wave2-32.png"))); // NOI18N
         playlistanalyseButton.setText("analyse playlist");
         playlistanalyseButton.setBorder(null);
         playlistanalyseButton.setMaximumSize(new java.awt.Dimension(80, 24));
@@ -601,7 +597,7 @@ public class MainWindow extends javax.swing.JFrame {
         generatePlaylistButton.setBackground(new java.awt.Color(44, 51, 51));
         generatePlaylistButton.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         generatePlaylistButton.setForeground(new java.awt.Color(255, 255, 255));
-        generatePlaylistButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons8-music-library-32.png"))); // NOI18N
+        generatePlaylistButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons/icons8-music-library-32.png"))); // NOI18N
         generatePlaylistButton.setText("generate playlist");
         generatePlaylistButton.setBorder(null);
         generatePlaylistButton.setMaximumSize(new java.awt.Dimension(80, 24));
@@ -665,7 +661,7 @@ public class MainWindow extends javax.swing.JFrame {
         homeButton.setBackground(new java.awt.Color(44, 51, 51));
         homeButton.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         homeButton.setForeground(new java.awt.Color(255, 255, 255));
-        homeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons8-equal-housing-opportunity-32.png"))); // NOI18N
+        homeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/icons/icons8-equal-housing-opportunity-32.png"))); // NOI18N
         homeButton.setText("HOME");
         homeButton.setBorder(null);
         homeButton.setHideActionText(true);
@@ -967,7 +963,7 @@ public class MainWindow extends javax.swing.JFrame {
             "<p>&emsp; &emsp; &ensp; Filip Szczygielski</p>\n" +
             "<p>&emsp; &emsp; &ensp; Mikolaj Wewior</p>\n" +
             "<p><br></p>\n" +
-            "<p>&emsp; &emsp; version 1.2 (pretty stable)</p></font></html>"
+            "<p>&emsp; &emsp; version 1.3 (pretty stable)</p></font></html>"
         );
 
         creditsLabel.setFont(new Font("Verdana", Font.PLAIN, 18));
@@ -1276,12 +1272,7 @@ public class MainWindow extends javax.swing.JFrame {
         }
         else {
             try {
-                // int plNum = Integer.parseInt(playlists_num);
-                // if (plNum <= 0) {
-                //     javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of playlists");
-                // } else {
                     actionPanel.removeAll();
-                    // Statify.SetPlaylistsNum(plNum);
                     upperPanelDefault();
                     if (analFlag) {
                         int plNum = Integer.parseInt(playlists_num);
@@ -1295,10 +1286,6 @@ public class MainWindow extends javax.swing.JFrame {
                         }
                     }
                     else {
-                        // if (plNum > 5){
-                        //     javax.swing.JOptionPane.showMessageDialog(this, "Maximum amount of playlist is 5");
-                        // }
-                        // else {
                             java.util.ArrayList<String> selectedNames = new java.util.ArrayList<>();
                             User user = Statify.currentUser;
                             for(Object elem : selectedPlaylists){
@@ -1313,10 +1300,8 @@ public class MainWindow extends javax.swing.JFrame {
                             selectedNames.clear();
                             panelInit(radar);
                             radar.setVisible(true);
-                        // }
                     }
                     optionsPanel.setVisible(true);
-                // }
             } catch (NumberFormatException e) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
             } catch (NullPointerException e) {

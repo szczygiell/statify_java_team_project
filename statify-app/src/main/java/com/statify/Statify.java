@@ -394,27 +394,6 @@ public class Statify {
     }
 
 
-
-    // /////////////////////////////////////////////////////////////////////////////
-    // public static JScrollPane getPlaylistsSelectableList() {
-    //     HashMap<String, String> playlistsDictionary = currentUser.getPlaylistsHashMap();
-    //     Object[] names = playlistsDictionary.keySet().toArray();
-
-    //     JList<String> playlistsNamesList = new JList(names);
-    //     CheckboxListCellRenderer checkNames = new CheckboxListCellRenderer();
-
-    //     playlistsNamesList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-    //     playlistsNamesList.setLayoutOrientation(JList.VERTICAL);
-    //     playlistsNamesList.setCellRenderer(checkNames);
-
-
-    //     JScrollPane listScroller = new JScrollPane(playlistsNamesList);
-    //     listScroller.setPreferredSize(new Dimension(250, 80));
-
-    //     JScrollPane scrollPane = new JScrollPane(playlistsNamesList);
-    //     return scrollPane;
-    // }
-
     public static ObjectSelectionPanel getPlaylistsSelectableList(Object[] objects) {
         ObjectSelectionPanel selectionPanel = new ObjectSelectionPanel(objects);
         return selectionPanel;
