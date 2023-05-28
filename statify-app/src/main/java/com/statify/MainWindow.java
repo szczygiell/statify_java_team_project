@@ -9,10 +9,14 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.GridBagLayout;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.MouseInfo;
 import java.util.HashMap;
 import javax.swing.Timer;
+
+import org.apache.hc.core5.http.nio.support.AsyncServerFilterChainExchangeHandlerFactory;
 
 /**
  *
@@ -57,6 +61,10 @@ public class MainWindow extends javax.swing.JFrame {
         actionPanel.removeAll();
         actionPanel.revalidate();
         actionPanel.repaint();
+        genPanel.setVisible(false);
+        genPanel.removeAll();
+        genPanel.revalidate();
+        genPanel.repaint();
     }
 
     public void setTransparent(){
@@ -282,6 +290,9 @@ public class MainWindow extends javax.swing.JFrame {
         infoText11 = new javax.swing.JLabel();
         infoText12 = new javax.swing.JLabel();
         infoText13 = new javax.swing.JLabel();
+        genArtistButton = new javax.swing.JButton();
+        genTracksButton = new javax.swing.JButton();
+        genPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Statify PAP23L edition");
@@ -446,7 +457,7 @@ public class MainWindow extends javax.swing.JFrame {
         infoText13.setForeground(Color.BLACK);
         infoText13.setText(text13);
 
-
+        genPanel.setLayout(new GridBagLayout());
 
         planeRoot.setMaximumSize(new java.awt.Dimension(1980, 1080));
         planeRoot.setPreferredSize(new java.awt.Dimension(960, 540));
@@ -753,7 +764,7 @@ public class MainWindow extends javax.swing.JFrame {
         danceabilityButton.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
         danceabilityButton.setForeground(new java.awt.Color(255, 255, 255));
         danceabilityButton.setText("danceability");
-        danceabilityButton.setMaximumSize(new java.awt.Dimension(130, 54));
+        danceabilityButton.setMaximumSize(new java.awt.Dimension(200, 54));
         danceabilityButton.setMinimumSize(new java.awt.Dimension(130, 54));
         danceabilityButton.setPreferredSize(new java.awt.Dimension(130, 54));
         danceabilityButton.setBorder(null);
@@ -884,14 +895,6 @@ public class MainWindow extends javax.swing.JFrame {
         months6Button.setMaximumSize(new java.awt.Dimension(130, 54));
         months6Button.setMinimumSize(new java.awt.Dimension(130, 54));
         months6Button.setPreferredSize(new java.awt.Dimension(130, 54));
-        // months6Button.addMouseListener(new java.awt.event.MouseAdapter() {
-        //     public void mouseEntered(java.awt.event.MouseEvent evt) {
-        //         months6ButtonMouseEntered(evt);
-        //     }
-        //     public void mouseExited(java.awt.event.MouseEvent evt) {
-        //         months6ButtonMouseExited(evt);
-        //     }
-        // });
         months6Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 months6ButtonActionPerformed(evt);
@@ -923,6 +926,38 @@ public class MainWindow extends javax.swing.JFrame {
                 allTimeHistoryButtonActionPerformed(evt);
             }
         });
+
+        genArtistButton.setBackground(new java.awt.Color(44, 51, 51));
+        genArtistButton.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        genArtistButton.setForeground(new java.awt.Color(255, 255, 255));
+        genArtistButton.setText("By favourite artists");
+        genArtistButton.setBorder(null);
+        genArtistButton.setMaximumSize(new java.awt.Dimension(200, 54));
+        genArtistButton.setMinimumSize(new java.awt.Dimension(200, 54));
+        genArtistButton.setPreferredSize(new java.awt.Dimension(200, 54));
+        genArtistButton.setSize(new java.awt.Dimension(200, 54));
+        genArtistButton.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                genArtistButtonActionPerformed(evt);
+            }
+        });
+
+        genTracksButton.setBackground(new java.awt.Color(44, 51, 51));
+        genTracksButton.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        genTracksButton.setForeground(new java.awt.Color(255, 255, 255));
+        genTracksButton.setText("By favourite tracks");
+        genTracksButton.setBorder(null);
+        genTracksButton.setMaximumSize(new java.awt.Dimension(200, 54));
+        genTracksButton.setMinimumSize(new java.awt.Dimension(200, 54));
+        genTracksButton.setPreferredSize(new java.awt.Dimension(200, 54));
+        genTracksButton.setSize(new java.awt.Dimension(200, 54));
+        genTracksButton.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                genTracksButtonActionPerformed(evt);
+            }
+        });
+
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
@@ -1259,228 +1294,6 @@ public class MainWindow extends javax.swing.JFrame {
     //     infoWindow.setVisible(false);
     // }//GEN-LAST:event_genreButtonMouseExited
 
-    // private void topTracksButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topTracksButtonMouseEntered
-        
-    //     infoWindow2.add(infoText2);
-    //     java.awt.PointerInfo a = MouseInfo.getPointerInfo();
-    //     java.awt.Point b = a.getLocation();
-    //     int mouse_x = (int) b.getX();
-    //     int mouse_y = (int) b.getY();
-    //     // System.out.println(mouse_x);
-    //     // System.out.println(mouse_y);
-    //     infoWindow2.setLocation(mouse_x - 170, mouse_y - 100);
-    //     infoWindow2.setVisible(true);
-    // }//GEN-LAST:event_topTracksButtonMouseEntered
-
-    // private void topTracksButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topTracksButtonMouseExited
-    //     infoWindow2.setVisible(false);
-    // }//GEN-LAST:event_topTracksButtonMouseExited
-
-    // private void tracksanalyseButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tracksanalyseButtonMouseEntered
-    //     infoWindow3.add(infoText3);
-    //     java.awt.PointerInfo a = MouseInfo.getPointerInfo();
-    //     java.awt.Point b = a.getLocation();
-    //     int mouse_x = (int) b.getX();
-    //     int mouse_y = (int) b.getY();
-    //     // System.out.println(mouse_x);
-    //     // System.out.println(mouse_y);
-    //     infoWindow3.setLocation(mouse_x - 170, mouse_y - 100);
-    //     infoWindow3.setVisible(true);
-    // }//GEN-LAST:event_tracksanalyseButtonMouseEntered
-
-    // private void tracksanalyseButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tracksanalyseButtonMouseExited
-    //     infoWindow3.setVisible(false);
-    // }//GEN-LAST:event_tracksanalyseButtonMouseExited
-
-    // private void playlistanalyseButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playlistanalyseButtonMouseEntered
-    //     infoWindow4.add(infoText4);
-    //     java.awt.PointerInfo a = MouseInfo.getPointerInfo();
-    //     java.awt.Point b = a.getLocation();
-    //     int mouse_x = (int) b.getX();
-    //     int mouse_y = (int) b.getY();
-    //     // System.out.println(mouse_x);
-    //     // System.out.println(mouse_y);
-    //     infoWindow4.setLocation(mouse_x - 170, mouse_y - 100);
-    //     infoWindow4.setVisible(true);
-    // }//GEN-LAST:event_playlistanalyseButtonMouseEntered
-
-    // private void playlistanalyseButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_playlistanalyseButtonMouseExited
-    //     infoWindow4.setVisible(false);
-    // }//GEN-LAST:event_playlistanalyseButtonMouseExited
-
-    // private void generatePlaylistButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_generatePlaylistButtonMouseEntered
-    //     infoWindow5.add(infoText5);
-    //     java.awt.PointerInfo a = MouseInfo.getPointerInfo();
-    //     java.awt.Point b = a.getLocation();
-    //     int mouse_x = (int) b.getX();
-    //     int mouse_y = (int) b.getY();
-    //     // System.out.println(mouse_x);
-    //     // System.out.println(mouse_y);
-    //     infoWindow5.setLocation(mouse_x - 170, mouse_y - 50);
-    //     infoWindow5.setVisible(true);
-    // }//GEN-LAST:event_generatePlaylistButtonMouseEntered
-
-    // private void generatePlaylistButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_generatePlaylistButtonMouseExited
-    //     infoWindow5.setVisible(false);
-    // }//GEN-LAST:event_generatePlaylistButtonMouseExited
-
-    // private void homeButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeButtonMouseEntered
-    //     infoWindow6.add(infoText6);
-    //     java.awt.PointerInfo a = MouseInfo.getPointerInfo();
-    //     java.awt.Point b = a.getLocation();
-    //     int mouse_x = (int) b.getX();
-    //     int mouse_y = (int) b.getY();
-    //     // System.out.println(mouse_x);
-    //     // System.out.println(mouse_y);
-    //     infoWindow6.setLocation(mouse_x - 170, mouse_y - 50);
-    //     infoWindow6.setVisible(true);
-    // }//GEN-LAST:event_homeButtonMouseEntered
-
-    // private void homeButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeButtonMouseExited
-    //     infoWindow6.setVisible(false);
-    // }//GEN-LAST:event_homeButtonMouseExited
-
-    // private void loudnessButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loudnessButtonMouseEntered
-
-    //     infoWindow7.add(infoText7);
-    //     java.awt.PointerInfo a = MouseInfo.getPointerInfo();
-    //     java.awt.Point b = a.getLocation();
-    //     int mouse_x = (int) b.getX();
-    //     int mouse_y = (int) b.getY();
-    //     System.out.println(mouse_x);
-    //     System.out.println(mouse_y);
-    //     infoWindow7.setLocation(mouse_x - 170, mouse_y - 50);
-    //     infoWindow7.setVisible(true);
-    // }//GEN-LAST:event_loudnessButtonMouseEntered
-
-        // here
-
-    // SMTHButton{ msg }
-//   actionlistener(RClick)
-        // msg.show
-        // infoWindow7.add(infotext["artist"]);
-        // { 
-//          "artist": "twoi ulubiency"
-        // }
-        // infotxt.reset setclear
-        
-    // private void loudnessButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loudnessButtonMouseExited
-    //     infoWindow7.setVisible(false);
-    // }//GEN-LAST:event_loudnessButtonMouseExited
-
-    // private void danceabilityButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_danceabilityButtonMouseEntered
-
-    //     infoWindow8.add(infoText8);
-    //     java.awt.PointerInfo a = MouseInfo.getPointerInfo();
-    //     java.awt.Point b = a.getLocation();
-    //     int mouse_x = (int) b.getX();
-    //     int mouse_y = (int) b.getY();
-    //     System.out.println(mouse_x);
-    //     System.out.println(mouse_y);
-    //     infoWindow8.setLocation(mouse_x - 170, mouse_y - 50);
-    //     infoWindow8.setVisible(true);
-    // }//GEN-LAST:event_danceabilityButtonMouseEntered
-
-    // private void danceabilityButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_danceabilityButtonMouseExited
-    //     infoWindow8.setVisible(false);
-    // }//GEN-LAST:event_danceabilityButtonMouseExited
-
-    // private void acousticnessButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_acousticnessButtonMouseEntered
-    //     infoWindow9.add(infoText9);
-    //     java.awt.PointerInfo a = MouseInfo.getPointerInfo();
-    //     java.awt.Point b = a.getLocation();
-    //     int mouse_x = (int) b.getX();
-    //     int mouse_y = (int) b.getY();
-    //     System.out.println(mouse_x);
-    //     System.out.println(mouse_y);
-    //     infoWindow9.setLocation(mouse_x - 170, mouse_y - 50);
-    //     infoWindow9.setVisible(true);
-    // }//GEN-LAST:event_acousticnessButtonMouseEntered
-
-    // private void acousticnessButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_acousticnessButtonMouseExited
-    //     infoWindow9.setVisible(false);
-    // }//GEN-LAST:event_acousticnessButtonMouseExited
-
-    // private void numPlaylistTextFieldMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_numPlaylistTextFieldMouseEntered
-    //     infoWindow1.add(infoText1);
-    //     java.awt.PointerInfo a = MouseInfo.getPointerInfo();
-    //     java.awt.Point b = a.getLocation();
-    //     int mouse_x = (int) b.getX();
-    //     int mouse_y = (int) b.getY();
-    //     System.out.println(mouse_x);
-    //     System.out.println(mouse_y);
-    //     infoWindow1.setLocation(mouse_x - 170, mouse_y - 50);
-    //     infoWindow1.setVisible(true);
-    // }//GEN-LAST:event_numPlaylistTextFieldMouseEntered
-
-    // private void numPlaylistTextFieldMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_numPlaylistTextFieldMouseExited
-    //     infoWindow.setVisible(false);
-    // }//GEN-LAST:event_numPlaylistTextFieldMouseExited
-
-    // private void weeks4ButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_weeks4ButtonMouseEntered
-    //     infoWindow10.add(infoText10);
-    //     java.awt.PointerInfo a = MouseInfo.getPointerInfo();
-    //     java.awt.Point b = a.getLocation();
-    //     int mouse_x = (int) b.getX();
-    //     int mouse_y = (int) b.getY();
-    //     System.out.println(mouse_x);
-    //     System.out.println(mouse_y);
-    //     infoWindow10.setLocation(mouse_x - 170, mouse_y - 50);
-    //     infoWindow10.setVisible(true);
-    // }//GEN-LAST:event_weeks4ButtonMouseEntered
-
-    // private void weeks4ButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_weeks4ButtonMouseExited
-    //     infoWindow10.setVisible(false);
-    // }//GEN-LAST:event_weeks4ButtonMouseExited
-
-    // private void months6ButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_months6ButtonMouseEntered
-    //     infoWindow11.add(infoText11);
-    //     java.awt.PointerInfo a = MouseInfo.getPointerInfo();
-    //     java.awt.Point b = a.getLocation();
-    //     int mouse_x = (int) b.getX();
-    //     int mouse_y = (int) b.getY();
-    //     System.out.println(mouse_x);
-    //     System.out.println(mouse_y);
-    //     infoWindow11.setLocation(mouse_x - 170, mouse_y - 50);
-    //     infoWindow11.setVisible(true);
-    // }//GEN-LAST:event_months6ButtonMouseEntered
-
-    // private void months6ButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_months6ButtonMouseExited
-    //     infoWindow11.setVisible(false);
-    // }//GEN-LAST:event_months6ButtonMouseExited
-
-    // private void allTimeHistoryButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_allTimeHistoryButtonMouseEntered
-    //     infoWindow12.add(infoText12);
-    //     java.awt.PointerInfo a = MouseInfo.getPointerInfo();
-    //     java.awt.Point b = a.getLocation();
-    //     int mouse_x = (int) b.getX();
-    //     int mouse_y = (int) b.getY();
-    //     System.out.println(mouse_x);
-    //     System.out.println(mouse_y);
-    //     infoWindow12.setLocation(mouse_x - 170, mouse_y - 50);
-    //     infoWindow12.setVisible(true);
-    // }//GEN-LAST:event_allTimeHistoryButtonMouseEntered
-
-    // private void allTimeHistoryButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_allTimeHistoryButtonMouseExited
-    //     infoWindow12.setVisible(false);
-    // }//GEN-LAST:event_allTimeHistoryButtonMouseExited
-
-    // private void numTracksTextFieldMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_numTracksTextFieldMouseEntered
-    //     infoWindow1.add(infoText1);
-    //     java.awt.PointerInfo a = MouseInfo.getPointerInfo();
-    //     java.awt.Point b = a.getLocation();
-    //     int mouse_x = (int) b.getX();
-    //     int mouse_y = (int) b.getY();
-    //     System.out.println(mouse_x);
-    //     System.out.println(mouse_y);
-    //     infoWindow1.setLocation(mouse_x - 170, mouse_y - 50);
-    //     infoWindow1.setVisible(true);
-    // }//GEN-LAST:event_numTracksTextFieldMouseEntered
-
-    // private void numTracksTextFieldMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_numTracksTextFieldMouseExited
-    //     infoWindow.setVisible(false);
-    // }//GEN-LAST:event_numTracksTextFieldMouseExited
-
     private void numPlaylistTextFieldActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_numPlaylistTextFieldActionPerformed
 
     }// GEN-LAST:event_numPlaylistTextFieldActionPerformed
@@ -1538,40 +1351,46 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void danceabilityButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_optionButton2ActionPerformed
         String playlists_num = numPlaylistTextField.getText();
-        try {
-            int plNum = Integer.parseInt(playlists_num);
-            if (plNum <= 0) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of playlists");
-            } else {
-                actionPanel.removeAll();
-                Statify.SetPlaylistsNum(plNum);
-                upperPanelDefault();
-                if (analFlag) {
-                    JPanel histo = Statify.getDanceabilityHistogram();
-                    panelInit(histo);
-                    histo.setVisible(true);
-                }
-                else {
-                    if (plNum > 5){
-                        javax.swing.JOptionPane.showMessageDialog(this, "Maximum amount of playlist is 5");
+        if(genFlag){
+            System.out.println("piękniusia playlista hej");
+            // tu obsługujemy dodanie playlisty do biblioteki
+        }
+        else {
+            try {
+                int plNum = Integer.parseInt(playlists_num);
+                if (plNum <= 0) {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of playlists");
+                } else {
+                    actionPanel.removeAll();
+                    Statify.SetPlaylistsNum(plNum);
+                    upperPanelDefault();
+                    if (analFlag) {
+                        JPanel histo = Statify.getDanceabilityHistogram();
+                        panelInit(histo);
+                        histo.setVisible(true);
                     }
                     else {
-                        User user = Statify.currentUser;
-                        HashMap<String, String> playlists = user.getPlaylistsHashMap(plNum);
-                        FeatureName[] features = { FeatureName.ACOUSTICNESS, FeatureName.DANCEABILITY, FeatureName.ENERGY,
-                        FeatureName.LOUDNESS, FeatureName.LIVENESS };
-                        JPanel radar = Statify.getTracksRadarChartFromPlaylists(playlists, features);
-                        panelInit(radar);
-                        radar.setVisible(true);
+                        if (plNum > 5){
+                            javax.swing.JOptionPane.showMessageDialog(this, "Maximum amount of playlist is 5");
+                        }
+                        else {
+                            User user = Statify.currentUser;
+                            HashMap<String, String> playlists = user.getPlaylistsHashMap(plNum);
+                            FeatureName[] features = { FeatureName.ACOUSTICNESS, FeatureName.DANCEABILITY, FeatureName.ENERGY,
+                            FeatureName.LOUDNESS, FeatureName.LIVENESS };
+                            JPanel radar = Statify.getTracksRadarChartFromPlaylists(playlists, features);
+                            panelInit(radar);
+                            radar.setVisible(true);
+                        }
                     }
+                    optionsPanel.setVisible(true);
                 }
-                optionsPanel.setVisible(true);
-            }
-        } catch (NumberFormatException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
-        } catch (NullPointerException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
+            } catch (NumberFormatException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
+            } catch (NullPointerException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
 
+            }
         }
         // trzeba to jesszcze jakoś wyłączyć potem
 
@@ -1616,27 +1435,111 @@ public class MainWindow extends javax.swing.JFrame {
     }// GEN-LAST:event_optionButton3ActionPerformed
 
     private void weeks4ButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_weeks4ButtonActionPerformed
-        chooseTypeTopList("short_term");
-        // if(buttonFlag.equals("tracks")){
-        //     trackListGrapher("short_term");
-        // }
-        // else if(buttonFlag.equals("artist")){
-        //     artistListGrapher("short_term");
-        // }
-        // // else if(buttonFlag.equals("artist")){
-        // //     genreListGrapher("short_term");
-        // // }
-        // else{
-        //     panelsSetDefault();
-        // }
+        if (genFlag){
+            if(genFlag2) {
+                JScrollPane scrollPane = Statify.getRecommendationsPanelByTopArtists("short_term");
+                actionPanel.removeAll();
+                actionPanel.revalidate();
+                actionPanel.repaint();
+                actionPanel.add(scrollPane);
+                loudnessButton.setVisible(false);
+                acousticnessButton.setVisible(false);
+                numPlaylistTextField.setVisible(false);
+                danceabilityButton.setPreferredSize(new java.awt.Dimension(200, 54));
+                danceabilityButton.setText("Add playlist to your library");
+                danceabilityButton.setVisible(true);
+                optionsPanel.setVisible(true);
+            }
+            else {
+                JScrollPane scrollPane = Statify.getRecommendationsPanelByTopTracks("short_term");
+                actionPanel.removeAll();
+                actionPanel.revalidate();
+                actionPanel.repaint();
+                actionPanel.add(scrollPane);
+                loudnessButton.setVisible(false);
+                acousticnessButton.setVisible(false);
+                numPlaylistTextField.setVisible(false);
+                danceabilityButton.setPreferredSize(new java.awt.Dimension(200, 54));
+                danceabilityButton.setText("Add playlist to your library");
+                danceabilityButton.setVisible(true);
+                optionsPanel.setVisible(true);
+            }
+        }
+        else {
+            chooseTypeTopList("short_term");
+        }
         }// GEN-LAST:event_weeks4ButtonActionPerformed
 
     private void months6ButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_months6ButtonActionPerformed
-        chooseTypeTopList("medium_term");
+        if (genFlag){
+            if(genFlag2) {
+                JScrollPane scrollPane = Statify.getRecommendationsPanelByTopArtists("medium_term");
+                actionPanel.removeAll();
+                actionPanel.revalidate();
+                actionPanel.repaint();
+                actionPanel.add(scrollPane);
+                loudnessButton.setVisible(false);
+                acousticnessButton.setVisible(false);
+                numPlaylistTextField.setVisible(false);
+                danceabilityButton.setPreferredSize(new java.awt.Dimension(200, 54));
+                danceabilityButton.setText("Add playlist to your library");
+                danceabilityButton.setVisible(true);
+                optionsPanel.setVisible(true);
+            }
+            else {
+                JScrollPane scrollPane = Statify.getRecommendationsPanelByTopTracks("medium_term");
+                actionPanel.removeAll();
+                actionPanel.revalidate();
+                actionPanel.repaint();
+                actionPanel.add(scrollPane);
+                loudnessButton.setVisible(false);
+                acousticnessButton.setVisible(false);
+                numPlaylistTextField.setVisible(false);
+                danceabilityButton.setPreferredSize(new java.awt.Dimension(200, 54));
+                danceabilityButton.setText("Add playlist to your library");
+                danceabilityButton.setVisible(true);
+                optionsPanel.setVisible(true);
+            }
+        }
+        else {
+            chooseTypeTopList("medium_term");
+        }
     }// GEN-LAST:event_months6ButtonActionPerformed
 
     private void allTimeHistoryButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_allTimeHistoryButtonActionPerformed
+        if (genFlag){
+            if(genFlag2) {
+                JScrollPane scrollPane = Statify.getRecommendationsPanelByTopArtists("long_term");
+                actionPanel.removeAll();
+                actionPanel.revalidate();
+                actionPanel.repaint();
+                actionPanel.add(scrollPane);
+                loudnessButton.setVisible(false);
+                acousticnessButton.setVisible(false);
+                numPlaylistTextField.setVisible(false);
+                danceabilityButton.setPreferredSize(new java.awt.Dimension(200, 54));
+                danceabilityButton.setText("Add playlist to your library");
+                danceabilityButton.setVisible(true);
+                optionsPanel.setVisible(true);
+            }
+            else {
+                JScrollPane scrollPane = Statify.getRecommendationsPanelByTopTracks("long_term");
+                actionPanel.removeAll();
+                actionPanel.revalidate();
+                actionPanel.repaint();
+                actionPanel.add(scrollPane);
+                loudnessButton.setVisible(false);
+                acousticnessButton.setVisible(false);
+                numPlaylistTextField.setVisible(false);
+                danceabilityButton.setPreferredSize(new java.awt.Dimension(200, 54));
+                danceabilityButton.setText("Add playlist to your library");
+                danceabilityButton.setVisible(true);
+                optionsPanel.setVisible(true);
+            }
+        }
+        else {
         chooseTypeTopList("long_term");
+        }
     }// GEN-LAST:event_allTimeHistoryButtonActionPerformed
 
     private void artistButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_artistButtonActionPerformed
@@ -1673,7 +1576,10 @@ public class MainWindow extends javax.swing.JFrame {
         // actionPanel.repaint();
         analFlag = true;
         acousticnessButton.setVisible(true);
+        numPlaylistTextField.setVisible(true);
         loudnessButton.setVisible(true);
+        //danceabilityButton.setSize(130,54);
+        danceabilityButton.setPreferredSize(new java.awt.Dimension(130, 54));
         danceabilityButton.setText("danceability");
         optionsPanel.setVisible(true);
     }// GEN-LAST:event_tracksanalyseButtonActionPerformed
@@ -1695,11 +1601,66 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void generatePlaylistButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_generatePlaylistButtonActionPerformed
         panelsSetDefault();
-        optionsPanel.setVisible(true);
-        // actionPanel.removeAll();
-        // actionPanel.revalidate();
-        // actionPanel.repaint();
+        java.awt.GridBagConstraints constraints = new java.awt.GridBagConstraints();
+        constraints.gridx = 0; // Column 0
+        constraints.gridy = 0; // Row 0
+        constraints.insets = new java.awt.Insets(10, 10, 10, 10); // Padding
+        genPanel.add(genArtistButton, constraints);
+        constraints.gridx = 1; // Column 0
+        constraints.gridy = 0;
+        genPanel.add(genTracksButton, constraints);
+        genPanel.setBackground(new Color(255, 255, 255, 0));
+        genPanel.setVisible(true);
+        actionPanel.add(genPanel);
+        actionPanel.setVisible(true);
     }// GEN-LAST:event_generatePlaylistButtonActionPerformed
+    
+    private void genArtistButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_months6ButtonActionPerformed
+        genFlag = true;
+        genFlag2 = true;
+        genPanel.removeAll();
+        genPanel.revalidate();
+        genPanel.repaint();
+        java.awt.GridBagConstraints constraints = new java.awt.GridBagConstraints();
+        constraints.gridx = 0; 
+        constraints.gridy = 0; 
+        constraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        genPanel.add(weeks4Button, constraints);
+        constraints.gridx = 1;
+        constraints.gridy = 0;
+        genPanel.add(months6Button, constraints);
+        constraints.gridx = 2;
+        constraints.gridy = 0;
+        genPanel.add(allTimeHistoryButton, constraints);
+        genPanel.setBackground(new Color(255, 255, 255, 0));
+        genPanel.setVisible(true);
+        actionPanel.add(genPanel);
+        actionPanel.setVisible(true);
+    }
+    
+    private void genTracksButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_months6ButtonActionPerformed
+        genFlag = true;
+        genFlag2 = false;
+        genPanel.removeAll();
+        genPanel.revalidate();
+        genPanel.repaint();
+        java.awt.GridBagConstraints constraints = new java.awt.GridBagConstraints();
+        constraints.gridx = 0; 
+        constraints.gridy = 0; 
+        constraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        genPanel.add(weeks4Button, constraints);
+        constraints.gridx = 1;
+        constraints.gridy = 0;
+        genPanel.add(months6Button, constraints);
+        constraints.gridx = 2;
+        constraints.gridy = 0;
+        genPanel.add(allTimeHistoryButton, constraints);
+        genPanel.setBackground(new Color(255, 255, 255, 0));
+        genPanel.setVisible(true);
+        actionPanel.add(genPanel);
+        actionPanel.setVisible(true);
+
+    }
 
     /**
      * @param args the command line arguments
@@ -1809,6 +1770,11 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel infoText12;
     private javax.swing.JLabel infoText13;
     private Boolean analFlag;
+    private javax.swing.JButton genArtistButton;
+    private javax.swing.JButton genTracksButton;
+    private Boolean genFlag;
+    private Boolean genFlag2;
+    private javax.swing.JPanel genPanel;
 
 
     // End of variables declaration//GEN-END:variables

@@ -429,12 +429,12 @@ public class Statify {
     }
 
     public static JScrollPane getRecommendationsPanelByTopTracks(String timeDuration) {
-        HashMap<String, String> recommendations = currentUser.getRecomendationsByTopTracks("short_term");
+        HashMap<String, String> recommendations = currentUser.getRecomendationsByTopTracks(timeDuration);
         return Statify.createRecommendationsPanel(recommendations);
     }
 
     public static JScrollPane getRecommendationsPanelByTopArtists(String timeDuration) {
-        HashMap<String, String> recommendations = currentUser.getRecomendationsByTopArtists("short_term");
+        HashMap<String, String> recommendations = currentUser.getRecomendationsByTopArtists(timeDuration);
         return Statify.createRecommendationsPanel(recommendations);
     }
 
