@@ -10,6 +10,11 @@ import org.knowm.xchart.style.Styler.LegendPosition;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.Histogram;
 import org.knowm.xchart.style.Styler.ChartTheme;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.data.general.DefaultPieDataset;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -324,7 +329,7 @@ public class Statify {
         return valuesArray;
     }
 
-    public static XChartPanel<RadarChart> getTracksRadarChartFromPlaylists(HashMap<String, String> playlistsHashMap, 
+    public static XChartPanel<RadarChart> getTracksRadarChartFromPlaylists(HashMap<String, String> playlistsHashMap,
             FeatureName[] features) {
         List<double[]> dataSeriesList = new ArrayList();
         String[] playlistNames = playlistsHashMap.keySet().toArray(new String[0]);
@@ -438,58 +443,64 @@ public class Statify {
         return Statify.createRecommendationsPanel(recommendations);
     }
 
+    public static JPanel createPieChart(Dictionary<String, Integer> data) {
+        DefaultPieDataset dataset = new DefaultPieDataset();
+
+        // Dodanie danych do zestawu danych wykresu
+        Enumeration<String> keys = data.keys();
+        while (keys.hasMoreElements()) {
+            String key = keys.nextElement();
+            int value = data.get(key);
+            dataset.setValue(key, value);
+        }
+
+        // Utworzenie wykresu kołowego
+        JFreeChart chart = ChartFactory.createPieChart("Wykres kołowy", dataset, true, true, false);
+
+        // Dostosowanie wyglądu wykresu
+        PiePlot plot = (PiePlot) chart.getPlot();
+        plot.setSectionOutlinesVisible(false);
+        plot.setShadowPaint(null);
+        plot.setLabelBackgroundPaint(new Color(220, 220, 220));
+
+        // Utworzenie panelu wykresu
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new Dimension(400, 300));
+
+        return chartPanel;
+    }
+
     public static void main(String[] args) {
         Statify statify = new Statify();
         // statify.getDanceabilityHistogram(Arrays.asList(1.4f, 5.0f, 6.4f), 2);
-        JFrame frame = new JFrame("Song Form");
-
-        // SORRY ZA SYF ALE PROSZĘ TEGO NIE USUWAĆ NA RAZIE!
-
-        // List<Dictionary<String, String>> dictionaryList = new ArrayList<>();
-
-        // Dictionary<String, String> dictionary1 = new Hashtable<>();
-        // dictionary1.put("name", "hello");
-        // dictionary1.put("artist", "adele");
-        // dictionary1.put("album", "waheteverr");
-        // dictionaryList.add(dictionary1);
-
-        // Dictionary<String, String> dictionary2 = new Hashtable<>();
-        // dictionary2.put("name", "bebe");
-        // dictionary2.put("artist", "adadadasele");
-        // dictionary2.put("album", "verr");
-        // dictionaryList.add(dictionary2);
-
-        // Dictionary<String, String> dictionary3 = new Hashtable<>();
-        // dictionary3.put("name", "sbglo");
-        // dictionary3.put("artist", "tet");
-        // dictionary3.put("album", "wahefgsdteverr");
-        // dictionaryList.add(dictionary3);
-
-        // String accessToken =
-        //
-        // "BQAVQB6_0uvh43j3ABrWlHglI0R7kolM1Ph8cJjKz3RuwHyTeaujE85q8-BVfwILJIf10dC82ZX_D3lClNZcIGp9n_jHknNtmjVhWazVwug1vJZ4toPr4rFROwfA9AXf03TvAD5dk8mHovCA3o1onUH6QprhzkxKCaxK_bV4uHmBjv5l3Zg3F_SYG3Fsd2qQ9HcieS1UO7P-55eOQyNoMrMv1srluX5t9px1tJP-R70DLo1tIhshDjdmt3fpS7DySCdAReQ9oEt18eybwsfV1jjsiuaLii-dnpGe0729uNwQiAV9qiDT8ol8N6Ablk1UKJaQP1vc";
-        // User user = new User(accessToken);
-        // LoginWindow frame1 = new LoginWindow();
-        // frame1.setTitle("Login Form");
-        // frame1.setVisible(true);
-        // frame1.setBounds(10, 10, 370, 600);
-        // frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // frame1.setResizable(false);
+        // JFrame frame = new JFrame("Song Form");
 
         User user = new User(
-                "BQDYeRNDwTpM1UlGEBxGaDd6aHeypMSlbbEuIyYT_l0eHnbE3sWD3hYruH_zwmYjRiV6JrXdSCndBZVtHCot6m3TkzLy-KvFTOzOioxPbA2EtA7xY_lrP-Qjw00OSIVn-C-KuFi_cpfCK0UJTeNriMD9FSDpcF3nDRuXwkjKddyPD4d6lIQ2Mezu04knubswlI1bPQv3vWS8wb8Qrmr5NYVjwDKE4jX4jwtbC_UoQVyu1eL-PawlCK9YbRWd5MIosReBw3PiMaNDE5vENHQ3xBQpI3h-habc_Xc9UrCPFYRVYGJTrnKGTVNA4rSXLoaNg9JdBUcp");
+                "BQCRuToL2aMIp_vXCQYvwfNTjoN-BMdWFHdUPRnWSoOlotDHMJpFvEyftAVI67ryDIg-KMUDXwRnJ9vmxXosHB2GfpvHsn_B8A1KBlw3DOz8dVHtg3oJDbGMRHsYbU0bm-W0_Hw1KosCVdg5JlpRb-dSRG4k5ftO2ltxVtP98CNm3q578xov5aXACUSrcfYoE4mHgcGWUq2Fe_6U5czFUrC6jmk7YaTV4PK9bXM-GTWuk3F3kWGZyhNpLCrp7TklOC8zC7nE3M4stNgDn66ypstO5VzqCutqt3MkiGhfda39tI3GifyI2iy7EMS8NdZGViROdkelT6xzyreFyT4hDh2T");
         statify.setUser(user);
-        String timeRange = "short_term";
-        int artistsNumber = 10;
+        String timeRange = "long_term";
+        int artistsNumber = 40;
 
-        // List<Dictionary<String, String>> dictionaryListFromMethod =
-        // user.getTopTracksInfoList(tracksNumber, timeRange);
-        // List<Dictionary<String, String>> dictionaryListFromMethod =
-        // user.getTopTracksInfoList(tracksNumber, timeRange);
 
-        JScrollPane scrollPane = createTopArtistsPanel(artistsNumber, timeRange);
-        frame.add(scrollPane);
+        Dictionary<String, Integer> dict = user.getTopGenresDict(artistsNumber, timeRange);
+        Dictionary<String, Integer> outDict = user.analyzeDictionary(dict);
+        Enumeration<String> keys = outDict.keys();
+        while (keys.hasMoreElements()) {
+            String key = keys.nextElement();
+            Integer value = outDict.get(key);
+            System.out.println("Klucz: " + key + ", Wartość: " + value);
+        }
+        // JScrollPane scrollPane = createTopArtistsPanel(artistsNumber, timeRange);
+        // frame.add(scrollPane);
+        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // frame.pack();
+        // frame.setVisible(true);
+        JFrame frame = new JFrame("Wykres kołowy");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JPanel chartPanel = createPieChart(outDict);
+        frame.getContentPane().add(chartPanel);
+
         frame.pack();
         frame.setVisible(true);
 

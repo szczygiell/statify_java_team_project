@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Enumeration;
+import java.util.PriorityQueue;
 import java.lang.Math;
 import java.io.IOException;
 import org.apache.hc.core5.http.ParseException;
@@ -282,6 +284,59 @@ public class User {
             dictionaryList.add(dictionary);
         }
         return dictionaryList;
+    }
+
+    public Dictionary<String, Integer> getTopGenresDict(int limit, String time_range) {
+        Dictionary<String, Integer> dictionary = new Hashtable<>();
+
+        List<Dictionary<String, String>> artistInfoList = getTopArtistsInfoList(limit, time_range);
+        for (int i = 0; i < limit; i++) {
+            List<String> genresList = Arrays.asList(artistInfoList.get(i).get("genres").split(", "));
+            for (int j = 0; j < genresList.size(); j++) {
+                String klucz = genresList.get(j);
+                if (dictionary.get(klucz) != null) {
+                    dictionary.put(klucz, dictionary.get(klucz) + 1);
+                } else {
+                    dictionary.put(klucz, 1);
+                }
+            }
+
+        }
+        return dictionary;
+    }
+
+    public Dictionary<String, Integer> analyzeDictionary(Dictionary<String, Integer> dictionary) {
+        PriorityQueue<String> pq = new PriorityQueue<>((key1, key2) -> dictionary.get(key2) - dictionary.get(key1));
+
+        // Przejście po słowniku i dodanie kluczy do kolejki priorytetowej
+        Enumeration<String> keys = dictionary.keys();
+        while (keys.hasMoreElements()) {
+            String key = keys.nextElement();
+            pq.offer(key);
+        }
+
+        // Pobranie 10 kluczy z najwyższymi wartościami
+        int topCount = 10;
+        Dictionary<String, Integer> result = new Hashtable<>();
+        int remainingSum = 0;
+        for (int i = 0; i < topCount; i++) {
+            String key = pq.poll();
+            if (key != null) {
+                int value = dictionary.get(key);
+                result.put(key, value);
+            }
+        }
+
+        // Zliczenie łącznej sumy wartości pozostałych kluczy
+        while (!pq.isEmpty()) {
+            String key = pq.poll();
+            remainingSum += dictionary.get(key);
+        }
+
+        // Dodanie klucza "others" z wartością sumy reszty kluczy
+        result.put("others", remainingSum);
+
+        return result;
     }
 
     // artistIds' and tracksIds' length must be max 5
