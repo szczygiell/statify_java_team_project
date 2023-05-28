@@ -15,6 +15,8 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.chart.title.LegendTitle;
+import org.jfree.chart.LegendItem;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -460,6 +462,7 @@ public class Statify {
         // Dostosowanie wyglądu wykresu
         PiePlot plot = (PiePlot) chart.getPlot();
         plot.setSectionOutlinesVisible(false);
+        plot.setLabelGenerator(null);
         plot.setShadowPaint(null);
         plot.setLabelBackgroundPaint(new Color(220, 220, 220));
 
@@ -469,6 +472,7 @@ public class Statify {
 
         return chartPanel;
     }
+
 
     public static void main(String[] args) {
         Statify statify = new Statify();
