@@ -1270,43 +1270,54 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void danceabilityButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_optionButton2ActionPerformed
         String playlists_num = numPlaylistTextField.getText();
+        // Object[] seleOne = selectedPlaylists; 
         if(genFlag){
             System.out.println("piękniusia playlista hej");
             // tu obsługujemy dodanie playlisty do biblioteki
         }
         else {
             try {
-                int plNum = Integer.parseInt(playlists_num);
-                if (plNum <= 0) {
-                    javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of playlists");
-                } else {
+                // int plNum = Integer.parseInt(playlists_num);
+                // if (plNum <= 0) {
+                //     javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of playlists");
+                // } else {
                     actionPanel.removeAll();
-                    Statify.SetPlaylistsNum(plNum);
+                    // Statify.SetPlaylistsNum(plNum);
                     upperPanelDefault();
                     if (analFlag) {
-                        JPanel histo = Statify.getDanceabilityHistogram();
-                        panelInit(histo);
-                        histo.setVisible(true);
+                        int plNum = Integer.parseInt(playlists_num);
+                        Statify.SetPlaylistsNum(plNum);
+                        if (plNum <= 0) {
+                            javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of playlists");
+                        } else {
+                            JPanel histo = Statify.getDanceabilityHistogram();
+                            panelInit(histo);
+                            histo.setVisible(true);
+                        }
                     }
                     else {
-                        if (plNum > 5){
-                            javax.swing.JOptionPane.showMessageDialog(this, "Maximum amount of playlist is 5");
-                        }
-                        else {
-
-                            // TUTAJ TRZEBA DODAĆ ŻE ZBIERA ZAZNACZONE POLA Z SCROLLPANEA
+                        // if (plNum > 5){
+                        //     javax.swing.JOptionPane.showMessageDialog(this, "Maximum amount of playlist is 5");
+                        // }
+                        // else {
+                            java.util.ArrayList<String> selectedNames = new java.util.ArrayList<>();
                             User user = Statify.currentUser;
-                            // int ammount = selectedPlaylists.length; 
-                            HashMap<String, String> playlists = user.getPlaylistsHashMap(plNum); //, selectedPlaylists);
+                            for(Object elem : selectedPlaylists){
+                                if(elem != null){
+                                    selectedNames.add(elem.toString());
+                                }
+                            }
+                            HashMap<String, String> playlists = user.getPlaylistsHashMap(selectedNames); //, selectedPlaylists);
                             FeatureName[] features = { FeatureName.ACOUSTICNESS, FeatureName.DANCEABILITY, FeatureName.ENERGY,
                             FeatureName.LOUDNESS, FeatureName.LIVENESS };
                             JPanel radar = Statify.getTracksRadarChartFromPlaylists(playlists, features);
+                            selectedNames.clear();
                             panelInit(radar);
                             radar.setVisible(true);
-                        }
+                        // }
                     }
                     optionsPanel.setVisible(true);
-                }
+                // }
             } catch (NumberFormatException e) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
             } catch (NullPointerException e) {
@@ -1511,8 +1522,9 @@ public class MainWindow extends javax.swing.JFrame {
         HashMap<String, String> playlistsDictionary = Statify.currentUser.getPlaylistsHashMap();
         Object[] names = playlistsDictionary.keySet().toArray();
         ObjectSelectionPanel selectPanel = Statify.getPlaylistsSelectableList(names);
-        // selectedPlaylists = selectPanel.getSelectedObjects();
+        selectedPlaylists = selectPanel.selectedPlaylists();
         addNewPanel(selectPanel);
+        numPlaylistTextField.setVisible(false);
         selectPanel.setVisible(true);
     }// GEN-LAST:event_playlistanalyseButtonActionPerformed
 
@@ -1686,7 +1698,7 @@ public class MainWindow extends javax.swing.JFrame {
     private Boolean genFlag2;
     private javax.swing.JPanel genPanel;
     private javax.swing.JPanel transPanel;
-    // private Object[] selectedPlaylists;
+    private Object[] selectedPlaylists;
 
 
     // End of variables declaration//GEN-END:variables

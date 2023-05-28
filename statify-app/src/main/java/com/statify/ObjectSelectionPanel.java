@@ -23,6 +23,11 @@ public class ObjectSelectionPanel extends JPanel {
             add(checkBoxes[i]);
         }
     }
+    
+    public Object[] selectedPlaylists(){
+        return getSelectedObjects();
+    }
+    
 
     private class CheckBoxListener implements ActionListener {
         private int index;

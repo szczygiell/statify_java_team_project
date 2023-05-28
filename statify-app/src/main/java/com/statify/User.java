@@ -81,17 +81,17 @@ public class User {
         return playlistsDictionary;
     }
     
-    // public HashMap<String, String> getPlaylistsHashMap(int limit, Object[] checkedNames) {
-    //     PlaylistSimplified[] playlists = getPlaylists(limit);
-    //     HashMap<String, String> playlistsDictionary = new HashMap<>();
-    //     // ArrayList<String> checkedNames;
-    //     for (PlaylistSimplified playlist : playlists) {
-    //         if(checkedNames.contains(playlist)){
-    //             playlistsDictionary.put(playlist.getName(), playlist.getId());
-    //         }
-    //     }
-    //     return playlistsDictionary;
-    // }
+    public HashMap<String, String> getPlaylistsHashMap(ArrayList<String> checkedNames) {
+        PlaylistSimplified[] playlists = getPlaylists(20);
+        HashMap<String, String> playlistsDictionary = new HashMap<>();
+        // ArrayList<String> checkedNames;
+        for (PlaylistSimplified playlist : playlists) {
+            if(checkedNames.contains(playlist.getName())){
+                playlistsDictionary.put(playlist.getName(), playlist.getId());
+            }
+        }
+        return playlistsDictionary;
+    }
 
     public List<String> getPlaylistsIds(int limit) {
         List<String> playlists_ids = new ArrayList<>();
