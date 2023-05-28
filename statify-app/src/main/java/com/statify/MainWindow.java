@@ -1270,7 +1270,6 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void danceabilityButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_optionButton2ActionPerformed
         String playlists_num = numPlaylistTextField.getText();
-        // Object[] seleOne = selectedPlaylists; 
         if(genFlag){
             System.out.println("piękniusia playlista hej");
             // tu obsługujemy dodanie playlisty do biblioteki
