@@ -457,7 +457,7 @@ public class Statify {
         }
 
         // Utworzenie wykresu kołowego
-        JFreeChart chart = ChartFactory.createPieChart("Wykres kołowy", dataset, true, true, false);
+        JFreeChart chart = ChartFactory.createPieChart("Genres Pie Chart", dataset, true, true, false);
 
         // Dostosowanie wyglądu wykresu
         PiePlot plot = (PiePlot) chart.getPlot();
