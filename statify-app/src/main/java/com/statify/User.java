@@ -239,12 +239,17 @@ public class User {
                 .time_range(time_range) // "short_term": 4 weeks; "medium_term": 6 months; "long_term": years
                 .limit(limit) // number of tracks
                 .build();
+                
         try {
             final Paging<Artist> artistsPaging = getUsersTopArtistsRequest.execute();
             Artist[] artists = artistsPaging.getItems();
-            for (int i = 0; i < limit; i++) {
+
+            for (int i = 0; i < artists.length; i++) {
                 trackIds.add(artists[i].getId());
             }
+            // if(limit > artists.length){
+            //     trackIds.add(Integer.toString(artists.length));
+            // }
             return trackIds;
 
         } catch (IOException | SpotifyWebApiException | ParseException | NullPointerException e) {
@@ -277,7 +282,7 @@ public class User {
 
         List<String> topArtistsIds = getTopArtistsIds(limit, time_range);
 
-        for (int i = 0; i < limit; i++) {
+        for (int i = 0; i < topArtistsIds.size(); i++) {
             Dictionary<String, String> dictionary = getArtistInfo(topArtistsIds.get(i));
             dictionaryList.add(dictionary);
         }
@@ -334,4 +339,35 @@ public class User {
         return tracks;
     }
 
+    public int getMaxAmmount(int limit, String time_range, String type){
+
+        if(type.equals("artists")){
+            final GetUsersTopArtistsRequest getUsersTopArtistsRequest = spotifyApi.getUsersTopArtists()
+                    .time_range(time_range) // "short_term": 4 weeks; "medium_term": 6 months; "long_term": years
+                    .limit(limit) // number of tracks
+                    .build();
+            try{
+                final Paging<Artist> artistsPaging = getUsersTopArtistsRequest.execute();
+                Artist[] artists = artistsPaging.getItems();
+                return artists.length;
+            } catch (IOException | SpotifyWebApiException | ParseException | NullPointerException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+        if(type.equals("tracks")){
+            final GetUsersTopTracksRequest getUsersTopTracksRequest = spotifyApi.getUsersTopTracks()
+                    .time_range(time_range) // "short_term": 4 weeks; "medium_term": 6 months; "long_term": years
+                    .limit(limit) // number of tracks
+                    .build();
+            try{
+                final Paging<Track> trackPaging = getUsersTopTracksRequest.execute();
+                Track[] tracks = trackPaging.getItems();
+                return tracks.length;
+            } catch (IOException | SpotifyWebApiException | ParseException | NullPointerException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+        return 1;
+
+    } 
 }

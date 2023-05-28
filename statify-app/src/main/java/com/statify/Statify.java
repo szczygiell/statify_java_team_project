@@ -189,7 +189,7 @@ public class Statify {
     public static JScrollPane createTopArtistsPanel(int artistsNumber, String timeRange) {
         List<Dictionary<String, String>> data = Statify.currentUser.getTopArtistsInfoList(artistsNumber, timeRange);
         JPanel panel = new JPanel();
-
+        // System.out.println(data.size());
         panel.setLayout(new GridBagLayout()); // n+1 rows, 2 columns, 10px between each row and
         GridBagConstraints c = new GridBagConstraints();                                                             // ech column
         // lepiej to zrobić GridBagLayout bo można dodawać kolumny różnych szerokości
