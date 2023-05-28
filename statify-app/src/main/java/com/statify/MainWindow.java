@@ -329,6 +329,7 @@ public class MainWindow extends javax.swing.JFrame {
         genTracksButton = new javax.swing.JButton();
         genPanel = new javax.swing.JPanel();
         genFlag = false;
+        // selectedPlaylists = new Object[];
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Statify PAP23L edition");
@@ -1367,7 +1368,7 @@ public class MainWindow extends javax.swing.JFrame {
                     }
                     else {
                         User user = Statify.currentUser;
-                        HashMap<String, String> playlists = user.getPlaylistsHashMap(plNum);
+                        HashMap<String, String> playlists = user.getPlaylistsHashMap(plNum);//, selectedPlaylists);
                         FeatureName[] features = { FeatureName.ACOUSTICNESS, FeatureName.DANCEABILITY, FeatureName.ENERGY,
                         FeatureName.LOUDNESS, FeatureName.LIVENESS };
                         JPanel radar = Statify.getTracksRadarChartFromPlaylists(playlists, features);
@@ -1410,8 +1411,11 @@ public class MainWindow extends javax.swing.JFrame {
                             javax.swing.JOptionPane.showMessageDialog(this, "Maximum amount of playlist is 5");
                         }
                         else {
+
+                            // TUTAJ TRZEBA DODAĆ ŻE ZBIERA ZAZNACZONE POLA Z SCROLLPANEA
                             User user = Statify.currentUser;
-                            HashMap<String, String> playlists = user.getPlaylistsHashMap(plNum);
+                            // int ammount = selectedPlaylists.length; 
+                            HashMap<String, String> playlists = user.getPlaylistsHashMap(plNum); //, selectedPlaylists);
                             FeatureName[] features = { FeatureName.ACOUSTICNESS, FeatureName.DANCEABILITY, FeatureName.ENERGY,
                             FeatureName.LOUDNESS, FeatureName.LIVENESS };
                             JPanel radar = Statify.getTracksRadarChartFromPlaylists(playlists, features);
@@ -1453,7 +1457,7 @@ public class MainWindow extends javax.swing.JFrame {
                     }
                     else {
                         User user = Statify.currentUser;
-                        HashMap<String, String> playlists = user.getPlaylistsHashMap(plNum);
+                        HashMap<String, String> playlists = user.getPlaylistsHashMap(plNum); //, selectedPlaylists);
                         FeatureName[] features = { FeatureName.ACOUSTICNESS, FeatureName.DANCEABILITY, FeatureName.ENERGY,
                         FeatureName.LOUDNESS, FeatureName.LIVENESS };
                         JPanel radar = Statify.getTracksRadarChartFromPlaylists(playlists, features);
@@ -1637,8 +1641,12 @@ public class MainWindow extends javax.swing.JFrame {
         loudnessButton.setVisible(false);
         danceabilityButton.setText("Show chart");
         optionsPanel.setVisible(true);
-        JScrollPane selectPanel = Statify.getPlaylistsSelectableList();
-        addNewScrollPane(selectPanel);
+
+        HashMap<String, String> playlistsDictionary = Statify.currentUser.getPlaylistsHashMap();
+        Object[] names = playlistsDictionary.keySet().toArray();
+        ObjectSelectionPanel selectPanel = Statify.getPlaylistsSelectableList(names);
+        // selectedPlaylists = selectPanel.getSelectedObjects();
+        addNewPanel(selectPanel);
         selectPanel.setVisible(true);
         // actionPanel.revalidate();
         // actionPanel.repaint();
@@ -1820,6 +1828,7 @@ public class MainWindow extends javax.swing.JFrame {
     private Boolean genFlag;
     private Boolean genFlag2;
     private javax.swing.JPanel genPanel;
+    // private Object[] selectedPlaylists;
 
 
     // End of variables declaration//GEN-END:variables

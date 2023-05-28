@@ -53,23 +53,23 @@ public final class App {
         TopLevelWindow.createChartFrame(chart);
     }
 
-    public static void playlistSelectablePanel(String token) {
-        String user_token = token;
-        User user = new User(user_token);
-        int limit = 1;
+    // public static void playlistSelectablePanel(String token) {
+    //     String user_token = token;
+    //     User user = new User(user_token);
+    //     int limit = 1;
 
-        Statify.setUser(user);
-        Statify.SetPlaylistsNum(limit);
+    //     Statify.setUser(user);
+    //     Statify.SetPlaylistsNum(limit);
 
-        JScrollPane scrollPane = Statify.getPlaylistsSelectableList();
-        // Create a frame and add the scroll pane
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(200, 200);
-        frame.getContentPane().setLayout(new BorderLayout());
-        frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
-        frame.setVisible(true);
-    }
+    //     JScrollPane scrollPane = Statify.getPlaylistsSelectableList();
+    //     // Create a frame and add the scroll pane
+    //     JFrame frame = new JFrame();
+    //     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    //     frame.setSize(200, 200);
+    //     frame.getContentPane().setLayout(new BorderLayout());
+    //     frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
+    //     frame.setVisible(true);
+    // }
 
     public static void login_window() {
         LoginWindow frame = new LoginWindow();
