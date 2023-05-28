@@ -112,6 +112,23 @@ public class MainWindow extends javax.swing.JFrame {
         infoWindow6.setVisible(false);
     }
 
+    public void timeButtonsPanelSetDefault(){
+        java.awt.GridBagConstraints c = new java.awt.GridBagConstraints();
+        c.gridx = 0;
+        c.gridy = 0;
+        timeButtonsPanel.add(weeks4Button, c);
+        weeks4Button.setVisible(true);
+        c.gridx = 2;
+        c.gridy = 0;
+        timeButtonsPanel.add(months6Button, c);
+        months6Button.setVisible(true);
+        c.gridx = 4;
+        c.gridy = 0;
+        timeButtonsPanel.add(allTimeHistoryButton, c);
+        allTimeHistoryButton.setVisible(true);
+        numTracksTextField.setVisible(true);
+    }
+
     
     public void trackListGrapher(String timeRange) {
         String track_num = numTracksTextField.getText();
@@ -293,6 +310,7 @@ public class MainWindow extends javax.swing.JFrame {
         genArtistButton = new javax.swing.JButton();
         genTracksButton = new javax.swing.JButton();
         genPanel = new javax.swing.JPanel();
+        genFlag = false;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Statify PAP23L edition");
@@ -1544,6 +1562,8 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void artistButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_artistButtonActionPerformed
         buttonFlag = "artist";
+        genFlag = false;
+        timeButtonsPanelSetDefault();
         panelsSetDefault();
         timeButtonsPanel.setVisible(true);
         // actionPanel.removeAll();
@@ -1553,6 +1573,8 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void genreButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_genreButtonActionPerformed
         buttonFlag = "genre";
+        genFlag = false;
+        timeButtonsPanelSetDefault();
         panelsSetDefault();
         timeButtonsPanel.setVisible(true);
         // actionPanel.removeAll();
@@ -1562,6 +1584,9 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void topTracksButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_topTracksButtonActionPerformed
         buttonFlag = "tracks";
+        genFlag = false;
+        timeButtonsPanelSetDefault();
+
         panelsSetDefault();
         timeButtonsPanel.setVisible(true);
         // actionPanel.removeAll();
@@ -1571,6 +1596,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void tracksanalyseButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_tracksanalyseButtonActionPerformed
         panelsSetDefault();
+        genFlag = false;
         // actionPanel.removeAll();
         // actionPanel.revalidate();
         // actionPanel.repaint();
@@ -1586,6 +1612,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void playlistanalyseButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_playlistanalyseButtonActionPerformed
         panelsSetDefault();
+        genFlag = false;
         // actionPanel.removeAll();
         analFlag = false;
         acousticnessButton.setVisible(false);
