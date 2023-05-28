@@ -134,9 +134,18 @@ public class MainWindow extends javax.swing.JFrame {
         String track_num = numTracksTextField.getText();
         try {
             int trNum = Integer.parseInt(track_num);
-            if (trNum <= 0) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of tracks");
+            int maxValue = Statify.currentUser.getMaxAmmount(trNum, timeRange, "tracks");
+            if (trNum <= 0 || trNum > 50) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of tracks.\nValue must range between 1 and 50.");
             } else {
+                if (trNum > maxValue) {
+                    javax.swing.JOptionPane.showMessageDialog(
+                        this,
+                        "We can't show you "+trNum+" tracks.\n"
+                        +"In choosen period of time you have listened to "
+                        +maxValue+" tracks"
+                        );
+                }
                 actionPanel.removeAll();
                 upperPanelDefault();
                 javax.swing.JScrollPane graph = Statify.createTopTracksPanel(trNum, timeRange);
@@ -145,9 +154,9 @@ public class MainWindow extends javax.swing.JFrame {
                 timeButtonsPanel.setVisible(true);
             }
         } catch (NumberFormatException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
+            javax.swing.JOptionPane.showMessageDialog(this, "Amount of tracks has to be a whole number");
         } catch (NullPointerException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
+            javax.swing.JOptionPane.showMessageDialog(this, "Amount of tracks has to be a whole number");
 
         }
     }
@@ -156,9 +165,18 @@ public class MainWindow extends javax.swing.JFrame {
         String artist_num = numTracksTextField.getText();
         try {
             int trNum = Integer.parseInt(artist_num);
-            if (trNum <= 0) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of tracks");
+            int maxValue = Statify.currentUser.getMaxAmmount(trNum, timeRange, "artists");
+            if (trNum <= 0 || trNum > 50) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of artists\nValue must range between 1 and "+maxValue);
             } else {
+                if (trNum > maxValue) {
+                    javax.swing.JOptionPane.showMessageDialog(
+                        this,
+                        "We can't show you "+trNum+" artists.\n"
+                        +"In choosen period of time you have listened to "
+                        +maxValue+" artists"
+                        );
+                }
                 actionPanel.removeAll();
                 upperPanelDefault();
                 javax.swing.JScrollPane graph = Statify.createTopArtistsPanel(trNum, timeRange);
@@ -167,9 +185,9 @@ public class MainWindow extends javax.swing.JFrame {
                 timeButtonsPanel.setVisible(true);
             }
         } catch (NumberFormatException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
+            javax.swing.JOptionPane.showMessageDialog(this, "Amount of artists has to be a whole number");
         } catch (NullPointerException e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
+            javax.swing.JOptionPane.showMessageDialog(this, "Amount of artists has to be a whole number");
         }
     }
 
