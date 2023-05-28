@@ -65,6 +65,7 @@ public class MainWindow extends javax.swing.JFrame {
         genPanel.removeAll();
         genPanel.revalidate();
         genPanel.repaint();
+        transPanel.setVisible(false);
     }
 
     public void setTransparent(){
@@ -340,6 +341,7 @@ public class MainWindow extends javax.swing.JFrame {
         genTracksButton = new javax.swing.JButton();
         genPanel = new javax.swing.JPanel();
         genFlag = false;
+        transPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Statify PAP23L edition");
@@ -940,12 +942,15 @@ public class MainWindow extends javax.swing.JFrame {
 
         centrePanel.add(actionButtonsPanel, java.awt.BorderLayout.NORTH);
 
-        actionPanel.setBackground(new java.awt.Color(29, 185, 84));
+        actionPanel.setBackground(new java.awt.Color(29, 185, 84, 0));
         actionPanel.setPreferredSize(new java.awt.Dimension(750, 420));
         actionPanel.setLayout(new java.awt.CardLayout());
-        actionPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+
+        transPanel.setBackground(new Color(0, 0, 0, 0));
+        transPanel.setPreferredSize(new java.awt.Dimension(700, 400));
+        transPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                actionPanelMouseClicked(evt);
+                transPanelMouseClicked(evt);
             }
         });
 
@@ -1187,7 +1192,7 @@ public class MainWindow extends javax.swing.JFrame {
         }                 
     }
 
-    private void actionPanelMouseClicked(java.awt.event.MouseEvent evt) {
+    private void transPanelMouseClicked(java.awt.event.MouseEvent evt) {
         if (evt.getButton() == java.awt.event.MouseEvent.BUTTON3){
             infoWindowsHide();
             infoWindow10.add(infoText10);
@@ -1233,8 +1238,11 @@ public class MainWindow extends javax.swing.JFrame {
                 upperPanelDefault();
                 if(analFlag){
                     JPanel histo = Statify.getLoudnessHistogram();
+                    //histo.add(transPanel);
                     panelInit(histo);
                     addNewPanel(histo);
+                    //transPanel.setVisible(true);
+
                 }
                 else {
                     if (plNum > 5){
@@ -1670,6 +1678,7 @@ public class MainWindow extends javax.swing.JFrame {
     private Boolean genFlag;
     private Boolean genFlag2;
     private javax.swing.JPanel genPanel;
+    private javax.swing.JPanel transPanel;
 
 
     // End of variables declaration//GEN-END:variables
