@@ -7,6 +7,9 @@ import se.michaelthelin.spotify.model_objects.specification.TrackSimplified;
 import org.knowm.xchart.CategoryChart;
 import org.knowm.xchart.CategoryChartBuilder;
 import org.knowm.xchart.style.Styler.LegendPosition;
+
+import com.madgag.gif.fmsware.GifDecoder;
+
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.Histogram;
 import org.knowm.xchart.style.Styler.ChartTheme;
@@ -124,11 +127,11 @@ public class Statify {
         JPanel panel = new JPanel();
 
         panel.setLayout(new GridBagLayout()); // n+1 rows, 2 columns, 10px between each row and
-        GridBagConstraints c = new GridBagConstraints();                                                             // ech column
+        GridBagConstraints c = new GridBagConstraints(); // ech column
         // lepiej to zrobić GridBagLayout bo można dodawać kolumny różnych szerokości
 
         panel.setLayout(new GridBagLayout()); // n+1 rows, 2 columns, 10px between each row and
-                                                                     // ech column
+                                              // ech column
         JLabel mainPositionLabel = new JLabel("Position");
         c.fill = GridBagConstraints.BOTH + 10;
         c.gridx = 0;
@@ -160,25 +163,25 @@ public class Statify {
             JLabel positionLabel = new JLabel(Integer.toString(i + 1));
             c.fill = GridBagConstraints.BOTH + 10;
             c.gridx = 0;
-            c.gridy = i+1;
+            c.gridy = i + 1;
             panel.add(positionLabel, c);
 
             JLabel titleLabel = new JLabel(data.get(i).get("name"));
             c.fill = GridBagConstraints.BOTH + 10;
             c.gridx = 1;
-            c.gridy = i+1;
+            c.gridy = i + 1;
             panel.add(titleLabel, c);
 
             JLabel artistLabel = new JLabel(data.get(i).get("artist"));
             c.fill = GridBagConstraints.BOTH + 10;
             c.gridx = 2;
-            c.gridy = i+1;
+            c.gridy = i + 1;
             panel.add(artistLabel, c);
 
             JLabel albumLabel = new JLabel(data.get(i).get("album"));
             c.fill = GridBagConstraints.BOTH + 10;
             c.gridx = 3;
-            c.gridy = i+1;
+            c.gridy = i + 1;
             panel.add(albumLabel, c);
         }
         JScrollPane scrollPane = new JScrollPane(panel); // Create a JScrollPane and pass in the JPanel
@@ -198,7 +201,7 @@ public class Statify {
         JPanel panel = new JPanel();
         // System.out.println(data.size());
         panel.setLayout(new GridBagLayout()); // n+1 rows, 2 columns, 10px between each row and
-        GridBagConstraints c = new GridBagConstraints();                                                             // ech column
+        GridBagConstraints c = new GridBagConstraints(); // ech column
         // lepiej to zrobić GridBagLayout bo można dodawać kolumny różnych szerokości
         JLabel mainPositionLabel = new JLabel("Position");
         c.fill = GridBagConstraints.BOTH + 10;
@@ -213,7 +216,7 @@ public class Statify {
         c.gridy = 0;
         panel.add(mainArtistLabel, c);
         JLabel mainGenresLabel = new JLabel("Genres");
-        c.fill = GridBagConstraints.BOTH +10;
+        c.fill = GridBagConstraints.BOTH + 10;
         c.gridx = 2;
         c.gridy = 0;
         panel.add(mainGenresLabel, c);
@@ -221,21 +224,21 @@ public class Statify {
         // Adding 10 string fields to panel
         for (int i = 0; i < data.size(); i++) {
             JLabel positionLabel = new JLabel(Integer.toString(i + 1));
-            c.fill = GridBagConstraints.BOTH+10;
+            c.fill = GridBagConstraints.BOTH + 10;
             c.gridx = 0;
-            c.gridy = i+1;
+            c.gridy = i + 1;
             panel.add(positionLabel, c);
 
             JLabel nameLabel = new JLabel(data.get(i).get("name"));
-            c.fill = GridBagConstraints.BOTH+10;
+            c.fill = GridBagConstraints.BOTH + 10;
             c.gridx = 1;
-            c.gridy = i+1;
+            c.gridy = i + 1;
             panel.add(nameLabel, c);
 
             JLabel genresLabel = new JLabel(data.get(i).get("genres"));
-            c.fill = GridBagConstraints.BOTH+10;
+            c.fill = GridBagConstraints.BOTH + 10;
             c.gridx = 2;
-            c.gridy = i+1;
+            c.gridy = i + 1;
             panel.add(genresLabel, c);
 
         }
@@ -334,6 +337,7 @@ public class Statify {
     public static XChartPanel<RadarChart> getTracksRadarChartFromPlaylists(HashMap<String, String> playlistsHashMap,
             FeatureName[] features) {
         List<double[]> dataSeriesList = new ArrayList();
+        Dictionary<String, List<Double>> MeansFeaturesDictionary;
         String[] playlistNames = playlistsHashMap.keySet().toArray(new String[0]);
         for (String playlistId : playlistsHashMap.values()) {
             // get playlist's dict track_id : [features list]
@@ -344,10 +348,23 @@ public class Statify {
                     playlistTracksAllAudioFeatures, features);
             // convert dict to
             Dictionary<String, Float> meanPlaylistFeatures = MeanFeatureValues(playlistTracksAudioFeatures);
-            double[] dataSeries = convertValuesToDoubleArray(meanPlaylistFeatures);
+            System.out.println("acousticness= " + meanPlaylistFeatures.get("acousticness"));
+            List<Double> valuesList = new ArrayList<>();
+
+            for (FeatureName featureName : features) {
+                Float value = meanPlaylistFeatures.get(featureName.keyName);
+                valuesList.add(value.doubleValue());
+            }
+            double[] dataSeries = valuesList.stream().mapToDouble(Double::doubleValue).toArray();
             dataSeriesList.add(dataSeries);
         }
-        RadarChart radarChart = getRadarChart(FeatureName.toArray(features), playlistNames, dataSeriesList,
+        String[] featuresNamesArray = new String[features.length];
+        for (int i = 0; i < features.length; i++) {
+            featuresNamesArray[i] = features[i].keyName;
+        }
+
+        RadarChart radarChart = getRadarChart(
+                featuresNamesArray, playlistNames, dataSeriesList,
                 "Your playlists Features RadarChart");
 
         return new XChartPanel<RadarChart>(radarChart);
@@ -390,7 +407,6 @@ public class Statify {
     public static JPanel getDanceabilityHistogram() {
         return getAudioFeatureHistogram(FeatureName.DANCEABILITY);
     }
-
 
     public static ObjectSelectionPanel getPlaylistsSelectableList(Object[] objects) {
         ObjectSelectionPanel selectionPanel = new ObjectSelectionPanel(objects);
@@ -462,7 +478,6 @@ public class Statify {
         return chartPanel;
     }
 
-
     public static void main(String[] args) {
         Statify statify = new Statify();
         // statify.getDanceabilityHistogram(Arrays.asList(1.4f, 5.0f, 6.4f), 2);
@@ -473,7 +488,6 @@ public class Statify {
         statify.setUser(user);
         String timeRange = "long_term";
         int artistsNumber = 40;
-
 
         Dictionary<String, Integer> dict = user.getTopGenresDict(artistsNumber, timeRange);
         Dictionary<String, Integer> outDict = user.analyzeDictionary(dict);
