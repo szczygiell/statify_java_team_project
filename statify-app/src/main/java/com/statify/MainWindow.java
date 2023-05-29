@@ -1363,7 +1363,7 @@ public class MainWindow extends javax.swing.JFrame {
                 danceabilityButton.setPreferredSize(new java.awt.Dimension(200, 54));
                 danceabilityButton.setText("Add playlist to your library");
                 danceabilityButton.setVisible(true);
-                optionsPanel.setVisible(true);
+                optionsPanel.setVisible(false);
             }
             else {
                 JScrollPane scrollPane = Statify.getRecommendationsPanelByTopTracks("short_term");
@@ -1377,7 +1377,7 @@ public class MainWindow extends javax.swing.JFrame {
                 danceabilityButton.setPreferredSize(new java.awt.Dimension(200, 54));
                 danceabilityButton.setText("Add playlist to your library");
                 danceabilityButton.setVisible(true);
-                optionsPanel.setVisible(true);
+                optionsPanel.setVisible(false);
             }
         }
         else {
@@ -1399,7 +1399,7 @@ public class MainWindow extends javax.swing.JFrame {
                 danceabilityButton.setPreferredSize(new java.awt.Dimension(200, 54));
                 danceabilityButton.setText("Add playlist to your library");
                 danceabilityButton.setVisible(true);
-                optionsPanel.setVisible(true);
+                optionsPanel.setVisible(false);
             }
             else {
                 JScrollPane scrollPane = Statify.getRecommendationsPanelByTopTracks("medium_term");
@@ -1413,7 +1413,7 @@ public class MainWindow extends javax.swing.JFrame {
                 danceabilityButton.setPreferredSize(new java.awt.Dimension(200, 54));
                 danceabilityButton.setText("Add playlist to your library");
                 danceabilityButton.setVisible(true);
-                optionsPanel.setVisible(true);
+                optionsPanel.setVisible(false);
             }
         }
         else {
@@ -1435,7 +1435,7 @@ public class MainWindow extends javax.swing.JFrame {
                 danceabilityButton.setPreferredSize(new java.awt.Dimension(200, 54));
                 danceabilityButton.setText("Add playlist to your library");
                 danceabilityButton.setVisible(true);
-                optionsPanel.setVisible(true);
+                optionsPanel.setVisible(false);
             }
             else {
                 JScrollPane scrollPane = Statify.getRecommendationsPanelByTopTracks("long_term");
@@ -1449,7 +1449,7 @@ public class MainWindow extends javax.swing.JFrame {
                 danceabilityButton.setPreferredSize(new java.awt.Dimension(200, 54));
                 danceabilityButton.setText("Add playlist to your library");
                 danceabilityButton.setVisible(true);
-                optionsPanel.setVisible(true);
+                optionsPanel.setVisible(false);
             }
         }
         else {
