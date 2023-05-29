@@ -339,6 +339,7 @@ public class Statify {
     public static XChartPanel<RadarChart> getTracksRadarChartFromPlaylists(HashMap<String, String> playlistsHashMap,
             FeatureName[] features) {
         List<double[]> dataSeriesList = new ArrayList();
+        Dictionary<String, List<Double>> MeansFeaturesDictionary;
         String[] playlistNames = playlistsHashMap.keySet().toArray(new String[0]);
         for (String playlistId : playlistsHashMap.values()) {
             // get playlist's dict track_id : [features list]
