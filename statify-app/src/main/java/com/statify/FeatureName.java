@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.List;
 
-import javafx.scene.control.ResizeFeaturesBase;
-
 import java.util.HashMap;
 
 public enum FeatureName {
