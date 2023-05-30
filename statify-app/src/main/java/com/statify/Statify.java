@@ -15,8 +15,6 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
-import org.jfree.chart.title.LegendTitle;
-import org.jfree.chart.LegendItem;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -447,7 +445,7 @@ public class Statify {
         }
 
         // Utworzenie wykresu kołowego
-        JFreeChart chart = ChartFactory.createPieChart("Genres Pie Chart", dataset, true, true, false);
+        JFreeChart chart = ChartFactory.createPieChart("Your Top 10 Genres", dataset, true, true, false);
 
         // Dostosowanie wyglądu wykresu
         PiePlot plot = (PiePlot) chart.getPlot();
@@ -455,6 +453,7 @@ public class Statify {
         plot.setLabelGenerator(null);
         plot.setShadowPaint(null);
         plot.setLabelBackgroundPaint(new Color(220, 220, 220));
+        plot.setBackgroundPaint(Color.WHITE);
 
         // Utworzenie panelu wykresu
         ChartPanel chartPanel = new ChartPanel(chart);
@@ -470,7 +469,7 @@ public class Statify {
         // JFrame frame = new JFrame("Song Form");
 
         User user = new User(
-                "BQCRuToL2aMIp_vXCQYvwfNTjoN-BMdWFHdUPRnWSoOlotDHMJpFvEyftAVI67ryDIg-KMUDXwRnJ9vmxXosHB2GfpvHsn_B8A1KBlw3DOz8dVHtg3oJDbGMRHsYbU0bm-W0_Hw1KosCVdg5JlpRb-dSRG4k5ftO2ltxVtP98CNm3q578xov5aXACUSrcfYoE4mHgcGWUq2Fe_6U5czFUrC6jmk7YaTV4PK9bXM-GTWuk3F3kWGZyhNpLCrp7TklOC8zC7nE3M4stNgDn66ypstO5VzqCutqt3MkiGhfda39tI3GifyI2iy7EMS8NdZGViROdkelT6xzyreFyT4hDh2T");
+                "BQBjOs2YqOU7i2q1hnD4OBzpoqPrwLpZJQuL6c6jEOBdNqlTgPjA0yl36txSQLgEjLyXzGuJDDwFvYCfSQm-0GTZCw5tQNujpaqWTVfX8LbiYqahSVBAUR8Nma_GkDa2bOOZizyYookq1bb3D2FKjT-FwWl78EObC0PZgYPjh6T-cMHuA0NrbGzdtRmAaOqwioXSxyWCeAavewe-cwicA7OPXtwGpbj338zeZQ3lJ8OKN5DTTLvjuH9I-cV-uqGulMPJUi5Ab272EvrGoYxSDu9kz4VaomXTTPQ1AhTYqVrtt_NwmwP0Hs6Etv6H2n7r6Co3q_Me-QKpz7E8LZyavdpf");
         statify.setUser(user);
         String timeRange = "long_term";
         int artistsNumber = 40;
