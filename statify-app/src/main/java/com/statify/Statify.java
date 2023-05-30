@@ -109,10 +109,10 @@ public class Statify {
         RadarStyler radarStyler = radarChart.getStyler();
         Color[] colorSeries = {
                 new Color(170, 246, 131, 150),
-                new Color(238, 96, 85, 230),
-                new Color(255, 155, 133, 80),
-                new Color(255, 217, 125, 100),
-                new Color(96, 211, 148, 200),
+                new Color(238, 96, 85, 150),
+                new Color(255, 155, 133, 150),
+                new Color(255, 217, 125, 150),
+                new Color(96, 211, 148, 150),
         };
         radarStyler.setSeriesColors(colorSeries);
         Font monsterratFont = new Font("Noto Sans CJK JP", Font.PLAIN, 25);
@@ -337,7 +337,6 @@ public class Statify {
     public static XChartPanel<RadarChart> getTracksRadarChartFromPlaylists(HashMap<String, String> playlistsHashMap,
             FeatureName[] features) {
         List<double[]> dataSeriesList = new ArrayList();
-        Dictionary<String, List<Double>> MeansFeaturesDictionary;
         String[] playlistNames = playlistsHashMap.keySet().toArray(new String[0]);
         for (String playlistId : playlistsHashMap.values()) {
             // get playlist's dict track_id : [features list]
