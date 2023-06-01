@@ -33,15 +33,15 @@ public class MainWindow extends javax.swing.JFrame {
      */
 
     public MainWindow() {
-        int heightInit = 1400;
-        int widthInit = 2140;
+        int heightInit = 1080;
+        int widthInit = 1920;
 
         initComponents(widthInit, heightInit);
         panelsSetDefault();
         this.setBounds(100, 100, 960, 540);
         setTransparent();
         creditsPanel.setVisible(true);
-        setMinimumSize(new java.awt.Dimension(960, 540));
+        setMinimumSize(new java.awt.Dimension(1060, 640));
     }
 
     public final void panelsSetDefault() {
@@ -1709,6 +1709,9 @@ public class MainWindow extends javax.swing.JFrame {
         acousticnessButton.setVisible(true);
         numPlaylistTextField.setVisible(true);
         loudnessButton.setVisible(true);
+        instrumentalButton.setVisible(true);
+        energyButton.setVisible(true);
+        infoTextField2.setVisible(true);
         danceabilityButton.setPreferredSize(new java.awt.Dimension(130, 54));
         danceabilityButton.setText("danceability");
         optionsPanel.setVisible(true);
@@ -1722,6 +1725,7 @@ public class MainWindow extends javax.swing.JFrame {
         loudnessButton.setVisible(false);
         instrumentalButton.setVisible(false);
         energyButton.setVisible(false);
+        infoTextField2.setVisible(false);
         danceabilityButton.setText("Show chart");
         optionsPanel.setVisible(true);
 
