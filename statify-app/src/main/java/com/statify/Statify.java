@@ -408,6 +408,14 @@ public class Statify {
         return getAudioFeatureHistogram(FeatureName.DANCEABILITY);
     }
 
+    public static JPanel getInstrumentalHistogram() {
+        return getAudioFeatureHistogram(FeatureName.INSTRUMENTALNESS);
+    }
+
+    public static JPanel getEnergyHistogram() {
+        return getAudioFeatureHistogram(FeatureName.ENERGY);
+    }
+
     public static ObjectSelectionPanel getPlaylistsSelectableList(Object[] objects) {
         ObjectSelectionPanel selectionPanel = new ObjectSelectionPanel(objects);
         return selectionPanel;
