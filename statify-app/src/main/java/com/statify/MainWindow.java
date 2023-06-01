@@ -754,7 +754,7 @@ public class MainWindow extends javax.swing.JFrame {
         optionsPanel.setMinimumSize(new java.awt.Dimension(620, 120));
         optionsPanel.setPreferredSize(new java.awt.Dimension(20, 120));
         java.awt.GridBagLayout optionsPanelLayout = new java.awt.GridBagLayout();
-        optionsPanelLayout.columnWidths = new int[] { 0, 40, 0, 40, 0 };
+        optionsPanelLayout.columnWidths = new int[] { 0, 40, 0, 40, 0 , 40, 0, 40, 0};
         optionsPanelLayout.rowHeights = new int[] { 0, 10, 0 };
         optionsPanel.setLayout(optionsPanelLayout);
 
@@ -800,7 +800,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         optionsPanel.add(danceabilityButton, gridBagConstraints);
 
@@ -823,7 +823,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
         optionsPanel.add(acousticnessButton, gridBagConstraints);
 
@@ -846,7 +846,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 0;
         optionsPanel.add(instrumentalButton, gridBagConstraints);
 
@@ -869,7 +869,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 8;
         gridBagConstraints.gridy = 0;
         optionsPanel.add(energyButton, gridBagConstraints);
 
@@ -1705,6 +1705,8 @@ public class MainWindow extends javax.swing.JFrame {
         analFlag = false;
         acousticnessButton.setVisible(false);
         loudnessButton.setVisible(false);
+        instrumentalButton.setVisible(false);
+        energyButton.setVisible(false);
         danceabilityButton.setText("Show chart");
         optionsPanel.setVisible(true);
 
