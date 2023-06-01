@@ -121,6 +121,7 @@ public class MainWindow extends javax.swing.JFrame {
         timeButtonsPanel.add(allTimeHistoryButton, c);
         allTimeHistoryButton.setVisible(true);
         numTracksTextField.setVisible(true);
+        infoTextField.setVisible(true);
     }
 
     public void trackListGrapher(String timeRange) {
@@ -325,6 +326,7 @@ public class MainWindow extends javax.swing.JFrame {
         infoText8 = new javax.swing.JLabel();
         infoText9 = new javax.swing.JLabel();
         infoText10 = new javax.swing.JLabel();
+        infoTextField = new javax.swing.JLabel();
         genArtistButton = new javax.swing.JButton();
         genTracksButton = new javax.swing.JButton();
         genPanel = new javax.swing.JPanel();
@@ -470,6 +472,12 @@ public class MainWindow extends javax.swing.JFrame {
         infoText10.setFont(new java.awt.Font("Liberation Sans", 1, 15));
         infoText10.setForeground(Color.BLACK);
         infoText10.setText(text10);
+
+        String text11 = "^^Enter number of tracks or artists^^"; 
+        infoTextField.setFont(new java.awt.Font("Liberation Sans", 1, 15));
+        //infoTextField.setBackground(new Color(0, 0, 0, 0));
+        infoTextField.setForeground(Color.BLACK);
+        infoTextField.setText(text11);
 
         genPanel.setLayout(new GridBagLayout());
 
@@ -818,6 +826,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         actionButtonsPanel.add(optionsPanel, "card2");
 
+
         timeButtonsPanel.setBackground(new java.awt.Color(29, 185, 84));
         timeButtonsPanel.setMinimumSize(new java.awt.Dimension(620, 120));
         timeButtonsPanel.setPreferredSize(new java.awt.Dimension(620, 120));
@@ -934,6 +943,14 @@ public class MainWindow extends javax.swing.JFrame {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 5;
         timeButtonsPanel.add(numTracksTextField, gridBagConstraints);
+
+        infoTextField.setPreferredSize(new java.awt.Dimension(250, 32));
+        
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 5;
+        timeButtonsPanel.add(infoTextField, gridBagConstraints);
 
         actionButtonsPanel.add(timeButtonsPanel, "card2");
 
@@ -1474,6 +1491,7 @@ public class MainWindow extends javax.swing.JFrame {
         timeButtonsPanelSetDefault();
         panelsSetDefault();
         numTracksTextField.setVisible(false);
+        infoTextField.setVisible(false);
         timeButtonsPanel.setVisible(true);
     }// GEN-LAST:event_genreButtonActionPerformed
 
@@ -1686,6 +1704,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel genPanel;
     private javax.swing.JPanel transPanel;
     private Object[] selectedPlaylists;
+    private javax.swing.JLabel infoTextField;
 
     // End of variables declaration//GEN-END:variables
 }
