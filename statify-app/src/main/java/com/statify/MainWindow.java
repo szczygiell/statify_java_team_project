@@ -121,6 +121,7 @@ public class MainWindow extends javax.swing.JFrame {
         timeButtonsPanel.add(allTimeHistoryButton, c);
         allTimeHistoryButton.setVisible(true);
         numTracksTextField.setVisible(true);
+        infoTextField.setVisible(true);
     }
 
     public void trackListGrapher(String timeRange) {
@@ -314,6 +315,8 @@ public class MainWindow extends javax.swing.JFrame {
         infoWindow8 = new javax.swing.JFrame();
         infoWindow9 = new javax.swing.JFrame();
         infoWindow10 = new javax.swing.JFrame();
+        infoWindow11 = new javax.swing.JFrame();
+        infoWindow12 = new javax.swing.JFrame();
         infoText = new javax.swing.JLabel();
         infoText1 = new javax.swing.JLabel();
         infoText2 = new javax.swing.JLabel();
@@ -325,11 +328,16 @@ public class MainWindow extends javax.swing.JFrame {
         infoText8 = new javax.swing.JLabel();
         infoText9 = new javax.swing.JLabel();
         infoText10 = new javax.swing.JLabel();
+        infoText11 = new javax.swing.JLabel();
+        infoText12 = new javax.swing.JLabel();
+        infoTextField = new javax.swing.JLabel();
         genArtistButton = new javax.swing.JButton();
         genTracksButton = new javax.swing.JButton();
         genPanel = new javax.swing.JPanel();
         genFlag = false;
         transPanel = new javax.swing.JPanel();
+        instrumentalButton = new javax.swing.JButton();
+        energyButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Statify PAP23L edition");
@@ -368,6 +376,12 @@ public class MainWindow extends javax.swing.JFrame {
         infoWindow10.setUndecorated(true);
         infoWindow10.setBackground(new Color(255, 255, 255, 50));
         infoWindow10.setSize(400, 50);
+        infoWindow11.setUndecorated(true);
+        infoWindow11.setBackground(new Color(255, 255, 255, 50));
+        infoWindow11.setSize(400, 50);
+        infoWindow12.setUndecorated(true);
+        infoWindow12.setBackground(new Color(255, 255, 255, 50));
+        infoWindow12.setSize(400, 50);
 
         // int width = infoWindow.getWidth();
         // int height = infoWindow.getHeight();
@@ -470,6 +484,28 @@ public class MainWindow extends javax.swing.JFrame {
         infoText10.setFont(new java.awt.Font("Liberation Sans", 1, 15));
         infoText10.setForeground(Color.BLACK);
         infoText10.setText(text10);
+
+        String text11 = "^^Enter number of tracks or artists^^"; 
+        infoTextField.setFont(new java.awt.Font("Liberation Sans", 1, 15));
+        //infoTextField.setBackground(new Color(0, 0, 0, 0));
+        infoTextField.setForeground(Color.BLACK);
+        infoTextField.setText(text11);
+
+        String text12 = "How instrumental are tracks"; // przycisk instrumental
+        infoText11.setBounds(0, 0, width, height);
+        infoText11.setHorizontalAlignment(JLabel.CENTER);
+        infoText11.setVerticalAlignment(JLabel.CENTER);
+        infoText11.setFont(new java.awt.Font("Liberation Sans", 1, 15));
+        infoText11.setForeground(Color.BLACK);
+        infoText11.setText(text12);
+
+        String text13 = "How much energetic are tracks"; // przycisk energy
+        infoText12.setBounds(0, 0, width, height);
+        infoText12.setHorizontalAlignment(JLabel.CENTER);
+        infoText12.setVerticalAlignment(JLabel.CENTER);
+        infoText12.setFont(new java.awt.Font("Liberation Sans", 1, 15));
+        infoText12.setForeground(Color.BLACK);
+        infoText12.setText(text13);
 
         genPanel.setLayout(new GridBagLayout());
 
@@ -718,7 +754,7 @@ public class MainWindow extends javax.swing.JFrame {
         optionsPanel.setMinimumSize(new java.awt.Dimension(620, 120));
         optionsPanel.setPreferredSize(new java.awt.Dimension(20, 120));
         java.awt.GridBagLayout optionsPanelLayout = new java.awt.GridBagLayout();
-        optionsPanelLayout.columnWidths = new int[] { 0, 40, 0, 40, 0 };
+        optionsPanelLayout.columnWidths = new int[] { 0, 40, 0, 40, 0 , 40, 0, 40, 0};
         optionsPanelLayout.rowHeights = new int[] { 0, 10, 0 };
         optionsPanel.setLayout(optionsPanelLayout);
 
@@ -791,6 +827,52 @@ public class MainWindow extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         optionsPanel.add(acousticnessButton, gridBagConstraints);
 
+        instrumentalButton.setBackground(new java.awt.Color(44, 51, 51));
+        instrumentalButton.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        instrumentalButton.setForeground(new java.awt.Color(255, 255, 255));
+        instrumentalButton.setText("instrumental");
+        instrumentalButton.setMaximumSize(new java.awt.Dimension(130, 54));
+        instrumentalButton.setMinimumSize(new java.awt.Dimension(130, 54));
+        instrumentalButton.setPreferredSize(new java.awt.Dimension(130, 54));
+        instrumentalButton.setBorder(null);
+        instrumentalButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                instrumentalButtonMouseClicked(evt);
+            }
+        });
+        instrumentalButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                instrumentalButtonActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 0;
+        optionsPanel.add(instrumentalButton, gridBagConstraints);
+
+        energyButton.setBackground(new java.awt.Color(44, 51, 51));
+        energyButton.setFont(new java.awt.Font("Liberation Sans", 1, 15)); // NOI18N
+        energyButton.setForeground(new java.awt.Color(255, 255, 255));
+        energyButton.setText("energy");
+        energyButton.setMaximumSize(new java.awt.Dimension(130, 54));
+        energyButton.setMinimumSize(new java.awt.Dimension(130, 54));
+        energyButton.setPreferredSize(new java.awt.Dimension(130, 54));
+        energyButton.setBorder(null);
+        energyButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                energyButtonMouseClicked(evt);
+            }
+        });
+        energyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                energyButtonActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 0;
+        optionsPanel.add(energyButton, gridBagConstraints);
+
         numPlaylistTextField.setBackground(new java.awt.Color(44, 51, 51));
         numPlaylistTextField.setFont(new java.awt.Font("Liberation Sans", 2, 15)); // NOI18N
         numPlaylistTextField.setForeground(new java.awt.Color(255, 255, 255));
@@ -817,6 +899,7 @@ public class MainWindow extends javax.swing.JFrame {
         optionsPanel.add(numPlaylistTextField, gridBagConstraints);
 
         actionButtonsPanel.add(optionsPanel, "card2");
+
 
         timeButtonsPanel.setBackground(new java.awt.Color(29, 185, 84));
         timeButtonsPanel.setMinimumSize(new java.awt.Dimension(620, 120));
@@ -934,6 +1017,14 @@ public class MainWindow extends javax.swing.JFrame {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 5;
         timeButtonsPanel.add(numTracksTextField, gridBagConstraints);
+
+        infoTextField.setPreferredSize(new java.awt.Dimension(250, 32));
+        
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 5;
+        timeButtonsPanel.add(infoTextField, gridBagConstraints);
 
         actionButtonsPanel.add(timeButtonsPanel, "card2");
 
@@ -1200,6 +1291,42 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }
 
+    private void instrumentalButtonMouseClicked(java.awt.event.MouseEvent evt) {
+        if (evt.getButton() == java.awt.event.MouseEvent.BUTTON3) {
+            infoWindowsHide();
+            infoWindow11.add(infoText11);
+            java.awt.PointerInfo a = MouseInfo.getPointerInfo();
+            java.awt.Point b = a.getLocation();
+            int mouse_x = (int) b.getX();
+            int mouse_y = (int) b.getY();
+            infoWindow11.setLocation(mouse_x - 170, mouse_y - 50);
+            infoWindow11.setVisible(true);
+            Timer timer = new Timer(4000, e -> {
+                infoWindow11.setVisible(false);
+            });
+            timer.setRepeats(false);
+            timer.start();
+        }
+    }
+
+    private void energyButtonMouseClicked(java.awt.event.MouseEvent evt) {
+        if (evt.getButton() == java.awt.event.MouseEvent.BUTTON3) {
+            infoWindowsHide();
+            infoWindow12.add(infoText12);
+            java.awt.PointerInfo a = MouseInfo.getPointerInfo();
+            java.awt.Point b = a.getLocation();
+            int mouse_x = (int) b.getX();
+            int mouse_y = (int) b.getY();
+            infoWindow12.setLocation(mouse_x - 170, mouse_y - 50);
+            infoWindow12.setVisible(true);
+            Timer timer = new Timer(4000, e -> {
+                infoWindow12.setVisible(false);
+            });
+            timer.setRepeats(false);
+            timer.start();
+        }
+    }
+
     private void transPanelMouseClicked(java.awt.event.MouseEvent evt) {
         if (evt.getButton() == java.awt.event.MouseEvent.BUTTON3) {
             infoWindowsHide();
@@ -1358,6 +1485,80 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }// GEN-LAST:event_optionButton3ActionPerformed
 
+    private void instrumentalButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_optionButton3ActionPerformed
+        String playlists_num = numPlaylistTextField.getText();
+        try {
+            int plNum = Integer.parseInt(playlists_num);
+            if (plNum <= 0) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of playlists");
+            } else {
+                actionPanel.removeAll();
+                Statify.SetPlaylistsNum(plNum);
+                upperPanelDefault();
+                if (analFlag) {
+                    JPanel histo = Statify.getInstrumentalHistogram();
+                    panelInit(histo);
+                    histo.setVisible(true);
+                } else {
+                    if (plNum > 5) {
+                        javax.swing.JOptionPane.showMessageDialog(this, "Maximum amount of playlist is 5");
+                    } else {
+                        User user = Statify.currentUser;
+                        HashMap<String, String> playlists = user.getPlaylistsHashMap(plNum); // , selectedPlaylists);
+                        FeatureName[] features = { FeatureName.ACOUSTICNESS, FeatureName.DANCEABILITY,
+                                FeatureName.ENERGY,
+                                FeatureName.LOUDNESS, FeatureName.LIVENESS };
+                        JPanel radar = Statify.getTracksRadarChartFromPlaylists(playlists, features);
+                        panelInit(radar);
+                        radar.setVisible(true);
+                    }
+                }
+                optionsPanel.setVisible(true);
+            }
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
+        } catch (NullPointerException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
+        }
+    }
+
+    private void energyButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_optionButton3ActionPerformed
+        String playlists_num = numPlaylistTextField.getText();
+        try {
+            int plNum = Integer.parseInt(playlists_num);
+            if (plNum <= 0) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Invalid amount of playlists");
+            } else {
+                actionPanel.removeAll();
+                Statify.SetPlaylistsNum(plNum);
+                upperPanelDefault();
+                if (analFlag) {
+                    JPanel histo = Statify.getEnergyHistogram();
+                    panelInit(histo);
+                    histo.setVisible(true);
+                } else {
+                    if (plNum > 5) {
+                        javax.swing.JOptionPane.showMessageDialog(this, "Maximum amount of playlist is 5");
+                    } else {
+                        User user = Statify.currentUser;
+                        HashMap<String, String> playlists = user.getPlaylistsHashMap(plNum); // , selectedPlaylists);
+                        FeatureName[] features = { FeatureName.ACOUSTICNESS, FeatureName.DANCEABILITY,
+                                FeatureName.ENERGY,
+                                FeatureName.LOUDNESS, FeatureName.LIVENESS };
+                        JPanel radar = Statify.getTracksRadarChartFromPlaylists(playlists, features);
+                        panelInit(radar);
+                        radar.setVisible(true);
+                    }
+                }
+                optionsPanel.setVisible(true);
+            }
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
+        } catch (NullPointerException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Amount of playlists has to be a whole number");
+        }
+    }
+
     private void weeks4ButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_weeks4ButtonActionPerformed
         if (genFlag) {
             if (genFlag2) {
@@ -1474,6 +1675,7 @@ public class MainWindow extends javax.swing.JFrame {
         timeButtonsPanelSetDefault();
         panelsSetDefault();
         numTracksTextField.setVisible(false);
+        infoTextField.setVisible(false);
         timeButtonsPanel.setVisible(true);
     }// GEN-LAST:event_genreButtonActionPerformed
 
@@ -1503,6 +1705,8 @@ public class MainWindow extends javax.swing.JFrame {
         analFlag = false;
         acousticnessButton.setVisible(false);
         loudnessButton.setVisible(false);
+        instrumentalButton.setVisible(false);
+        energyButton.setVisible(false);
         danceabilityButton.setText("Show chart");
         optionsPanel.setVisible(true);
 
@@ -1634,6 +1838,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel creditsPanel;
     private javax.swing.JLabel creditsLabel;
     private javax.swing.JButton danceabilityButton;
+    private javax.swing.JButton energyButton;
+    private javax.swing.JButton instrumentalButton;
     private javax.swing.JButton generatePlaylistButton;
     private javax.swing.JButton genreButton;
     private javax.swing.JButton homeButton;
@@ -1669,6 +1875,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JFrame infoWindow8;
     private javax.swing.JFrame infoWindow9;
     private javax.swing.JFrame infoWindow10;
+    private javax.swing.JFrame infoWindow11;
+    private javax.swing.JFrame infoWindow12;
     private javax.swing.JLabel infoText2;
     private javax.swing.JLabel infoText3;
     private javax.swing.JLabel infoText4;
@@ -1678,6 +1886,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel infoText8;
     private javax.swing.JLabel infoText9;
     private javax.swing.JLabel infoText10;
+    private javax.swing.JLabel infoText11;
+    private javax.swing.JLabel infoText12;
     private Boolean analFlag;
     private javax.swing.JButton genArtistButton;
     private javax.swing.JButton genTracksButton;
@@ -1686,6 +1896,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel genPanel;
     private javax.swing.JPanel transPanel;
     private Object[] selectedPlaylists;
+    private javax.swing.JLabel infoTextField;
 
     // End of variables declaration//GEN-END:variables
 }
