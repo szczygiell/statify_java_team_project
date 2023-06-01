@@ -41,7 +41,7 @@ public class MainWindow extends javax.swing.JFrame {
         this.setBounds(100, 100, 960, 540);
         setTransparent();
         creditsPanel.setVisible(true);
-        setMinimumSize(new java.awt.Dimension(960, 540));
+        setMinimumSize(new java.awt.Dimension(1060, 640));
     }
 
     public final void panelsSetDefault() {
@@ -331,6 +331,7 @@ public class MainWindow extends javax.swing.JFrame {
         infoText11 = new javax.swing.JLabel();
         infoText12 = new javax.swing.JLabel();
         infoTextField = new javax.swing.JLabel();
+        infoTextField2 = new javax.swing.JLabel();
         genArtistButton = new javax.swing.JButton();
         genTracksButton = new javax.swing.JButton();
         genPanel = new javax.swing.JPanel();
@@ -506,6 +507,12 @@ public class MainWindow extends javax.swing.JFrame {
         infoText12.setFont(new java.awt.Font("Liberation Sans", 1, 15));
         infoText12.setForeground(Color.BLACK);
         infoText12.setText(text13);
+
+        String text14 = "^^Enter number of playlist from which you will get statistics^^"; 
+        infoTextField2.setFont(new java.awt.Font("Liberation Sans", 1, 15));
+        //infoTextField.setBackground(new Color(0, 0, 0, 0));
+        infoTextField2.setForeground(Color.BLACK);
+        infoTextField2.setText(text14);
 
         genPanel.setLayout(new GridBagLayout());
 
@@ -895,8 +902,16 @@ public class MainWindow extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.gridwidth = 10;
         optionsPanel.add(numPlaylistTextField, gridBagConstraints);
+
+        infoTextField2.setPreferredSize(new java.awt.Dimension(350, 32));
+        
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 10;
+        optionsPanel.add(infoTextField2, gridBagConstraints);
 
         actionButtonsPanel.add(optionsPanel, "card2");
 
@@ -1694,6 +1709,9 @@ public class MainWindow extends javax.swing.JFrame {
         acousticnessButton.setVisible(true);
         numPlaylistTextField.setVisible(true);
         loudnessButton.setVisible(true);
+        instrumentalButton.setVisible(true);
+        energyButton.setVisible(true);
+        infoTextField2.setVisible(true);
         danceabilityButton.setPreferredSize(new java.awt.Dimension(130, 54));
         danceabilityButton.setText("danceability");
         optionsPanel.setVisible(true);
@@ -1707,6 +1725,7 @@ public class MainWindow extends javax.swing.JFrame {
         loudnessButton.setVisible(false);
         instrumentalButton.setVisible(false);
         energyButton.setVisible(false);
+        infoTextField2.setVisible(false);
         danceabilityButton.setText("Show chart");
         optionsPanel.setVisible(true);
 
@@ -1897,6 +1916,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel transPanel;
     private Object[] selectedPlaylists;
     private javax.swing.JLabel infoTextField;
+    private javax.swing.JLabel infoTextField2;
 
     // End of variables declaration//GEN-END:variables
 }
