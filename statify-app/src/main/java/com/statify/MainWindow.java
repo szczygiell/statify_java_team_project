@@ -24,7 +24,7 @@ import org.apache.hc.core5.http.nio.support.AsyncServerFilterChainExchangeHandle
  * @author jmacuga
  * @author fszczygi
  * @author mkowale2
- * 
+ *
  */
 public class MainWindow extends javax.swing.JFrame {
 
@@ -486,7 +486,7 @@ public class MainWindow extends javax.swing.JFrame {
         infoText10.setForeground(Color.BLACK);
         infoText10.setText(text10);
 
-        String text11 = "^^Enter number of tracks or artists^^"; 
+        String text11 = "^^Enter number of tracks or artists^^";
         infoTextField.setFont(new java.awt.Font("Liberation Sans", 1, 15));
         //infoTextField.setBackground(new Color(0, 0, 0, 0));
         infoTextField.setForeground(Color.BLACK);
@@ -508,7 +508,7 @@ public class MainWindow extends javax.swing.JFrame {
         infoText12.setForeground(Color.BLACK);
         infoText12.setText(text13);
 
-        String text14 = "^^Enter number of playlist from which you will get statistics^^"; 
+        String text14 = "^^Enter number of playlist from which you will get statistics^^";
         infoTextField2.setFont(new java.awt.Font("Liberation Sans", 1, 15));
         //infoTextField.setBackground(new Color(0, 0, 0, 0));
         infoTextField2.setForeground(Color.BLACK);
@@ -906,7 +906,7 @@ public class MainWindow extends javax.swing.JFrame {
         optionsPanel.add(numPlaylistTextField, gridBagConstraints);
 
         infoTextField2.setPreferredSize(new java.awt.Dimension(350, 32));
-        
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -1034,7 +1034,7 @@ public class MainWindow extends javax.swing.JFrame {
         timeButtonsPanel.add(numTracksTextField, gridBagConstraints);
 
         infoTextField.setPreferredSize(new java.awt.Dimension(250, 32));
-        
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
