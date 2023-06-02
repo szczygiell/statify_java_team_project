@@ -10,6 +10,8 @@ import org.knowm.xchart.style.Styler.LegendPosition;
 
 import com.madgag.gif.fmsware.GifDecoder;
 
+import java.awt.Component;
+
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.Histogram;
 import org.knowm.xchart.style.Styler.ChartTheme;
@@ -125,78 +127,165 @@ public class Statify {
     public static JScrollPane createTopTracksPanel(int tracksNumber, String timeRange) {
         List<Dictionary<String, String>> data = Statify.currentUser.getTopTracksInfoList(tracksNumber, timeRange);
         JPanel panel = new JPanel();
+        panel.setBackground(Color.BLACK);
 
-        panel.setLayout(new GridBagLayout()); // n+1 rows, 2 columns, 10px between each row and
-        GridBagConstraints c = new GridBagConstraints(); // ech column
-        // lepiej to zrobić GridBagLayout bo można dodawać kolumny różnych szerokości
+        panel.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
 
-        panel.setLayout(new GridBagLayout()); // n+1 rows, 2 columns, 10px between each row and
-                                              // ech column
-        JLabel mainPositionLabel = new JLabel("Position");
-        c.fill = GridBagConstraints.BOTH + 10;
+        JLabel mainPositionLabel = new JLabel("   Position");
+        c.fill = GridBagConstraints.BOTH;
         c.gridx = 0;
         c.gridy = 0;
         c.weightx = 1;
         c.weighty = 1;
         panel.add(mainPositionLabel, c);
-        panel.add(mainPositionLabel, c);
+
         JLabel mainTitleLabel = new JLabel("Title");
-        c.fill = GridBagConstraints.BOTH + 10;
         c.gridx = 1;
-        c.gridy = 0;
         panel.add(mainTitleLabel, c);
-        panel.add(mainTitleLabel, c);
+
         JLabel mainArtistLabel = new JLabel("Artist");
-        c.fill = GridBagConstraints.BOTH + 10;
         c.gridx = 2;
-        c.gridy = 0;
         panel.add(mainArtistLabel, c);
-        panel.add(mainArtistLabel, c);
+
         JLabel mainAlbumLabel = new JLabel("Album");
-        c.fill = GridBagConstraints.BOTH + 10;
         c.gridx = 3;
-        c.gridy = 0;
         panel.add(mainAlbumLabel, c);
-        panel.add(mainAlbumLabel, c);
-        // Adding 10 string fields to panel
+
+        // Dodawanie 10 pól tekstowych do panelu
         for (int i = 0; i < data.size(); i++) {
-            JLabel positionLabel = new JLabel(Integer.toString(i + 1));
-            c.fill = GridBagConstraints.BOTH + 10;
+            JLabel positionLabel = new JLabel("   " + Integer.toString(i + 1));
             c.gridx = 0;
             c.gridy = i + 1;
             panel.add(positionLabel, c);
 
             JLabel titleLabel = new JLabel(data.get(i).get("name"));
-            c.fill = GridBagConstraints.BOTH + 10;
             c.gridx = 1;
-            c.gridy = i + 1;
             panel.add(titleLabel, c);
 
             JLabel artistLabel = new JLabel(data.get(i).get("artist"));
-            c.fill = GridBagConstraints.BOTH + 10;
             c.gridx = 2;
-            c.gridy = i + 1;
             panel.add(artistLabel, c);
 
             JLabel albumLabel = new JLabel(data.get(i).get("album"));
-            c.fill = GridBagConstraints.BOTH + 10;
             c.gridx = 3;
-            c.gridy = i + 1;
             panel.add(albumLabel, c);
+
+            // Co drugi wiersz ma szary kolor tła
+            if (i % 2 == 1) {
+                positionLabel.setBackground(Color.BLACK);
+                titleLabel.setBackground(Color.BLACK);
+                artistLabel.setBackground(Color.BLACK);
+                albumLabel.setBackground(Color.BLACK);
+            } else {
+                positionLabel.setBackground(Color.DARK_GRAY);
+                titleLabel.setBackground(Color.DARK_GRAY);
+                artistLabel.setBackground(Color.DARK_GRAY);
+                albumLabel.setBackground(Color.DARK_GRAY);
+            }
+
+            positionLabel.setOpaque(true);
+            titleLabel.setOpaque(true);
+            artistLabel.setOpaque(true);
+            albumLabel.setOpaque(true);
         }
-        JScrollPane scrollPane = new JScrollPane(panel); // Create a JScrollPane and pass in the JPanel
+
+        // Ustawienie koloru tekstu na biały dla wszystkich napisów
+        mainPositionLabel.setForeground(Color.WHITE);
+        mainTitleLabel.setForeground(Color.WHITE);
+        mainArtistLabel.setForeground(Color.WHITE);
+        mainAlbumLabel.setForeground(Color.WHITE);
+        for (Component component : panel.getComponents()) {
+            if (component instanceof JLabel) {
+                ((JLabel) component).setForeground(Color.WHITE);
+            }
+        }
+
+        JScrollPane scrollPane = new JScrollPane(panel);
         scrollPane.setPreferredSize(new java.awt.Dimension(800, 600));
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        // scroll_panel.add(panel);
-        // JPanel main_panel = new JPanel();
-
-        // main_panel.add(scroll_panel);
 
         return scrollPane;
     }
 
     public static JScrollPane createTopArtistsPanel(int artistsNumber, String timeRange) {
+        List<Dictionary<String, String>> data = Statify.currentUser.getTopArtistsInfoList(artistsNumber, timeRange);
+        JPanel panel = new JPanel();
+        panel.setBackground(Color.BLACK);
+
+        panel.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+
+        JLabel mainPositionLabel = new JLabel("   Position");
+        c.fill = GridBagConstraints.BOTH;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.weightx = 1;
+        c.weighty = 1;
+        panel.add(mainPositionLabel, c);
+
+        JLabel mainArtistLabel = new JLabel("Artist");
+        c.gridx = 1;
+        panel.add(mainArtistLabel, c);
+
+        JLabel mainGenresLabel = new JLabel("Genres");
+        c.gridx = 2;
+        panel.add(mainGenresLabel, c);
+
+
+        // Dodawanie 10 pól tekstowych do panelu
+        for (int i = 0; i < data.size(); i++) {
+            JLabel positionLabel = new JLabel("   " + Integer.toString(i + 1));
+            c.gridx = 0;
+            c.gridy = i + 1;
+            panel.add(positionLabel, c);
+
+            JLabel artistLabel = new JLabel(data.get(i).get("name"));
+            c.gridx = 1;
+            panel.add(artistLabel, c);
+
+            JLabel genresLabel = new JLabel(data.get(i).get("genres"));
+            c.gridx = 2;
+            panel.add(genresLabel, c);
+
+
+            // Co drugi wiersz ma szary kolor tła
+            if (i % 2 == 1) {
+                positionLabel.setBackground(Color.BLACK);
+                artistLabel.setBackground(Color.BLACK);
+                genresLabel.setBackground(Color.BLACK);
+
+            } else {
+                positionLabel.setBackground(Color.DARK_GRAY);
+                artistLabel.setBackground(Color.DARK_GRAY);
+                genresLabel.setBackground(Color.DARK_GRAY);
+            }
+
+            positionLabel.setOpaque(true);
+            artistLabel.setOpaque(true);
+            genresLabel.setOpaque(true);
+        }
+
+        // Ustawienie koloru tekstu na biały dla wszystkich napisów
+        mainPositionLabel.setForeground(Color.WHITE);
+        mainArtistLabel.setForeground(Color.WHITE);
+        mainGenresLabel.setForeground(Color.WHITE);
+        for (Component component : panel.getComponents()) {
+            if (component instanceof JLabel) {
+                ((JLabel) component).setForeground(Color.WHITE);
+            }
+        }
+
+        JScrollPane scrollPane = new JScrollPane(panel);
+        scrollPane.setPreferredSize(new java.awt.Dimension(800, 600));
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+        return scrollPane;
+    }
+
+    public static JScrollPane createTopArtistsPanel2(int artistsNumber, String timeRange) {
         List<Dictionary<String, String>> data = Statify.currentUser.getTopArtistsInfoList(artistsNumber, timeRange);
         JPanel panel = new JPanel();
         // System.out.println(data.size());
