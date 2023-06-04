@@ -11,7 +11,15 @@ import org.knowm.xchart.style.Styler.LegendPosition;
 import com.madgag.gif.fmsware.GifDecoder;
 
 import java.awt.Component;
+import java.util.Comparator;
+import org.jfree.chart.plot.PiePlot3D;
+import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+import org.jfree.chart.util.Rotation;
+import java.util.Map;
+import java.util.AbstractMap;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.Histogram;
 import org.knowm.xchart.style.Styler.ChartTheme;
@@ -140,35 +148,41 @@ public class Statify {
         c.weighty = 1;
         panel.add(mainPositionLabel, c);
 
-        JLabel mainTitleLabel = new JLabel("Title");
+        JLabel mainTitleLabel = new JLabel("  Title");
         c.gridx = 1;
+        c.gridy = 0;
         panel.add(mainTitleLabel, c);
 
-        JLabel mainArtistLabel = new JLabel("Artist");
+        JLabel mainArtistLabel = new JLabel("  Artist");
         c.gridx = 2;
+        c.gridy = 0;
         panel.add(mainArtistLabel, c);
 
-        JLabel mainAlbumLabel = new JLabel("Album");
+        JLabel mainAlbumLabel = new JLabel("  Album");
         c.gridx = 3;
+        c.gridy = 0;
         panel.add(mainAlbumLabel, c);
 
         // Dodawanie 10 pól tekstowych do panelu
         for (int i = 0; i < data.size(); i++) {
-            JLabel positionLabel = new JLabel("   " + Integer.toString(i + 1));
+            JLabel positionLabel = new JLabel("    " + Integer.toString(i + 1));
             c.gridx = 0;
             c.gridy = i + 1;
             panel.add(positionLabel, c);
 
-            JLabel titleLabel = new JLabel(data.get(i).get("name"));
+            JLabel titleLabel = new JLabel("    " + data.get(i).get("name"));
             c.gridx = 1;
+            c.gridy = i + 1;
             panel.add(titleLabel, c);
 
-            JLabel artistLabel = new JLabel(data.get(i).get("artist"));
+            JLabel artistLabel = new JLabel("    " + data.get(i).get("artist"));
             c.gridx = 2;
+            c.gridy = i + 1;
             panel.add(artistLabel, c);
 
-            JLabel albumLabel = new JLabel(data.get(i).get("album"));
+            JLabel albumLabel = new JLabel("    " + data.get(i).get("album"));
             c.gridx = 3;
+            c.gridy = i + 1;
             panel.add(albumLabel, c);
 
             // Co drugi wiersz ma szary kolor tła
@@ -225,28 +239,32 @@ public class Statify {
         c.weighty = 1;
         panel.add(mainPositionLabel, c);
 
-        JLabel mainArtistLabel = new JLabel("Artist");
+        JLabel mainArtistLabel = new JLabel("  Artist");
         c.gridx = 1;
+        c.gridy = 0;
         panel.add(mainArtistLabel, c);
 
-        JLabel mainGenresLabel = new JLabel("Genres");
+        JLabel mainGenresLabel = new JLabel("  Genres");
         c.gridx = 2;
+        c.gridy = 0;
         panel.add(mainGenresLabel, c);
 
 
         // Dodawanie 10 pól tekstowych do panelu
         for (int i = 0; i < data.size(); i++) {
-            JLabel positionLabel = new JLabel("   " + Integer.toString(i + 1));
+            JLabel positionLabel = new JLabel("    " + Integer.toString(i + 1));
             c.gridx = 0;
             c.gridy = i + 1;
             panel.add(positionLabel, c);
 
-            JLabel artistLabel = new JLabel(data.get(i).get("name"));
+            JLabel artistLabel = new JLabel("    " + data.get(i).get("name"));
             c.gridx = 1;
+            c.gridy = i + 1;
             panel.add(artistLabel, c);
 
-            JLabel genresLabel = new JLabel(data.get(i).get("genres"));
+            JLabel genresLabel = new JLabel("    " + data.get(i).get("genres"));
             c.gridx = 2;
+            c.gridy = i + 1;
             panel.add(genresLabel, c);
 
 
@@ -546,10 +564,9 @@ public class Statify {
         return Statify.createRecommendationsPanel(recommendations);
     }
 
-    public static JPanel createPieChart(Dictionary<String, Integer> data) {
+    public static JPanel createPieChart2(Dictionary<String, Integer> data) {
         DefaultPieDataset dataset = new DefaultPieDataset();
 
-        // Dodanie danych do zestawu danych wykresu
         Enumeration<String> keys = data.keys();
         while (keys.hasMoreElements()) {
             String key = keys.nextElement();
@@ -557,10 +574,8 @@ public class Statify {
             dataset.setValue(key, value);
         }
 
-        // Utworzenie wykresu kołowego
         JFreeChart chart = ChartFactory.createPieChart("Your Top 10 Genres", dataset, true, true, false);
 
-        // Dostosowanie wyglądu wykresu
         PiePlot plot = (PiePlot) chart.getPlot();
         plot.setSectionOutlinesVisible(false);
         plot.setLabelGenerator(null);
@@ -568,7 +583,51 @@ public class Statify {
         plot.setLabelBackgroundPaint(new Color(220, 220, 220));
         plot.setBackgroundPaint(Color.WHITE);
 
-        // Utworzenie panelu wykresu
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new Dimension(400, 300));
+
+        return chartPanel;
+    }
+
+    public static JPanel createPieChart(Dictionary<String, Integer> data) {
+        DefaultPieDataset dataset = new DefaultPieDataset();
+
+        Enumeration<String> keys = data.keys();
+        List<Map.Entry<String, Integer>> sortedEntries = new ArrayList<>();
+
+        while (keys.hasMoreElements()) {
+            String key = keys.nextElement();
+            int value = data.get(key);
+            sortedEntries.add(new AbstractMap.SimpleEntry<>(key, value));
+        }
+
+        sortedEntries.sort(new Comparator<Map.Entry<String, Integer>>() {
+            public int compare(Map.Entry<String, Integer> entry1, Map.Entry<String, Integer> entry2) {
+                return entry2.getValue().compareTo(entry1.getValue());
+            }
+        });
+
+        for (Map.Entry<String, Integer> entry : sortedEntries) {
+            dataset.setValue(entry.getKey(), entry.getValue());
+        }
+
+        JFreeChart chart = ChartFactory.createPieChart3D("Your Top 10 Genres", dataset, true, true, false);
+
+        PiePlot3D plot = (PiePlot3D) chart.getPlot();
+        plot.setSectionOutlinesVisible(false);
+        plot.setShadowPaint(null);
+        plot.setLabelBackgroundPaint(new Color(220, 220, 220));
+
+        DecimalFormat df = new DecimalFormat("0.00%");
+        plot.setLabelGenerator(new StandardPieSectionLabelGenerator("{0} - {2}", NumberFormat.getNumberInstance(), df));
+
+        chart.setBackgroundPaint(Color.WHITE);
+        plot.setBackgroundPaint(Color.WHITE);
+        plot.setStartAngle(90);
+        plot.setDirection(Rotation.CLOCKWISE);
+        plot.setForegroundAlpha(0.8f);
+        plot.setCircular(true);
+
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(400, 300));
 
