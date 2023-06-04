@@ -148,35 +148,41 @@ public class Statify {
         c.weighty = 1;
         panel.add(mainPositionLabel, c);
 
-        JLabel mainTitleLabel = new JLabel("Title");
+        JLabel mainTitleLabel = new JLabel("  Title");
         c.gridx = 1;
+        c.gridy = 0;
         panel.add(mainTitleLabel, c);
 
-        JLabel mainArtistLabel = new JLabel("Artist");
+        JLabel mainArtistLabel = new JLabel("  Artist");
         c.gridx = 2;
+        c.gridy = 0;
         panel.add(mainArtistLabel, c);
 
-        JLabel mainAlbumLabel = new JLabel("Album");
+        JLabel mainAlbumLabel = new JLabel("  Album");
         c.gridx = 3;
+        c.gridy = 0;
         panel.add(mainAlbumLabel, c);
 
         // Dodawanie 10 pól tekstowych do panelu
         for (int i = 0; i < data.size(); i++) {
-            JLabel positionLabel = new JLabel("   " + Integer.toString(i + 1));
+            JLabel positionLabel = new JLabel("    " + Integer.toString(i + 1));
             c.gridx = 0;
             c.gridy = i + 1;
             panel.add(positionLabel, c);
 
-            JLabel titleLabel = new JLabel(data.get(i).get("name"));
+            JLabel titleLabel = new JLabel("    " + data.get(i).get("name"));
             c.gridx = 1;
+            c.gridy = i + 1;
             panel.add(titleLabel, c);
 
-            JLabel artistLabel = new JLabel(data.get(i).get("artist"));
+            JLabel artistLabel = new JLabel("    " + data.get(i).get("artist"));
             c.gridx = 2;
+            c.gridy = i + 1;
             panel.add(artistLabel, c);
 
-            JLabel albumLabel = new JLabel(data.get(i).get("album"));
+            JLabel albumLabel = new JLabel("    " + data.get(i).get("album"));
             c.gridx = 3;
+            c.gridy = i + 1;
             panel.add(albumLabel, c);
 
             // Co drugi wiersz ma szary kolor tła
@@ -233,28 +239,32 @@ public class Statify {
         c.weighty = 1;
         panel.add(mainPositionLabel, c);
 
-        JLabel mainArtistLabel = new JLabel("Artist");
+        JLabel mainArtistLabel = new JLabel("  Artist");
         c.gridx = 1;
+        c.gridy = 0;
         panel.add(mainArtistLabel, c);
 
-        JLabel mainGenresLabel = new JLabel("Genres");
+        JLabel mainGenresLabel = new JLabel("  Genres");
         c.gridx = 2;
+        c.gridy = 0;
         panel.add(mainGenresLabel, c);
 
 
         // Dodawanie 10 pól tekstowych do panelu
         for (int i = 0; i < data.size(); i++) {
-            JLabel positionLabel = new JLabel("   " + Integer.toString(i + 1));
+            JLabel positionLabel = new JLabel("    " + Integer.toString(i + 1));
             c.gridx = 0;
             c.gridy = i + 1;
             panel.add(positionLabel, c);
 
-            JLabel artistLabel = new JLabel(data.get(i).get("name"));
+            JLabel artistLabel = new JLabel("    " + data.get(i).get("name"));
             c.gridx = 1;
+            c.gridy = i + 1;
             panel.add(artistLabel, c);
 
-            JLabel genresLabel = new JLabel(data.get(i).get("genres"));
+            JLabel genresLabel = new JLabel("    " + data.get(i).get("genres"));
             c.gridx = 2;
+            c.gridy = i + 1;
             panel.add(genresLabel, c);
 
 
