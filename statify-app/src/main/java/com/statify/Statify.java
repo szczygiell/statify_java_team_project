@@ -11,7 +11,15 @@ import org.knowm.xchart.style.Styler.LegendPosition;
 import com.madgag.gif.fmsware.GifDecoder;
 
 import java.awt.Component;
+import java.util.Comparator;
+import org.jfree.chart.plot.PiePlot3D;
+import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+import org.jfree.chart.util.Rotation;
+import java.util.Map;
+import java.util.AbstractMap;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.Histogram;
 import org.knowm.xchart.style.Styler.ChartTheme;
@@ -546,10 +554,9 @@ public class Statify {
         return Statify.createRecommendationsPanel(recommendations);
     }
 
-    public static JPanel createPieChart(Dictionary<String, Integer> data) {
+    public static JPanel createPieChart2(Dictionary<String, Integer> data) {
         DefaultPieDataset dataset = new DefaultPieDataset();
 
-        // Dodanie danych do zestawu danych wykresu
         Enumeration<String> keys = data.keys();
         while (keys.hasMoreElements()) {
             String key = keys.nextElement();
@@ -557,10 +564,8 @@ public class Statify {
             dataset.setValue(key, value);
         }
 
-        // Utworzenie wykresu kołowego
         JFreeChart chart = ChartFactory.createPieChart("Your Top 10 Genres", dataset, true, true, false);
 
-        // Dostosowanie wyglądu wykresu
         PiePlot plot = (PiePlot) chart.getPlot();
         plot.setSectionOutlinesVisible(false);
         plot.setLabelGenerator(null);
@@ -568,7 +573,51 @@ public class Statify {
         plot.setLabelBackgroundPaint(new Color(220, 220, 220));
         plot.setBackgroundPaint(Color.WHITE);
 
-        // Utworzenie panelu wykresu
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new Dimension(400, 300));
+
+        return chartPanel;
+    }
+
+    public static JPanel createPieChart(Dictionary<String, Integer> data) {
+        DefaultPieDataset dataset = new DefaultPieDataset();
+
+        Enumeration<String> keys = data.keys();
+        List<Map.Entry<String, Integer>> sortedEntries = new ArrayList<>();
+
+        while (keys.hasMoreElements()) {
+            String key = keys.nextElement();
+            int value = data.get(key);
+            sortedEntries.add(new AbstractMap.SimpleEntry<>(key, value));
+        }
+
+        sortedEntries.sort(new Comparator<Map.Entry<String, Integer>>() {
+            public int compare(Map.Entry<String, Integer> entry1, Map.Entry<String, Integer> entry2) {
+                return entry2.getValue().compareTo(entry1.getValue());
+            }
+        });
+
+        for (Map.Entry<String, Integer> entry : sortedEntries) {
+            dataset.setValue(entry.getKey(), entry.getValue());
+        }
+
+        JFreeChart chart = ChartFactory.createPieChart3D("Your Top 10 Genres", dataset, true, true, false);
+
+        PiePlot3D plot = (PiePlot3D) chart.getPlot();
+        plot.setSectionOutlinesVisible(false);
+        plot.setShadowPaint(null);
+        plot.setLabelBackgroundPaint(new Color(220, 220, 220));
+
+        DecimalFormat df = new DecimalFormat("0.00%");
+        plot.setLabelGenerator(new StandardPieSectionLabelGenerator("{0} - {2}", NumberFormat.getNumberInstance(), df));
+
+        chart.setBackgroundPaint(Color.WHITE);
+        plot.setBackgroundPaint(Color.WHITE);
+        plot.setStartAngle(90);
+        plot.setDirection(Rotation.CLOCKWISE);
+        plot.setForegroundAlpha(0.8f);
+        plot.setCircular(true);
+
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(400, 300));
 
