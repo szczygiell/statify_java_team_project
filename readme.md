@@ -1,5 +1,9 @@
 # PAP Projekt → Statify
 
+## Uruchomienie
+Aby uruchomić aplikację należy uruchomić plik pod nazwą 'App.java', wtedy nastąpi przekierowanie do zalogowania się do Spotify.
+Alternatywną opcją jest uruchomienie pliku 'LoginWinow.java', jednak wtedy trzeba uzyskać AccessToken Spotify.
+
 ## Funkcjonalność:
 
 ### Kreator Playlist
@@ -25,7 +29,7 @@ Niewielka funkcja aplikacji umożliwiająca użytkownikowi poszerzenie swoich mu
 - [Spotify api Java wrapper]( https://github.com/spotify-web-api-java/spotify-web-api-java)
 
 
-### Źródła:
+### Pozostałe źródła:
 ikony: https://icons8.com/icon/set/music/windows--static
 
 
