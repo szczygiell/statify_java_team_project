@@ -1,5 +1,6 @@
 package com.statify;
 
+import javax.servlet.http.Cookie;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -18,16 +19,23 @@ public class ObjectSelectionPanel extends JPanel {
         setLayout(new GridLayout(objects.length, 1));
 
         for (int i = 0; i < objects.length; i++) {
-            checkBoxes[i] = new JCheckBox(objects[i].toString());
+            JCheckBox checkBox = new JCheckBox(objects[i].toString());
+            Color darkGreyColor = new Color(44, 51, 51);
+            checkBox.setForeground(Color.WHITE);
+            checkBox.setBackground(darkGreyColor);
+            checkBox.setFont(new Font("Noto Sans CJK JP", Font.PLAIN, 15));
+            checkBox.setAlignmentX(20);
+            checkBox.setAlignmentY(15);
+            checkBox.setBorder(BorderFactory.createMatteBorder(10, 20, 10, 0, Color.BLACK));
+            checkBoxes[i] = checkBox;
             checkBoxes[i].addActionListener(new CheckBoxListener(i));
             add(checkBoxes[i]);
         }
     }
-    
-    public Object[] selectedPlaylists(){
+
+    public Object[] selectedPlaylists() {
         return getSelectedObjects();
     }
-    
 
     private class CheckBoxListener implements ActionListener {
         private int index;
@@ -47,4 +55,3 @@ public class ObjectSelectionPanel extends JPanel {
         return selectedObjects;
     }
 }
-

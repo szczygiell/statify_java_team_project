@@ -56,6 +56,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.util.Enumeration;
 import java.util.HashMap;
+import javax.swing.BorderFactory;
 
 public class Statify {
 
@@ -249,7 +250,6 @@ public class Statify {
         c.gridy = 0;
         panel.add(mainGenresLabel, c);
 
-
         // Dodawanie 10 pól tekstowych do panelu
         for (int i = 0; i < data.size(); i++) {
             JLabel positionLabel = new JLabel("    " + Integer.toString(i + 1));
@@ -266,7 +266,6 @@ public class Statify {
             c.gridx = 2;
             c.gridy = i + 1;
             panel.add(genresLabel, c);
-
 
             // Co drugi wiersz ma szary kolor tła
             if (i % 2 == 1) {
@@ -530,23 +529,39 @@ public class Statify {
 
     private static JScrollPane createRecommendationsPanel(HashMap<String, String> recomendedTracks) {
         JPanel panel = new JPanel();
+        Color darkGreyColor = new Color(44, 51, 51);
 
         panel.setLayout(new GridLayout(recomendedTracks.size() + 1, 2, 10, 10)); // n+1 rows, 2 columns, 10px between
                                                                                  // each row and
-        JLabel mainTitleLabel = new JLabel("Title");
+        JLabel mainTitleLabel = new JLabel("TITLE");
+        mainTitleLabel.setForeground(new Color(255, 255, 255));
+        mainTitleLabel.setFont(new Font("Noto Sans CJK JP", Font.BOLD, 25));
+        mainTitleLabel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
         panel.add(mainTitleLabel);
         panel.add(mainTitleLabel);
-        JLabel mainArtistLabel = new JLabel("Artist");
+        JLabel mainArtistLabel = new JLabel("ARTIST");
+        mainArtistLabel.setFont(new Font("Noto Sans CJK JP", Font.BOLD, 25));
+        mainArtistLabel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+        mainArtistLabel.setForeground(new Color(255, 255, 255));
         panel.add(mainArtistLabel);
         panel.add(mainArtistLabel);
         // Adding 10 string fields to panel
         for (String trackName : recomendedTracks.keySet()) {
             JLabel titleLabel = new JLabel(trackName);
+            titleLabel.setForeground(new Color(255, 255, 255));
+            titleLabel.setFont(new Font("Noto Sans CJK JP", Font.PLAIN, 15));
+            titleLabel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
             panel.add(titleLabel);
             JLabel artistLabel = new JLabel(recomendedTracks.get(trackName));
+            artistLabel.setForeground(new Color(255, 255, 255));
+            artistLabel.setFont(new Font("Noto Sans CJK JP", Font.PLAIN, 15));
+            artistLabel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
             panel.add(artistLabel);
 
         }
+        panel.setBackground(darkGreyColor);
+        panel.setAlignmentX(10);
+        panel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
         JScrollPane scrollPane = new JScrollPane(panel); // Create a JScrollPane and pass in the JPanel
         scrollPane.setPreferredSize(new java.awt.Dimension(800, 600));
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);

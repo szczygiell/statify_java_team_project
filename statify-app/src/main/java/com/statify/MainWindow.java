@@ -7,6 +7,7 @@ package com.statify;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.GridBagLayout;
@@ -17,6 +18,7 @@ import java.util.HashMap;
 import javax.swing.Timer;
 
 import org.apache.hc.core5.http.nio.support.AsyncServerFilterChainExchangeHandlerFactory;
+import org.apache.http.params.CoreConnectionPNames;
 
 /**
  *
@@ -488,7 +490,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         String text11 = "^^Enter number of tracks or artists^^";
         infoTextField.setFont(new java.awt.Font("Liberation Sans", 1, 15));
-        //infoTextField.setBackground(new Color(0, 0, 0, 0));
+        // infoTextField.setBackground(new Color(0, 0, 0, 0));
         infoTextField.setForeground(Color.BLACK);
         infoTextField.setText(text11);
 
@@ -510,7 +512,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         String text14 = "^^Enter number of playlist from which you will get statistics^^";
         infoTextField2.setFont(new java.awt.Font("Liberation Sans", 1, 15));
-        //infoTextField.setBackground(new Color(0, 0, 0, 0));
+        // infoTextField.setBackground(new Color(0, 0, 0, 0));
         infoTextField2.setForeground(Color.BLACK);
         infoTextField2.setText(text14);
 
@@ -761,7 +763,7 @@ public class MainWindow extends javax.swing.JFrame {
         optionsPanel.setMinimumSize(new java.awt.Dimension(620, 120));
         optionsPanel.setPreferredSize(new java.awt.Dimension(20, 120));
         java.awt.GridBagLayout optionsPanelLayout = new java.awt.GridBagLayout();
-        optionsPanelLayout.columnWidths = new int[] { 0, 40, 0, 40, 0 , 40, 0, 40, 0};
+        optionsPanelLayout.columnWidths = new int[] { 0, 40, 0, 40, 0, 40, 0, 40, 0 };
         optionsPanelLayout.rowHeights = new int[] { 0, 10, 0 };
         optionsPanel.setLayout(optionsPanelLayout);
 
@@ -914,7 +916,6 @@ public class MainWindow extends javax.swing.JFrame {
         optionsPanel.add(infoTextField2, gridBagConstraints);
 
         actionButtonsPanel.add(optionsPanel, "card2");
-
 
         timeButtonsPanel.setBackground(new java.awt.Color(29, 185, 84));
         timeButtonsPanel.setMinimumSize(new java.awt.Dimension(620, 120));
@@ -1076,18 +1077,23 @@ public class MainWindow extends javax.swing.JFrame {
         creditsPanel.setMinimumSize(new java.awt.Dimension(620, 320));
         creditsPanel.setLayout(new java.awt.GridLayout(1, 0));
 
-        creditsLabel.setText("<html><font color='white'>"+
-        "<p><br></p>" +
-        "<p><strong>Loudness</strong> - The overall loudness of a track in decibels (dB). Loudness values are averaged across the entire track and are useful for comparing relative loudness of tracks. Loudness is the quality of a sound that is the primary psychological correlate of physical strength (amplitude). Values typically range between -60 and 0 db.</p>" +
-        "<p><br></p>" +
-        "<p><strong>Danceability</strong> - &nbsp;describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable.</p>" +
-        "<p><br></p>" +
-        "<p><strong>Acousticness</strong> - A confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0 represents high confidence the track is acoustic.</p>" +
-        "<p><br></p>" +
-        "<p><strong>Instrumentalness</strong> - Predicts whether a track contains no vocals. &quot;Ooh&quot; and &quot;aah&quot; sounds are treated as instrumental in this context. Rap or spoken word tracks are clearly &quot;vocal&quot;. The closer the instrumentalness value is to 1.0, the greater likelihood the track contains no vocal content. Values above 0.5 are intended to represent instrumental tracks, but confidence is higher as the value approaches 1.0.</p>" +
-        "<p><br></p>" +
-        "<p><strong>Energy</strong> - a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity. Typically, energetic tracks feel fast, loud, and noisy. For example, death metal has high energy, while a Bach prelude scores low on the scale. Perceptual features contributing to this attribute include dynamic range, perceived loudness, timbre, onset rate, and general entropy.</p>" +
-        "<p><br></p>");
+        creditsLabel.setText("<html><font color='white'>" +
+                "<p><br></p>" +
+                "<p><strong>Loudness</strong> - The overall loudness of a track in decibels (dB). Loudness values are averaged across the entire track and are useful for comparing relative loudness of tracks. Loudness is the quality of a sound that is the primary psychological correlate of physical strength (amplitude). Values typically range between -60 and 0 db.</p>"
+                +
+                "<p><br></p>" +
+                "<p><strong>Danceability</strong> - &nbsp;describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable.</p>"
+                +
+                "<p><br></p>" +
+                "<p><strong>Acousticness</strong> - A confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0 represents high confidence the track is acoustic.</p>"
+                +
+                "<p><br></p>" +
+                "<p><strong>Instrumentalness</strong> - Predicts whether a track contains no vocals. &quot;Ooh&quot; and &quot;aah&quot; sounds are treated as instrumental in this context. Rap or spoken word tracks are clearly &quot;vocal&quot;. The closer the instrumentalness value is to 1.0, the greater likelihood the track contains no vocal content. Values above 0.5 are intended to represent instrumental tracks, but confidence is higher as the value approaches 1.0.</p>"
+                +
+                "<p><br></p>" +
+                "<p><strong>Energy</strong> - a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity. Typically, energetic tracks feel fast, loud, and noisy. For example, death metal has high energy, while a Bach prelude scores low on the scale. Perceptual features contributing to this attribute include dynamic range, perceived loudness, timbre, onset rate, and general entropy.</p>"
+                +
+                "<p><br></p>");
 
         creditsLabel.setFont(new Font("Verdana", Font.PLAIN, 18));
         creditsLabel.setOpaque(false);
@@ -1578,17 +1584,22 @@ public class MainWindow extends javax.swing.JFrame {
         if (genFlag) {
             if (genFlag2) {
                 JScrollPane scrollPane = Statify.getRecommendationsPanelByTopArtists("short_term");
+
                 actionPanel.removeAll();
                 actionPanel.revalidate();
                 actionPanel.repaint();
-                actionPanel.add(scrollPane);
+                actionPanel.add(scrollPane, BorderLayout.CENTER);
                 loudnessButton.setVisible(false);
                 acousticnessButton.setVisible(false);
+                energyButton.setVisible(false);
+                instrumentalButton.setVisible(false);
+                infoTextField2.setVisible(false);
+
                 numPlaylistTextField.setVisible(false);
                 danceabilityButton.setPreferredSize(new java.awt.Dimension(200, 54));
                 danceabilityButton.setText("Add playlist to your library");
                 danceabilityButton.setVisible(true);
-                optionsPanel.setVisible(false);
+                optionsPanel.setVisible(true);
             } else {
                 JScrollPane scrollPane = Statify.getRecommendationsPanelByTopTracks("short_term");
                 actionPanel.removeAll();
@@ -1597,11 +1608,14 @@ public class MainWindow extends javax.swing.JFrame {
                 actionPanel.add(scrollPane);
                 loudnessButton.setVisible(false);
                 acousticnessButton.setVisible(false);
+                energyButton.setVisible(false);
+                instrumentalButton.setVisible(false);
+                infoTextField2.setVisible(false);
                 numPlaylistTextField.setVisible(false);
                 danceabilityButton.setPreferredSize(new java.awt.Dimension(200, 54));
                 danceabilityButton.setText("Add playlist to your library");
                 danceabilityButton.setVisible(true);
-                optionsPanel.setVisible(false);
+                optionsPanel.setVisible(true);
             }
         } else {
             chooseTypeTopList("short_term");
@@ -1618,11 +1632,17 @@ public class MainWindow extends javax.swing.JFrame {
                 actionPanel.add(scrollPane);
                 loudnessButton.setVisible(false);
                 acousticnessButton.setVisible(false);
+                energyButton.setVisible(false);
+                instrumentalButton.setVisible(false);
+                infoTextField2.setVisible(false);
+                energyButton.setVisible(false);
+                instrumentalButton.setVisible(false);
+                infoTextField2.setVisible(false);
                 numPlaylistTextField.setVisible(false);
                 danceabilityButton.setPreferredSize(new java.awt.Dimension(200, 54));
                 danceabilityButton.setText("Add playlist to your library");
                 danceabilityButton.setVisible(true);
-                optionsPanel.setVisible(false);
+                optionsPanel.setVisible(true);
             } else {
                 JScrollPane scrollPane = Statify.getRecommendationsPanelByTopTracks("medium_term");
                 actionPanel.removeAll();
@@ -1631,11 +1651,14 @@ public class MainWindow extends javax.swing.JFrame {
                 actionPanel.add(scrollPane);
                 loudnessButton.setVisible(false);
                 acousticnessButton.setVisible(false);
+                energyButton.setVisible(false);
+                instrumentalButton.setVisible(false);
+                infoTextField2.setVisible(false);
                 numPlaylistTextField.setVisible(false);
                 danceabilityButton.setPreferredSize(new java.awt.Dimension(200, 54));
                 danceabilityButton.setText("Add playlist to your library");
                 danceabilityButton.setVisible(true);
-                optionsPanel.setVisible(false);
+                optionsPanel.setVisible(true);
             }
         } else {
             chooseTypeTopList("medium_term");
@@ -1652,11 +1675,14 @@ public class MainWindow extends javax.swing.JFrame {
                 actionPanel.add(scrollPane);
                 loudnessButton.setVisible(false);
                 acousticnessButton.setVisible(false);
+                energyButton.setVisible(false);
+                instrumentalButton.setVisible(false);
+                infoTextField2.setVisible(false);
                 numPlaylistTextField.setVisible(false);
                 danceabilityButton.setPreferredSize(new java.awt.Dimension(200, 54));
                 danceabilityButton.setText("Add playlist to your library");
                 danceabilityButton.setVisible(true);
-                optionsPanel.setVisible(false);
+                optionsPanel.setVisible(true);
             } else {
                 JScrollPane scrollPane = Statify.getRecommendationsPanelByTopTracks("long_term");
                 actionPanel.removeAll();
@@ -1665,11 +1691,14 @@ public class MainWindow extends javax.swing.JFrame {
                 actionPanel.add(scrollPane);
                 loudnessButton.setVisible(false);
                 acousticnessButton.setVisible(false);
+                energyButton.setVisible(false);
+                instrumentalButton.setVisible(false);
+                infoTextField2.setVisible(false);
                 numPlaylistTextField.setVisible(false);
                 danceabilityButton.setPreferredSize(new java.awt.Dimension(200, 54));
                 danceabilityButton.setText("Add playlist to your library");
                 danceabilityButton.setVisible(true);
-                optionsPanel.setVisible(false);
+                optionsPanel.setVisible(true);
             }
         } else {
             chooseTypeTopList("long_term");
@@ -1729,9 +1758,12 @@ public class MainWindow extends javax.swing.JFrame {
         danceabilityButton.setText("Show chart");
         optionsPanel.setVisible(true);
 
+        Color darkGreyColor = new Color(44, 51, 51);
+
         HashMap<String, String> playlistsDictionary = Statify.currentUser.getPlaylistsHashMap();
         Object[] names = playlistsDictionary.keySet().toArray();
         ObjectSelectionPanel selectPanel = Statify.getPlaylistsSelectableList(names);
+        selectPanel.setBackground(darkGreyColor);
         selectedPlaylists = selectPanel.selectedPlaylists();
         addNewPanel(selectPanel);
         numPlaylistTextField.setVisible(false);
@@ -1740,6 +1772,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void generatePlaylistButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_generatePlaylistButtonActionPerformed
         panelsSetDefault();
+
         java.awt.GridBagConstraints constraints = new java.awt.GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 0;
