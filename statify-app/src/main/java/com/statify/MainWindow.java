@@ -471,6 +471,7 @@ public class MainWindow extends javax.swing.JFrame {
         infoText8.setHorizontalAlignment(JLabel.CENTER);
         infoText8.setVerticalAlignment(JLabel.CENTER);
         infoText8.setFont(new java.awt.Font("Liberation Sans", 1, 15));
+
         infoText8.setForeground(Color.BLACK);
         infoText8.setText(text8);
         String text9 = "How much acoustic instruments impact the track"; // przycisk acusticness
@@ -1095,7 +1096,8 @@ public class MainWindow extends javax.swing.JFrame {
                 +
                 "<p><br></p>");
 
-        creditsLabel.setFont(new Font("Verdana", Font.PLAIN, 18));
+        creditsLabel.setFont(new Font("Noto Sans CJK JP", Font.PLAIN, 18));
+        creditsLabel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
         creditsLabel.setOpaque(false);
         creditsPanel.add(creditsLabel, java.awt.BorderLayout.CENTER);
 
