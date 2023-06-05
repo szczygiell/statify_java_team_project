@@ -38,10 +38,10 @@ public class MainWindow extends javax.swing.JFrame {
 
         initComponents(widthInit, heightInit);
         panelsSetDefault();
-        this.setBounds(100, 100, 960, 540);
+        this.setBounds(100, 100, 1060, 740);
         setTransparent();
         creditsPanel.setVisible(true);
-        setMinimumSize(new java.awt.Dimension(1060, 640));
+        setMinimumSize(new java.awt.Dimension(1060, 740));
     }
 
     public final void panelsSetDefault() {
@@ -724,7 +724,7 @@ public class MainWindow extends javax.swing.JFrame {
         homeButton.setForeground(new java.awt.Color(255, 255, 255));
         homeButton.setIcon(new javax.swing.ImageIcon(
                 getClass().getResource("/com/icons/icons8-equal-housing-opportunity-32.png"))); // NOI18N
-        homeButton.setText("HOME");
+        homeButton.setText("INFO");
         homeButton.setBorder(null);
         homeButton.setHideActionText(true);
         homeButton.setMaximumSize(new java.awt.Dimension(180, 60));
@@ -1076,22 +1076,22 @@ public class MainWindow extends javax.swing.JFrame {
         creditsPanel.setMinimumSize(new java.awt.Dimension(620, 320));
         creditsPanel.setLayout(new java.awt.GridLayout(1, 0));
 
-        creditsLabel.setText(
-                "<html><font color='white'><p>&emsp; &emsp; Statify PAP 23L</p>\n" +
-                        "<p><br></p>\n" +
-                        "<p>&emsp; &emsp; developers:</p>\n" +
-                        "<p>&emsp; &emsp; &ensp; Milosz Kowalewski</p>\n" +
-                        "<p>&emsp; &emsp; &ensp; Julia Macuga</p>\n" +
-                        "<p>&emsp; &emsp; &ensp; Filip Szczygielski</p>\n" +
-                        "<p>&emsp; &emsp; &ensp; Mikolaj Wewior</p>\n" +
-                        "<p><br></p>\n" +
-                        "<p>&emsp; &emsp; version 1.3 (pretty stable)</p></font></html>");
+        creditsLabel.setText("<html><font color='white'>"+
+        "<p><br></p>" +
+        "<p><strong>Loudness</strong> - The overall loudness of a track in decibels (dB). Loudness values are averaged across the entire track and are useful for comparing relative loudness of tracks. Loudness is the quality of a sound that is the primary psychological correlate of physical strength (amplitude). Values typically range between -60 and 0 db.</p>" +
+        "<p><br></p>" +
+        "<p><strong>Danceability</strong> - &nbsp;describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable.</p>" +
+        "<p><br></p>" +
+        "<p><strong>Acousticness</strong> - A confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0 represents high confidence the track is acoustic.</p>" +
+        "<p><br></p>" +
+        "<p><strong>Instrumentalness</strong> - Predicts whether a track contains no vocals. &quot;Ooh&quot; and &quot;aah&quot; sounds are treated as instrumental in this context. Rap or spoken word tracks are clearly &quot;vocal&quot;. The closer the instrumentalness value is to 1.0, the greater likelihood the track contains no vocal content. Values above 0.5 are intended to represent instrumental tracks, but confidence is higher as the value approaches 1.0.</p>" +
+        "<p><br></p>" +
+        "<p><strong>Energy</strong> - a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity. Typically, energetic tracks feel fast, loud, and noisy. For example, death metal has high energy, while a Bach prelude scores low on the scale. Perceptual features contributing to this attribute include dynamic range, perceived loudness, timbre, onset rate, and general entropy.</p>" +
+        "<p><br></p>");
 
         creditsLabel.setFont(new Font("Verdana", Font.PLAIN, 18));
         creditsLabel.setOpaque(false);
         creditsPanel.add(creditsLabel, java.awt.BorderLayout.CENTER);
-
-        creditsPanel.add(creditsLabel);
 
         actionPanel.add(creditsPanel, "card0");
 
