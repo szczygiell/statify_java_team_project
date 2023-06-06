@@ -25,7 +25,8 @@ Po uruchomieniu aplikacji użytkownik zostaje poproszony o zalogowanie się do s
 ### TopArtist - Twoi ulubieni artyści
 Po wybraniu liczby utworów i okresu czasu, użytkownik może przejrzeć listę najczęściej słuchanych przez niego utworów w danym okresie.
 
-![](img/artists2.png)
+
+<img src="img/artists2.png" style="height: 500; width:500;"/>
 
 ### Top Tracks - najchętniej słuchane utwory
 Analogicznie użytkownik może przeanalizować swoje ulubione utowory z różnych okresów czasu.
