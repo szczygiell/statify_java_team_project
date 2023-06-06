@@ -8,9 +8,12 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Enumeration;
 import java.util.PriorityQueue;
+import java.util.Properties;
 import java.lang.Math;
 import java.io.IOException;
 import org.apache.hc.core5.http.ParseException;
+import org.eclipse.jetty.util.thread.strategy.ProduceConsume;
+
 import se.michaelthelin.spotify.model_objects.specification.Playlist;
 
 import se.michaelthelin.spotify.SpotifyApi;
@@ -80,13 +83,13 @@ public class User {
         }
         return playlistsDictionary;
     }
-    
+
     public HashMap<String, String> getPlaylistsHashMap(ArrayList<String> checkedNames) {
         PlaylistSimplified[] playlists = getPlaylists(20);
         HashMap<String, String> playlistsDictionary = new HashMap<>();
         // ArrayList<String> checkedNames;
         for (PlaylistSimplified playlist : playlists) {
-            if(checkedNames.contains(playlist.getName())){
+            if (checkedNames.contains(playlist.getName())) {
                 playlistsDictionary.put(playlist.getName(), playlist.getId());
             }
         }
@@ -262,7 +265,7 @@ public class User {
                 trackIds.add(artists[i].getId());
             }
             // if(limit > artists.length){
-            //     trackIds.add(Integer.toString(artists.length));
+            // trackIds.add(Integer.toString(artists.length));
             // }
             return trackIds;
 
@@ -346,11 +349,12 @@ public class User {
 
         // Counting sum of rest values from keys - not used now but do not delete this
         // while (!pq.isEmpty()) {
-        //     String key = pq.poll();
-        //     remainingSum += dictionary.get(key);
+        // String key = pq.poll();
+        // remainingSum += dictionary.get(key);
         // }
 
-        // Adding ket "others" with its value from above - not used now but do not delete this
+        // Adding ket "others" with its value from above - not used now but do not
+        // delete this
         // result.put("others", remainingSum);
 
         return result;
@@ -361,7 +365,7 @@ public class User {
         String tracksIdsString = String.join(",", tracksIds);
         String artistsIdsString = String.join(",", artistsIds);
         final GetRecommendationsRequest getRecommendationsRequest = spotifyApi.getRecommendations()
-                .limit(10)
+                .limit(30)
                 // .market(CountryCode.SE)
                 // .max_popularity(50)
                 // .min_popularity(10)
@@ -386,34 +390,49 @@ public class User {
         return recommendedTracks;
     }
 
-    public HashMap<String, String> getRecomendationsByTopTracks(String timeDuration) {
+    // hashmap of id : [name, artist, duration]
+    public HashMap<String, List<String>> getRecomendationsByTopTracks(String timeDuration) {
         List<String> topTracksIds = getTopTrackIds(5, timeDuration);
         List<TrackSimplified> recommendedTracks = getRecomendations(new ArrayList<String>(), topTracksIds);
-        HashMap<String, String> tracks = new HashMap<>();
+        HashMap<String, List<String>> tracks = new HashMap<>();
         for (TrackSimplified track : recommendedTracks) {
-            tracks.put(track.getName(), track.getArtists()[0].getName());
+
+            List<String> trackProperties = new ArrayList<>();
+            trackProperties.add(track.getName());
+            trackProperties.add(track.getArtists()[0].getName());
+            trackProperties.add(String.valueOf((int) track.getDurationMs() / 60000) + " min" + String
+                    .valueOf((int) track.getDurationMs() / 1000 % 60) + "s");
+
+            tracks.put(track.getId(), trackProperties);
+            // tracks.put(track.getName(), track.getArtists()[0].getName());
         }
         return tracks;
     }
 
-    public HashMap<String, String> getRecomendationsByTopArtists(String timeDuration) {
+    public HashMap<String, List<String>> getRecomendationsByTopArtists(String timeDuration) {
         List<String> topArtistsIds = getTopArtistsIds(5, timeDuration);
         List<TrackSimplified> recommendedTracks = getRecomendations(topArtistsIds, new ArrayList<String>());
-        HashMap<String, String> tracks = new HashMap<>();
+        HashMap<String, List<String>> tracks = new HashMap<>();
         for (TrackSimplified track : recommendedTracks) {
-            tracks.put(track.getName(), track.getArtists()[0].getName());
+            List<String> trackProperties = new ArrayList<>();
+            trackProperties.add(track.getName());
+            trackProperties.add(track.getArtists()[0].getName());
+            trackProperties.add(String.valueOf(String.valueOf((int) track.getDurationMs() / 60000) + " min" + String
+                    .valueOf((int) track.getDurationMs() / 1000 % 60) + "s"));
+
+            tracks.put(track.getId(), trackProperties);
         }
         return tracks;
     }
 
-    public int getMaxAmmount(int limit, String time_range, String type){
+    public int getMaxAmmount(int limit, String time_range, String type) {
 
-        if(type.equals("artists")){
+        if (type.equals("artists")) {
             final GetUsersTopArtistsRequest getUsersTopArtistsRequest = spotifyApi.getUsersTopArtists()
                     .time_range(time_range) // "short_term": 4 weeks; "medium_term": 6 months; "long_term": years
                     .limit(limit) // number of tracks
                     .build();
-            try{
+            try {
                 final Paging<Artist> artistsPaging = getUsersTopArtistsRequest.execute();
                 Artist[] artists = artistsPaging.getItems();
                 return artists.length;
@@ -421,12 +440,12 @@ public class User {
                 System.out.println("Error: " + e.getMessage());
             }
         }
-        if(type.equals("tracks")){
+        if (type.equals("tracks")) {
             final GetUsersTopTracksRequest getUsersTopTracksRequest = spotifyApi.getUsersTopTracks()
                     .time_range(time_range) // "short_term": 4 weeks; "medium_term": 6 months; "long_term": years
                     .limit(limit) // number of tracks
                     .build();
-            try{
+            try {
                 final Paging<Track> trackPaging = getUsersTopTracksRequest.execute();
                 Track[] tracks = trackPaging.getItems();
                 return tracks.length;

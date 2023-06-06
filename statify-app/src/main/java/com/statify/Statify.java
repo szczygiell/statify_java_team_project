@@ -480,7 +480,7 @@ public class Statify {
     public static JPanel getAudioFeatureHistogram(FeatureName feature) {
         List<Float> data = getFeaturePlaylistData(playlists_num, feature);
         int binsNum = (int) Math.cbrt(data.size());
-        String title = feature.keyName + String.format(" Histogram of your %d playlists", playlists_num);
+        String title = feature.keyName + String.format(" histogram of your %d playlists", playlists_num);
         String xTitle = "Mean";
         String yTitle = "Tracks count";
         String seriesName = "Tracks in your playlists";
@@ -527,7 +527,7 @@ public class Statify {
         return selectionPanel;
     }
 
-    private static JScrollPane createRecommendationsPanel(HashMap<String, String> recomendedTracks) {
+    private static JScrollPane createRecommendationsPanel(HashMap<String, List<String>> recomendedTracks) {
         JPanel panel = new JPanel();
         Color darkGreyColor = new Color(44, 51, 51);
 
@@ -545,18 +545,31 @@ public class Statify {
         mainArtistLabel.setForeground(new Color(255, 255, 255));
         panel.add(mainArtistLabel);
         panel.add(mainArtistLabel);
+        JLabel mainDurationLabel = new JLabel("DURATION");
+        mainDurationLabel.setFont(new Font("Noto Sans CJK JP", Font.BOLD, 25));
+        mainDurationLabel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+        mainDurationLabel.setForeground(new Color(255, 255, 255));
+        panel.add(mainDurationLabel);
         // Adding 10 string fields to panel
-        for (String trackName : recomendedTracks.keySet()) {
+        for (String trackId : recomendedTracks.keySet()) {
+            String trackName = recomendedTracks.get(trackId).get(0);
+            String trackArtist = recomendedTracks.get(trackId).get(1);
+            String duration = recomendedTracks.get(trackId).get(2);
             JLabel titleLabel = new JLabel(trackName);
             titleLabel.setForeground(new Color(255, 255, 255));
             titleLabel.setFont(new Font("Noto Sans CJK JP", Font.PLAIN, 15));
             titleLabel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
             panel.add(titleLabel);
-            JLabel artistLabel = new JLabel(recomendedTracks.get(trackName));
+            JLabel artistLabel = new JLabel(trackArtist);
             artistLabel.setForeground(new Color(255, 255, 255));
             artistLabel.setFont(new Font("Noto Sans CJK JP", Font.PLAIN, 15));
             artistLabel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
             panel.add(artistLabel);
+            JLabel durationLabel = new JLabel(duration);
+            durationLabel.setForeground(new Color(255, 255, 255));
+            durationLabel.setFont(new Font("Noto Sans CJK JP", Font.PLAIN, 15));
+            durationLabel.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));
+            panel.add(durationLabel);
 
         }
         panel.setBackground(darkGreyColor);
@@ -570,12 +583,12 @@ public class Statify {
     }
 
     public static JScrollPane getRecommendationsPanelByTopTracks(String timeDuration) {
-        HashMap<String, String> recommendations = currentUser.getRecomendationsByTopTracks(timeDuration);
+        HashMap<String, List<String>> recommendations = currentUser.getRecomendationsByTopTracks(timeDuration);
         return Statify.createRecommendationsPanel(recommendations);
     }
 
     public static JScrollPane getRecommendationsPanelByTopArtists(String timeDuration) {
-        HashMap<String, String> recommendations = currentUser.getRecomendationsByTopArtists(timeDuration);
+        HashMap<String, List<String>> recommendations = currentUser.getRecomendationsByTopArtists(timeDuration);
         return Statify.createRecommendationsPanel(recommendations);
     }
 
